@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
+  flutter_staggered_grid_view: ^0.7.0
   just_audio: ^0.9.35
   reg_page:
     path: /Users/user/Desktop/Development/GitlabRepo/reg_page

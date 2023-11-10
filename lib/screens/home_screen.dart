@@ -1,17 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:tempo_bpm/screens/landscape_board.dart';
 import 'package:tempo_bpm/screens/potrait_board.dart';
-import 'package:tempo_bpm/screens/setting_screen.dart';
-import 'package:tempo_bpm/utils/images.dart';
-import 'package:tempo_bpm/widgets/button_icon.dart';
 import '../providers/home_provider.dart';
 import '../utils/app_ colors.dart';
-import '../utils/app_constant.dart';
+
+
 class HomeScreen  extends StatefulWidget {
   const HomeScreen({super.key});
   @override
