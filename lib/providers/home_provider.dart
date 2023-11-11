@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:tempo_bpm/model/sound_model.dart';
 
+import '../utils/app_ colors.dart';
+
 class HomeProvider extends ChangeNotifier{
 
 
@@ -51,6 +53,35 @@ class HomeProvider extends ChangeNotifier{
       });
 
   }
+
+
+
+  // Selected Fret
+
+  // int? selectedFret;
+  //
+  // setSelectedFret(int index){
+  //
+  //   selectedFret = index;
+  //   notifyListeners();
+  // }
+
+
+
+  int selectedFret  = 1;
+
+  setSelectedFret(int index){
+    selectedFret = index;
+    notifyListeners();
+  }
+
+  // Color getSelectedFret(int index){
+  //   if(selectedFret == index){
+  //     return  AppColors.greyPrimary;
+  //   }else{
+  //     return  AppColors.redPrimary;
+  //   }
+  // }
 
 }
 

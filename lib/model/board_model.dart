@@ -8,6 +8,10 @@ class BoardModel{
 
   BoardModel({
     required this.id,
-    required this.string,required this.fret,required this.fretCode,required this.fretSound});
+    required this.string,
+    required this.fret,
+    required this.fretCode,
+    required this.fretSound
+  });
 
 }
