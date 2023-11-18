@@ -3,14 +3,14 @@ class BoardModel{
   int? id;
   int? string;
   int? fret;
-  String? fretCode;
+  String? note;
   String? fretSound;
 
   BoardModel({
     required this.id,
     required this.string,
     required this.fret,
-    required this.fretCode,
+    required this.note,
     required this.fretSound
   });
 

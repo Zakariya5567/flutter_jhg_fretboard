@@ -50,10 +50,13 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
 
-        home:  SplashScreen(
-          yearlySubscriptionId: AppConstant.yearlySubscriptionId,
-          monthlySubscriptionId: AppConstant.monthlySubscriptionId,
-          nextPage: ()=> const HomeScreen(),),
+        home:  const HomeScreen()
+        // SplashScreen(
+        //   yearlySubscriptionId: AppConstant.yearlySubscriptionId,
+        //   monthlySubscriptionId: AppConstant.monthlySubscriptionId,
+        //   appVersion: "1.0.0",
+        //   appName: "JHG Frethboard",
+        //   nextPage: ()=> const HomeScreen(),),
       ),
     );
   }

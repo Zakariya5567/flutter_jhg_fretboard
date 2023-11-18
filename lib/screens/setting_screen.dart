@@ -178,6 +178,8 @@ class _SettingScreenState extends State<SettingScreen>{
                               AppConstant.yearlySubscriptionId,
                           monthlySubscriptionId:
                               AppConstant.monthlySubscriptionId,
+                          appVersion: "1.0.0",
+                          appName: "JHG Frethboard",
                           nextPage: () => const HomeScreen(),
                         );
                       }), (route) => false);

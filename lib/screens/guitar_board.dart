@@ -18,9 +18,66 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
   // GuitarController provider = Get.find<GuitarController>();
   // late GuitarProvider provider;
   Future<void> loadFullList() async {
+
     fretList.clear();
+
+    //FRET0
     fretList.add(BoardModel(
-        id: 01, string: 1, fret: 1, fretCode: "A#", fretSound: "djkdfjf"));
+        id: 0, string: 0, fret: 1, note: "E", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 1, string: 0, fret: 1, note: "B", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 2, string: 0, fret: 1, note: "G", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 3, string: 0, fret: 1, note: "D", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 4, string: 0, fret: 1, note: "A", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 5, string: 0, fret: 1, note: "E", fretSound: "djkdfjf"));
+
+    //FRET1
+
+    fretList.add(BoardModel(
+        id: 6, string: 1, fret: 1, note: "F", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 7, string: 1, fret: 1, note: "C", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 8, string: 1, fret: 1, note: "G#", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 9, string: 1, fret: 1, note: "D#", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 10, string: 1, fret: 1, note: "A#", fretSound: "djkdfjf"));
+    fretList.add(BoardModel(
+        id: 11, string: 1, fret: 1, note: "F", fretSound: "djkdfjf"));
+
+
+    //FRET2
+
+    //FRET3
+
+    //FRET4
+
+    //FRET5
+
+    //FRET6
+
+    //FRET7
+
+    //FRET8
+
+    //FRET9
+
+    //FRET10
+
+    //FRET11
+
+    //FRET12
+
+    //FRET13
+
+    //FRET14
+
+    //FRET15
   }
 
   @override
@@ -78,12 +135,15 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+
                                 blackCircle(
                                   height: height,
                                   isColor: index == 11 ? true : false,
                                 ),
                                 SizedBox(
-                                  width: width * 0.080,
+                                  width: index == 11 ? width * 0.073:
+
+                                  width * 0.089,
                                 ),
                                 blackCircle(
                                     height: height,
@@ -94,7 +154,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                                         ? true
                                         : false),
                                 SizedBox(
-                                  width: width * 0.088,
+                                    width: index == 11 ? width * 0.073:  width * 0.089,
                                 ),
                                 blackCircle(
                                     height: height,
@@ -190,7 +250,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
               ),
               //SPACER
               SizedBox(
-                width: width * 0.02,
+                width: width * 0.05,
               ),
               // NUMBERS
               SizedBox(
@@ -212,31 +272,31 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                                       : index == 3
                                           ? height * 0.060
                                           : index == 4
-                                              ? height * 0.055
+                                              ? height * 0.056
                                               : index == 5
-                                                  ? height * 0.055
+                                                  ? height * 0.062
                                                   : index == 6
-                                                      ? height * 0.055
+                                                      ? height * 0.062
                                                       : index == 7
-                                                          ? height * 0.055
+                                                          ? height * 0.062
                                                           : index == 8
-                                                              ? height * 0.055
+                                                              ? height * 0.060
                                                               : index == 9
                                                                   ? height *
-                                                                      0.055
+                                                                      0.060
                                                                   : index == 10
                                                                       ? height *
-                                                                          0.055
+                                                                          0.060
                                                                       : index ==
                                                                               11
                                                                           ? height *
-                                                                              0.055
+                                                                              0.060
                                                                           : index == 12
-                                                                              ? height * 0.055
+                                                                              ? height * 0.060
                                                                               : index == 13
-                                                                                  ? height * 0.055
-                                                                                  : index == 14
-                                                                                      ? height * 0.055
+                                                                                  ? height * 0.060
+                                                                                   : index == 14
+                                                                                      ? height * 0.060
                                                                                       : height * 0.05),
                       child: Text(
                         index.toString(),
