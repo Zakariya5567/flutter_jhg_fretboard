@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:tempo_bpm/model/board_model.dart';
 import 'package:tempo_bpm/providers/home_provider.dart';
 import 'package:tempo_bpm/utils/app_%20colors.dart';
+import 'package:tempo_bpm/utils/app_constant.dart';
 
 class GuitarBoard extends StatefulWidget {
   const GuitarBoard({super.key});
@@ -13,79 +14,6 @@ class GuitarBoard extends StatefulWidget {
 }
 
 class _GuitarBoardAltState extends State<GuitarBoard> {
-  List<BoardModel> fretList = [];
-
-  // GuitarController provider = Get.find<GuitarController>();
-  // late GuitarProvider provider;
-  Future<void> loadFullList() async {
-
-    fretList.clear();
-
-    //FRET0
-    fretList.add(BoardModel(
-        id: 0, string: 0, fret: 1, note: "E", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 1, string: 0, fret: 1, note: "B", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 2, string: 0, fret: 1, note: "G", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 3, string: 0, fret: 1, note: "D", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 4, string: 0, fret: 1, note: "A", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 5, string: 0, fret: 1, note: "E", fretSound: "djkdfjf"));
-
-    //FRET1
-
-    fretList.add(BoardModel(
-        id: 6, string: 1, fret: 1, note: "F", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 7, string: 1, fret: 1, note: "C", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 8, string: 1, fret: 1, note: "G#", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 9, string: 1, fret: 1, note: "D#", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 10, string: 1, fret: 1, note: "A#", fretSound: "djkdfjf"));
-    fretList.add(BoardModel(
-        id: 11, string: 1, fret: 1, note: "F", fretSound: "djkdfjf"));
-
-
-    //FRET2
-
-    //FRET3
-
-    //FRET4
-
-    //FRET5
-
-    //FRET6
-
-    //FRET7
-
-    //FRET8
-
-    //FRET9
-
-    //FRET10
-
-    //FRET11
-
-    //FRET12
-
-    //FRET13
-
-    //FRET14
-
-    //FRET15
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    loadFullList();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -236,6 +164,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                           return GestureDetector(
                             onTap: () {
                               controller.setSelectedFret(index);
+                              controller.playSound(index);
                             },
                             child: stringPress(
                                 index: index, height: height, width: width),

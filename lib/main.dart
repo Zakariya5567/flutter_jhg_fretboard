@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:reg_page/reg_page.dart';
 import 'package:tempo_bpm/providers/home_provider.dart';
-import 'package:tempo_bpm/providers/setting_provider.dart';
 import 'package:tempo_bpm/screens/home_screen.dart';
-import 'package:tempo_bpm/utils/app_constant.dart';
 
 
 Future<void> main() async{
@@ -30,7 +27,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<HomeProvider>(create: (context)=> HomeProvider()),
-        ChangeNotifierProvider<SettingProvider>(create: (context)=> SettingProvider()),
       ],
       child:
       MaterialApp(
@@ -51,7 +47,7 @@ class MyApp extends StatelessWidget {
         ),
 
         home:  const HomeScreen()
-        // SplashScreen(
+        //   home: SplashScreen(
         //   yearlySubscriptionId: AppConstant.yearlySubscriptionId,
         //   monthlySubscriptionId: AppConstant.monthlySubscriptionId,
         //   appVersion: "1.0.0",

@@ -26,8 +26,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
     void initState() {
-    final metroProvider = Provider.of<HomeProvider>(context, listen: false);
-    metroProvider.initializeAnimationController();
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    homeProvider.initializeData();
     setExpiryDate();
     super.initState();
   }

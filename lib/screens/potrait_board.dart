@@ -70,9 +70,9 @@ class PortraitBoard extends StatelessWidget {
                       height: height*0.70,
                       child: GuitarBoard()),
               //SPACER
-              SizedBox(
+                SizedBox(
                 height: height*0.015,
-              ),
+               ),
 
               // //TIMER , STOPWATCH , ROTATE ICON
               // Row(

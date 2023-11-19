@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:tempo_bpm/providers/setting_provider.dart';
+import 'package:tempo_bpm/providers/home_provider.dart';
 import 'package:tempo_bpm/screens/home_screen.dart';
 import 'package:tempo_bpm/widgets/setting_toggle.dart';
 import '../utils/app_ colors.dart';
@@ -22,7 +22,7 @@ class _SettingScreenState extends State<SettingScreen>{
   @override
   void initState() {
     super.initState();
-    final settingProvider = Provider.of<SettingProvider>(context, listen: false);
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     //settingProvider.initializeAnimationController();
   }
 
@@ -37,7 +37,7 @@ class _SettingScreenState extends State<SettingScreen>{
         height: height,
         width: width,
         color: AppColors.blackPrimary,
-        child: Consumer<SettingProvider>(builder: (context, controller, child) {
+        child: Consumer<HomeProvider>(builder: (context, controller, child) {
           return Padding(
             padding: EdgeInsets.only(
               top: height * 0.07,
@@ -76,7 +76,9 @@ class _SettingScreenState extends State<SettingScreen>{
                     fontWeight: FontWeight.w600,
                   ),
                 ),
+
                 SizedBox(height: height * 0.01),
+
                 Text(
                   AppConstant.stringDescription,
                   style: TextStyle(
@@ -133,8 +135,6 @@ class _SettingScreenState extends State<SettingScreen>{
                       controller.setString1();
                     }
                 ),
-
-
 
 
                 SizedBox(height: height * 0.05),
