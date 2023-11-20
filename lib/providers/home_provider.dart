@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import '../model/board_model.dart';
@@ -109,72 +110,89 @@ class HomeProvider extends ChangeNotifier{
     fretList.add(BoardModel(id: 67, string: 2, fret: 11, note: "A#", fretSound:   AppConstant.str2Fr11));
     fretList.add(BoardModel(id: 68, string: 3, fret: 11, note: "F#", fretSound:   AppConstant.str3Fr11));
     fretList.add(BoardModel(id: 69, string: 4, fret: 11, note: "C#", fretSound:   AppConstant.str4Fr11));
-    fretList.add(BoardModel(id: 71, string: 5, fret: 11, note: "G#", fretSound:   AppConstant.str5Fr11));
-    fretList.add(BoardModel(id: 72, string: 6, fret: 11, note: "D#", fretSound:   AppConstant.str6Fr11));
+    fretList.add(BoardModel(id: 70, string: 5, fret: 11, note: "G#", fretSound:   AppConstant.str5Fr11));
+    fretList.add(BoardModel(id: 71, string: 6, fret: 11, note: "D#", fretSound:   AppConstant.str6Fr11));
 
     //FRET12
-    fretList.add(BoardModel(id: 73, string: 1, fret: 12, note: "E", fretSound:   AppConstant.str1Fr12));
-    fretList.add(BoardModel(id: 74, string: 2, fret: 12, note: "B", fretSound:   AppConstant.str2Fr12));
-    fretList.add(BoardModel(id: 75, string: 3, fret: 12, note: "G", fretSound:   AppConstant.str3Fr12));
-    fretList.add(BoardModel(id: 76, string: 4, fret: 12, note: "D", fretSound:   AppConstant.str4Fr12));
-    fretList.add(BoardModel(id: 77, string: 5, fret: 12, note: "A", fretSound:   AppConstant.str5Fr12));
-    fretList.add(BoardModel(id: 78, string: 6, fret: 12, note: "E", fretSound:   AppConstant.str6Fr12));
+    fretList.add(BoardModel(id: 72, string: 1, fret: 12, note: "E", fretSound:   AppConstant.str1Fr12));
+    fretList.add(BoardModel(id: 73, string: 2, fret: 12, note: "B", fretSound:   AppConstant.str2Fr12));
+    fretList.add(BoardModel(id: 74, string: 3, fret: 12, note: "G", fretSound:   AppConstant.str3Fr12));
+    fretList.add(BoardModel(id: 75, string: 4, fret: 12, note: "D", fretSound:   AppConstant.str4Fr12));
+    fretList.add(BoardModel(id: 76, string: 5, fret: 12, note: "A", fretSound:   AppConstant.str5Fr12));
+    fretList.add(BoardModel(id: 77, string: 6, fret: 12, note: "E", fretSound:   AppConstant.str6Fr12));
 
     //FRET13
-    fretList.add(BoardModel(id: 79, string: 1, fret: 13, note: "F", fretSound:   AppConstant.str1Fr13));
-    fretList.add(BoardModel(id: 80, string: 2, fret: 13, note: "C", fretSound:   AppConstant.str2Fr13));
-    fretList.add(BoardModel(id: 81, string: 3, fret: 13, note: "G#", fretSound:   AppConstant.str3Fr13));
-    fretList.add(BoardModel(id: 82, string: 4, fret: 13, note: "D#", fretSound:   AppConstant.str4Fr13));
-    fretList.add(BoardModel(id: 83, string: 5, fret: 13, note: "A#", fretSound:   AppConstant.str5Fr13));
-    fretList.add(BoardModel(id: 84, string: 6, fret: 13, note: "F", fretSound:   AppConstant.str6Fr13));
+    fretList.add(BoardModel(id: 78, string: 1, fret: 13, note: "F", fretSound:    AppConstant.str1Fr13));
+    fretList.add(BoardModel(id: 79, string: 2, fret: 13, note: "C", fretSound:    AppConstant.str2Fr13));
+    fretList.add(BoardModel(id: 80, string: 3, fret: 13, note: "G#", fretSound:   AppConstant.str3Fr13));
+    fretList.add(BoardModel(id: 81, string: 4, fret: 13, note: "D#", fretSound:   AppConstant.str4Fr13));
+    fretList.add(BoardModel(id: 82, string: 5, fret: 13, note: "A#", fretSound:   AppConstant.str5Fr13));
+    fretList.add(BoardModel(id: 83, string: 6, fret: 13, note: "F", fretSound:    AppConstant.str6Fr13));
 
     //FRET14
-    fretList.add(BoardModel(id: 85, string: 1, fret: 14, note: "F#", fretSound:   AppConstant.str1Fr14));
-    fretList.add(BoardModel(id: 86, string: 2, fret: 14, note: "C#", fretSound:   AppConstant.str2Fr14));
-    fretList.add(BoardModel(id: 87, string: 3, fret: 14, note: "A", fretSound:  AppConstant.str3Fr14));
-    fretList.add(BoardModel(id: 88, string: 4, fret: 14, note: "E", fretSound:  AppConstant.str4Fr14));
-    fretList.add(BoardModel(id: 89, string: 5, fret: 14, note: "B", fretSound:  AppConstant.str5Fr14));
-    fretList.add(BoardModel(id: 90, string: 6, fret: 14, note: "F#", fretSound:   AppConstant.str6Fr14));
+    fretList.add(BoardModel(id: 84, string: 1, fret: 14, note: "F#", fretSound:   AppConstant.str1Fr14));
+    fretList.add(BoardModel(id: 85, string: 2, fret: 14, note: "C#", fretSound:   AppConstant.str2Fr14));
+    fretList.add(BoardModel(id: 86, string: 3, fret: 14, note: "A", fretSound:  AppConstant.str3Fr14));
+    fretList.add(BoardModel(id: 87, string: 4, fret: 14, note: "E", fretSound:  AppConstant.str4Fr14));
+    fretList.add(BoardModel(id: 88, string: 5, fret: 14, note: "B", fretSound:  AppConstant.str5Fr14));
+    fretList.add(BoardModel(id: 89, string: 6, fret: 14, note: "F#", fretSound:   AppConstant.str6Fr14));
 
     //FRET15
-    fretList.add(BoardModel(id: 91, string: 1, fret: 15, note: "G", fretSound: AppConstant.str1Fr15));
-    fretList.add(BoardModel(id: 92, string: 2, fret: 15, note: "D", fretSound: AppConstant.str2Fr15));
-    fretList.add(BoardModel(id: 93, string: 3, fret: 15, note: "A#", fretSound:  AppConstant.str3Fr15));
-    fretList.add(BoardModel(id: 94, string: 4, fret: 15, note: "F", fretSound:  AppConstant.str4Fr15));
-    fretList.add(BoardModel(id: 95, string: 5, fret: 15, note: "C", fretSound:  AppConstant.str5Fr15));
-    fretList.add(BoardModel(id: 96, string: 6, fret: 15, note: "G", fretSound: AppConstant.str6Fr15));
+    fretList.add(BoardModel(id: 90, string: 1, fret: 15, note: "G", fretSound: AppConstant.str1Fr15));
+    fretList.add(BoardModel(id: 91, string: 2, fret: 15, note: "D", fretSound: AppConstant.str2Fr15));
+    fretList.add(BoardModel(id: 92, string: 3, fret: 15, note: "A#", fretSound:  AppConstant.str3Fr15));
+    fretList.add(BoardModel(id: 93, string: 4, fret: 15, note: "F", fretSound:  AppConstant.str4Fr15));
+    fretList.add(BoardModel(id: 94, string: 5, fret: 15, note: "C", fretSound:  AppConstant.str5Fr15));
+    fretList.add(BoardModel(id: 95, string: 6, fret: 15, note: "G", fretSound: AppConstant.str6Fr15));
 
   }
 
-  int? selectedIndex;
 
   // set sounds to sound list
   setSoundList(){
-
     fretList.clear();
-
   }
 
   int? selectedFret;
 
-  setSelectedFret(int index){
-    selectedFret = index;
+  // Initialize  animation controller
+  initializeData()async{
+     isStart = false;
+     selectedFret = null;
+     highlightFret = null;
+     highlightString = null;
+     highlightNode = null;
+     previousHighlightFret = null;
+    await loadFullList();
     notifyListeners();
   }
 
-  // Initialize  animation controller
-  initializeData()async{
-    selectedIndex = null;
-    selectedIndex = null;
-    await loadFullList();
-  }
-
-  // Play sound
+  // PLAY SOUND ACCORDING TO SELECTED NOTES , STRING AND FRET
   Future playSound(int index)async{
+
+    // STOP SOUND IF PLAYING
        await player.stop();
+
+       // EXECUTE LOOP
       fretList.forEach((element) async {
         if(element.id == index){
-          await player.play(AssetSource(element.fretSound!));
+          // GET ALLOW STRING STATUS
+          final stringStatus = getStringStatus(element.string!);
+
+          // CHECK IF THE STATUS IS TRUE AND GAME IS START
+          // THEN WE WILL HIGHLIGHT THINGS
+          if(stringStatus == true && isStart == true){
+            selectedFret = index;
+            print("selected fret : $selectedFret");
+            notifyListeners();
+            await player.play(AssetSource(element.fretSound!));
+            if(highlightFret == selectedFret){
+              previousHighlightFret = highlightFret;
+              restartTheGame();
+            }
+          }else{
+            await player.play(AssetSource(element.fretSound!));
+          }
           return;
         }
       });
@@ -198,6 +216,76 @@ class HomeProvider extends ChangeNotifier{
 
   }
 
+
+  // START THE GAME
+  // SELECT AND HIGHLIGHT STRING, FRET AND NOTE
+  bool isStart = false;
+  int? highlightFret;
+  int? highlightString;
+  String? highlightNode;
+  int? previousHighlightFret;
+
+  // WHEN PRESS CORRECT NOTE THEN HIGHLIGHT ANOTHER ONE TO SELECT
+restartTheGame(){
+  int randomIndex = getRandomIndex();
+  highlightFret = randomIndex;
+  print("Highlight fret: $highlightFret");
+  highlightNode = fretList[randomIndex].note;
+  highlightString = fretList[randomIndex].string;
+  notifyListeners();
+}
+
+// GET RANDOM INDEX ACCORDING TO  ALLOW STRING
+ getRandomIndex() {
+    Random random = Random();
+    int randomIndex;
+    do {
+      randomIndex = random.nextInt(fretList.length);
+    } while (getStringStatus(fretList[randomIndex].string!) == false );
+    return randomIndex;
+
+  }
+
+  // START THE GAME ON START BUTTON
+  startTheGame(){
+    isStart = true;
+    int randomIndex = getRandomIndex();
+    highlightFret = randomIndex;
+    previousHighlightFret = highlightFret;
+    print("Highlight fret: $highlightFret");
+    highlightNode = fretList[randomIndex].note;
+    highlightString = fretList[randomIndex].string;
+    notifyListeners();
+  }
+
+
+
+  // GET STRING STATUS WHICH STRING IS ALLOW
+bool getStringStatus(int id){
+
+    if(string1 == true && id == 1){
+      return true;
+    }
+    else if(string2 == true && id == 2){
+      return true;
+    }
+    else if(string3 == true && id == 3){
+      return true;
+    }
+    else if(string4 == true && id == 4){
+      return true;
+    }
+    else if(string5 == true && id == 5){
+      return true;
+    }
+    else if(string6 == true && id == 6){
+     return true;
+    }
+    else{
+      return false;
+    }
+
+  }
 
   //STRING TOGGLES
   // STRING 1

@@ -27,8 +27,6 @@ class PortraitBoard extends StatelessWidget {
         scale: controller.scale,
         child: Padding(
           padding: EdgeInsets.only(
-               left: width * 0.08,
-               right: width * 0.08,
                top: height*0.068 ,),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -36,26 +34,30 @@ class PortraitBoard extends StatelessWidget {
             children: [
 
               // TROPHY AND SETTING ICON
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ButtonIcon(
-                      icon: Images.iconTropy,
-                      width: height*0.026,
-                      height: height*0.026,
-                      onTap: (){}),
+              Padding(
+                padding:  EdgeInsets.only( left: width * 0.08,
+                  right: width * 0.08,),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ButtonIcon(
+                        icon: Images.iconTropy,
+                        width: height*0.026,
+                        height: height*0.026,
+                        onTap: (){}),
 
 
-                  ButtonIcon(
-                      icon: Images.iconSetting,
-                      width: height*0.038,
-                      height: height*0.038,
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return const SettingScreen();
-                        }));
-                      })
-                ],
+                    ButtonIcon(
+                        icon: Images.iconSetting,
+                        width: height*0.038,
+                        height: height*0.038,
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return const SettingScreen();
+                          }));
+                        })
+                  ],
+                ),
               ),
 
               // //SPACER
@@ -66,45 +68,53 @@ class PortraitBoard extends StatelessWidget {
               // BOARD WITH NUMBER
 
 
-                  Container(
-                      height: height*0.70,
-                      child: GuitarBoard()),
+                  Padding(
+                    padding:  EdgeInsets.only(left: width*0.070),
+                    child: Container(
+                        height: height*0.70,
+                        child: GuitarBoard()),
+                  ),
               //SPACER
                 SizedBox(
                 height: height*0.015,
                ),
 
               // //TIMER , STOPWATCH , ROTATE ICON
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     ButtonIcon(
-              //         icon: Images.iconTimer,
-              //         width: height*0.03,
-              //         height: height*0.03,
-              //         onTap: (){}),
-              //
-              //
-              //     Text(
-              //       "01:34",
-              //       style: TextStyle(
-              //         fontFamily: AppConstant.sansFont,
-              //         color: AppColors.whitePrimary,
-              //         fontSize: 40,
-              //         fontWeight: FontWeight.w700,
-              //       ),
-              //     ),
-              //
-              //
-              //     ButtonIcon(
-              //         icon: Images.iconRotate,
-              //         width: height*0.05,
-              //         height: height*0.04,
-              //         onTap: (){
-              //           controller.toggleOrientation();
-              //         })
-              //   ],
-              // ),
+              Padding(
+                padding:  EdgeInsets.only(
+                  left: width * 0.08,
+                  right: width * 0.08,),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ButtonIcon(
+                        icon: Images.iconTimer,
+                        width: height*0.03,
+                        height: height*0.03,
+                        onTap: (){}),
+
+
+                    Text(
+                      "01:34",
+                      style: TextStyle(
+                        fontFamily: AppConstant.sansFont,
+                        color: AppColors.whitePrimary,
+                        fontSize: 40,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+
+
+                    ButtonIcon(
+                        icon: Images.iconRotate,
+                        width: height*0.05,
+                        height: height*0.04,
+                        onTap: (){
+                          controller.toggleOrientation();
+                        })
+                  ],
+                ),
+              ),
               //
               //
               // //SCORE
@@ -121,7 +131,7 @@ class PortraitBoard extends StatelessWidget {
               //       ),
               //     ),
               //     Text(
-              //       "8",
+              //       controller.highlightNode??"",
               //       style: TextStyle(
               //         fontFamily: AppConstant.sansFont,
               //         color: AppColors.whitePrimary,
@@ -129,38 +139,39 @@ class PortraitBoard extends StatelessWidget {
               //         fontWeight: FontWeight.w600,
               //       ),
               //     ),
-              //   ],
-              // ),
+               // ],
+             // ),
 
             //  SPACER
-              SizedBox(
-                height: height*0.02,
-              ),
+            //   SizedBox(
+            //     height: height*0.02,
+            //   ),
 
              // START BUTTON
-              InkWell(
-                onTap: () {
-                },
-                child: Center(
-                  child: Container(
-                    height: height * 0.07,
-                    width: width * 0.8,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: AppColors.redPrimary,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Text(
-                      AppConstant.start,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whitePrimary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+             //  InkWell(
+             //    onTap: () {
+             //      controller.startTheGame();
+             //    },
+             //    child: Center(
+             //      child: Container(
+             //        height: height * 0.07,
+             //        width: width * 0.8,
+             //        alignment: Alignment.center,
+             //        decoration: BoxDecoration(
+             //            color: AppColors.redPrimary,
+             //            borderRadius: BorderRadius.circular(10)),
+             //        child: Text(
+             //          AppConstant.start,
+             //          style: TextStyle(
+             //            fontFamily: AppConstant.sansFont,
+             //            color: AppColors.whitePrimary,
+             //            fontSize: 16,
+             //            fontWeight: FontWeight.w600,
+             //          ),
+             //        ),
+             //      ),
+             //    ),
+             //  ),
 
             ],
           ),

@@ -115,7 +115,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                       scrollDirection: Axis.horizontal,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return colDivider(width, index, 5);
+                        return colDivider(width, index, controller.highlightString);
                       },
                     ),
 
@@ -137,7 +137,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                               isColor: controller.selectedFret == index
                                   ? true
                                   : false,
-                              color: controller.selectedFret == index
+                              color: controller.selectedFret == controller.previousHighlightFret
                                   ? AppColors.greenPrimary
                                   : AppColors.redPrimary,
                               //controller.getSelectedFret(index),
@@ -163,7 +163,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              controller.setSelectedFret(index);
+                             // controller.setSelectedFret(index);
                               controller.playSound(index);
                             },
                             child: stringPress(
@@ -267,7 +267,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
     );
   }
 
-  Widget colDivider(double width, int index, int selectedIndex) {
+  Widget colDivider(double width, int index, int? selectedString) {
     return Padding(
       padding:
           EdgeInsets.only(left: index == 0 ? width * 0.027 : width * 0.074),
@@ -287,10 +287,9 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
           gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: selectedIndex == index
+              colors: selectedString == index+1
                   ? [AppColors.redPrimary, AppColors.redPrimary]
-                  : [
-                      AppColors.whiteLight,
+                  : [ AppColors.whiteLight,
                       AppColors.whiteLight,
                       AppColors.greyPrimary,
                       AppColors.blackPrimary
@@ -331,6 +330,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
     required int index,
     required double height,
     required double width,
+
   }) =>
       Container(
         width: width * 0.040,
