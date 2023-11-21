@@ -7,8 +7,8 @@ import 'package:tempo_bpm/utils/app_%20colors.dart';
 import 'package:tempo_bpm/utils/app_constant.dart';
 
 class GuitarBoard extends StatefulWidget {
-  const GuitarBoard({super.key});
-
+  const GuitarBoard({super.key,required this.isPortrait});
+  final bool  isPortrait ;
   @override
   State<GuitarBoard> createState() => _GuitarBoardAltState();
 }
@@ -21,7 +21,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
     final width = MediaQuery.of(context).size.width;
     return Consumer<HomeProvider>(builder: (context, controller, child) {
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: height * 0.025),
+        padding: EdgeInsets.symmetric(vertical: height * 0.0),
         child: SingleChildScrollView(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,11 +78,11 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                                     isColor: index == 2 ||
                                             index == 4 ||
                                             index == 6 ||
-                                            index == 8
+                                            index == 8 || index == 14
                                         ? true
                                         : false),
                                 SizedBox(
-                                    width: index == 11 ? width * 0.073:  width * 0.089,
+                                    width: index == 11 ? width * 0.070:  width * 0.089,
                                 ),
                                 blackCircle(
                                     height: height,
@@ -108,15 +108,18 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
 
                     // COLUMN
 
-                    ListView.builder(
-                      itemCount: 6,
-                      shrinkWrap: false,
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.horizontal,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return colDivider(width, index, controller.highlightString);
-                      },
+                    RotatedBox(
+                      quarterTurns: 2,
+                      child: ListView.builder(
+                        itemCount: 6,
+                        shrinkWrap: false,
+                        padding: EdgeInsets.zero,
+                        scrollDirection: Axis.horizontal,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return colDivider(width, index, controller.highlightString);
+                        },
+                      ),
                     ),
 
                     /// red green  With Grid
@@ -182,6 +185,8 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                 width: width * 0.05,
               ),
               // NUMBERS
+
+              widget.isPortrait == false ? const SizedBox():
               SizedBox(
                 width: width * 0.06,
                 child: ListView.builder(
@@ -270,19 +275,14 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
   Widget colDivider(double width, int index, int? selectedString) {
     return Padding(
       padding:
-          EdgeInsets.only(left: index == 0 ? width * 0.027 : width * 0.074),
+          EdgeInsets.only(left: index == 0 ? width * 0.033 : width * 0.074),
       child: Container(
-        width: index == 0
-            ? width * 0.011
-            : index == 1
-                ? width * 0.010
-                : index == 2
-                    ? width * 0.009
-                    : index == 3
-                        ? width * 0.008
-                        : index == 4
-                            ? width * 0.007
-                            : width * 0.006,
+        width:      index == 6 ? width * 0.011
+            : index == 5 ? width * 0.010
+            : index == 4 ? width * 0.009
+            : index == 3 ? width * 0.008
+            : index == 2 ? width * 0.007
+            : width * 0.006,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.centerLeft,

@@ -139,7 +139,9 @@ class _SettingScreenState extends State<SettingScreen>{
 
                 SizedBox(height: height * 0.05),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: Center(
                     child: Container(
                       height: height * 0.07,

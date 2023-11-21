@@ -6,7 +6,7 @@ static const String sansFont = 'PlusJakartaSans-Regular';
 static const String logout = 'Logout';
 static const String start = 'Start';
 static const String returnString = 'Return';
-static const String score = 'Score: ';
+static const String score = 'Score:  ';
 static const String strings = 'Strings';
 static const String string1 = 'String 1';
 static const String string2 = 'String 2';
@@ -22,16 +22,16 @@ static const String monthlySubscriptionId  =  "com.jamieharrisonguitar.taptempo.
 //BEAT SOUND
 
   //STR1
-  static const String str1Fr0 = "audio/str_1/str1_fr0_nte.mp3";
-  static const String str1Fr1 = "audio/str_1/str1_fr1_ntf.mp3";
-  static const String str1Fr2 = "audio/str_1/str1_fr2_ntf#.mp3";
-  static const String str1Fr3 = "audio/str_1/str1_fr3_ntg.mp3";
-  static const String str1Fr4 = "audio/str_1/str1_fr4_ntg#.mp3";
-  static const String str1Fr5 = "audio/str_1/str1_fr5_nta.mp3";
-  static const String str1Fr6 = "audio/str_1/str1_fr6_nta#.mp3";
-  static const String str1Fr7 = "audio/str_1/str1_fr7_ntb.mp3";
-  static const String str1Fr8 = "audio/str_1/str1_fr8_ntc.mp3";
-  static const String str1Fr9 = "audio/str_1/str1_fr9_ntc#.mp3";
+  static const String str1Fr0 =  "audio/str_1/str1_fr0_nte.mp3";
+  static const String str1Fr1 =  "audio/str_1/str1_fr1_ntf.mp3";
+  static const String str1Fr2 =  "audio/str_1/str1_fr2_ntf#.mp3";
+  static const String str1Fr3 =  "audio/str_1/str1_fr3_ntg.mp3";
+  static const String str1Fr4 =  "audio/str_1/str1_fr4_ntg#.mp3";
+  static const String str1Fr5 =  "audio/str_1/str1_fr5_nta.mp3";
+  static const String str1Fr6 =  "audio/str_1/str1_fr6_nta#.mp3";
+  static const String str1Fr7 =  "audio/str_1/str1_fr7_ntb.mp3";
+  static const String str1Fr8 =  "audio/str_1/str1_fr8_ntc.mp3";
+  static const String str1Fr9 =  "audio/str_1/str1_fr9_ntc#.mp3";
   static const String str1Fr10 = "audio/str_1/str1_fr10_ntd.mp3";
   static const String str1Fr11 = "audio/str_1/str1_fr11_ntd#.mp3";
   static const String str1Fr12 = "audio/str_1/str1_fr12_nte.mp3";
