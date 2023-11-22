@@ -165,6 +165,8 @@ class HomeProvider extends ChangeNotifier{
      previousHighlightFret = null;
      score = 0;
      timer =  null;
+     isTimerSet = false;
+     secondsRemaining = 0;
      await loadFullList();
      notifyListeners();
   }
@@ -187,7 +189,6 @@ class HomeProvider extends ChangeNotifier{
             selectedFret = index;
             print("selected fret : $selectedFret");
             print("selected note: ${element.note}");
-            notifyListeners();
             await player.play(AssetSource(element.fretSound!));
             if(highlightFret == selectedFret){
               previousHighlightFret = highlightFret;
@@ -196,6 +197,7 @@ class HomeProvider extends ChangeNotifier{
             }else{
               decrementScore();
             }
+             notifyListeners();
           }else{
             await player.play(AssetSource(element.fretSound!));
           }
@@ -279,15 +281,61 @@ restartTheGame(){
 // TIMER
 
 
-  int secondsRemaining = 60; // Initial countdown time in seconds
+  int secondsRemaining = 0; // Initial countdown time in seconds
   Timer? timer;
+  bool isTimerSet = false;
 
-  resetTimer(){
-    startTimer();
+  increaseTime(){
+   if (isStart != true){
+     secondsRemaining = secondsRemaining+10;
+     notifyListeners();
+   }
+
+  }
+  decreaseTime(){
+   if(secondsRemaining>10 && isStart != true ){
+     secondsRemaining = secondsRemaining-10;
+     notifyListeners();
+   }
   }
 
-  startTimer() {
+  resetGame(){
+    if(timer != null){
+      timer!.cancel();
+    }
+    isStart = false;
+    selectedFret = null;
+    highlightFret = null;
+    highlightString = null;
+    highlightNode = null;
+    previousHighlightFret = null;
+    score = 0;
+    secondsRemaining = 0;
+    isTimerSet = false;
+    timer =  null;
+    notifyListeners();
+  }
+
+  resetTimer(){
+    isTimerSet = true;
     secondsRemaining = 60;
+    notifyListeners();
+  }
+
+
+  startTimer(){
+    if(isTimerSet == true){
+      startCountDownTimer();
+    }else{
+      startCountUpTimer();
+    }
+
+  }
+
+  startCountDownTimer() {
+    if(secondsRemaining == 0){
+      secondsRemaining = 60;
+    }
     notifyListeners();
     if(timer != null){
       timer!.cancel();
@@ -296,7 +344,7 @@ restartTheGame(){
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       // Update the UI and decrement the remaining seconds=
         if (secondsRemaining > 0) {
-          secondsRemaining--;
+           secondsRemaining--;
           notifyListeners();
         } else {
           // Timer expired, you can handle this case here
@@ -306,6 +354,20 @@ restartTheGame(){
 
         }
       });
+  }
+
+  startCountUpTimer() {
+    secondsRemaining = 0;
+    notifyListeners();
+    if(timer != null){
+      timer!.cancel();
+    }
+    // Create a timer that runs every second
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      // Update the UI and decrement the remaining seconds=
+        secondsRemaining++;
+        notifyListeners();
+    });
   }
 
   String formatTime(int seconds) {
@@ -343,41 +405,75 @@ bool getStringStatus(int id){
 
   }
 
+
+  List offString  = [true,true,true,true,true,true];
+
   //STRING TOGGLES
   // STRING 1
   bool string1 = true;
-  setString1(){
+  setString1(int index){
     string1 = !string1;
+    offString[index] = string1;
+    if(!offString.contains(true)){
+      offString[index] = true;
+      string1 = true;
+    }
     notifyListeners();}
 
   // STRING 2
   bool string2 = true;
-  setString2(){
+  setString2(int index){
     string2 = !string2;
+    offString[index] = string2;
+    if(!offString.contains(true)){
+      offString[index] = true;
+      string2 = true;
+    }
     notifyListeners();}
 
   // STRING 3
   bool string3 = true;
-  setString3(){
+  setString3(int index){
     string3 = !string3;
+    offString[index] = string3;
+    if(!offString.contains(true)){
+      offString[index] = true;
+      string3 = true;
+    }
     notifyListeners();}
 
   // STRING 4
   bool string4 = true;
-  setString4(){
+  setString4(int index){
     string4 = !string4;
+    offString[index] = string4;
+    if(!offString.contains(true)){
+      offString[index] = true;
+      string4 = true;
+    }
     notifyListeners();}
 
   // STRING 5
   bool string5 = true;
-  setString5(){
+  setString5(int index){
     string5 = !string5;
+    offString[index] = string5;
+    if(!offString.contains(true)){
+      offString[index] = true;
+      string5 = true;
+    }
     notifyListeners();}
 
   // STRING 6
   bool string6 = true;
-  setString6(){
+  setString6(int index){
+
     string6 = !string6;
+    offString[index] = string6;
+    if(!offString.contains(true)){
+      offString[index] = true;
+      string6 = true;
+    }
     notifyListeners();}
 
 }

@@ -185,8 +185,6 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                 width: width * 0.05,
               ),
               // NUMBERS
-
-              widget.isPortrait == false ? const SizedBox():
               SizedBox(
                 width: width * 0.06,
                 child: ListView.builder(
@@ -197,48 +195,19 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: EdgeInsets.only(
-                          bottom: index == 0
-                              ? height * 0.025
-                              : index == 1
-                                  ? height * 0.05
-                                  : index == 2
-                                      ? height * 0.055
-                                      : index == 3
-                                          ? height * 0.060
-                                          : index == 4
-                                              ? height * 0.056
-                                              : index == 5
-                                                  ? height * 0.062
-                                                  : index == 6
-                                                      ? height * 0.062
-                                                      : index == 7
-                                                          ? height * 0.062
-                                                          : index == 8
-                                                              ? height * 0.060
-                                                              : index == 9
-                                                                  ? height *
-                                                                      0.060
-                                                                  : index == 10
-                                                                      ? height *
-                                                                          0.060
-                                                                      : index ==
-                                                                              11
-                                                                          ? height *
-                                                                              0.060
-                                                                          : index == 12
-                                                                              ? height * 0.060
-                                                                              : index == 13
-                                                                                  ? height * 0.060
-                                                                                   : index == 14
-                                                                                      ? height * 0.060
-                                                                                      : height * 0.05),
-                      child: Text(
-                        index.toString(),
-                        style: TextStyle(
-                          color: AppColors.whitePrimary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                          height: 1.2,
+                          bottom: widget.isPortrait == true ?
+                          getPotraitHeight(index,height) : getLandscapeHeight(index,height),
+                          ),
+                      child: RotatedBox(
+                        quarterTurns: 1,
+                        child: Text(
+                          index.toString(),
+                          style: TextStyle(
+                            color: AppColors.whitePrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            height: widget.isPortrait == true ? 1.2 : 2,
+                          ),
                         ),
                       ),
                     );
@@ -411,4 +380,68 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
       return height * 0.076;
     }
   }
+
+  double getPotraitHeight(int index, double height) {
+    switch (index) {
+      case 0:
+        return height * 0.035;
+      case 1:
+        return height * 0.055;
+      case 2:
+        return height * 0.070;
+      case 3:
+        return height * 0.070;
+      case 4:
+        return height * 0.070;
+      case 5:
+      case 6:
+      case 7:
+        return height * 0.068;
+      case 8:
+      case 9:
+      case 10:
+      case 11:
+      case 12:
+      case 13:
+      case 14:
+        return height * 0.062;
+      default:
+        return height * 0.05;
+    }
+
+  }
+
+  double getLandscapeHeight(int index, double height) {
+    switch (index) {
+      case 0:
+        return height * 0.035;
+      case 1:
+        return height * 0.060;
+      case 2:
+        return height * 0.065;
+      case 3:
+        return height * 0.070;
+      case 4:
+        return height * 0.072;
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+        return height * 0.072;
+      case 9:
+        return height * 0.050;
+      case 10:
+        return height * 0.055;
+      case 11:
+        return height * 0.060;
+      case 12:
+      case 13:
+      case 14:
+        return height * 0.060;
+      default:
+        return height * 0.05;
+    }
+  }
+
+
 }

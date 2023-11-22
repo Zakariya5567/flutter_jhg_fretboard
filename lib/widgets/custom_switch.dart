@@ -15,7 +15,7 @@ class CustomSwitch extends StatelessWidget {
     return  InkWell(
       onTap: onChange,
       child: Container(
-        height: height*0.038,
+        height: height*0.036,
         width: width*0.15,
         alignment: Alignment.center,
         clipBehavior: Clip.hardEdge,

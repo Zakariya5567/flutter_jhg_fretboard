@@ -24,10 +24,10 @@ class PortraitBoard extends StatelessWidget {
       AnimatedScale(
         duration: const Duration(milliseconds: 1000),
         curve: Curves.linearToEaseOut,
-        scale: controller.scale,
+        scale: 1,
         child: Padding(
           padding: EdgeInsets.only(
-               top: height*0.068 ,),
+               top: height*0.072 ,),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,6 +60,7 @@ class PortraitBoard extends StatelessWidget {
                 ),
               ),
 
+
               // //SPACER
               SizedBox(
                 height: height*0.035,
@@ -73,7 +74,7 @@ class PortraitBoard extends StatelessWidget {
                     child: Container(
                         //color: Colors.red,
                         height:    controller.isStart == true? height*0.64
-                        : height*0.67,
+                        : height*0.64,
                         child: const GuitarBoard(isPortrait: true,)),
                   ),
                  //SPACER
@@ -82,31 +83,72 @@ class PortraitBoard extends StatelessWidget {
                 ),
 
 
-              controller.isStart == true? const SizedBox():
-
-              SizedBox(
-                height: height*0.030,
-              ),
-
-
-
-
               // TIMER
-              controller.isStart == true?
-              Center(
-                child: Text(
-                  controller.formatTime(controller.secondsRemaining),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: AppConstant.sansFont,
-                    color: AppColors.whitePrimary,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w600,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      controller.decreaseTime();
+                    },
+                    child: Container(
+                      height:height * 0.030,
+                      width: height * 0.030,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color:  AppColors.redPrimary,
+                      ),
+                      child: Center(
+                          child:
+                          Icon(Icons.remove,color: AppColors.whitePrimary,
+                            size: height*0.025,)
+                      ),
+                    ),
                   ),
-                ),
-              ): const SizedBox(),
+                  SizedBox(
+                    width: width*0.050,
+                  ),
+                  Center(
+                    child: Text(
+                      controller.formatTime(controller.secondsRemaining),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: AppConstant.sansFont,
+                        color: AppColors.whitePrimary,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: width*0.050,
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      controller.increaseTime();
+                    },
+                    child: Container(
+                      height:height * 0.030,
+                      width: height * 0.030,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color:  AppColors.redPrimary,
+                      ),
+                      child: Center(
+                          child:
+                          Icon(Icons.add,color: AppColors.whitePrimary,
+                          size: height*0.025,
+                          )
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+                  //: const SizedBox(),
               // //TIMER , STOPWATCH , ROTATE ICON
-
+              SizedBox(
+                height: height*0.010,
+              ),
               Padding(
                 padding:  EdgeInsets.only(
                   left: width * 0.08,
@@ -114,20 +156,29 @@ class PortraitBoard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+
                     ButtonIcon(
-                        icon: Images.iconTimer,
-                        width: height*0.033,
-                        height: height*0.033,
+                        icon:
+
+                        controller.isStart ?
+                        Images.iconReset : Images.iconTimer,
+                        width:  controller.isStart ? height*0.030 : height*0.033,
+                        height: controller.isStart ? height*0.030 : height*0.033,
                         onTap: (){
-                          controller.resetTimer();
+                          if(controller.isStart){
+                            controller.resetGame();
+                          }else{
+                            controller.resetTimer();
+                          }
+
                         }),
 
                     controller.isStart == true?
                     Container(
-                      height: height * 0.05,
+                      height: height * 0.060,
                       width: width * 0.45,
-                      alignment: Alignment.center,
-                     // color: Colors.red,
+                      alignment: Alignment.topCenter,
+                      //color: Colors.red,
                       child: Text(
                         "    ${controller.highlightNode ?? ""}",
                         textAlign: TextAlign.center,

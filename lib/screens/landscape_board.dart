@@ -20,7 +20,7 @@ class LandscapeBoard extends StatelessWidget {
     return   AnimatedScale(
       duration: const Duration(milliseconds: 1000),
       curve: Curves.linearToEaseOut,
-      scale: controller.scale,
+      scale: 1,
       child: Padding(
           padding: EdgeInsets.only(
               top: height*0.068
@@ -32,18 +32,27 @@ class LandscapeBoard extends StatelessWidget {
 
               // TROPHY AND Timer ICON
               Padding(
-                padding:  EdgeInsets.only( left: width * 0.1,
+                padding:  EdgeInsets.only( left: width * 0.08,
                   right: width * 0.1,),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ButtonIcon(
-                        icon: Images.iconTimerLandscape,
-                        width: height*0.032,
-                        height: height*0.032,
+                        icon:
+                        controller.isStart ?
+                        Images.iconReset : Images.iconTimerLandscape,
+                        width:  controller.isStart ? height*0.030 : height*0.034,
+                        height: controller.isStart ? height*0.030 : height*0.034,
                         onTap: (){
-                          controller.resetTimer();
+                          if(controller.isStart){
+                            controller.resetGame();
+                          }else{
+                            controller.resetTimer();
+                          }
+
                         }),
+
+
                     ButtonIcon(
                         icon: Images.iconTrophyLandscape,
                         width: height*0.028,
@@ -68,11 +77,9 @@ class LandscapeBoard extends StatelessWidget {
                   child: Row(
                     children: [
 
-                      controller.isStart == false ?
-                      Row(
-                        children: [
-                          SizedBox(width: width*0.05,),
-                          RotatedBox(
+                         // START BUTTON
+                        controller.isStart == true ? const SizedBox():
+                        RotatedBox(
                             quarterTurns: 1,
                             child: InkWell(
                               onTap: () {
@@ -101,17 +108,19 @@ class LandscapeBoard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(width: width*0.06,)
-                        ],
-                      ):
 
-
-
-                      Row(
-                        children: [
+                      controller.isStart == false ?
+                      SizedBox(width: width*0.01,)
+                          :
+                        const  SizedBox(),
+                          // SCORE AND NOTE
+                          controller.isStart == false ? const SizedBox():
+                          Row(
+                         children: [
                           RotatedBox(
                             quarterTurns: 1,
-                            child: Row(
+                            child:
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
@@ -138,19 +147,48 @@ class LandscapeBoard extends StatelessWidget {
                           RotatedBox(
                               quarterTurns: 1,
                               child:
-                              Text(
-                                controller.highlightNode ?? "",
-                                style: TextStyle(
-                                  fontFamily: AppConstant.sansFont,
-                                  color: AppColors.redPrimary,
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
+                                  Text(
+                                    controller.highlightNode ?? "",
+                                    style: TextStyle(
+                                      fontFamily: AppConstant.sansFont,
+                                      color: AppColors.redPrimary,
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
+
+
+                        ],
+                      ),
+
+                        // TIMER WITH INCREASE AND DECREASE BUTTON
+                        RotatedBox(
+                          quarterTurns: 1,
+                          child:
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: (){
+                                  controller.decreaseTime();
+                                },
+                                child: Container(
+                                  height:height * 0.030,
+                                  width: height * 0.030,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color:  AppColors.redPrimary,
+                                  ),
+                                  child: Center(
+                                      child:
+                                      Icon(Icons.remove,color: AppColors.whitePrimary,
+                                        size: height*0.025,)
+                                  ),
                                 ),
-                              )),
-                          //STOP WATCH
-                          RotatedBox(
-                              quarterTurns: 1,
-                              child:
+                              ),
+                              SizedBox(
+                                width: width*0.050,
+                              ),
                               Text(
                                 controller.formatTime( controller.secondsRemaining),
                                 style: TextStyle(
@@ -159,26 +197,43 @@ class LandscapeBoard extends StatelessWidget {
                                   fontSize: 36,
                                   fontWeight: FontWeight.w700,
                                 ),
-                              )),
+                              ),
+                              SizedBox(
+                                width: width*0.050,
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  controller.increaseTime();
+                                },
+                                child: Container(
+                                  height:height * 0.030,
+                                  width: height * 0.030,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color:  AppColors.redPrimary,
+                                  ),
+                                  child: Center(
+                                      child:
+                                      Icon(Icons.add,color: AppColors.whitePrimary,
+                                        size: height*0.025,
+                                      )
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
 
-                        ],
-                      ),
 
-                      //SPACER
+                       controller.isStart ?
+                        SizedBox(width: width*0.04,)
+                         :
+                        SizedBox(width: width*0.06,),
 
-                      controller.isStart ?
-                      SizedBox(
-                        width: width*0.04,
-                      ):
-                      SizedBox(
-                        width: width*0.075,
-                      ),
-
-                      //BOARD
-                      Container(
+                       // BOARD
+                       Container(
                         //color: Colors.red,
                           height: height*0.74,
-                          child: const GuitarBoard(isPortrait: true,)),
+                          child: const GuitarBoard(isPortrait: false,)),
 
 
                     ],
@@ -191,11 +246,12 @@ class LandscapeBoard extends StatelessWidget {
 
               //SPACER
               SizedBox(
-                height: height*0.030,
+                height: height*0.036,
               ),
+
               Padding(
                 padding:  EdgeInsets.only( left: width * 0.1,
-                  right: width * 0.1,),
+                  right: width * 0.08,),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

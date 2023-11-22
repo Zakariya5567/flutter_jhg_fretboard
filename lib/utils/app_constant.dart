@@ -6,6 +6,7 @@ static const String sansFont = 'PlusJakartaSans-Regular';
 static const String logout = 'Logout';
 static const String start = 'Start';
 static const String returnString = 'Return';
+static const String save = 'Save';
 static const String score = 'Score:  ';
 static const String strings = 'Strings';
 static const String string1 = 'String 1';

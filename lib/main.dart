@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:tempo_bpm/providers/home_provider.dart';
+import 'package:tempo_bpm/providers/leaderboard_controller.dart';
 import 'package:tempo_bpm/screens/home_screen.dart';
 
 
@@ -11,6 +12,8 @@ Future<void> main() async{
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight
   ]);
 
   runApp(const MyApp());
@@ -27,6 +30,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<HomeProvider>(create: (context)=> HomeProvider()),
+        ChangeNotifierProvider<LeaderBoardProvider>(create: (context)=> LeaderBoardProvider()),
       ],
       child:
       MaterialApp(

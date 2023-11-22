@@ -40,7 +40,7 @@ class _SettingScreenState extends State<SettingScreen>{
         child: Consumer<HomeProvider>(builder: (context, controller, child) {
           return Padding(
             padding: EdgeInsets.only(
-              top: height * 0.07,
+              top: height * 0.08,
               left: width * 0.08,
               right: width * 0.08,
             ),
@@ -57,8 +57,8 @@ class _SettingScreenState extends State<SettingScreen>{
                   },
                   child: Icon(
                     Icons.arrow_back_ios,
-                    color: AppColors.greySecondary,
-                    size: height * 0.025,
+                    color: AppColors.whiteSecondary,
+                    size: height * 0.030,
                   ),
                 ),
 
@@ -97,47 +97,47 @@ class _SettingScreenState extends State<SettingScreen>{
                     heading: AppConstant.string6,
                     value: controller.string6,
                     onChange: (){
-                      controller.setString6();
+                      controller.setString6(0);
                     }
                 ),
                 SettingToggle(
                     heading: AppConstant.string5,
                     value: controller.string5,
                     onChange: (){
-                      controller.setString5();
+                      controller.setString5(1);
                     }
                 ),
                 SettingToggle(
                     heading: AppConstant.string4,
                     value: controller.string4,
                     onChange: (){
-                      controller.setString4();
+                      controller.setString4(2);
                     }
                 ),
                 SettingToggle(
                     heading: AppConstant.string3,
                     value: controller.string3,
                     onChange: (){
-                      controller.setString3();
+                      controller.setString3(3);
                     }
                 ),
                 SettingToggle(
                     heading: AppConstant.string2,
                     value: controller.string2,
                     onChange: (){
-                      controller.setString2();
+                      controller.setString2(4);
                     }
                 ),
                 SettingToggle(
                     heading: AppConstant.string1,
                     value: controller.string1,
                     onChange: (){
-                      controller.setString1();
+                      controller.setString1(5);
                     }
                 ),
 
 
-                SizedBox(height: height * 0.05),
+                SizedBox(height: height * 0.09),
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
@@ -151,7 +151,7 @@ class _SettingScreenState extends State<SettingScreen>{
                           color: AppColors.redPrimary,
                           borderRadius: BorderRadius.circular(10)),
                       child: Text(
-                         AppConstant.returnString,
+                         AppConstant.save,
                         style: TextStyle(
                           fontFamily: AppConstant.sansFont,
                           color: AppColors.whitePrimary,
@@ -165,7 +165,7 @@ class _SettingScreenState extends State<SettingScreen>{
 
                 // SPACER
                 SizedBox(
-                  height: height * 0.02,
+                  height: height * 0.005,
                 ),
 
                 Center(

@@ -4,6 +4,7 @@ class Images {
   static const iconSetting = "assets/images/ic_setting.png";
   static const iconTimer = "assets/images/ic_timer.png";
   static const iconTropy = "assets/images/ic_tropy.png";
+  static const iconReset = "assets/images/ic_reset.png";
 
 
   static const iconRotateLandscape = "assets/images/ic_rotate_landscape.png";
