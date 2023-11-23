@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:tempo_bpm/providers/home_provider.dart';
-import 'package:tempo_bpm/screens/home_screen.dart';
-import 'package:tempo_bpm/widgets/setting_toggle.dart';
+import 'package:fretboard/screens/home_screen.dart';
+import 'package:fretboard/widgets/setting_toggle.dart';
+import '../controllers/home_controller.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 
@@ -17,14 +18,28 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen>{
 
-
+  PackageInfo packageInfo = PackageInfo(
+    appName: '',
+    packageName: '',
+    version: '',
+    buildNumber: '',
+    buildSignature: '',
+    installerStore: '',
+  );
 
   @override
   void initState() {
     super.initState();
-    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
-    //settingProvider.initializeAnimationController();
+    _initPackageInfo();
   }
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      packageInfo = info;
+    });
+  }
+
 
   bool toggle = true;
 
@@ -37,7 +52,9 @@ class _SettingScreenState extends State<SettingScreen>{
         height: height,
         width: width,
         color: AppColors.blackPrimary,
-        child: Consumer<HomeProvider>(builder: (context, controller, child) {
+        child: GetBuilder<HomeController>(
+            init: HomeController(),
+            builder: (controller) {
           return Padding(
             padding: EdgeInsets.only(
               top: height * 0.08,
@@ -138,11 +155,11 @@ class _SettingScreenState extends State<SettingScreen>{
 
 
                 SizedBox(height: height * 0.09),
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Center(
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                     child: Container(
                       height: height * 0.07,
                       width: width * 1,
@@ -180,8 +197,8 @@ class _SettingScreenState extends State<SettingScreen>{
                               AppConstant.yearlySubscriptionId,
                           monthlySubscriptionId:
                               AppConstant.monthlySubscriptionId,
-                          appVersion: "1.0.0",
-                          appName: "JHG Frethboard",
+                          appVersion: packageInfo.version,
+                          appName: AppConstant.appName,
                           nextPage: () => const HomeScreen(),
                         );
                       }), (route) => false);

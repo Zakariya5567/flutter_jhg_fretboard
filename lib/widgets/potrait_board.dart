@@ -1,21 +1,21 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:reg_page/reg_page.dart';
-import 'package:tempo_bpm/screens/guitar_board.dart';
-import 'package:tempo_bpm/screens/setting_screen.dart';
-import 'package:tempo_bpm/utils/images.dart';
-import 'package:tempo_bpm/widgets/button_icon.dart';
-import '../providers/home_provider.dart';
+import 'package:fretboard/controllers/home_controller.dart';
+import 'package:fretboard/widgets/guitar_board.dart';
+import 'package:fretboard/screens/setting_screen.dart';
+import 'package:fretboard/utils/images.dart';
+import 'package:fretboard/widgets/button_icon.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import '../screens/leaderboard_screen.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 
 class PortraitBoard extends StatelessWidget {
   const PortraitBoard({super.key,required this.controller});
 
-  final HomeProvider controller;
+  final HomeController controller;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -44,7 +44,10 @@ class PortraitBoard extends StatelessWidget {
                         icon: Images.iconTropy,
                         width: height*0.026,
                         height: height*0.026,
-                        onTap: (){}),
+                        onTap: (){
+                          Get.to(() => LeadershipScreen(),
+                              transition: Transition.leftToRight);
+                        }),
 
 
                     ButtonIcon(
@@ -251,7 +254,7 @@ class PortraitBoard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      AppConstant.score,
+                      AppConstant.scoreText,
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
                         color: AppColors.whitePrimary,

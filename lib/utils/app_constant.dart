@@ -2,13 +2,20 @@
 class AppConstant {
 
 static const String sansFont = 'PlusJakartaSans-Regular';
-
+static const String appName = 'JHG Fretboard Trainer';
 static const String logout = 'Logout';
 static const String start = 'Start';
+static String loadMore = "Load more";
+static String username = "username";
+static String score = "score";
 static const String returnString = 'Return';
+static const String titleLeaderBoardTitle = "Fretboard - Trainer";
 static const String save = 'Save';
-static const String score = 'Score:  ';
+static const String scoreText = 'Score:  ';
 static const String strings = 'Strings';
+static String user = "User";
+static String scoreTemp = "score";
+
 static const String string1 = 'String 1';
 static const String string2 = 'String 2';
 static const String string3 = 'String 3';

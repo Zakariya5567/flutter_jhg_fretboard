@@ -4,8 +4,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import '../model/board_model.dart';
 import '../utils/app_constant.dart';
+import 'package:get/get.dart';
 
-class HomeProvider extends ChangeNotifier{
+class HomeController extends GetxController {
 
   // Instance of the Player
   final player = AudioPlayer();
@@ -173,7 +174,7 @@ class HomeProvider extends ChangeNotifier{
      isTimerSet = false;
      secondsRemaining.value = 0;
      await loadFullList();
-     notifyListeners();
+     update();
   }
 
   // PLAY SOUND ACCORDING TO SELECTED NOTES , STRING AND FRET
@@ -214,7 +215,7 @@ class HomeProvider extends ChangeNotifier{
             }else{
               decrementScore();
             }
-             notifyListeners();
+             update();
           }else{
             await player.play(AssetSource(element.fretSound!));
           }
@@ -232,11 +233,11 @@ class HomeProvider extends ChangeNotifier{
     scale  = 0.5;
     Future.delayed(const Duration(milliseconds: 100),(){
       isPortrait = !isPortrait;
-      notifyListeners();
+      update();
     });
     Future.delayed(const Duration(milliseconds: 300),(){
       scale  = 1;
-      notifyListeners();
+      update();
     });
 
   }
@@ -248,12 +249,12 @@ class HomeProvider extends ChangeNotifier{
 
   incrementScore(){
     score = score +1;
-    notifyListeners();
+    update();
   }
 
   decrementScore(){
     score = score -1;
-    notifyListeners();
+    update();
   }
 
 
@@ -278,7 +279,7 @@ restartTheGame(){
   print("Highlight note ========>>>>: $highlightNode");
   print("Highlight fret ========>>>>: $highlightFret");
   print("Highlight string ========>>>>: $highlightString");
-  notifyListeners();
+  update();
 }
 
 // GET RANDOM INDEX ACCORDING TO  ALLOW STRING
@@ -305,7 +306,7 @@ restartTheGame(){
     print("Highlight note ========>>>>: $highlightNode");
     print("Highlight fret ========>>>>: $highlightFret");
     print("Highlight string ========>>>>: $highlightString");
-    notifyListeners();
+    update();
   }
 // TIMER
 
@@ -318,14 +319,14 @@ restartTheGame(){
   increaseTime(){
     if (isStart != true){
       secondsRemaining.value = secondsRemaining.value+10;
-      notifyListeners();
+      update();
     }
 
   }
   decreaseTime(){
     if(secondsRemaining.value>10 && isStart != true ){
       secondsRemaining.value = secondsRemaining.value-10;
-      notifyListeners();
+      update();
     }
   }
 
@@ -346,13 +347,13 @@ restartTheGame(){
     secondsRemaining.value = 0;
     isTimerSet = false;
     timer =  null;
-    notifyListeners();
+    update();
   }
 
   resetTimer(){
     isTimerSet = true;
     secondsRemaining.value = 60;
-    notifyListeners();
+    update();
   }
 
 
@@ -414,7 +415,7 @@ bool getStringStatus(int id){
       offString[index] = true;
       string1 = true;
     }
-    notifyListeners();}
+    update();}
 
   // STRING 2
   bool string2 = true;
@@ -425,7 +426,7 @@ bool getStringStatus(int id){
       offString[index] = true;
       string2 = true;
     }
-    notifyListeners();}
+    update();}
 
   // STRING 3
   bool string3 = true;
@@ -436,7 +437,7 @@ bool getStringStatus(int id){
       offString[index] = true;
       string3 = true;
     }
-    notifyListeners();}
+    update();}
 
   // STRING 4
   bool string4 = true;
@@ -447,7 +448,7 @@ bool getStringStatus(int id){
       offString[index] = true;
       string4 = true;
     }
-    notifyListeners();}
+    update();}
 
   // STRING 5
   bool string5 = true;
@@ -458,7 +459,7 @@ bool getStringStatus(int id){
       offString[index] = true;
       string5 = true;
     }
-    notifyListeners();}
+    update();}
 
   // STRING 6
   bool string6 = true;
@@ -470,7 +471,7 @@ bool getStringStatus(int id){
       offString[index] = true;
       string6 = true;
     }
-    notifyListeners();}
+    update();}
 
   // Value Notifier listener
 
@@ -479,7 +480,7 @@ bool getStringStatus(int id){
 
   startCountUpTimer() {
     secondsRemaining.value = 0;
-    notifyListeners();
+    update();
     if(timer != null){
       timer!.cancel();
     }
@@ -496,7 +497,7 @@ bool getStringStatus(int id){
     if(secondsRemaining.value == 0){
       secondsRemaining.value = 60;
     }
-    notifyListeners();
+    update();
     if(timer != null){
       timer!.cancel();
     }
@@ -509,7 +510,7 @@ bool getStringStatus(int id){
         // Timer expired, you can handle this case here
         timer.cancel();
         // Cancel the timer when the countdown reaches 0
-        notifyListeners();
+        update();
 
       }
     });

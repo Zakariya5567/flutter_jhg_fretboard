@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tempo_bpm/screens/setting_screen.dart';
-import 'package:tempo_bpm/utils/images.dart';
-import 'package:tempo_bpm/widgets/button_icon.dart';
-import '../providers/home_provider.dart';
+import 'package:fretboard/controllers/home_controller.dart';
+import 'package:fretboard/screens/setting_screen.dart';
+import 'package:fretboard/utils/images.dart';
+import 'package:fretboard/widgets/button_icon.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import '../screens/leaderboard_screen.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'guitar_board.dart';
@@ -11,7 +14,7 @@ import 'guitar_board.dart';
 class LandscapeBoard extends StatelessWidget {
   const LandscapeBoard({super.key,required this.controller});
 
-  final HomeProvider controller;
+  final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,11 @@ class LandscapeBoard extends StatelessWidget {
                         icon: Images.iconTrophyLandscape,
                         width: height*0.028,
                         height: height*0.028,
-                        onTap: (){}),
+                        onTap: (){
+
+                          Get.to(() => LeadershipScreen(),
+                              transition: Transition.leftToRight);
+                        }),
                   ],
                 ),
               ),
@@ -124,7 +131,7 @@ class LandscapeBoard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  AppConstant.score,
+                                  AppConstant.scoreText,
                                   style: TextStyle(
                                     fontFamily: AppConstant.sansFont,
                                     color: AppColors.whitePrimary,

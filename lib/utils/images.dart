@@ -6,6 +6,9 @@ class Images {
   static const iconTropy = "assets/images/ic_tropy.png";
   static const iconReset = "assets/images/ic_reset.png";
 
+  static const svg_trophyIcon = "assets/images/trophy.svg";
+  static const svg_forward_button = "assets/images/svg_forward_button.svg";
+
 
   static const iconRotateLandscape = "assets/images/ic_rotate_landscape.png";
   static const iconSettingLandscape = "assets/images/ic_setting_landscape.png";

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:provider/provider.dart';
-import 'package:tempo_bpm/model/board_model.dart';
-import 'package:tempo_bpm/providers/home_provider.dart';
-import 'package:tempo_bpm/utils/app_%20colors.dart';
-import 'package:tempo_bpm/utils/app_constant.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:fretboard/utils/app_%20colors.dart';
+
+import '../controllers/home_controller.dart';
 
 class GuitarBoard extends StatefulWidget {
   const GuitarBoard({super.key,required this.isPortrait});
@@ -19,7 +18,9 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Consumer<HomeProvider>(builder: (context, controller, child) {
+    return GetBuilder<HomeController>(
+        init: HomeController(),
+        builder: (controller) {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: height * 0.0),
         child: SingleChildScrollView(
@@ -27,7 +28,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // FRETBOARD
+              // fretboard
               Container(
                 width: width * 0.48,
                 constraints: BoxConstraints(maxHeight: height * 1.2),

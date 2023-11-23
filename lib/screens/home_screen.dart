@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:tempo_bpm/screens/landscape_board.dart';
-import 'package:tempo_bpm/screens/potrait_board.dart';
-import '../providers/home_provider.dart';
+import 'package:fretboard/controllers/home_controller.dart';
+import 'package:fretboard/widgets/landscape_board.dart';
+import 'package:fretboard/widgets/potrait_board.dart';
 import '../utils/app_ colors.dart';
 
 
@@ -26,18 +26,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
     void initState() {
-    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
-    homeProvider.initializeData();
+    final homeController = Get.put(HomeController());
+    homeController.initializeData();
     setExpiryDate();
     super.initState();
   }
 
-  HomeProvider? homeProvider;
+  HomeController? homeController;
 
 
   @override
   void didChangeDependencies() {
-    homeProvider = Provider.of<HomeProvider>(context,listen: false);
+    homeController = Get.put(HomeController());
     super.didChangeDependencies();
   }
 
@@ -51,8 +51,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       height: height,
       width: width,
       color:  AppColors.blackPrimary,
-      child: Consumer<HomeProvider>(
-          builder: (context, controller, child) {
+      child: GetBuilder<HomeController>(
+           init: HomeController(),
+           builder: (controller) {
             return
             //   OrientationBuilder(builder: (context,orientation){
             //   if (orientation == Orientation.portrait) {
