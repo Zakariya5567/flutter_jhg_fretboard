@@ -189,15 +189,24 @@ class LandscapeBoard extends StatelessWidget {
                               SizedBox(
                                 width: width*0.050,
                               ),
-                              Text(
-                                controller.formatTime( controller.secondsRemaining),
-                                style: TextStyle(
-                                  fontFamily: AppConstant.sansFont,
-                                  color: AppColors.whitePrimary,
-                                  fontSize: 36,
-                                  fontWeight: FontWeight.w700,
-                                ),
+
+                              ValueListenableBuilder<int>(
+                                valueListenable: controller.secondsRemaining,
+                                //widget.model.seconds,
+                                builder: (context, value, child) {
+                                  return
+                                  Text(
+                                    controller.formatTime(value),
+                                    style: TextStyle(
+                                      fontFamily: AppConstant.sansFont,
+                                      color: AppColors.whitePrimary,
+                                      fontSize: 36,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  );
+                                },
                               ),
+
                               SizedBox(
                                 width: width*0.050,
                               ),
@@ -269,6 +278,7 @@ class LandscapeBoard extends StatelessWidget {
                         width: height*0.035,
                         height: height*0.035,
                         onTap: (){
+                          controller.resetGame();
                           Navigator.push(context, MaterialPageRoute(builder: (context){
                             return const SettingScreen();
                           }));

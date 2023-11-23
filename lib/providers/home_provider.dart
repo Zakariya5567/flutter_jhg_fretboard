@@ -154,31 +154,37 @@ class HomeProvider extends ChangeNotifier{
   }
 
   int? selectedFret;
+  String? selectedNote;
+  int? selectedString;
 
   // Initialize  animation controller
   initializeData()async{
      isStart = false;
      selectedFret = null;
+     selectedString = null;
+     selectedNote = null;
      highlightFret = null;
      highlightString = null;
      highlightNode = null;
      previousHighlightFret = null;
+     previousHighlightNode = null;
      score = 0;
      timer =  null;
      isTimerSet = false;
-     secondsRemaining = 0;
+     secondsRemaining.value = 0;
      await loadFullList();
      notifyListeners();
   }
 
   // PLAY SOUND ACCORDING TO SELECTED NOTES , STRING AND FRET
-  Future playSound(int index)async{
+  Future playSound(int index,String note,int str)async{
 
      // STOP SOUND IF PLAYING
        await player.stop();
 
        // EXECUTE LOOP
       fretList.forEach((element) async {
+        // if(element.id == index){
         if(element.id == index){
           // GET ALLOW STRING STATUS
           final stringStatus = getStringStatus(element.string!);
@@ -187,11 +193,22 @@ class HomeProvider extends ChangeNotifier{
           // THEN WE WILL HIGHLIGHT THINGS
           if(stringStatus == true && isStart == true){
             selectedFret = index;
+            selectedString = str;
+            selectedNote = note;
+
+            print("Highlight note: $highlightNode");
+            print("selected note: $selectedNote");
+
+            print("Highlight string: $highlightString");
+            print("selected string : $selectedString");
+
+            print("highlight fret : $highlightFret");
             print("selected fret : $selectedFret");
-            print("selected note: ${element.note}");
+
             await player.play(AssetSource(element.fretSound!));
-            if(highlightFret == selectedFret){
+            if(highlightNode == selectedNote  && selectedString == highlightString ){
               previousHighlightFret = highlightFret;
+              previousHighlightNode = highlightNode;
               incrementScore();
               restartTheGame();
             }else{
@@ -211,20 +228,22 @@ class HomeProvider extends ChangeNotifier{
   bool isPortrait = true;
 
   void toggleOrientation() {
-       scale  = 0.5;
-       Future.delayed(const Duration(milliseconds: 100),(){
-         isPortrait = !isPortrait;
-         notifyListeners();
-       });
-       Future.delayed(const Duration(milliseconds: 300),(){
-         scale  = 1;
-         notifyListeners();
-      });
+
+    scale  = 0.5;
+    Future.delayed(const Duration(milliseconds: 100),(){
+      isPortrait = !isPortrait;
+      notifyListeners();
+    });
+    Future.delayed(const Duration(milliseconds: 300),(){
+      scale  = 1;
+      notifyListeners();
+    });
 
   }
 
   // SCORE
-
+  // Correct  and Incorrect
+  // Correct increment , incorrect decrement
   int score = 0;
 
   incrementScore(){
@@ -244,15 +263,21 @@ class HomeProvider extends ChangeNotifier{
   int? highlightFret;
   int? highlightString;
   String? highlightNode;
+  String? previousHighlightNode;
   int? previousHighlightFret;
 
   // WHEN PRESS CORRECT NOTE THEN HIGHLIGHT ANOTHER ONE TO SELECT
 restartTheGame(){
+
+  // Get randomly highlight node
   int randomIndex = getRandomIndex();
   highlightFret = randomIndex;
-  print("Highlight fret: $highlightFret");
   highlightNode = fretList[randomIndex].note;
   highlightString = fretList[randomIndex].string;
+
+  print("Highlight note ========>>>>: $highlightNode");
+  print("Highlight fret ========>>>>: $highlightFret");
+  print("Highlight string ========>>>>: $highlightString");
   notifyListeners();
 }
 
@@ -273,30 +298,35 @@ restartTheGame(){
     int randomIndex = getRandomIndex();
     highlightFret = randomIndex;
     previousHighlightFret = highlightFret;
-    print("Highlight fret: $highlightFret");
+    previousHighlightNode = highlightNode;
     highlightNode = fretList[randomIndex].note;
     highlightString = fretList[randomIndex].string;
+
+    print("Highlight note ========>>>>: $highlightNode");
+    print("Highlight fret ========>>>>: $highlightFret");
+    print("Highlight string ========>>>>: $highlightString");
     notifyListeners();
   }
 // TIMER
 
 
-  int secondsRemaining = 0; // Initial countdown time in seconds
+ // int secondsRemaining = 0; // Initial countdown time in seconds
   Timer? timer;
   bool isTimerSet = false;
 
+
   increaseTime(){
-   if (isStart != true){
-     secondsRemaining = secondsRemaining+10;
-     notifyListeners();
-   }
+    if (isStart != true){
+      secondsRemaining.value = secondsRemaining.value+10;
+      notifyListeners();
+    }
 
   }
   decreaseTime(){
-   if(secondsRemaining>10 && isStart != true ){
-     secondsRemaining = secondsRemaining-10;
-     notifyListeners();
-   }
+    if(secondsRemaining.value>10 && isStart != true ){
+      secondsRemaining.value = secondsRemaining.value-10;
+      notifyListeners();
+    }
   }
 
   resetGame(){
@@ -305,12 +335,15 @@ restartTheGame(){
     }
     isStart = false;
     selectedFret = null;
+    selectedString = null;
+    selectedNote = null;
     highlightFret = null;
     highlightString = null;
     highlightNode = null;
     previousHighlightFret = null;
+    previousHighlightNode = null;
     score = 0;
-    secondsRemaining = 0;
+    secondsRemaining.value = 0;
     isTimerSet = false;
     timer =  null;
     notifyListeners();
@@ -318,7 +351,7 @@ restartTheGame(){
 
   resetTimer(){
     isTimerSet = true;
-    secondsRemaining = 60;
+    secondsRemaining.value = 60;
     notifyListeners();
   }
 
@@ -332,43 +365,6 @@ restartTheGame(){
 
   }
 
-  startCountDownTimer() {
-    if(secondsRemaining == 0){
-      secondsRemaining = 60;
-    }
-    notifyListeners();
-    if(timer != null){
-      timer!.cancel();
-    }
-    // Create a timer that runs every second
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      // Update the UI and decrement the remaining seconds=
-        if (secondsRemaining > 0) {
-           secondsRemaining--;
-          notifyListeners();
-        } else {
-          // Timer expired, you can handle this case here
-          timer.cancel();
-          // Cancel the timer when the countdown reaches 0
-          notifyListeners();
-
-        }
-      });
-  }
-
-  startCountUpTimer() {
-    secondsRemaining = 0;
-    notifyListeners();
-    if(timer != null){
-      timer!.cancel();
-    }
-    // Create a timer that runs every second
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      // Update the UI and decrement the remaining seconds=
-        secondsRemaining++;
-        notifyListeners();
-    });
-  }
 
   String formatTime(int seconds) {
     // Format the remaining time as mm:ss
@@ -475,6 +471,51 @@ bool getStringStatus(int id){
       string6 = true;
     }
     notifyListeners();}
+
+  // Value Notifier listener
+
+  ValueNotifier<int> secondsRemaining = ValueNotifier(0);
+
+
+  startCountUpTimer() {
+    secondsRemaining.value = 0;
+    notifyListeners();
+    if(timer != null){
+      timer!.cancel();
+    }
+    // Create a timer that runs every second
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      // Update the UI and decrement the remaining seconds
+      secondsRemaining.value++;
+    });
+  }
+
+
+
+  startCountDownTimer() {
+    if(secondsRemaining.value == 0){
+      secondsRemaining.value = 60;
+    }
+    notifyListeners();
+    if(timer != null){
+      timer!.cancel();
+    }
+    // Create a timer that runs every second
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      // Update the UI and decrement the remaining seconds
+      if (secondsRemaining.value > 0) {
+        secondsRemaining.value--;
+      } else {
+        // Timer expired, you can handle this case here
+        timer.cancel();
+        // Cancel the timer when the countdown reaches 0
+        notifyListeners();
+
+      }
+    });
+  }
+
+
 
 }
 

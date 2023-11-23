@@ -54,6 +54,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: Consumer<HomeProvider>(
           builder: (context, controller, child) {
             return
+            //   OrientationBuilder(builder: (context,orientation){
+            //   if (orientation == Orientation.portrait) {
+            //     print(orientation.index);
+            //     controller.toggleOrientation(true);
+            //     return PortraitBoard(controller: controller);
+            //   } else {
+            //     print(orientation.index);
+            //     controller.toggleOrientation(false);
+            //     return LandscapeBoard(controller: controller);
+            //   }
+            //
+            // });
                  controller.isPortrait == true ?
                  PortraitBoard(controller: controller):
                  LandscapeBoard(controller: controller);

@@ -52,6 +52,7 @@ class PortraitBoard extends StatelessWidget {
                         width: height*0.038,
                         height: height*0.038,
                         onTap: (){
+                          controller.resetGame();
                           Navigator.push(context, MaterialPageRoute(builder: (context){
                             return const SettingScreen();
                           }));
@@ -109,15 +110,23 @@ class PortraitBoard extends StatelessWidget {
                     width: width*0.050,
                   ),
                   Center(
-                    child: Text(
-                      controller.formatTime(controller.secondsRemaining),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whitePrimary,
-                        fontSize: 36,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    child:
+                    ValueListenableBuilder<int>(
+                      valueListenable: controller.secondsRemaining,
+                      //widget.model.seconds,
+                      builder: (context, value, child) {
+                        return
+                          Text(
+                            controller.formatTime(value),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: AppConstant.sansFont,
+                              color: AppColors.whitePrimary,
+                              fontSize: 36,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                      },
                     ),
                   ),
                   SizedBox(

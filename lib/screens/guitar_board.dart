@@ -140,10 +140,9 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                               isColor: controller.selectedFret == index
                                   ? true
                                   : false,
-                              color: controller.selectedFret == controller.previousHighlightFret
+                              color: controller.selectedNote == controller.previousHighlightNode
                                   ? AppColors.greenPrimary
                                   : AppColors.redPrimary,
-                              //controller.getSelectedFret(index),
                               index: index,
                               height: height);
                         },
@@ -164,10 +163,10 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                         mainAxisSpacing: 3,
                         crossAxisSpacing: 4,
                         itemBuilder: (context, index) {
+                          final noteIndex = controller.fretList[index];
                           return GestureDetector(
                             onTap: () {
-                             // controller.setSelectedFret(index);
-                              controller.playSound(index);
+                              controller.playSound(index,noteIndex.note!,noteIndex.string!);
                             },
                             child: stringPress(
                                 index: index, height: height, width: width),
@@ -199,7 +198,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                           getPotraitHeight(index,height) : getLandscapeHeight(index,height),
                           ),
                       child: RotatedBox(
-                        quarterTurns: 1,
+                        quarterTurns: widget.isPortrait ? 0 : 1,
                         child: Text(
                           index.toString(),
                           style: TextStyle(
@@ -384,19 +383,19 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
   double getPotraitHeight(int index, double height) {
     switch (index) {
       case 0:
-        return height * 0.035;
+        return height * 0.025;
       case 1:
-        return height * 0.055;
+        return height * 0.05;
       case 2:
-        return height * 0.070;
+        return height * 0.055;
       case 3:
-        return height * 0.070;
+        return height * 0.060;
       case 4:
-        return height * 0.070;
+        return height * 0.056;
       case 5:
       case 6:
       case 7:
-        return height * 0.068;
+        return height * 0.062;
       case 8:
       case 9:
       case 10:
@@ -404,11 +403,10 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
       case 12:
       case 13:
       case 14:
-        return height * 0.062;
+        return height * 0.060;
       default:
         return height * 0.05;
     }
-
   }
 
   double getLandscapeHeight(int index, double height) {
