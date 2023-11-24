@@ -7,7 +7,7 @@ import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 
 final ScrollController _scrollController = ScrollController();
-//Strings s = Strings();
+
 Widget populateScoreList(List data) {
   return Padding(
     padding: const EdgeInsets.only(left: 0.0, top: 0.0),
@@ -16,7 +16,6 @@ Widget populateScoreList(List data) {
       elevation: 1.0,
       child: SizedBox(
         //  height: 400.dp,
-
         child: Padding(
           padding: EdgeInsets.only(left: 10.dp, top: 15.0.dp),
           child: Scrollbar(
@@ -35,22 +34,24 @@ Widget populateScoreList(List data) {
                       return Padding(
                         padding: EdgeInsets.all(8.dp),
                         child: Container(
-                            margin: EdgeInsets.only(top: 0.dp, left: 0.dp,right: 5.w),
+                            margin: EdgeInsets.only(
+                                top: 0.dp, left: 0.dp, right: 5.w),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-
                                   // width: 55.w,
                                   child: Row(
                                     children: [
                                       Text(
                                         "$count. ",
-                                        style: CustomTextStyles.whiteLargeTextStyle,
+                                        style: CustomTextStyles
+                                            .whiteLargeTextStyle,
                                       ),
                                       Text(
                                         "${model[AppConstant.username]}",
-                                        style: CustomTextStyles.whiteLargeTextStyle,
+                                        style: CustomTextStyles
+                                            .whiteLargeTextStyle,
                                       ),
                                     ],
                                   ),
@@ -68,8 +69,7 @@ Widget populateScoreList(List data) {
                       );
                     },
                     itemCount: data.length),
-
-                    leaderBoardButton()
+                leaderBoardButton()
               ],
             ),
           ),
@@ -85,14 +85,13 @@ leaderBoardTextWidget(String text1, String text2) {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: (() {
-    try {
-      double.parse(text2);
-      return CrossAxisAlignment.center;
-    } catch (e) {
-      return CrossAxisAlignment.start;
-    }
-  })(),
-
+        try {
+          double.parse(text2);
+          return CrossAxisAlignment.center;
+        } catch (e) {
+          return CrossAxisAlignment.start;
+        }
+      })(),
       children: [
         Text(
           text1,
@@ -133,12 +132,11 @@ leaderBoardButton() {
 }
 
 leaderBoardTitleWidget() {
-    return Padding(
-                            padding:  EdgeInsets.only(top: 17.dp),
-                            child: Text(
-                             AppConstant.titleLeaderBoardTitle,
-                              style: CustomTextStyles.goldNormalTextStyle,
-
-                            ),
-                          );
-  }
+  return Padding(
+    padding: EdgeInsets.only(top: 17.dp),
+    child: Text(
+      AppConstant.titleLeaderBoardTitle,
+      style: CustomTextStyles.goldNormalTextStyle,
+    ),
+  );
+}

@@ -3,7 +3,6 @@ import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'custom_switch.dart';
 
-
 class SettingToggle extends StatelessWidget {
   const SettingToggle({super.key,
     required this.heading,

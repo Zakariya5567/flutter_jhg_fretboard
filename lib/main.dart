@@ -14,8 +14,6 @@ Future<void> main() async{
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-    // DeviceOrientation.landscapeLeft,
-    // DeviceOrientation.landscapeRight
   ]);
 
   runApp(const MyApp());
@@ -67,13 +65,11 @@ class _MyAppState extends State<MyApp> {
               );},
             debugShowCheckedModeBanner: false,
             title: 'JHG fretboard',
-
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-
-            //home:  const HomeScreen()
+          //  home:  const HomeScreen()
           home: SplashScreen(
           yearlySubscriptionId: AppConstant.yearlySubscriptionId,
           monthlySubscriptionId: AppConstant.monthlySubscriptionId,

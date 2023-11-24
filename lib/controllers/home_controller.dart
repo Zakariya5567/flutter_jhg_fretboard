@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:reg_page/reg_page.dart';
+import '../api/api_triggers.dart';
 import '../model/board_model.dart';
 import '../utils/app_constant.dart';
 import 'package:get/get.dart';
@@ -149,6 +151,7 @@ class HomeController extends GetxController {
   }
 
 
+
   // set sounds to sound list
   setSoundList(){
     fretList.clear();
@@ -157,6 +160,13 @@ class HomeController extends GetxController {
   int? selectedFret;
   String? selectedNote;
   int? selectedString;
+
+  String? userName;
+
+  getUserName()async {
+    var userName  =  await LocalDB.getUserName;
+    print("THE USER NAME IS $userName");
+  }
 
   // Initialize  animation controller
   initializeData()async{
@@ -171,9 +181,12 @@ class HomeController extends GetxController {
      previousHighlightNode = null;
      score = 0;
      timer =  null;
-     isTimerSet = false;
+     //isTimerSet = false;
      secondsRemaining.value = 0;
+     timerMode = false;
+     leaderboardMode  = false;
      await loadFullList();
+     await getUserName();
      update();
   }
 
@@ -211,7 +224,7 @@ class HomeController extends GetxController {
               previousHighlightFret = highlightFret;
               previousHighlightNode = highlightNode;
               incrementScore();
-              restartTheGame();
+              highLightTheGame();
             }else{
               decrementScore();
             }
@@ -258,8 +271,30 @@ class HomeController extends GetxController {
   }
 
 
+ //Modes
+
+  bool timerMode = false;
+  bool leaderboardMode = false;
+
+
+  setTimerMode(bool mode){
+    timerMode = mode;
+    update();
+  }
+
+
+  setLeaderMode(bool mode){
+    leaderboardMode = mode;
+
+    update();
+  }
+
+
+
+
   // START THE GAME
   // SELECT AND HIGHLIGHT STRING, FRET AND NOTE
+
   bool isStart = false;
   int? highlightFret;
   int? highlightString;
@@ -268,14 +303,12 @@ class HomeController extends GetxController {
   int? previousHighlightFret;
 
   // WHEN PRESS CORRECT NOTE THEN HIGHLIGHT ANOTHER ONE TO SELECT
-restartTheGame(){
-
+ highLightTheGame(){
   // Get randomly highlight node
   int randomIndex = getRandomIndex();
   highlightFret = randomIndex;
   highlightNode = fretList[randomIndex].note;
   highlightString = fretList[randomIndex].string;
-
   print("Highlight note ========>>>>: $highlightNode");
   print("Highlight fret ========>>>>: $highlightFret");
   print("Highlight string ========>>>>: $highlightString");
@@ -302,7 +335,6 @@ restartTheGame(){
     previousHighlightNode = highlightNode;
     highlightNode = fretList[randomIndex].note;
     highlightString = fretList[randomIndex].string;
-
     print("Highlight note ========>>>>: $highlightNode");
     print("Highlight fret ========>>>>: $highlightFret");
     print("Highlight string ========>>>>: $highlightString");
@@ -313,7 +345,7 @@ restartTheGame(){
 
  // int secondsRemaining = 0; // Initial countdown time in seconds
   Timer? timer;
-  bool isTimerSet = false;
+ // bool isTimerSet = false;
 
 
   increaseTime(){
@@ -330,7 +362,7 @@ restartTheGame(){
     }
   }
 
-  resetGame(){
+  resetGame(bool resetAll){
     if(timer != null){
       timer!.cancel();
     }
@@ -345,22 +377,53 @@ restartTheGame(){
     previousHighlightNode = null;
     score = 0;
     secondsRemaining.value = 0;
-    isTimerSet = false;
+   // isTimerSet = false;
     timer =  null;
+
+    if(resetAll == true){
+      if(timerMode == true){
+        timerMode = false;
+      }else{
+        leaderboardMode = false;
+      }
+    }
     update();
   }
 
   resetTimer(){
-    isTimerSet = true;
-    secondsRemaining.value = 60;
+    //isTimerSet = true;
+    if(timerMode == true){
+      secondsRemaining.value = 60;
+    }else if(leaderboardMode == true){
+      secondsRemaining.value = 120;
+    }else{
+      secondsRemaining.value = 0;
+    }
     update();
   }
 
-
   startTimer(){
-    if(isTimerSet == true){
+    // if(isTimerSet == true){
+    //   startCountDownTimer();
+    // }else{
+    //   startCountUpTimer();
+    // }
+
+    if(timerMode == true){
       startCountDownTimer();
-    }else{
+    }
+    if(leaderboardMode == true){
+      offString  = [true,true,true,true,true,true];
+      string1 = true;
+      string2 = true;
+      string3 = true;
+      string4 = true;
+      string5 = true;
+      string6 = true;
+      notifyChildrens();
+      startLeaderBoardCountDownTimer();
+    }
+    else{
       startCountUpTimer();
     }
 
@@ -478,20 +541,28 @@ bool getStringStatus(int id){
   ValueNotifier<int> secondsRemaining = ValueNotifier(0);
 
 
-  startCountUpTimer() {
-    secondsRemaining.value = 0;
+
+  startLeaderBoardCountDownTimer() {
+    if(secondsRemaining.value == 0){
+      secondsRemaining.value = 120;
+    }
     update();
     if(timer != null){
       timer!.cancel();
     }
     // Create a timer that runs every second
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       // Update the UI and decrement the remaining seconds
-      secondsRemaining.value++;
+      if (secondsRemaining.value > 0) {
+        secondsRemaining.value--;
+      } else {
+        timer.cancel();
+       await updateScore(score);
+        update();
+
+      }
     });
   }
-
-
 
   startCountDownTimer() {
     if(secondsRemaining.value == 0){
@@ -516,6 +587,26 @@ bool getStringStatus(int id){
     });
   }
 
+  startCountUpTimer() {
+    secondsRemaining.value = 0;
+    update();
+    if(timer != null){
+      timer!.cancel();
+    }
+    // Create a timer that runs every second
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      // Update the UI and decrement the remaining seconds
+      secondsRemaining.value++;
+    });
+  }
+
+
+  ApiTriggers api = ApiTriggers();
+  Future<dynamic> updateScore(score) async {
+    var response = await api.updateScore("FretboardTrainer", userName, score);
+    print(response);
+    return response;
+  }
 
 
 }

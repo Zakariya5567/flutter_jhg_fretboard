@@ -40,20 +40,66 @@ class LandscapeBoard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+
+
+                    controller.isStart == true ?
+                    ButtonIcon(
+                        icon: Images.iconReset,
+                        width: height*0.034,
+                        height: height*0.034,
+                        onTap: (){
+                          controller.setTimerMode(false);
+                          controller.setLeaderMode(false);
+                          controller.resetGame(false);
+                        }) :
+
+                    controller.timerMode == false && controller.leaderboardMode == false?
+                    ButtonIcon(
+                        icon: Images.iconTimerLandscape,
+                        width: height*0.034,
+                        height: height*0.034,
+                        onTap: (){
+                          controller.setTimerMode(true);
+                          controller.resetTimer();
+                        }):
+
+                    controller.timerMode == true?
+                    ButtonIcon(
+                        icon: Images.iconTimerLandscape,
+                        width: height*0.036,
+                        height: height*0.036,
+                        onTap: (){
+                          controller.setTimerMode(false);
+                          controller.setLeaderMode(true);
+                          controller.resetTimer();
+                        }):
+
+                    controller.leaderboardMode == true ?
                     ButtonIcon(
                         icon:
-                        controller.isStart ?
-                        Images.iconReset : Images.iconTimerLandscape,
-                        width:  controller.isStart ? height*0.030 : height*0.034,
-                        height: controller.isStart ? height*0.030 : height*0.034,
+                        Images.iconTrophyLandscape,
+                        width:  height*0.036,
+                        height:  height*0.036 ,
                         onTap: (){
-                          if(controller.isStart){
-                            controller.resetGame();
-                          }else{
-                            controller.resetTimer();
-                          }
+                          controller.setLeaderMode(false);
+                          controller.setTimerMode(false);
+                          controller.resetTimer();
+                        }) : SizedBox(),
 
-                        }),
+                    // ButtonIcon(
+                    //     icon:
+                    //     controller.isStart ?
+                    //     Images.iconReset : Images.iconTimerLandscape,
+                    //     width:  controller.isStart ? height*0.030 : height*0.034,
+                    //     height: controller.isStart ? height*0.030 : height*0.034,
+                    //     onTap: (){
+                    //       if(controller.isStart){
+                    //         controller.resetGame();
+                    //       }else{
+                    //         controller.resetTimer();
+                    //       }
+                    //
+                    //     }),
 
 
                     ButtonIcon(
@@ -175,6 +221,7 @@ class LandscapeBoard extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              controller.timerMode == true ?
                               GestureDetector(
                                 onTap: (){
                                   controller.decreaseTime();
@@ -192,7 +239,7 @@ class LandscapeBoard extends StatelessWidget {
                                         size: height*0.025,)
                                   ),
                                 ),
-                              ),
+                              ) : SizedBox(),
                               SizedBox(
                                 width: width*0.050,
                               ),
@@ -217,6 +264,7 @@ class LandscapeBoard extends StatelessWidget {
                               SizedBox(
                                 width: width*0.050,
                               ),
+                              controller.timerMode == true ?
                               GestureDetector(
                                 onTap: (){
                                   controller.increaseTime();
@@ -235,7 +283,7 @@ class LandscapeBoard extends StatelessWidget {
                                       )
                                   ),
                                 ),
-                              ),
+                              ) : SizedBox(),
                             ],
                           )),
 
@@ -280,16 +328,28 @@ class LandscapeBoard extends StatelessWidget {
                           controller.toggleOrientation();
                         }),
 
+
                     ButtonIcon(
-                        icon: Images.iconSettingLandscape,
-                        width: height*0.035,
-                        height: height*0.035,
-                        onTap: (){
-                          controller.resetGame();
+                      iconData: Icons.settings,
+                      color:
+                      controller.leaderboardMode == true ? AppColors.greySecondary :
+                      AppColors.whitePrimary,
+                      width: height*0.042,
+                      height: height*0.042,
+                      onTap: (){
+
+                        if(controller.leaderboardMode == true){
+                          return ;
+                        }else{
+                          controller.resetGame(false);
                           Navigator.push(context, MaterialPageRoute(builder: (context){
                             return const SettingScreen();
                           }));
-                        }),
+                        }
+
+                      }, icon: '',)
+
+
 
                   ],
                 ),

@@ -48,18 +48,25 @@ class PortraitBoard extends StatelessWidget {
                           Get.to(() => LeadershipScreen(),
                               transition: Transition.leftToRight);
                         }),
-
-
                     ButtonIcon(
-                        icon: Images.iconSetting,
+                        iconData: Icons.settings,
+                        color:
+                            controller.leaderboardMode == true ? AppColors.greySecondary :
+                        AppColors.whitePrimary,
                         width: height*0.038,
                         height: height*0.038,
                         onTap: (){
-                          controller.resetGame();
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const SettingScreen();
-                          }));
-                        })
+
+                          if(controller.leaderboardMode == true){
+                            return ;
+                          }else{
+                            controller.resetGame(false);
+                            Navigator.push(context, MaterialPageRoute(builder: (context){
+                              return const SettingScreen();
+                            }));
+                          }
+
+                        }, icon: '',)
                   ],
                 ),
               ),
@@ -91,6 +98,7 @@ class PortraitBoard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  controller.timerMode == true ?
                   GestureDetector(
                     onTap: (){
                       controller.decreaseTime();
@@ -108,7 +116,7 @@ class PortraitBoard extends StatelessWidget {
                             size: height*0.025,)
                       ),
                     ),
-                  ),
+                  ) : SizedBox(),
                   SizedBox(
                     width: width*0.050,
                   ),
@@ -135,6 +143,7 @@ class PortraitBoard extends StatelessWidget {
                   SizedBox(
                     width: width*0.050,
                   ),
+                  controller.timerMode == true ?
                   GestureDetector(
                     onTap: (){
                       controller.increaseTime();
@@ -153,7 +162,7 @@ class PortraitBoard extends StatelessWidget {
                           )
                       ),
                     ),
-                  ),
+                  ) : SizedBox(),
                 ],
               ),
                   //: const SizedBox(),
@@ -169,21 +178,49 @@ class PortraitBoard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
 
-                    ButtonIcon(
-                        icon:
-
-                        controller.isStart ?
-                        Images.iconReset : Images.iconTimer,
-                        width:  controller.isStart ? height*0.030 : height*0.033,
-                        height: controller.isStart ? height*0.030 : height*0.033,
+                   controller.isStart == true ?
+                   ButtonIcon(
+                       icon: Images.iconReset,
+                        width: height*0.033,
+                        height: height*0.033,
                         onTap: (){
-                          if(controller.isStart){
-                            controller.resetGame();
-                          }else{
-                            controller.resetTimer();
-                          }
+                           controller.setTimerMode(false);
+                           controller.setLeaderMode(false);
+                           controller.resetGame(false);
+                       }) :
 
-                        }),
+                   controller.timerMode == false && controller.leaderboardMode == false?
+                   ButtonIcon(
+                       icon: Images.iconTimer,
+                       width: height*0.033,
+                       height: height*0.033,
+                       onTap: (){
+                         controller.setTimerMode(true);
+                         controller.resetTimer();
+                       }):
+
+                   controller.timerMode == true?
+                   ButtonIcon(
+                       icon: Images.iconTimer,
+                       width: height*0.035,
+                       height: height*0.035,
+                       onTap: (){
+                         controller.setTimerMode(false);
+                         controller.setLeaderMode(true);
+                         controller.resetTimer();
+                       }):
+
+                   controller.leaderboardMode == true ?
+                    ButtonIcon(
+                       icon:
+                        Images.iconTropy,
+                        width:  height*0.035,
+                        height:  height*0.035 ,
+                        onTap: (){
+                           controller.setLeaderMode(false);
+                           controller.setTimerMode(false);
+                           controller.resetTimer();
+                       }) : SizedBox(),
 
                     controller.isStart == true?
                     Container(
@@ -274,9 +311,6 @@ class PortraitBoard extends StatelessWidget {
                  ],
              ),
               ) : const  SizedBox(),
-
-
-
             ],
           ),
         ),
