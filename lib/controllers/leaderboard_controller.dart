@@ -2,11 +2,13 @@ import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
 import '../api/api_triggers.dart';
 
-class LeaderBoardController extends GetxController{
+class LeaderBoardController extends GetxController {
   RxBool isLoading = false.obs;
+  RxString gameType = "fretboardtrainer".obs;
   RxString username = "user1".obs;
   RxString highestUserScore = "".obs;
   RxString highScore = "0".obs;
+
   RxList scoreList = [].obs;
   ApiTriggers api = ApiTriggers();
 
@@ -17,17 +19,35 @@ class LeaderBoardController extends GetxController{
     getLearderBoard();
   }
 
-   getUserName()async {
-   var usernames  =  await LocalDB.getUserName;
-   username.value = usernames!;
+  getUserName()async {
+    var usernames  =  await LocalDB.getUserName;
+
+    username.value = usernames!;
+
     print("THE USER NAME IS $usernames");
   }
-
+  //
+  // void setSelectedGame(String? selectedgameType) {
+  //   if (selectedgameType == "Chords") {
+  //     gameType.value = "Namethechord";
+  //   } else if (selectedgameType == "Scales") {
+  //     gameType.value = "Namethescale";
+  //   } else if (selectedgameType == "Intervals") {
+  //     gameType.value = "Nametheinterval";
+  //   } else if (selectedgameType == "Chord Tones") {
+  //     gameType.value = "Namethechordtone";
+  //   } else if (selectedgameType == "Arpeggios") {
+  //     gameType.value = "Namethearpeggio";
+  //   } else if (selectedgameType == "Modes") {
+  //     gameType.value = "Namethemode";
+  //   }
+  //   update();
+  // }
 
   Future<dynamic> getLearderBoard() async {
     scoreList([]);
     isLoading(true);
-    scoreList.value = await api.getLearderBoard("FretboardTrainer");
+    scoreList.value = await api.getLearderBoard(gameType);
     isLoading(false);
     await highestScorer(scoreList);
     update();
@@ -41,6 +61,7 @@ class LeaderBoardController extends GetxController{
     for (var player in leaderboard) {
       String username = player['username'];
       int score = player['score'];
+
       if (score > highestScore) {
         highestScore = score;
         highestScorer = username;
@@ -57,5 +78,10 @@ class LeaderBoardController extends GetxController{
     }
     update();
     return highestScorer;
+  }
+
+  Future<dynamic> updateScore(score) async {
+    var response = await api.updateScore(gameType.value, username.value, score);
+    return response;
   }
 }

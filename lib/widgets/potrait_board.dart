@@ -11,6 +11,7 @@ import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import '../screens/leaderboard_screen.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
+import 'add_sub_button.dart';
 
 class PortraitBoard extends StatelessWidget {
   const PortraitBoard({super.key,required this.controller});
@@ -99,24 +100,13 @@ class PortraitBoard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   controller.timerMode == true ?
-                  GestureDetector(
-                    onTap: (){
-                      controller.decreaseTime();
-                    },
-                    child: Container(
-                      height:height * 0.030,
-                      width: height * 0.030,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color:  AppColors.redPrimary,
-                      ),
-                      child: Center(
-                          child:
-                          Icon(Icons.remove,color: AppColors.whitePrimary,
-                            size: height*0.025,)
-                      ),
-                    ),
-                  ) : SizedBox(),
+
+                  AddAndSubtractButton(
+                      onTap: (){
+                        controller.decreaseTime();
+                      },
+                      isAdd: false)
+              : const SizedBox(),
                   SizedBox(
                     width: width*0.050,
                   ),
@@ -144,25 +134,13 @@ class PortraitBoard extends StatelessWidget {
                     width: width*0.050,
                   ),
                   controller.timerMode == true ?
-                  GestureDetector(
-                    onTap: (){
-                      controller.increaseTime();
-                    },
-                    child: Container(
-                      height:height * 0.030,
-                      width: height * 0.030,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color:  AppColors.redPrimary,
-                      ),
-                      child: Center(
-                          child:
-                          Icon(Icons.add,color: AppColors.whitePrimary,
-                          size: height*0.025,
-                          )
-                      ),
-                    ),
-                  ) : SizedBox(),
+
+                  AddAndSubtractButton(
+                      onTap: (){
+                        controller.increaseTime();
+                      },
+                      isAdd: false)
+               : const SizedBox(),
                 ],
               ),
                   //: const SizedBox(),
@@ -191,9 +169,9 @@ class PortraitBoard extends StatelessWidget {
 
                    controller.timerMode == false && controller.leaderboardMode == false?
                    ButtonIcon(
-                       icon: Images.iconTimer,
-                       width: height*0.033,
-                       height: height*0.033,
+                       icon: Images.iconStopwatch,
+                       width: height*0.035,
+                       height: height*0.035,
                        onTap: (){
                          controller.setTimerMode(true);
                          controller.resetTimer();

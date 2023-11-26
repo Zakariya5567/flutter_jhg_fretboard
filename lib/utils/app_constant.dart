@@ -9,7 +9,7 @@ static String loadMore = "Load more";
 static String username = "username";
 static String score = "score";
 static const String returnString = 'Return';
-static const String titleLeaderBoardTitle = "Fretboard - Trainer";
+static const String titleLeaderBoardTitle = "Leaderboard - Fretboard Trainer";
 static const String save = 'Save';
 static const String scoreText = 'Score:  ';
 static const String strings = 'Strings';
@@ -23,6 +23,7 @@ static const String string4 = 'String 4';
 static const String string5 = 'String 5';
 static const String string6 = 'String 6';
 static const String stringDescription = 'Turn on/off strings to increase or decrease\ndifficulty';
+static const String stringDescriptionLandscape = 'Turn on/off strings to increase or decrease difficulty';
 
 static const String yearlySubscriptionId = "com.jamieharrisonguitar.taptempo.freetrial";
 static const String monthlySubscriptionId  =  "com.jamieharrisonguitar.taptempo.monthly";

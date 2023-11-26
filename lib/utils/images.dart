@@ -5,6 +5,8 @@ class Images {
   static const iconTimer = "assets/images/ic_timer.png";
   static const iconTropy = "assets/images/ic_tropy.png";
   static const iconReset = "assets/images/ic_reset.png";
+  static const iconStopwatchLandscape = "assets/images/ic_stopwatch_landscape.png";
+  static const iconStopwatch = "assets/images/ic_stopwatch.png";
 
   static const svg_trophyIcon = "assets/images/trophy.svg";
   static const svg_forward_button = "assets/images/svg_forward_button.svg";

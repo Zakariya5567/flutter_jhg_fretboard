@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/screens/setting_screen.dart';
 import 'package:fretboard/utils/images.dart';
+import 'package:fretboard/widgets/add_sub_button.dart';
 import 'package:fretboard/widgets/button_icon.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -55,9 +56,9 @@ class LandscapeBoard extends StatelessWidget {
 
                     controller.timerMode == false && controller.leaderboardMode == false?
                     ButtonIcon(
-                        icon: Images.iconTimerLandscape,
-                        width: height*0.034,
-                        height: height*0.034,
+                        icon: Images.iconStopwatchLandscape,
+                        width: height*0.036,
+                        height: height*0.036,
                         onTap: (){
                           controller.setTimerMode(true);
                           controller.resetTimer();
@@ -85,21 +86,6 @@ class LandscapeBoard extends StatelessWidget {
                           controller.setTimerMode(false);
                           controller.resetTimer();
                         }) : SizedBox(),
-
-                    // ButtonIcon(
-                    //     icon:
-                    //     controller.isStart ?
-                    //     Images.iconReset : Images.iconTimerLandscape,
-                    //     width:  controller.isStart ? height*0.030 : height*0.034,
-                    //     height: controller.isStart ? height*0.030 : height*0.034,
-                    //     onTap: (){
-                    //       if(controller.isStart){
-                    //         controller.resetGame();
-                    //       }else{
-                    //         controller.resetTimer();
-                    //       }
-                    //
-                    //     }),
 
 
                     ButtonIcon(
@@ -222,24 +208,13 @@ class LandscapeBoard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               controller.timerMode == true ?
-                              GestureDetector(
-                                onTap: (){
-                                  controller.decreaseTime();
-                                },
-                                child: Container(
-                                  height:height * 0.030,
-                                  width: height * 0.030,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color:  AppColors.redPrimary,
-                                  ),
-                                  child: Center(
-                                      child:
-                                      Icon(Icons.remove,color: AppColors.whitePrimary,
-                                        size: height*0.025,)
-                                  ),
-                                ),
-                              ) : SizedBox(),
+                              AddAndSubtractButton(
+                                  onTap: (){
+                                    controller.decreaseTime();
+                                  },
+                                  isAdd: false)
+
+                                  : SizedBox(),
                               SizedBox(
                                 width: width*0.050,
                               ),
@@ -265,25 +240,13 @@ class LandscapeBoard extends StatelessWidget {
                                 width: width*0.050,
                               ),
                               controller.timerMode == true ?
-                              GestureDetector(
-                                onTap: (){
-                                  controller.increaseTime();
-                                },
-                                child: Container(
-                                  height:height * 0.030,
-                                  width: height * 0.030,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color:  AppColors.redPrimary,
-                                  ),
-                                  child: Center(
-                                      child:
-                                      Icon(Icons.add,color: AppColors.whitePrimary,
-                                        size: height*0.025,
-                                      )
-                                  ),
-                                ),
-                              ) : SizedBox(),
+
+                              AddAndSubtractButton(
+                                  onTap: (){
+                                    controller.increaseTime();
+                                  },
+                                  isAdd: true)
+                              : SizedBox(),
                             ],
                           )),
 
