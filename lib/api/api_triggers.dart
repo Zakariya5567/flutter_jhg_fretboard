@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
+
 import 'api_provider.dart';
 class ApiTriggers {
 ApiProvider api = ApiProvider();
 List scoreList =[];
  Future<dynamic> getLearderBoard(gameType) async {
     scoreList =[];
-    var response =  await api.getRequest("${api.getLeaderboardApi}${gameType.value}");
+     debugPrint("URL: ${api.getLeaderboardApi}${gameType} ");
+    var response =  await api.getRequest("${api.getLeaderboardApi}${gameType}");
     for (var scores in response['leaderboard']) {
       scoreList.add(scores);
     }
