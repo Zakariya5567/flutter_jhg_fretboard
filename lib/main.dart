@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/utils/app_constant.dart';
+import 'package:fretboard/utils/app_subscription.dart';
 import 'package:get/get.dart';
 import 'package:fretboard/screens/home_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -71,8 +72,8 @@ class _MyAppState extends State<MyApp> {
             ),
           //  home:  const HomeScreen()
           home: SplashScreen(
-          yearlySubscriptionId: AppConstant.yearlySubscriptionId,
-          monthlySubscriptionId: AppConstant.monthlySubscriptionId,
+          yearlySubscriptionId: yearlySubscription(),
+          monthlySubscriptionId: monthlySubscription(),
           appName: AppConstant.appName,
           appVersion: packageInfo.version,
           nextPage: () => const HomeScreen(),

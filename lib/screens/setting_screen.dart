@@ -12,6 +12,8 @@ import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'package:flutter/services.dart';
 
+import '../utils/app_subscription.dart';
+
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -269,10 +271,8 @@ class _SettingScreenState extends State<SettingScreen>{
                         Navigator.pushAndRemoveUntil(context,
                             MaterialPageRoute(builder: (context) {
                               return Welcome(
-                                yearlySubscriptionId:
-                                AppConstant.yearlySubscriptionId,
-                                monthlySubscriptionId:
-                                AppConstant.monthlySubscriptionId,
+                                yearlySubscriptionId: yearlySubscription(),
+                                monthlySubscriptionId: monthlySubscription(),
                                 appVersion: packageInfo.version,
                                 appName: AppConstant.appName,
                                 nextPage: () => const HomeScreen(),
@@ -492,10 +492,8 @@ class _SettingScreenState extends State<SettingScreen>{
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(builder: (context) {
                                 return Welcome(
-                                  yearlySubscriptionId:
-                                  AppConstant.yearlySubscriptionId,
-                                  monthlySubscriptionId:
-                                  AppConstant.monthlySubscriptionId,
+                                  yearlySubscriptionId: yearlySubscription(),
+                                  monthlySubscriptionId: monthlySubscription(),
                                   appVersion: packageInfo.version,
                                   appName: AppConstant.appName,
                                   nextPage: () => const HomeScreen(),

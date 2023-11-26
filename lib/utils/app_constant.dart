@@ -25,8 +25,13 @@ static const String string6 = 'String 6';
 static const String stringDescription = 'Turn on/off strings to increase or decrease\ndifficulty';
 static const String stringDescriptionLandscape = 'Turn on/off strings to increase or decrease difficulty';
 
-static const String yearlySubscriptionId = "com.jamieharrisonguitar.taptempo.freetrial";
-static const String monthlySubscriptionId  =  "com.jamieharrisonguitar.taptempo.monthly";
+static const String androidYearlySubscriptionId = "com.jamieharrisonguitar.taptempo.freetrial";
+static const String androidMonthlySubscriptionId  =  "com.jamieharrisonguitar.taptempo.monthly";
+
+static const String iosYearlySubscriptionId = "com.jamieharrisonguitar.taptempo.freetrial";
+static const String iosMonthlySubscriptionId  =  "com.jamieharrisonguitar.taptempo.monthly";
+
+
 
 //BEAT SOUND
 
