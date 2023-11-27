@@ -139,7 +139,7 @@ class PortraitBoard extends StatelessWidget {
                       onTap: (){
                         controller.increaseTime();
                       },
-                      isAdd: false)
+                      isAdd: true)
                : const SizedBox(),
                 ],
               ),
@@ -174,6 +174,7 @@ class PortraitBoard extends StatelessWidget {
                        height: height*0.035,
                        onTap: (){
                          controller.setTimerMode(true);
+                         controller.setLeaderMode(false);
                          controller.resetTimer();
                        }):
 

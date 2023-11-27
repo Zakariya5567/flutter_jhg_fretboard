@@ -411,8 +411,7 @@ class HomeController extends GetxController {
 
     if(timerMode == true){
       startCountDownTimer();
-    }
-    if(leaderboardMode == true){
+    }else if(leaderboardMode == true){
       offString  = [true,true,true,true,true,true];
       string1 = true;
       string2 = true;

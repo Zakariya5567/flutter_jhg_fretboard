@@ -80,12 +80,7 @@ class _SettingScreenState extends State<SettingScreen>{
 
           },
       ),
-
-
-
-     //==================================================
-
-
+      
     );
   }
 
@@ -369,32 +364,41 @@ class _SettingScreenState extends State<SettingScreen>{
                     ),
 
                     // SPACER
-                    SizedBox(height: height * 0.02),
-
-
-                    Text(
-                      AppConstant.strings,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whiteSecondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-
                     SizedBox(height: height * 0.01),
 
-                    Text(
-                      AppConstant.stringDescriptionLandscape,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whiteSecondary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+
+                    Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: width*0.28),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppConstant.strings,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: AppConstant.sansFont,
+                              color: AppColors.whiteSecondary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+
+                          SizedBox(height: height * 0.01),
+
+                          Text(
+                            AppConstant.stringDescriptionLandscape,
+                            style: TextStyle(
+                              fontFamily: AppConstant.sansFont,
+                              color: AppColors.whiteSecondary,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: height * 0.015),
+                        ],
                       ),
                     ),
-                    SizedBox(height: height * 0.015),
+
                     // SAVE BUTTON
 
 
@@ -405,8 +409,8 @@ class _SettingScreenState extends State<SettingScreen>{
                           color: Colors.black.withOpacity(0.2),
 
                         ),
-                        height: width*0.35,
-                        width: height*0.65,
+                        height: width*0.37,
+                        width: height*0.58,
                         child: ListView(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
