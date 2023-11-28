@@ -293,7 +293,7 @@ class LandscapeBoard extends StatelessWidget {
 
 
                     ButtonIcon(
-                      iconData: Icons.settings,
+                      icon:Images.iconSetting,
                       color:
                       controller.leaderboardMode == true ? AppColors.greySecondary :
                       AppColors.whitePrimary,
@@ -305,12 +305,13 @@ class LandscapeBoard extends StatelessWidget {
                           return ;
                         }else{
                           controller.resetGame(false);
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const SettingScreen();
-                          }));
+
+                          Get.to(() => SettingScreen(),
+                              transition: Transition.leftToRight
+                          );
                         }
 
-                      }, icon: '',)
+                      },)
 
 
 

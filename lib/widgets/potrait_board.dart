@@ -50,9 +50,8 @@ class PortraitBoard extends StatelessWidget {
                               transition: Transition.leftToRight);
                         }),
                     ButtonIcon(
-                        iconData: Icons.settings,
-                        color:
-                            controller.leaderboardMode == true ? AppColors.greySecondary :
+                        icon:Images.iconSetting,
+                        color: controller.leaderboardMode == true ? AppColors.greySecondary :
                         AppColors.whitePrimary,
                         width: height*0.038,
                         height: height*0.038,
@@ -62,12 +61,11 @@ class PortraitBoard extends StatelessWidget {
                             return ;
                           }else{
                             controller.resetGame(false);
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
-                              return const SettingScreen();
-                            }));
+                            Get.to(() => SettingScreen(),
+                                transition: Transition.leftToRight);
                           }
 
-                        }, icon: '',)
+                        },)
                   ],
                 ),
               ),

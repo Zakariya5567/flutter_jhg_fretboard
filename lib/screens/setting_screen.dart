@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:reg_page/reg_page.dart';
@@ -105,7 +106,8 @@ class _SettingScreenState extends State<SettingScreen>{
                     children: [
                       GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context){
                             return const HomeScreen();
                           }));
                         },
