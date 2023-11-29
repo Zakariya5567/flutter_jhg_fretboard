@@ -106,10 +106,7 @@ class _SettingScreenState extends State<SettingScreen>{
                     children: [
                       GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context){
-                            return const HomeScreen();
-                          }));
+                          Get.back();
                         },
                         child: Icon(
                           Icons.arrow_back_ios,
@@ -317,9 +314,7 @@ class _SettingScreenState extends State<SettingScreen>{
                       children: [
                         GestureDetector(
                           onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context){
-                              return const HomeScreen();
-                            }));
+                            Get.back();
                           },
                           child: Icon(
                             Icons.arrow_back_ios,

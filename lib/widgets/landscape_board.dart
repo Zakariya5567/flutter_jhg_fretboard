@@ -307,8 +307,7 @@ class LandscapeBoard extends StatelessWidget {
                           controller.resetGame(false);
 
                           Get.to(() => SettingScreen(),
-                              transition: Transition.leftToRight
-                          );
+                              transition: Transition.rightToLeft);
                         }
 
                       },)

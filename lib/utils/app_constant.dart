@@ -25,13 +25,11 @@ static const String string6 = 'String 6';
 static const String stringDescription = 'Turn on/off strings to increase or decrease\ndifficulty';
 static const String stringDescriptionLandscape = 'Turn on/off strings to increase or decrease difficulty';
 
-static const String androidYearlySubscriptionId =   "com-jamieharrisonguitar-fretboard-trainer-annual";
-static const String androidMonthlySubscriptionId =  "com-jamieharrisonguitar-fretboard-trainer-monthly";
+static const String iosYearlySubscriptionId =   "com.jamieharrisonguitar.fretboardtrainer.monthly";
+static const String iosMonthlySubscriptionId =   "com.jamieharrisonguitar.fretboardtrainer.annual";
 
-static const String iosYearlySubscriptionId = "jhgfretboardtrainer.annual";
-static const String iosMonthlySubscriptionId  =  "jhgfretboardtrainer.monthly";
-
-
+static const String androidYearlySubscriptionId   = "jhgfretboardtrainer.annual";
+static const String androidMonthlySubscriptionId   =  "jhgfretboardtrainer.monthly";
 
 //BEAT SOUND
 

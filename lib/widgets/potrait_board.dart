@@ -62,7 +62,7 @@ class PortraitBoard extends StatelessWidget {
                           }else{
                             controller.resetGame(false);
                             Get.to(() => SettingScreen(),
-                                transition: Transition.leftToRight);
+                                transition: Transition.rightToLeft);
                           }
 
                         },)
