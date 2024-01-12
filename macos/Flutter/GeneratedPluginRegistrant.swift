@@ -6,7 +6,7 @@ import FlutterMacOS
 import Foundation
 
 import audioplayers_darwin
-import connectivity_macos
+import connectivity_plus
 import device_info_plus
 import in_app_purchase_storekit
 import package_info_plus
