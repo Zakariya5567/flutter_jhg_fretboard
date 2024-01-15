@@ -4,6 +4,8 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:fretboard/utils/app_%20colors.dart';
 
 import '../controllers/home_controller.dart';
+import '../model/freth_list.dart';
+import '../model/freth_list.dart';
 
 class GuitarBoard extends StatefulWidget {
   const GuitarBoard({super.key,required this.isPortrait});
@@ -164,7 +166,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                         mainAxisSpacing: 3,
                         crossAxisSpacing: 4,
                         itemBuilder: (context, index) {
-                          final noteIndex = controller.fretList[index];
+                          final noteIndex = fretList[index];
                           return GestureDetector(
                             onTap: () {
                               controller.playSound(index,noteIndex.note!,noteIndex.string!);
@@ -318,30 +320,43 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
       return height * 0.042;
     } else if (index >= 18 && index <= 23) {
       return height * 0.045;
+
     } else if (index >= 24 && index <= 29) {
+
       return height * 0.045;
     } else if (index >= 30 && index <= 35) {
+
       return height * 0.045;
     } else if (index >= 36 && index <= 41) {
       return height * 0.045;
-    } else if (index >= 42 && index <= 47) {
+    }
+    else if (index >= 42 && index <= 47) {
       return height * 0.045;
+
     } else if (index >= 48 && index <= 53) {
       return height * 0.045;
+
     } else if (index >= 54 && index <= 59) {
       return height * 0.045;
+
     } else if (index >= 60 && index <= 65) {
       return height * 0.045;
+
     } else if (index >= 66 && index <= 71) {
       return height * 0.045;
+
     } else if (index >= 72 && index <= 77) {
       return height * 0.045;
+
     } else if (index >= 78 && index <= 83) {
       return height * 0.045;
+
     } else if (index >= 84 && index <= 89) {
       return height * 0.045;
+
     } else {
       return height * 0.045;
+
     }
   }
 

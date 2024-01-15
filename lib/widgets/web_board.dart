@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/widgets/guitar_board.dart';
 import 'package:fretboard/screens/setting_screen/setting_screen.dart';
 import 'package:fretboard/utils/images.dart';
 import 'package:fretboard/widgets/button_icon.dart';
+import 'package:fretboard/widgets/web_guitar_board.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
@@ -13,100 +15,84 @@ import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'add_sub_button.dart';
 
-class PortraitBoard extends StatelessWidget {
-  const PortraitBoard({super.key,required this.controller});
+
+class WebBoard extends StatelessWidget {
+  const WebBoard({super.key,required this.controller});
 
   final HomeController controller;
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final height = MediaQuery.of(context).size.height;
+    // final width = MediaQuery.of(context).size.width;
     return
-      AnimatedScale(
-        duration: const Duration(milliseconds: 1000),
-        curve: Curves.linearToEaseOut,
-        scale: 1,
-        child: Padding(
-          padding: EdgeInsets.only(
-               top: height*0.072 ,),
+      Padding(
+        padding: EdgeInsets.only(top: 5.h ,),
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               // TROPHY AND SETTING ICON
               Padding(
-                padding:  EdgeInsets.only( left: width * 0.08,
-                  right: width * 0.08,),
+                padding:  EdgeInsets.only(
+                  left: 3.w, right: 3.w,),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ButtonIcon(
                         icon: Images.iconTropy,
-                        width: height*0.026,
-                        height: height*0.026,
+                        width: 2.5.w,
+                        height: 2.5.w,
                         onTap: (){
                           Get.to(() => LeadershipScreen(),
                               transition: Transition.leftToRight);
                         }),
                     ButtonIcon(
-                        icon:Images.iconSetting,
-                        color: controller.leaderboardMode == true ? AppColors.greySecondary :
-                        AppColors.whitePrimary,
-                        width: height*0.038,
-                        height: height*0.038,
-                        onTap: (){
+                      icon:Images.iconSetting,
+                      color: controller.leaderboardMode == true ? AppColors.greySecondary :
+                      AppColors.whitePrimary,
+                      width: 3.w,
+                      height: 3.w,
+                      onTap: (){
 
-                          if(controller.leaderboardMode == true){
-                            return ;
-                          }else{
-                            controller.resetGame(false);
-                            Get.to(() => SettingScreen(),
-                                transition: Transition.rightToLeft);
-                          }
+                        if(controller.leaderboardMode == true){
+                          return ;
+                        }else{
+                          controller.resetGame(false);
+                          Get.to(() => SettingScreen(),
+                              transition: Transition.rightToLeft);
+                        }
 
-                        },)
+                      },)
                   ],
                 ),
               ),
-
-
-              // //SPACER
+              //SPACER
               SizedBox(
-                height: height*0.035,
+                height:50,
               ),
-
               // BOARD WITH NUMBER
-
-
-                  Padding(
-                    padding:  EdgeInsets.only(left: width*0.070),
-                    child: Container(
-                        //color: Colors.red,
-                        height:    controller.isStart == true? height*0.64
-                        : height*0.64,
-                        child: const GuitarBoard(isPortrait: true,)),
-                  ),
-                 //SPACER
-                 SizedBox(
-                 height: height*0.025,
-                ),
-
-
-              // TIMER
+              Container(
+                  height: 465,
+                  width: 80.w,
+                  child: const WebGuitarBoard()),
+              //SPACER
+              SizedBox(
+                height:20,
+              ),
+              // TIMER  WITH ADD AND SUBTRACT BUTTONS
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   controller.timerMode == true ?
-
-                  AddAndSubtractButton(
+                  WebAddAndSubtractButton(
                       onTap: (){
                         controller.decreaseTime();
                       },
                       isAdd: false)
-              : const SizedBox(),
+                      : const SizedBox(),
                   SizedBox(
-                    width: width*0.050,
+                    width: 5.w,
                   ),
                   Center(
                     child:
@@ -121,7 +107,7 @@ class PortraitBoard extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: AppConstant.sansFont,
                               color: AppColors.whitePrimary,
-                              fontSize: 36,
+                              fontSize: 2.5.w,
                               fontWeight: FontWeight.w600,
                             ),
                           );
@@ -129,80 +115,85 @@ class PortraitBoard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: width*0.050,
+                    width: 5.w,
                   ),
                   controller.timerMode == true ?
 
-                  AddAndSubtractButton(
+                  WebAddAndSubtractButton(
                       onTap: (){
                         controller.increaseTime();
                       },
                       isAdd: true)
-               : const SizedBox(),
+                      : const SizedBox(),
                 ],
               ),
-                  //: const SizedBox(),
               // //TIMER , STOPWATCH , ROTATE ICON
               SizedBox(
-                height: height*0.010,
+                height:7,
               ),
+
+
               Padding(
                 padding:  EdgeInsets.only(
-                  left: width * 0.08,
-                  right: width * 0.08,),
+                  left: 3.w,
+                  right: 3.w,),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
 
-                   controller.isStart == true ?
-                   ButtonIcon(
-                       icon: Images.iconReset,
-                        width: height*0.033,
-                        height: height*0.033,
-                        onTap: (){
-                           controller.setTimerMode(false);
-                           controller.setLeaderMode(false);
-                           controller.resetGame(false);
-                       }) :
-
-                   controller.timerMode == false && controller.leaderboardMode == false?
-                   ButtonIcon(
-                       icon: Images.iconStopwatch,
-                       width: height*0.035,
-                       height: height*0.035,
-                       onTap: (){
-                         controller.setTimerMode(true);
-                         controller.setLeaderMode(false);
-                         controller.resetTimer();
-                       }):
-
-                   controller.timerMode == true?
-                   ButtonIcon(
-                       icon: Images.iconTimer,
-                       width: height*0.035,
-                       height: height*0.035,
-                       onTap: (){
-                         controller.setTimerMode(false);
-                         controller.setLeaderMode(true);
-                         controller.resetTimer();
-                       }):
-
-                   controller.leaderboardMode == true ?
+                    controller.isStart == true ?
                     ButtonIcon(
-                       icon:
-                        Images.iconTropy,
-                        width:  height*0.035,
-                        height:  height*0.035 ,
+                        icon: Images.iconReset,
+                        width: 2.7.w,
+                        height: 2.7.w,
                         onTap: (){
-                           controller.setLeaderMode(false);
-                           controller.setTimerMode(false);
-                           controller.resetTimer();
-                       }) : SizedBox(),
+                          controller.setTimerMode(false);
+                          controller.setLeaderMode(false);
+                          controller.resetGame(false);
+                        }) :
 
+                  // ICON STOP WATCH
+                    controller.timerMode == false && controller.leaderboardMode == false?
+                    ButtonIcon(
+                        icon: Images.iconStopwatch,
+                        width: 2.7.w,
+                        height: 2.7.w,
+                        onTap: (){
+                          controller.setTimerMode(true);
+                          controller.setLeaderMode(false);
+                          controller.resetTimer();
+                        }):
+
+                        // ICON TIMER
+                    controller.timerMode == true?
+                    ButtonIcon(
+                        icon: Images.iconTimer,
+                        width: 2.7.w,
+                        height: 2.7.w,
+                        onTap: (){
+                          controller.setTimerMode(false);
+                          controller.setLeaderMode(true);
+                          controller.resetTimer();
+                        }):
+
+                        // ICON LEADERBOARD
+                    controller.leaderboardMode == true ?
+                    ButtonIcon(
+                        icon:
+                        Images.iconTropy,
+                        width: 2.7.w,
+                        height: 2.7.w,
+                        onTap: (){
+                          controller.setLeaderMode(false);
+                          controller.setTimerMode(false);
+                          controller.resetTimer();
+                        }) : SizedBox(),
+
+                    // HIGILITED NOTE
                     controller.isStart == true?
                     Container(
-                      height: height * 0.060,
-                      width: width * 0.45,
+                      height:45,
+                      width: 25.w,
                       alignment: Alignment.topCenter,
                       //color: Colors.red,
                       child: Text(
@@ -211,7 +202,7 @@ class PortraitBoard extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: AppConstant.sansFont,
                           color: AppColors.redPrimary,
-                          fontSize: 28,
+                          fontSize: 2.2.w,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -226,8 +217,8 @@ class PortraitBoard extends StatelessWidget {
                       child: Center(
                         child:
                         Container(
-                          height: height * 0.06,
-                          width: width * 0.45,
+                          width: 20.w,
+                          height: 55,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: AppColors.redPrimary,
@@ -237,7 +228,7 @@ class PortraitBoard extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: AppConstant.sansFont,
                               color: AppColors.whitePrimary,
-                              fontSize: 16,
+                              fontSize: 1.8.w,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -245,11 +236,11 @@ class PortraitBoard extends StatelessWidget {
                       ),
                     ),
 
-
+                    // ROTATE ICON
                     ButtonIcon(
                         icon: Images.iconRotate,
-                        width: height*0.05,
-                        height: height*0.04,
+                        width: 2.7.w,
+                        height: 2.7.w,
                         onTap: (){
                           controller.toggleOrientation();
                         })
@@ -258,11 +249,11 @@ class PortraitBoard extends StatelessWidget {
               ),
 
 
-              //SCORE
-
+              //SPACER
+              SizedBox(height: 5),
               controller.isStart == true?
 
-
+              // SCORE TEXT
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -272,7 +263,7 @@ class PortraitBoard extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
                         color: AppColors.whitePrimary,
-                        fontSize: 16,
+                        fontSize: 1.8.w,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -281,12 +272,12 @@ class PortraitBoard extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
                         color: AppColors.whitePrimary,
-                        fontSize: 16,
+                        fontSize: 1.8.w,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                 ],
-             ),
+                  ],
+                ),
               ) : const  SizedBox(),
             ],
           ),
@@ -294,3 +285,5 @@ class PortraitBoard extends StatelessWidget {
       );
   }
 }
+
+

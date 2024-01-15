@@ -25,8 +25,8 @@ static const String string6 = 'String 6';
 static const String stringDescription = 'Turn on/off strings to increase or decrease\ndifficulty';
 static const String stringDescriptionLandscape = 'Turn on/off strings to increase or decrease difficulty';
 
-static const String iosYearlySubscriptionId =   "com.jamieharrisonguitar.fretboardtrainer.monthly";
-static const String iosMonthlySubscriptionId =   "com.jamieharrisonguitar.fretboardtrainer.annual";
+static const String iosYearlySubscriptionId =    "com.jamieharrisonguitar.fretboardtrainer.annual";
+static const String iosMonthlySubscriptionId =   "com.jamieharrisonguitar.fretboardtrainer.monthly";
 
 static const String androidYearlySubscriptionId   = "jhgfretboardtrainer.annual";
 static const String androidMonthlySubscriptionId   =  "jhgfretboardtrainer.monthly";

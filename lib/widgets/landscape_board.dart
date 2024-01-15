@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fretboard/controllers/home_controller.dart';
-import 'package:fretboard/screens/setting_screen.dart';
+import 'package:fretboard/screens/setting_screen/setting_screen.dart';
 import 'package:fretboard/utils/images.dart';
 import 'package:fretboard/widgets/add_sub_button.dart';
 import 'package:fretboard/widgets/button_icon.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import '../screens/leaderboard_screen.dart';
+import '../screens/leader_board_screen/leaderboard_screen.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'guitar_board.dart';
@@ -261,8 +261,6 @@ class LandscapeBoard extends StatelessWidget {
                         //color: Colors.red,
                           height: height*0.74,
                           child: const GuitarBoard(isPortrait: false,)),
-
-
                     ],
                   ),
                 ),

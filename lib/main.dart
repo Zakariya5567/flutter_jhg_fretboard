@@ -4,8 +4,9 @@ import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/utils/app_constant.dart';
 import 'package:fretboard/utils/app_subscription.dart';
 import 'package:get/get.dart';
-import 'package:fretboard/screens/home_screen.dart';
+import 'package:fretboard/screens/home_screen/home_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:reg_page/reg_page.dart';
 
 
@@ -53,32 +54,31 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return FlutterSizer(
       builder: (BuildContext , Orientation , ScreenType ) {
         return GetMaterialApp(
-            builder: (context, child) {
-              return MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: child!,
-              );},
+            builder: (context, child){
+              return  MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0), child: child!,);
+              },
             debugShowCheckedModeBanner: false,
             title: 'JHG fretboard',
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-          //  home:  const HomeScreen()
-          home: SplashScreen(
-          yearlySubscriptionId: yearlySubscription(),
-          monthlySubscriptionId: monthlySubscription(),
-          appName: AppConstant.appName,
-          appVersion: packageInfo.version,
-          nextPage: () => const HomeScreen(),
-        ),
+           // home:  const HomeScreen()
+            home:
+            kIsWeb ?  const HomeScreen() :
+
+            SplashScreen(
+            yearlySubscriptionId: yearlySubscription(),
+            monthlySubscriptionId: monthlySubscription(),
+            appName: AppConstant.appName,
+            appVersion: packageInfo.version,
+            nextPage: () => const HomeScreen(),
+          ),
         );
       },
-
     );
   }
 }

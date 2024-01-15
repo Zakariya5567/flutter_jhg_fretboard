@@ -26,23 +26,6 @@ class LeaderBoardController extends GetxController {
 
     print("THE USER NAME IS $usernames");
   }
-  //
-  // void setSelectedGame(String? selectedgameType) {
-  //   if (selectedgameType == "Chords") {
-  //     gameType.value = "Namethechord";
-  //   } else if (selectedgameType == "Scales") {
-  //     gameType.value = "Namethescale";
-  //   } else if (selectedgameType == "Intervals") {
-  //     gameType.value = "Nametheinterval";
-  //   } else if (selectedgameType == "Chord Tones") {
-  //     gameType.value = "Namethechordtone";
-  //   } else if (selectedgameType == "Arpeggios") {
-  //     gameType.value = "Namethearpeggio";
-  //   } else if (selectedgameType == "Modes") {
-  //     gameType.value = "Namethemode";
-  //   }
-  //   update();
-  // }
 
   Future<dynamic> getLearderBoard() async {
     scoreList([]);
