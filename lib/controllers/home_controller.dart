@@ -4,11 +4,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:reg_page/reg_page.dart';
 import '../api/api_triggers.dart';
-import '../model/board_model.dart';
 import '../model/freth_list.dart';
-import '../utils/app_constant.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class HomeController extends GetxController {
 
@@ -48,48 +46,96 @@ class HomeController extends GetxController {
   // PLAY SOUND ACCORDING TO SELECTED NOTES , STRING AND FRET
   Future playSound(int index,String note,int str)async{
 
-     // STOP SOUND IF PLAYING
+
+     if(kIsWeb){
+
+       // STOP SOUND IF PLAYING
        await player.stop();
-
        // EXECUTE LOOP
-      fretList.forEach((element) async {
-        // if(element.id == index){
-        if(element.id == index){
-          // GET ALLOW STRING STATUS
-          final stringStatus = getStringStatus(element.string!);
+       fretList.forEach((element) async {
+         // if(element.id == index){
+         if(element.id == index){
+           // GET ALLOW STRING STATUS
+           final stringStatus = getStringStatus(element.string!);
 
-          // CHECK IF THE STATUS IS TRUE AND GAME IS START
-          // THEN WE WILL HIGHLIGHT THINGS
-          if(stringStatus == true && isStart == true){
-            selectedFret = index;
-            selectedString = str;
-            selectedNote = note;
+           // CHECK IF THE STATUS IS TRUE AND GAME IS START
+           // THEN WE WILL HIGHLIGHT THINGS
+           if(stringStatus == true && isStart == true){
+             selectedFret = index;
+             selectedString = str;
+             selectedNote = note;
 
-            print("Highlight note: $highlightNode");
-            print("selected note: $selectedNote");
+             print("Highlight note: $highlightNode");
+             print("selected note: $selectedNote");
 
-            print("Highlight string: $highlightString");
-            print("selected string : $selectedString");
+             print("Highlight string: $highlightString");
+             print("selected string : $selectedString");
 
-            print("highlight fret : $highlightFret");
-            print("selected fret : $selectedFret");
+             print("highlight fret : $highlightFret");
+             print("selected fret : $selectedFret");
 
-            await player.play(AssetSource(element.fretSound!));
-            if(highlightNode == selectedNote  && selectedString == highlightString ){
-              previousHighlightFret = highlightFret;
-              previousHighlightNode = highlightNode;
-              incrementScore();
-              highLightTheGame();
-            }else{
-              decrementScore();
-            }
+
+
+             await player.play(AssetSource(element.fretSound!));
+             if(highlightNode == selectedNote  && selectedString == highlightString ){
+               previousHighlightFret = highlightFret;
+               previousHighlightNode = highlightNode;
+               incrementScore();
+               highLightTheGame();
+             }else{
+               decrementScore();
+             }
              update();
-          }else{
-            await player.play(AssetSource(element.fretSound!));
-          }
-          return;
-        }
-      });
+           }else{
+             await player.play(AssetSource(element.fretSound!));
+           }
+           return;
+         }
+       });
+
+     }else{
+       // STOP SOUND IF PLAYING
+       await player.stop();
+       // EXECUTE LOOP
+       fretList.forEach((element) async {
+         // if(element.id == index){
+         if(element.id == index){
+           // GET ALLOW STRING STATUS
+           final stringStatus = getStringStatus(element.string!);
+
+           // CHECK IF THE STATUS IS TRUE AND GAME IS START
+           // THEN WE WILL HIGHLIGHT THINGS
+           if(stringStatus == true && isStart == true){
+             selectedFret = index;
+             selectedString = str;
+             selectedNote = note;
+
+             print("Highlight note: $highlightNode");
+             print("selected note: $selectedNote");
+
+             print("Highlight string: $highlightString");
+             print("selected string : $selectedString");
+
+             print("highlight fret : $highlightFret");
+             print("selected fret : $selectedFret");
+
+             await player.play(AssetSource(element.fretSound!));
+             if(highlightNode == selectedNote  && selectedString == highlightString ){
+               previousHighlightFret = highlightFret;
+               previousHighlightNode = highlightNode;
+               incrementScore();
+               highLightTheGame();
+             }else{
+               decrementScore();
+             }
+             update();
+           }else{
+             await player.play(AssetSource(element.fretSound!));
+           }
+           return;
+         }
+       });
+     }
   }
 
   // SCALE FOR ORIENTATION ANIMATION

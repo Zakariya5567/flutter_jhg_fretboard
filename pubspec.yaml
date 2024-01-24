@@ -41,9 +41,10 @@ dependencies:
   flutter_svg: ^2.0.9
   get:
   flutter_staggered_grid_view: ^0.7.0
-  package_info_plus: ^4.2.0
+  package_info_plus: ^5.0.1
   device_info_plus: ^9.1.1
   audioplayers: ^5.2.1
+  #just_audio: ^0.9.36
   reg_page:
     git:
       url: https://github.com/jamie2364/flutter-jhg-reg-page
