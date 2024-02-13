@@ -57,6 +57,7 @@ class WebSettingToggle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+
           Text(
             heading,
             textAlign: TextAlign.center,
@@ -67,8 +68,8 @@ class WebSettingToggle extends StatelessWidget {
                 fontWeight: FontWeight.bold
             ),
           ),
-          WebCustomSwitch(value: value, onChange: onChange,
-          )
+          WebCustomSwitch(value: value, onChange: onChange,)
+
         ],
       ),
     );

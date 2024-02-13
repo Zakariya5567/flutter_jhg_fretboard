@@ -10,9 +10,6 @@ import '../../utils/images.dart';
 import '../../widgets/leaderboard_widget.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-
-
-// ignore: must_be_immutable
 class LeadershipScreen extends StatelessWidget {
   String? intervalType;
   LeadershipScreen({this.intervalType, super.key});
@@ -48,7 +45,6 @@ class LeaderMobileView extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(top: 20.dp, left: 10.0.dp, right: 10.0.dp),

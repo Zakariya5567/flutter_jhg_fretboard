@@ -69,16 +69,16 @@ class WebBoard extends StatelessWidget {
               ),
               //SPACER
               SizedBox(
-                height:50,
+                height:125,
               ),
               // BOARD WITH NUMBER
               Container(
-                  height: 465,
+                  height: 320,
                   width: 80.w,
                   child: const WebGuitarBoard()),
               //SPACER
               SizedBox(
-                height:20,
+                height:110,
               ),
               // TIMER  WITH ADD AND SUBTRACT BUTTONS
               Row(

@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   child:WebBoard(controller:controller),
                 );
               }
-              else if (constraints.maxWidth >= 600) {
+              else if (constraints.maxWidth >= 400) {
                 return Container(
                   height: height,
                   width: width,

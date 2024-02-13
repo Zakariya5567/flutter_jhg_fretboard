@@ -74,21 +74,35 @@ class _SettingScreenState extends State<SettingScreen> {
       body: GetBuilder<HomeController>(
         init: HomeController(),
         builder: (controller) {
+          //
+          // if(kIsWeb){
+          //   return settingWeb(
+          //               controller: controller, height: height, width: width);
+          // }else{
+          //   if (controller.isPortrait == false) {
+          //           return settingLandscape(
+          //               controller: controller, height: height, width: width);
+          //         } else {
+          //           return settingPotrait(
+          //               controller: controller, height:  height, width: width);
+          //         }
+          // }
           return
             LayoutBuilder(builder: (context, constraints) {
             if (constraints.maxWidth >= 1100) {
               return settingWeb(
                   controller: controller, height: height, width: width);
-            } else if (constraints.maxWidth >= 600) {
+            } else if (constraints.maxWidth >= 400) {
               return settingWeb(
                   controller: controller, height: height, width: width);
             } else {
+
               if (controller.isPortrait == false) {
                 return settingLandscape(
                     controller: controller, height: height, width: width);
               } else {
                 return settingPotrait(
-                    controller: controller, height: height, width: width);
+                    controller: controller, height:  height, width: width);
               }
             }
           });
@@ -472,7 +486,6 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
               ),
-
               Center(
                 child: TextButton(
                   onPressed: () async {
@@ -582,30 +595,48 @@ class _SettingScreenState extends State<SettingScreen> {
                 // SPACER
                 SizedBox(height: 30),
                 //
+            Center(
+              child: Container(
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(8),
+                //   color: Colors.black.withOpacity(0.2),
+                // ),
+                width: 40.w,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
-                Text(
-                  AppConstant.strings,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: AppConstant.sansFont,
-                    color: AppColors.whiteSecondary,
-                    fontSize: 1.6.w,
-                    fontWeight: FontWeight.w600,
+                    children: [
+
+                      Text(
+                        AppConstant.strings,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: AppConstant.sansFont,
+                            color: AppColors.whiteSecondary,
+                            fontSize: 1.6.w,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+
+                      //
+                      SizedBox(height: 10),
+                      //
+                      Text(
+                          AppConstant.stringDescription,
+                          style: TextStyle(
+                            fontFamily: AppConstant.sansFont,
+                            color: AppColors.whiteSecondary,
+                            fontSize: 1.2.w,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+
+                      SizedBox(height: 20),
+                    ],
                   ),
-                ),
-                //
-                SizedBox(height: 10),
-                //
-                Text(
-                  AppConstant.stringDescription,
-                  style: TextStyle(
-                    fontFamily: AppConstant.sansFont,
-                    color: AppColors.whiteSecondary,
-                    fontSize: 1.2.w,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 20),
+                )),
+
 
                 Center(
                   child: Container(
@@ -670,7 +701,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       Navigator.pop(context);
                     },
                     child: Container(
-                      height: 55,
+                      height: 45,
                       width: 25.w,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -681,7 +712,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         style: TextStyle(
                           fontFamily: AppConstant.sansFont,
                           color: AppColors.whitePrimary,
-                          fontSize: 1.3.w,
+                          fontSize: 14,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -713,7 +744,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
                         color: AppColors.redPrimary,
-                        fontSize: 1.2.w,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
