@@ -39,31 +39,34 @@ class WebBoard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ButtonIcon(
-                        icon: Images.iconTropy,
-                        width: 2.5.w,
-                        height: 2.5.w,
+                     WebButtonIcon(
+                          icon: Images.iconTropy,
+                          width: 2.w,
+                          height: 2.w,
+                          onTap: (){
+                            Get.to(() => LeadershipScreen(),
+                                transition: Transition.leftToRight);
+                          }),
+
+
+                      WebButtonIcon(
+                        icon:Images.iconSettingLandscape,
+                        color: controller.leaderboardMode == true ? AppColors.greySecondary :
+                        AppColors.whitePrimary,
+                        width: 2.2.w,
+                        height: 2.2.w,
                         onTap: (){
-                          Get.to(() => LeadershipScreen(),
-                              transition: Transition.leftToRight);
-                        }),
-                    ButtonIcon(
-                      icon:Images.iconSetting,
-                      color: controller.leaderboardMode == true ? AppColors.greySecondary :
-                      AppColors.whitePrimary,
-                      width: 3.w,
-                      height: 3.w,
-                      onTap: (){
 
-                        if(controller.leaderboardMode == true){
-                          return ;
-                        }else{
-                          controller.resetGame(false);
-                          Get.to(() => SettingScreen(),
-                              transition: Transition.rightToLeft);
-                        }
+                          if(controller.leaderboardMode == true){
+                            return ;
+                          }else{
+                            controller.resetGame(false);
+                            Get.to(() => SettingScreen(),
+                                transition: Transition.rightToLeft);
+                          }
 
-                      },)
+                        },),
+
                   ],
                 ),
               ),
@@ -73,7 +76,7 @@ class WebBoard extends StatelessWidget {
               ),
               // BOARD WITH NUMBER
               Container(
-                  height: 320,
+                  height: 300,
                   width: 80.w,
                   child: const WebGuitarBoard()),
               //SPACER
@@ -142,10 +145,10 @@ class WebBoard extends StatelessWidget {
                   children: [
 
                     controller.isStart == true ?
-                    ButtonIcon(
+                    WebButtonIcon(
                         icon: Images.iconReset,
-                        width: 2.7.w,
-                        height: 2.7.w,
+                        width: 2.0.w,
+                        height: 2.0.w,
                         onTap: (){
                           controller.setTimerMode(false);
                           controller.setLeaderMode(false);
@@ -154,10 +157,10 @@ class WebBoard extends StatelessWidget {
 
                   // ICON STOP WATCH
                     controller.timerMode == false && controller.leaderboardMode == false?
-                    ButtonIcon(
-                        icon: Images.iconStopwatch,
-                        width: 2.7.w,
-                        height: 2.7.w,
+                    WebButtonIcon(
+                        icon: Images.iconStop,
+                        width: 2.2.w,
+                        height: 2.2.w,
                         onTap: (){
                           controller.setTimerMode(true);
                           controller.setLeaderMode(false);
@@ -166,10 +169,10 @@ class WebBoard extends StatelessWidget {
 
                         // ICON TIMER
                     controller.timerMode == true?
-                    ButtonIcon(
+                    WebButtonIcon(
                         icon: Images.iconTimer,
-                        width: 2.7.w,
-                        height: 2.7.w,
+                        width: 2.2.w,
+                        height: 2.2.w,
                         onTap: (){
                           controller.setTimerMode(false);
                           controller.setLeaderMode(true);
@@ -178,11 +181,11 @@ class WebBoard extends StatelessWidget {
 
                         // ICON LEADERBOARD
                     controller.leaderboardMode == true ?
-                    ButtonIcon(
+                    WebButtonIcon(
                         icon:
                         Images.iconTropy,
-                        width: 2.7.w,
-                        height: 2.7.w,
+                        width: 2.0.w,
+                        height: 2.0.w,
                         onTap: (){
                           controller.setLeaderMode(false);
                           controller.setTimerMode(false);
@@ -193,7 +196,7 @@ class WebBoard extends StatelessWidget {
                     controller.isStart == true?
                     Container(
                       height:45,
-                      width: 25.w,
+                      width: 22.w,
                       alignment: Alignment.topCenter,
                       //color: Colors.red,
                       child: Text(
@@ -202,7 +205,7 @@ class WebBoard extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: AppConstant.sansFont,
                           color: AppColors.redPrimary,
-                          fontSize: 2.2.w,
+                          fontSize: 2.0.w,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -237,10 +240,10 @@ class WebBoard extends StatelessWidget {
                     ),
 
                     // ROTATE ICON
-                    ButtonIcon(
+                    WebButtonIcon(
                         icon: Images.iconRotate,
-                        width: 2.7.w,
-                        height: 2.7.w,
+                        width: 2.4.w,
+                        height: 2.4.w,
                         onTap: (){
                           controller.toggleOrientation();
                         })
@@ -263,7 +266,7 @@ class WebBoard extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
                         color: AppColors.whitePrimary,
-                        fontSize: 1.8.w,
+                        fontSize: 1.6.w,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -272,7 +275,7 @@ class WebBoard extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
                         color: AppColors.whitePrimary,
-                        fontSize: 1.8.w,
+                        fontSize: 1.6.w,
                         fontWeight: FontWeight.w600,
                       ),
                     ),

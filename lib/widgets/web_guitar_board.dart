@@ -53,11 +53,12 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
 
               //fretboard
               Container(
-                height: 275,
+                height: 255,
                 width: 80.w,
                 // alignment: Alignment.,
                 child: Stack(
                   children: [
+
                     //BOARD SIZE WITH COLOR
                     Row(
                       children: [
@@ -157,55 +158,62 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
                     /// red green  With Grid
                     ///===========================================================
 
-                    AlignedGridView.count(
-                      itemCount: 96,
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.horizontal,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: 6,
-                      mainAxisSpacing: 0,
-                      crossAxisSpacing: 2.3,
-                      itemBuilder: (context, index) {
-                        return redGreenCircle(
-                          isColor:
-                              controller.selectedFret == index ? true : false,
-                          color: controller.selectedNote ==
-                                  controller.previousHighlightNode
-                              ? AppColors.greenPrimary
-                              : AppColors.redPrimary,
-                          index: index,
-                        );
-                      },
+                    Transform.flip(
+                      flipY: true,
+                      child: AlignedGridView.count(
+                        itemCount: 96,
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        scrollDirection: Axis.horizontal,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 6,
+                        mainAxisSpacing: 0,
+                        crossAxisSpacing: 5,
+                        itemBuilder: (context, index) {
+                          return redGreenCircle(
+
+                            isColor: controller.selectedFret == index ? true : false,
+
+                            color: controller.selectedNote == controller.previousHighlightNode
+                                ? AppColors.greenPrimary : AppColors.redPrimary,
+                            index: index,
+                          );
+                        },
+                      ),
                     ),
 
                     /// Fret press With Grid
                     ///===========================================================
 
                     Transform.flip(
-                      flipX: true,
-                      child: RotatedBox(
-                        quarterTurns: 1,
-                        child: AlignedGridView.count(
-                          itemCount: 96,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 6,
-                          mainAxisSpacing: 5,
-                          crossAxisSpacing: 4,
-                          itemBuilder: (context, index) {
-                            final noteIndex = fretList[index];
-                            return GestureDetector(
-                              onTap: () {
-                                controller.playSound(index, noteIndex.note!,
-                                    noteIndex.string!);
-                              },
-                              child: stringPress(index: index),
-                            );
-                          },
+                      flipY: true,
+                      child: Transform.flip(
+                        flipX: true,
+                        child:
+                        RotatedBox(
+                          quarterTurns: 1,
+                          child:
+                          AlignedGridView.count(
+                            itemCount: 96,
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            physics: const NeverScrollableScrollPhysics(),
+                            crossAxisCount: 6,
+                            mainAxisSpacing: 5,
+                            crossAxisSpacing: 4,
+                            itemBuilder: (context, index) {
+                              final noteIndex = fretList[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  controller.playSound(index, noteIndex.note!,
+                                      noteIndex.string!);
+                                },
+                                child: stringPress(index: index),
+                              );
+                            },
+                          ),
                         ),
-                      ),
+                                         ),
                     ),
 
                     ///===========================================================
@@ -239,13 +247,14 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
                 AppColors.blackPrimary
               ]),
         ),
+       // child: Text("r$index",style: TextStyle(color:Colors.white ),),
       ),
     );
   }
 
   Widget colDivider(int index, int? selectedString) {
     return Padding(
-      padding: EdgeInsets.only(top: index == 0 ? 21 : 42),
+      padding: EdgeInsets.only(top: index == 0 ? 18 : 40),
       child: Container(
         height: index == 6
             ? 5.5
@@ -271,6 +280,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
                       AppColors.blackPrimary
                     ]),
         ),
+     //  child: Text("S$index",style: TextStyle(color:Colors.teal ),),
       ),
     );
   }
@@ -311,10 +321,11 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
         child: Container(
           width: 2.0.w,
           height: 2.0.w,
-          decoration: BoxDecoration(
+          decoration: BoxDecoration( 
             color: isColor == true ? color : Colors.transparent,
             shape: BoxShape.circle,
           ),
+        //  child: Text("$index",style: TextStyle(color:Colors.blue ),),
         ),
       );
 
@@ -327,7 +338,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
         decoration: BoxDecoration(
           color: Colors.transparent
         ),
-        //child: Text("$index"),
+       // child: Text("$index",style: TextStyle(color:Colors.orange ),),
       );
 
   double getHighLightBasedOnIndex(
@@ -372,11 +383,11 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     int index,
   ) {
     if (index >= 0 && index <= 5) {
-      return 2.w;
+      return 1.7.w;
     } else if (index >= 6 && index <= 11) {
-      return 3.0.w;
+      return 2.9.w;
     } else if (index >= 12 && index <= 17) {
-      return 4.3.w;
+      return 4.9.w;
     } else if (index >= 18 && index <= 23) {
       return 5.w;
     } else if (index >= 24 && index <= 29) {

@@ -248,7 +248,8 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
       padding:
           EdgeInsets.only(left: index == 0 ? width * 0.033 : width * 0.074),
       child: Container(
-        width:      index == 6 ? width * 0.011
+        width:
+              index == 6 ? width * 0.011
             : index == 5 ? width * 0.010
             : index == 4 ? width * 0.009
             : index == 3 ? width * 0.008
@@ -302,8 +303,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
     required double height,
     required double width,
 
-  }) =>
-      Container(
+  }) => Container(
         width: width * 0.040,
         height: getFretPressBasedOnIndex(index, height),
         decoration: const BoxDecoration(

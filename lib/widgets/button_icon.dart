@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../utils/app_ colors.dart';
 
 
 
@@ -34,31 +37,39 @@ class ButtonIcon extends StatelessWidget {
 
 
 
-// class ButtonIcon extends StatelessWidget {
-//   const ButtonIcon({super.key,
-//     required this.icon,
-//     required this .width,
-//     required this.height,
-//     required this.onTap,this.color , this.iconData});
-//
-//   final String icon;
-//   final IconData? iconData;
-//   final double height;
-//   final double width;
-//   final VoidCallback onTap;
-//   final Color? color;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: onTap,
-//       child:  iconData != null
-//           ? Icon(iconData,color: color,size: height,):
-//       Image.asset(
-//         icon,
-//         height: height,
-//         width: width,
-//       ),
-//     );
-//   }
-// }
+class WebButtonIcon extends StatelessWidget {
+  const WebButtonIcon({super.key,
+    required this.icon,
+    required this .width,
+    required this.height,
+    required this.onTap,this.color,});
+
+  final String icon;
+  final double height;
+  final double width;
+  final VoidCallback onTap;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+        onTap: onTap,
+        child:
+        Container(
+          width: 3.5.w,
+          height: 3.5.w,
+          clipBehavior: Clip.hardEdge,
+          alignment: Alignment.center,
+          decoration:BoxDecoration(
+            color: AppColors.greySecondary.withOpacity(0.2),
+            shape: BoxShape.circle,
+          ),
+
+          child: SvgPicture.asset(
+              height: height,
+              width: width,
+              icon),
+        )
+    );
+  }
+}

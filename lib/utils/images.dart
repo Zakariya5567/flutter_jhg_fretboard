@@ -8,9 +8,10 @@ class Images {
   static const iconStopwatch = "assets/images/ic_stopwatch.svg";
   static const iconStopwatchLandscape = "assets/images/ic_stopwatch_landscape.svg";
   static const iconRotateLandscape = "assets/images/ic_rotate_landscape.svg";
-  static const iconSettingLandscape = "assets/images/ic_setting_landscape.svg";
+  static const iconSettingLandscape = "assets/images/ic_setting_lanscape.svg";
   static const iconTimerLandscape = "assets/images/ic_timer_landscape.svg";
   static const iconTrophyLandscape = "assets/images/ic_trophy_landscape.svg";
+  static const iconStop = "assets/images/ic_stop.svg";
 
 
   static const svg_trophyIcon = "assets/images/trophy.svg";

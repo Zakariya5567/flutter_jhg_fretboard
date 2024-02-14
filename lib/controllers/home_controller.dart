@@ -82,6 +82,10 @@ class HomeController extends GetxController {
                previousHighlightNode = highlightNode;
                incrementScore();
                highLightTheGame();
+               Future.delayed(Duration(seconds:1),(){
+                 selectedFret = null;
+                 update();
+               });
              }else{
                decrementScore();
              }
@@ -93,7 +97,8 @@ class HomeController extends GetxController {
          }
        });
 
-     }else{
+     }
+     else{
        // STOP SOUND IF PLAYING
        await player.stop();
        // EXECUTE LOOP
@@ -125,6 +130,10 @@ class HomeController extends GetxController {
                previousHighlightNode = highlightNode;
                incrementScore();
                highLightTheGame();
+               Future.delayed(Duration(seconds:1),(){
+                 selectedFret = null;
+                 update();
+               });
              }else{
                decrementScore();
              }
@@ -136,6 +145,7 @@ class HomeController extends GetxController {
          }
        });
      }
+
   }
 
   // SCALE FOR ORIENTATION ANIMATION
@@ -219,7 +229,6 @@ class HomeController extends GetxController {
       randomIndex = random.nextInt(fretList.length);
     } while (getStringStatus(fretList[randomIndex].string!) == false );
     return randomIndex;
-
   }
 
   // START THE GAME ON START BUTTON
@@ -326,7 +335,7 @@ class HomeController extends GetxController {
 
   }
 
-  // GET STRING STATUS WHICH STRING IS ALLOW
+  //GET STRING STATUS WHICH STRING IS ALLOW
 bool getStringStatus(int id){
 
     if(string1 == true && id == 1){
