@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/utils/app_constant.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,7 @@ class LeadershipScreen extends StatelessWidget {
   String? intervalType;
   LeadershipScreen({this.intervalType, super.key});
   LeaderBoardController lc = Get.put(LeaderBoardController());
+  HomeController hc = Get.put(HomeController());
   //Global g = Global();
 
   @override
@@ -25,12 +27,10 @@ class LeadershipScreen extends StatelessWidget {
 
 
       return  LayoutBuilder(builder: (context, constraints) {
-          if (constraints.maxWidth >= 1100) {
-            return LeaderWebView(controller: controller,);
-          } else if (constraints.maxWidth >= 600) {
+          if (constraints.maxWidth >= 400) {
             return  LeaderWebView(controller: controller,);
           } else {
-            return  LeaderMobileView(controller: controller,);
+               return LeaderWebView(controller: controller,);
           }
         });
       }),

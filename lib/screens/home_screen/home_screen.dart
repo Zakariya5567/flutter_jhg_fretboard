@@ -43,20 +43,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return  Scaffold(
+      backgroundColor: Colors.teal,
       body: GetBuilder<HomeController>(
           init: HomeController(),
           builder: (controller) {
           return LayoutBuilder(
             builder: (context,constraints) {
-              if (constraints.maxWidth >= 1100) {
-                return  Container(
-                  height: height,
-                  width: width,
-                  color:  AppColors.blackPrimary,
-                  child:WebBoard(controller:controller),
-                );
-              }
-              else if (constraints.maxWidth >= 400) {
+                if (constraints.maxWidth >= 400) {
                 return Container(
                   height: height,
                   width: width,

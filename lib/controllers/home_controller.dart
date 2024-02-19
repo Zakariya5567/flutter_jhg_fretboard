@@ -3,10 +3,11 @@ import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:reg_page/reg_page.dart';
+import '../api/api_provider.dart';
 import '../api/api_triggers.dart';
 import '../model/freth_list.dart';
 import 'package:get/get.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show compute, kIsWeb;
 
 class HomeController extends GetxController {
 
@@ -45,7 +46,6 @@ class HomeController extends GetxController {
 
   // PLAY SOUND ACCORDING TO SELECTED NOTES , STRING AND FRET
   Future playSound(int index,String note,int str)async{
-
 
      if(kIsWeb){
 
@@ -299,7 +299,7 @@ class HomeController extends GetxController {
     if(timerMode == true){
       secondsRemaining.value = 60;
     }else if(leaderboardMode == true){
-      secondsRemaining.value = 120;
+      secondsRemaining.value = 10;
     }else{
       secondsRemaining.value = 0;
     }
@@ -441,7 +441,7 @@ bool getStringStatus(int id){
 
   startLeaderBoardCountDownTimer() {
     if(secondsRemaining.value == 0){
-      secondsRemaining.value = 120;
+      secondsRemaining.value = 10;
     }
     update();
     if(timer != null){
@@ -454,7 +454,7 @@ bool getStringStatus(int id){
         secondsRemaining.value--;
       } else {
         timer.cancel();
-       await updateScore(score);
+        await updateScore(score);
         update();
 
       }
@@ -498,10 +498,14 @@ bool getStringStatus(int id){
   }
 
 
-  ApiTriggers api = ApiTriggers();
   Future<dynamic> updateScore(score) async {
-    var response = await api.updateScore("FretboardTrainer", userName, score);
+    var response = await compute(updateScoreApiRequest, "FretboardTrainer");
     print(response);
+    return response;
+  }
+
+  Future<dynamic> updateScoreApiRequest(gameType) async {
+    var response = await ApiProvider().postRequest("${ApiProvider().updateScoreApi}/$gameType/$userName", {'score': score});
     return response;
   }
 

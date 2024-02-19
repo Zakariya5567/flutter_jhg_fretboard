@@ -55,14 +55,17 @@ class LandscapeBoard extends StatelessWidget {
                         }) :
 
                     controller.timerMode == false && controller.leaderboardMode == false?
-                    ButtonIcon(
-                        icon: Images.iconStopwatchLandscape,
-                        width: height*0.036,
-                        height: height*0.036,
-                        onTap: (){
-                          controller.setTimerMode(true);
-                          controller.resetTimer();
-                        }):
+                    RotatedBox(
+                      quarterTurns: controller.isPortrait == true ? 0 :1,
+                      child: ButtonIcon(
+                          icon: Images.iconStopwatchLandscape,
+                          width: height*0.036,
+                          height: height*0.036,
+                          onTap: (){
+                            controller.setTimerMode(true);
+                            controller.resetTimer();
+                          }),
+                    ):
 
                     controller.timerMode == true?
                     ButtonIcon(

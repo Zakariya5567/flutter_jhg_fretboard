@@ -22,8 +22,8 @@ class WebBoard extends StatelessWidget {
   final HomeController controller;
   @override
   Widget build(BuildContext context) {
-    // final height = MediaQuery.of(context).size.height;
-    // final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return
       Padding(
         padding: EdgeInsets.only(top: 5.h ,),
@@ -34,12 +34,12 @@ class WebBoard extends StatelessWidget {
             children: [
               // TROPHY AND SETTING ICON
               Padding(
-                padding:  EdgeInsets.only(
+                padding:EdgeInsets.only(
                   left: 3.w, right: 3.w,),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     WebButtonIcon(
+                      WebButtonIcon(
                           icon: Images.iconTropy,
                           width: 2.w,
                           height: 2.w,
@@ -47,8 +47,6 @@ class WebBoard extends StatelessWidget {
                             Get.to(() => LeadershipScreen(),
                                 transition: Transition.leftToRight);
                           }),
-
-
                       WebButtonIcon(
                         icon:Images.iconSettingLandscape,
                         color: controller.leaderboardMode == true ? AppColors.greySecondary :
@@ -75,10 +73,28 @@ class WebBoard extends StatelessWidget {
                 height:125,
               ),
               // BOARD WITH NUMBER
+
+
+              // /// Landscape
+              // controller.isPortrait == true ?
+              //
+              // Container(
+              //   color: Colors.pink,
+              //     height: height*0.64,
+              //     width: width*0.20,
+              //     child: SingleChildScrollView(
+              //       child: const WebPortraitGuitarBoard(),
+              //     )
+              // )
+              //
+              //
+              //     :
               Container(
                   height: 300,
-                  width: 80.w,
-                  child: const WebGuitarBoard()),
+                  width: width*0.80,
+                  child: const WebGuitarBoard()
+              ),
+
               //SPACER
               SizedBox(
                 height:110,
@@ -146,7 +162,7 @@ class WebBoard extends StatelessWidget {
 
                     controller.isStart == true ?
                     WebButtonIcon(
-                        icon: Images.iconReset,
+                        icon: controller.isStart == true ? Images.iconStop : Images.iconReset,
                         width: 2.0.w,
                         height: 2.0.w,
                         onTap: (){
@@ -158,7 +174,7 @@ class WebBoard extends StatelessWidget {
                   // ICON STOP WATCH
                     controller.timerMode == false && controller.leaderboardMode == false?
                     WebButtonIcon(
-                        icon: Images.iconStop,
+                        icon: Images.iconStopwatch,
                         width: 2.2.w,
                         height: 2.2.w,
                         onTap: (){
