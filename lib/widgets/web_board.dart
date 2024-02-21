@@ -24,6 +24,9 @@ class WebBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    final dpr = MediaQuery.of(context).devicePixelRatio;
+   // final w = MediaQuery.of(context).size.width;
     return
       Padding(
         padding: EdgeInsets.only(top: 5.h ,),
@@ -70,34 +73,34 @@ class WebBoard extends StatelessWidget {
               ),
               //SPACER
               SizedBox(
-                height:125,
+                height: controller.isPortrait ?25 :125,
               ),
               // BOARD WITH NUMBER
 
+              /// Landscape
+              controller.isPortrait == true ?
 
-              // /// Landscape
-              // controller.isPortrait == true ?
-              //
-              // Container(
-              //   color: Colors.pink,
-              //     height: height*0.64,
-              //     width: width*0.20,
-              //     child: SingleChildScrollView(
-              //       child: const WebPortraitGuitarBoard(),
-              //     )
-              // )
+              Container(
+                  height: height*0.64,
+                  width: width*0.16,
+                  child: SingleChildScrollView(
+                    child: const WebPortraitGuitarBoard(),
+                  )
+              )
               //
               //
-              //     :
+                  :
+
+              ///================
               Container(
                   height: 300,
                   width: width*0.80,
                   child: const WebGuitarBoard()
               ),
-
+              ///================
               //SPACER
-              SizedBox(
-                height:110,
+             SizedBox(
+                height: controller.isPortrait ?20 :110,
               ),
               // TIMER  WITH ADD AND SUBTRACT BUTTONS
               Row(

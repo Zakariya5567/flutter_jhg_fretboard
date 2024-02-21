@@ -83,7 +83,7 @@ class PortraitBoard extends StatelessWidget {
                     padding:  EdgeInsets.only(left: width*0.070),
                     child: Container(
                         //color: Colors.red,
-                        height:    controller.isStart == true? height*0.64
+                        height: controller.isStart == true? height*0.64
                         : height*0.64,
                         child: const GuitarBoard(isPortrait: true,)),
                   ),
