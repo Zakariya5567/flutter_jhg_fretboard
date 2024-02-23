@@ -28,7 +28,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
             children: [
               //NUMBERS
               Container(
-                width: width * 0.80,
+                width: width * 0.74,
                 height: 35,
                 child: ListView.builder(
                   itemCount: 16,
@@ -43,8 +43,8 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
                         index.toString(),
                         style: TextStyle(
                           color: AppColors.whitePrimary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: width * 0.013,
+                          fontWeight: FontWeight.w500,
+                          fontSize: width * 0.012,
                         ),
                       ),
                     );
@@ -55,7 +55,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
               //fretboard
               Container(
                 height: 255,
-                width: width * 0.80,
+                width: width * 0.70,
                 // alignment: Alignment.,
                 child: Stack(
                   children: [
@@ -84,45 +84,45 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(
-                              left: index == 2
-                                  ? width * 0.020
-                                  : index == 4
-                                      ? width * 0.032
-                                      : index == 6
-                                          ? width * 0.034
-                                          : index == 8
-                                              ? width * 0.035
-                                              : index == 11
-                                                  ? width * 0.032
-                                                  : index == 14
-                                                      ? width * 0.036
-                                                      : width * 0.032),
+                              left: getBlackSpace(index,width),
+                          ),
                           child: Container(
                             // height: 7.h,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 blackCircle(
-                                    isColor: index == 11 ? true : false,
+                                    isColor:
+                                    index == 11 ?
+                                    true
+                                        : false,
                                     width: width),
                                 SizedBox(
                                   height: index == 11 ? 7.h : 5.h,
                                 ),
                                 blackCircle(
                                     width: width,
-                                    isColor: index == 2 ||
+                                    isColor:
+                                    index == 2 ||
                                             index == 4 ||
                                             index == 6 ||
                                             index == 8 ||
                                             index == 14
-                                        ? true
-                                        : false),
+                                        ?
+                                     true
+                                        :
+                                    false
+                                ),
                                 SizedBox(
                                   height: index == 11 ? 7.h : 5.h,
                                 ),
                                 blackCircle(
                                     width: width,
-                                    isColor: index == 11 ? true : false),
+                                    isColor:
+                                    index == 11 ?
+                                    true
+                                        : false
+                                ),
                               ],
                             ),
                           ),
@@ -235,7 +235,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
 
   Widget rowDivider(int index, double width) {
     return Padding(
-      padding: EdgeInsets.only(left: width * 0.0507),
+      padding: EdgeInsets.only(left: getFrethSpace(index, width)),
       child: Container(
         width: width * 0.0025,
         decoration: BoxDecoration(
@@ -287,6 +287,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     );
   }
 
+
   Widget blackCircle({
     bool? isColor,
     required double width,
@@ -312,7 +313,6 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
           ),
         ),
       );
-
   Widget redGreenCircle({
     bool? isColor,
     required color,
@@ -323,13 +323,13 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
         padding: EdgeInsets.only(left: getHighLightBasedOnIndex(index, width)),
         child: Container(
           width: width * 0.020,
-          height: width * 0.020,
+          height: width * 0.020,  
           decoration: BoxDecoration(
-            color: isColor == true ? color : Colors.transparent,
+             color: isColor == true ? color : Colors.transparent,
+            //color: Colors.red,
             shape: BoxShape.circle,
           ),
-          //  child: Text("$index",style: TextStyle(color:Colors.blue ),),
-        ),
+        ),  
       );
 
   Widget stringPress({
@@ -339,8 +339,94 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
       Container(
         // width: 10,
         height: getFretPressBasedOnIndex(index, width),
-        decoration: BoxDecoration(color: Colors.transparent),
+        decoration: BoxDecoration(
+             color: Colors.transparent
+            //color: Colors.green.withOpacity(0.5)
+        ),
+       // child: Text("$index",style: TextStyle(color: Colors.red),),
       );
+
+
+
+  double getFrethSpace(
+      int index,
+      double width,
+      ) {
+    if (index == 0 ) {
+      return width*0.060;
+    } else if (index == 1) {
+      return width * 0.057;
+    } else if (index == 2) {
+      return width * 0.055;
+    } else if (index == 3) {
+      return width * 0.053;
+    } else if (index == 4) {
+      return width * 0.051;
+    } else if (index == 5) {
+      return width * 0.049;
+    } else if (index == 6) {
+      return width * 0.047;
+    } else if (index == 7) {
+      return width * 0.044;
+    } else if (index == 8) {
+      return width * 0.041;
+    } else if (index == 9) {
+      return width * 0.039;
+    } else if (index == 10) {
+      return width * 0.037;
+    } else if (index == 11) {
+      return width * 0.035;
+    } else if (index == 12) {
+      return width * 0.033;
+    } else if (index == 13) {
+      return width * 0.031;
+    } else if (index == 14) {
+      return width * 0.029;
+    } else {
+      return width * 0.028;
+    }
+  }
+
+
+  double getBlackSpace(
+      int index,
+      double width,
+      ) {
+    if (index == 0 ) {
+      return width*0.034;
+    } else if (index == 1) {
+      return width * 0.034;
+    } else if (index == 2) {
+      return width * 0.034;
+    } else if (index == 3) {
+      return width * 0.034;
+    } else if (index == 4) {
+      return width * 0.034;
+    } else if (index == 5) {
+      return width * 0.034;
+    } else if (index == 6) {
+      return width * 0.030;
+    } else if (index == 7) {
+      return width * 0.030;
+    } else if (index == 8) {
+      return width * 0.025;
+    } else if (index == 9) {
+      return width * 0.020;
+    } else if (index == 10) {
+      return width * 0.020;
+    } else if (index == 11) {
+      return width * 0.020;
+    } else if (index == 12) {
+      return width * 0.015;
+    } else if (index == 13) {
+      return width * 0.015;
+    } else if (index == 14) {
+      return width * 0.015;
+    } else {
+      return width * 0.015;
+    }
+  }
+
 
   double getHighLightBasedOnIndex(
     int index,
@@ -349,35 +435,35 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     if (index >= 0 && index <= 5) {
       return 0;
     } else if (index >= 6 && index <= 11) {
-      return width * 0.003;
+      return width * 0.013;
     } else if (index >= 12 && index <= 17) {
-      return width * 0.025;
+      return width * 0.029;
     } else if (index >= 18 && index <= 23) {
-      return width * 0.034;
+      return width * 0.040;
     } else if (index >= 24 && index <= 29) {
-      return width * 0.032;
+      return width * 0.035;
     } else if (index >= 30 && index <= 35) {
       return width * 0.033;
     } else if (index >= 36 && index <= 41) {
-      return width * 0.033;
-    } else if (index >= 42 && index <= 47) {
-      return width * 0.033;
-    } else if (index >= 48 && index <= 53) {
-      return width * 0.033;
-    } else if (index >= 54 && index <= 59) {
-      return width * 0.032;
-    } else if (index >= 60 && index <= 65) {
-      return width * 0.034;
-    } else if (index >= 66 && index <= 71) {
-      return width * 0.032;
-    } else if (index >= 72 && index <= 77) {
-      return width * 0.032;
-    } else if (index >= 78 && index <= 83) {
-      return width * 0.032;
-    } else if (index >= 84 && index <= 89) {
-      return width * 0.037;
-    } else {
       return width * 0.035;
+    } else if (index >= 42 && index <= 47) {
+      return width * 0.030;
+    } else if (index >= 48 && index <= 53) {
+      return width * 0.028;
+    } else if (index >= 54 && index <= 59) {
+      return width * 0.028;
+    } else if (index >= 60 && index <= 65) {
+      return width * 0.020;
+    } else if (index >= 66 && index <= 71) {
+      return width * 0.018;
+    } else if (index >= 72 && index <= 77) {
+      return width * 0.018;
+    } else if (index >= 78 && index <= 83) {
+      return width * 0.015;
+    } else if (index >= 84 && index <= 89) {
+      return width * 0.018;
+    } else {
+      return width * 0.010;
     }
   }
 
@@ -388,35 +474,35 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     if (index >= 0 && index <= 5) {
       return width * 0.017;
     } else if (index >= 6 && index <= 11) {
-      return width * 0.029;
+      return width * 0.039;
     } else if (index >= 12 && index <= 17) {
-      return width * 0.049;
+      return width * 0.055;
     } else if (index >= 18 && index <= 23) {
-      return width * 0.050;
+      return width * 0.055;
     } else if (index >= 24 && index <= 29) {
-      return width * 0.050;
+      return width * 0.052;
     } else if (index >= 30 && index <= 35) {
       return width * 0.050;
     } else if (index >= 36 && index <= 41) {
-      return width * 0.049;
+      return width * 0.048;
     } else if (index >= 42 && index <= 47) {
-      return width * 0.050;
+      return width * 0.045;
     } else if (index >= 48 && index <= 53) {
-      return width * 0.050;
+      return width * 0.043;
     } else if (index >= 54 && index <= 59) {
-      return width * 0.050;
+      return width * 0.040;
     } else if (index >= 60 && index <= 65) {
-      return width * 0.049;
+      return width * 0.038;
     } else if (index >= 66 && index <= 71) {
-      return width * 0.050;
+      return width * 0.037;
     } else if (index >= 72 && index <= 77) {
-      return width * 0.050;
+      return width * 0.033;
     } else if (index >= 78 && index <= 83) {
-      return width * 0.050;
+      return width * 0.033;
     } else if (index >= 84 && index <= 89) {
-      return width * 0.050;
+      return width * 0.030;
     } else {
-      return width * 0.050;
+      return width * 0.030;
     }
   }
 
@@ -428,28 +514,37 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
       case 0:
         return width * 0.021;
       case 1:
-        return width * 0.040;
+        return width * 0.048;
       case 2:
-        return width * 0.040;
+        return width * 0.050;
       case 3:
-        return width * 0.045;
+        return width * 0.052;
       case 4:
         return width * 0.047;
       case 5:
-      case 6:
-      case 7:
         return width * 0.047;
+      case 6:
+        return width * 0.047;
+      case 7:
+        return width * 0.040;
       case 8:
+        return width * 0.040;
       case 9:
+        return width * 0.030;
       case 10:
+        return width * 0.025;
       case 11:
-        return width * 0.040;
+        return width * 0.023;
       case 12:
+        return width * 0.020;
       case 13:
+        return width * 0.024;
       case 14:
-        return width * 0.040;
+        return width * 0.020;
+      case 15:
+        return width * 0.015;
       default:
-        return width * 0.040;
+        return width * 0.015;
     }
   }
 }
@@ -662,7 +757,7 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                             index.toString(),
                             style: TextStyle(
                               color: AppColors.whitePrimary,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w500,
                               fontSize: height*0.020
                             ),
                           ),

@@ -125,6 +125,16 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                       ),
                     ),
 
+
+                    Align(
+                        alignment: Alignment.topCenter,
+                    child:  Container(
+                        color: AppColors.blackPrimary,
+                        width: double.infinity,
+                        height: height * 0.015,
+                      )),
+
+
                     /// red green  With Grid
                     ///===========================================================
 

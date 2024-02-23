@@ -28,6 +28,9 @@ class LeadershipScreen extends StatelessWidget {
 
       return  LayoutBuilder(builder: (context, constraints) {
 
+        if (constraints.maxWidth >= 400) {
+          return  LeaderVebView(controller: controller,);;
+        } else {
           if (hc.isPortrait == true) {
 
             return LeaderPortraitView(controller: controller,);
@@ -36,7 +39,9 @@ class LeadershipScreen extends StatelessWidget {
 
             return  LeaderLandscapeView(controller: controller,);
           }
-        });
+        }
+        }
+        );
       }),
       // bottomNavigationBar: leaderBoardButton(),
     );
@@ -166,7 +171,9 @@ class LeaderLandscapeView extends StatelessWidget {
         quarterTurns: 1,
         child: SingleChildScrollView(
 
-          child: Column(
+          child:
+
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -266,6 +273,124 @@ class LeaderLandscapeView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+
+class LeaderVebView extends StatelessWidget {
+  const LeaderVebView({super.key,required this.controller});
+  final LeaderBoardController controller;
+  @override
+
+  Widget build(BuildContext context) {
+
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(top: 20.dp, left: 10.0.dp, right: 10.0.dp),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(left: 50.dp, top: 0.dp),
+                    child: SvgPicture.asset(Images.svg_trophyIcon,width: 2.5.w,
+                      height: 2.5.w,)),
+                Padding(
+                  padding:
+                  EdgeInsets.only(left: 0.dp, top: 0.dp, right: 25.dp),
+                  child: GestureDetector(
+                      onTap: () => Get.back(),
+                      child: SvgPicture.asset(
+                          Images.svg_forward_button,
+                        width: 2.5.w,
+                        height: 2.5.w,
+                      )),
+                ),
+              ],
+            ),
+              leaderBoardTitleWidget(),
+
+
+            controller.isLoading.value
+                ? Padding(
+              padding: EdgeInsets.only(top: 30.0.h),
+              child: const Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.redlight,
+                  )),
+            )
+                : Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 20.dp, left: 10.0.dp, right: 10.0.dp),
+                  child: Container(
+                    width: 40.w,
+                    height: 10.h,
+                    padding:
+                    EdgeInsets.only(left: 15.dp, right: 15.dp),
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                      border: Border.all(
+                        color: AppColors.greyColor,
+                      ),
+                      color: AppColors.greyColor,
+                    ),
+                    child: Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        leaderBoardTextWidget('Current Leader',
+                            controller.highestUserScore.value),
+                        leaderBoardTextWidget(
+                            'Score', controller.highScore.value),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 20.dp, left: 10.0.dp, right: 10.0.dp),
+                  child:  Container(
+                    width: 40.w,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding:
+                          EdgeInsets.symmetric(horizontal: 30.dp),
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                AppConstant.user,
+                                style: const TextStyle(
+                                    color: Colors.white),
+                              ),
+                              Text(
+                                AppConstant.scoreTemp,
+                                style: const TextStyle(
+                                    color: Colors.white),
+                              )
+                            ],
+                          ),
+                        ),
+                        populateScoreList(controller.scoreList),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
   }
 }
 

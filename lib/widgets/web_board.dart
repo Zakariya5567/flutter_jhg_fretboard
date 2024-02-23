@@ -51,7 +51,7 @@ class WebBoard extends StatelessWidget {
                                 transition: Transition.leftToRight);
                           }),
                       WebButtonIcon(
-                        icon:Images.iconSettingLandscape,
+                        icon:Images.iconSetting,
                         color: controller.leaderboardMode == true ? AppColors.greySecondary :
                         AppColors.whitePrimary,
                         width: 2.2.w,
@@ -73,7 +73,7 @@ class WebBoard extends StatelessWidget {
               ),
               //SPACER
               SizedBox(
-                height: controller.isPortrait ?25 :125,
+                height: controller.isPortrait ?5 :125,
               ),
               // BOARD WITH NUMBER
 
@@ -86,21 +86,15 @@ class WebBoard extends StatelessWidget {
                   child: SingleChildScrollView(
                     child: const WebPortraitGuitarBoard(),
                   )
-              )
-              //
-              //
-                  :
-
-              ///================
+              ) :
               Container(
                   height: 300,
-                  width: width*0.80,
+                  width: width*0.70,
                   child: const WebGuitarBoard()
               ),
-              ///================
               //SPACER
-             SizedBox(
-                height: controller.isPortrait ?20 :110,
+              SizedBox(
+                height: controller.isPortrait ?8.5 :110,
               ),
               // TIMER  WITH ADD AND SUBTRACT BUTTONS
               Row(
@@ -114,7 +108,7 @@ class WebBoard extends StatelessWidget {
                       isAdd: false)
                       : const SizedBox(),
                   SizedBox(
-                    width: 5.w,
+                    width: 3.w,
                   ),
                   Center(
                     child:
@@ -137,7 +131,7 @@ class WebBoard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 5.w,
+                    width: 3.w,
                   ),
                   controller.timerMode == true ?
 
@@ -153,8 +147,6 @@ class WebBoard extends StatelessWidget {
               SizedBox(
                 height:7,
               ),
-
-
               Padding(
                 padding:  EdgeInsets.only(
                   left: 3.w,
@@ -165,7 +157,7 @@ class WebBoard extends StatelessWidget {
 
                     controller.isStart == true ?
                     WebButtonIcon(
-                        icon: controller.isStart == true ? Images.iconStop : Images.iconReset,
+                        icon:  Images.iconReset,
                         width: 2.0.w,
                         height: 2.0.w,
                         onTap: (){
@@ -250,7 +242,7 @@ class WebBoard extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: AppConstant.sansFont,
                               color: AppColors.whitePrimary,
-                              fontSize: 1.8.w,
+                              fontSize: 1.4.w,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -269,9 +261,7 @@ class WebBoard extends StatelessWidget {
                   ],
                 ),
               ),
-
-
-              //SPACER
+              //SPACE
               SizedBox(height: 5),
               controller.isStart == true?
 

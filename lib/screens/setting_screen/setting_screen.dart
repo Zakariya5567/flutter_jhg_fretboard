@@ -601,10 +601,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 //   borderRadius: BorderRadius.circular(8),
                 //   color: Colors.black.withOpacity(0.2),
                 // ),
-                width: 40.w,
+                width: 45.w,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
 
                     children: [
 

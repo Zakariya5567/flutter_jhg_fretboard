@@ -56,26 +56,36 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return FlutterSizer(
       builder: (BuildContext , Orientation , ScreenType ) {
-        return GetMaterialApp(
-            builder: (context, child){
-              return  MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0), child: child!,);
-              },
-            debugShowCheckedModeBanner: false,
-            title: 'JHG fretboard',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
-           // home:  const HomeScreen()
-            home:
-            kIsWeb ?  const HomeScreen() :
+        return AnnotatedRegion<SystemUiOverlayStyle>(
 
-            SplashScreen(
-            yearlySubscriptionId: yearlySubscription(),
-            monthlySubscriptionId: monthlySubscription(),
-            appName: AppConstant.appName,
-            appVersion: packageInfo.version,
-            nextPage: () => const HomeScreen(),
+          value : SystemUiOverlayStyle(
+              statusBarColor: Colors.white,
+              statusBarIconBrightness: Brightness.dark,
+              systemNavigationBarColor: Colors.white,
+              systemNavigationBarIconBrightness: Brightness.dark,
+              systemNavigationBarDividerColor: Colors.white),
+
+          child: GetMaterialApp(
+              builder: (context, child){
+                return  MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0), child: child!,);
+                },
+              debugShowCheckedModeBanner: false,
+              title: 'JHG fretboard',
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+              ),
+             // home:  const HomeScreen()
+              home:
+              kIsWeb ?  const HomeScreen() :
+
+              SplashScreen(
+              yearlySubscriptionId: yearlySubscription(),
+              monthlySubscriptionId: monthlySubscription(),
+              appName: AppConstant.appName,
+              appVersion: packageInfo.version,
+              nextPage: () => const HomeScreen(),
+            ),
           ),
         );
       },
