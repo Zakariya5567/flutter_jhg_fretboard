@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fretboard/widgets/web_board.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
@@ -42,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.teal,
       body: GetBuilder<HomeController>(
           init: HomeController(),

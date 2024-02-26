@@ -128,7 +128,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
 
                     Align(
                         alignment: Alignment.topCenter,
-                    child:  Container(
+                        child:  Container(
                         color: AppColors.blackPrimary,
                         width: double.infinity,
                         height: height * 0.015,
@@ -147,7 +147,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                         physics: const NeverScrollableScrollPhysics(),
                         crossAxisCount: 6,
                         mainAxisSpacing: 0,
-                        crossAxisSpacing: 4,
+                        crossAxisSpacing: 7,
                         itemBuilder: (context, index) {
                           return redGreenCircle(
                               isColor: controller.selectedFret == index
@@ -256,7 +256,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
   Widget colDivider(double width, int index, int? selectedString) {
     return Padding(
       padding:
-          EdgeInsets.only(left: index == 0 ? width * 0.033 : width * 0.074),
+          EdgeInsets.only(left: index == 0 ? width * 0.028 : width * 0.076),
       child: Container(
         width:
               index == 6 ? width * 0.011
@@ -294,17 +294,20 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
           {bool? isColor,
           required color,
           required int index,
-          required double height}) =>
+          required double height,
+          }) =>
       Padding(
         padding:
             EdgeInsets.only(bottom: getHighLightBasedOnIndex(index, height)),
         child: Container(
-          width: height * 0.035,
-          height: height * 0.035,
+          width: height * 0.030,
+          height: height * 0.030,
           decoration: BoxDecoration(
-            color: isColor == true ? color : Colors.transparent,
+             color: isColor == true ? color : Colors.transparent,
+            //color: Colors.red,
             shape: BoxShape.circle,
           ),
+         // child: Text("${fretList[index].note}",style: TextStyle(color: Colors.red),),
         ),
       );
 
@@ -316,83 +319,84 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
   }) => Container(
         width: width * 0.040,
         height: getFretPressBasedOnIndex(index, height),
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           color: Colors.transparent,
+       // color: Colors.green.withOpacity(0.5)
         ),
       );
 
   double getHighLightBasedOnIndex(int index, double height) {
     if (index >= 0 && index <= 5) {
-      return height * 0.002;
+      return height * 0.006;
     } else if (index >= 6 && index <= 11) {
-      return height * 0.032;
+      return height * 0.038;
     } else if (index >= 12 && index <= 17) {
-      return height * 0.042;
+      return height * 0.050;
     } else if (index >= 18 && index <= 23) {
-      return height * 0.045;
+      return height * 0.050;
 
     } else if (index >= 24 && index <= 29) {
 
-      return height * 0.045;
+      return height * 0.050;
     } else if (index >= 30 && index <= 35) {
 
-      return height * 0.045;
+      return height * 0.050;
     } else if (index >= 36 && index <= 41) {
-      return height * 0.045;
+      return height * 0.050;
     }
     else if (index >= 42 && index <= 47) {
-      return height * 0.045;
+      return height * 0.050;
 
     } else if (index >= 48 && index <= 53) {
-      return height * 0.045;
+      return height * 0.050;
 
     } else if (index >= 54 && index <= 59) {
-      return height * 0.045;
+      return height * 0.050;
 
     } else if (index >= 60 && index <= 65) {
-      return height * 0.045;
+      return height * 0.050;
 
     } else if (index >= 66 && index <= 71) {
-      return height * 0.045;
+      return height * 0.050;
 
     } else if (index >= 72 && index <= 77) {
-      return height * 0.045;
+      return height * 0.050;
 
     } else if (index >= 78 && index <= 83) {
-      return height * 0.045;
+      return height * 0.050;
 
     } else if (index >= 84 && index <= 89) {
-      return height * 0.045;
+      return height * 0.050;
 
     } else {
-      return height * 0.045;
+      return height * 0.050;
 
     }
   }
 
   double getFretPressBasedOnIndex(int index, double height) {
     if (index >= 0 && index <= 5) {
-      return height * 0.013;
+      return height * 0.014;
     } else if (index >= 6 && index <= 11) {
-      return height * 0.062;
+      return height * 0.063;
     } else if (index >= 12 && index <= 17) {
       return height * 0.075;
     } else if (index >= 18 && index <= 23) {
-      return height * 0.076;
+      return height * 0.077;
     } else if (index >= 24 && index <= 29) {
-      return height * 0.076;
+      return height * 0.077;
     } else if (index >= 30 && index <= 35) {
       return height * 0.076;
     } else if (index >= 36 && index <= 41) {
       return height * 0.076;
     } else if (index >= 42 && index <= 47) {
-      return height * 0.075;
+      return height * 0.077;
     } else if (index >= 48 && index <= 53) {
       return height * 0.076;
     } else if (index >= 54 && index <= 59) {
       return height * 0.076;
     } else if (index >= 60 && index <= 65) {
-      return height * 0.075;
+      return height * 0.076;
     } else if (index >= 66 && index <= 71) {
       return height * 0.076;
     } else if (index >= 72 && index <= 77) {

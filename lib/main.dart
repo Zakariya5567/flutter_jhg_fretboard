@@ -54,38 +54,34 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Transparent status bar
+      statusBarBrightness: Brightness.dark, // Dark text for status bar
+    ));
+
     return FlutterSizer(
       builder: (BuildContext , Orientation , ScreenType ) {
-        return AnnotatedRegion<SystemUiOverlayStyle>(
-
-          value : SystemUiOverlayStyle(
-              statusBarColor: Colors.white,
-              statusBarIconBrightness: Brightness.dark,
-              systemNavigationBarColor: Colors.white,
-              systemNavigationBarIconBrightness: Brightness.dark,
-              systemNavigationBarDividerColor: Colors.white),
-
-          child: GetMaterialApp(
-              builder: (context, child){
-                return  MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0), child: child!,);
-                },
-              debugShowCheckedModeBanner: false,
-              title: 'JHG fretboard',
-              theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                useMaterial3: true,
-              ),
-             // home:  const HomeScreen()
-              home:
-              kIsWeb ?  const HomeScreen() :
-
-              SplashScreen(
-              yearlySubscriptionId: yearlySubscription(),
-              monthlySubscriptionId: monthlySubscription(),
-              appName: AppConstant.appName,
-              appVersion: packageInfo.version,
-              nextPage: () => const HomeScreen(),
+        return GetMaterialApp(
+            builder: (context, child){
+              return  MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0), child: child!,);
+              },
+            debugShowCheckedModeBanner: false,
+            title: 'JHG fretboard',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
             ),
+           // home:  const HomeScreen()
+            home:
+            kIsWeb ?  const HomeScreen() :
+
+            SplashScreen(
+            yearlySubscriptionId: yearlySubscription(),
+            monthlySubscriptionId: monthlySubscription(),
+            appName: AppConstant.appName,
+            appVersion: packageInfo.version,
+            nextPage: () => const HomeScreen(),
           ),
         );
       },

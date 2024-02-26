@@ -54,7 +54,7 @@ class HomeController extends GetxController {
        // EXECUTE LOOP
        fretList.forEach((element) async {
          // if(element.id == index){
-         if(element.id == index){
+         if(element.note == note && element.string == str){
            // GET ALLOW STRING STATUS
            final stringStatus = getStringStatus(element.string!);
 
@@ -76,7 +76,7 @@ class HomeController extends GetxController {
 
 
 
-             await player.play(AssetSource(element.fretSound!));
+             await player.play(AssetSource(element.fretSound!),volume: 1.0);
              if(highlightNode == selectedNote  && selectedString == highlightString ){
                previousHighlightFret = highlightFret;
                previousHighlightNode = highlightNode;
@@ -91,7 +91,7 @@ class HomeController extends GetxController {
              }
              update();
            }else{
-             await player.play(AssetSource(element.fretSound!));
+             await player.play(AssetSource(element.fretSound!),volume: 1.0);
            }
            return;
          }
@@ -104,7 +104,8 @@ class HomeController extends GetxController {
        // EXECUTE LOOP
        fretList.forEach((element) async {
          // if(element.id == index){
-         if(element.id == index){
+         if(element.note == note && element.string == str){
+
            // GET ALLOW STRING STATUS
            final stringStatus = getStringStatus(element.string!);
 
@@ -124,7 +125,7 @@ class HomeController extends GetxController {
              print("highlight fret : $highlightFret");
              print("selected fret : $selectedFret");
 
-             await player.play(AssetSource(element.fretSound!));
+             await player.play(AssetSource(element.fretSound!),volume: 1.0);
              if(highlightNode == selectedNote  && selectedString == highlightString ){
                previousHighlightFret = highlightFret;
                previousHighlightNode = highlightNode;
@@ -139,7 +140,7 @@ class HomeController extends GetxController {
              }
              update();
            }else{
-             await player.play(AssetSource(element.fretSound!));
+             await player.play(AssetSource(element.fretSound!),volume: 1.0);
            }
            return;
          }
