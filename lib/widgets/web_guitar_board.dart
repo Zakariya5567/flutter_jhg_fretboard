@@ -22,61 +22,18 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     return GetBuilder<HomeController>(
         init: HomeController(),
         builder: (controller) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          return Wrap(
             children: [
-              //NUMBERS
-              Container(
-                width: width * 0.74,
-                height: 35,
-                child: ListView.builder(
-                  itemCount: 16,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(right: getSpace(index, width)),
-                      child: Text(
-                        index.toString(),
-                        style: TextStyle(
-                          color: AppColors.whitePrimary,
-                          fontWeight: FontWeight.w500,
-                          fontSize: width * 0.012,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-
-              //fretboard
-              Container(
-                height: 255,
-                width: width * 0.70,
-                // alignment: Alignment.,
-                child: Stack(
-                  children: [
-                    //  BOARD SIZE WITH COLOR
-                    Row(
-                      children: [
-                        Container(
-                          width: width * 0.012,
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: width * 0.80,
-                            color: AppColors.creamColor,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///============================================================
-                    /// BLACK CIRCLE
-                    ListView.builder(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //NUMBERS
+                  Container(
+                    width: width * 0.74,
+                    height: 35,
+                    child: ListView.builder(
+                      itemCount: 16,
                       shrinkWrap: true,
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.horizontal,
@@ -84,158 +41,205 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(
-                              left: getBlackSpace(index,width),
-                          ),
-                          child: Container(
-                            // height: 7.h,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                blackCircle(
-                                    isColor:
-                                    index == 11 ?
-                                    true
-                                        : false,
-                                    width: width),
-                                SizedBox(
-                                  height: index == 11 ? 7.h : 5.h,
-                                ),
-                                blackCircle(
-                                    width: width,
-                                    isColor:
-                                    index == 2 ||
-                                            index == 4 ||
-                                            index == 6 ||
-                                            index == 8 ||
-                                            index == 14
-                                        ?
-                                     true
-                                        :
-                                    false
-                                ),
-                                SizedBox(
-                                  height: index == 11 ? 7.h : 5.h,
-                                ),
-                                blackCircle(
-                                    width: width,
-                                    isColor:
-                                    index == 11 ?
-                                    true
-                                        : false
-                                ),
-                              ],
+                              right: getLandscapeSpace(index, width)),
+                          child: Text(
+                            index.toString(),
+                            style: TextStyle(
+                              color: AppColors.whitePrimary,
+                              fontWeight: FontWeight.w500,
+                              fontSize: width * 0.012,
                             ),
                           ),
                         );
                       },
-                      itemCount: 15,
                     ),
+                  ),
 
-                    ///====================================
-                    /// ROW
-                    ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 15,
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, pos) {
-                        return rowDivider(pos, width);
-                      },
-                    ),
+                  //fretboard
+                  Container(
+                    height: 255,
+                    width: width * 0.70,
+                    // alignment: Alignment.,
+                    child: Stack(
+                      children: [
+                        //  BOARD SIZE WITH COLOR
+                        Row(
+                          children: [
+                            Container(
+                              width: width * 0.012,
+                            ),
+                            Expanded(
+                              child: Container(
+                                width: width * 0.80,
+                                color: AppColors.creamColor,
+                              ),
+                            ),
+                          ],
+                        ),
 
-                    ///=========================================
-                    /// COLUMN
-                    ListView.builder(
-                      itemCount: 6,
-                      shrinkWrap: false,
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.vertical,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return colDivider(
-                            index, controller.highlightString, width);
-                      },
-                    ),
+                        ///============================================================
+                        /// BLACK CIRCLE
+                        ListView.builder(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.horizontal,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                left: getLandscapeBlackSpace(index, width),
+                              ),
+                              child: Container(
+                                // height: 7.h,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    blackLandscapeCircle(
+                                        isColor: index == 11 ? true : false,
+                                        width: width),
+                                    SizedBox(
+                                      height: 8.1.h,
+                                    ),
+                                    blackLandscapeCircle(
+                                        width: width,
+                                        isColor: index == 2 ||
+                                                index == 4 ||
+                                                index == 6 ||
+                                                index == 8 ||
+                                                index == 14
+                                            ? true
+                                            : false),
+                                    SizedBox(
+                                      height: 8.1.h,
+                                    ),
+                                    blackLandscapeCircle(
+                                        width: width,
+                                        isColor: index == 11 ? true : false),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          itemCount: 15,
+                        ),
 
-                    /// red green  With Grid
-                    ///===========================================================
+                        ///====================================
+                        /// ROW
+                        ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 15,
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, pos) {
+                            return rowLandscapeDivider(pos, width);
+                          },
+                        ),
 
-                    Transform.flip(
-                      flipY: true,
-                      child: AlignedGridView.count(
-                        itemCount: 96,
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        scrollDirection: Axis.horizontal,
-                        physics: const NeverScrollableScrollPhysics(),
-                        crossAxisCount: 6,
-                        mainAxisSpacing: 0,
-                        crossAxisSpacing: 5,
-                        itemBuilder: (context, index) {
-                          return redGreenCircle(
-                            width: width,
-                            isColor:
-                                controller.selectedFret == index ? true : false,
-                            color: controller.selectedNote ==
-                                    controller.previousHighlightNode
-                                ? AppColors.greenPrimary
-                                : AppColors.redPrimary,
-                            index: index,
-                          );
-                        },
-                      ),
-                    ),
+                        ///=========================================
+                        /// COLUMN
+                        ListView.builder(
+                          itemCount: 6,
+                          shrinkWrap: false,
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.vertical,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return colLandscapeDivider(
+                                index, controller.highlightString, width);
+                          },
+                        ),
 
-                    /// Fret press With Grid
-                    ///===========================================================
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Container(
+                              color: AppColors.blackPrimary,
+                              //height: height.,
+                              width: width * 0.012,
+                            )),
 
-                    Transform.flip(
-                      flipY: true,
-                      child: Transform.flip(
-                        flipX: true,
-                        child: RotatedBox(
-                          quarterTurns: 1,
+                        /// red green  With Grid
+                        ///===========================================================
+
+                        Transform.flip(
+                          flipY: true,
                           child: AlignedGridView.count(
                             itemCount: 96,
                             shrinkWrap: true,
                             padding: EdgeInsets.zero,
+                            scrollDirection: Axis.horizontal,
                             physics: const NeverScrollableScrollPhysics(),
                             crossAxisCount: 6,
-                            mainAxisSpacing: width * 0.0035,
-                            crossAxisSpacing: 4,
+                            mainAxisSpacing: 0,
+                            crossAxisSpacing: 17,
                             itemBuilder: (context, index) {
-                              final noteIndex = fretList[index];
-                              return GestureDetector(
-                                onTap: () {
-                                  controller.playSound(index, noteIndex.note!,
-                                      noteIndex.string!);
-                                },
-                                child: stringPress(index: index, width: width),
+                              return redGreenLandscapeCircle(
+                                width: width,
+                                isColor: controller.selectedFret == index
+                                    ? true
+                                    : false,
+                                color: controller.selectedNote ==
+                                        controller.previousHighlightNode
+                                    ? AppColors.greenPrimary
+                                    : AppColors.redPrimary,
+                                index: index,
                               );
                             },
                           ),
                         ),
-                      ),
+
+                        /// Fret press With Grid
+                        ///===========================================================
+
+                        Transform.flip(
+                          flipY: true,
+                          child: Transform.flip(
+                            flipX: true,
+                            child: RotatedBox(
+                              quarterTurns: 1,
+                              child: AlignedGridView.count(
+                                itemCount: 96,
+                                shrinkWrap: true,
+                                padding: EdgeInsets.zero,
+                                physics: const NeverScrollableScrollPhysics(),
+                                crossAxisCount: 6,
+                                mainAxisSpacing: width * 0.0035,
+                                crossAxisSpacing: 4,
+                                itemBuilder: (context, index) {
+                                  final noteIndex = fretList[index];
+                                  return GestureDetector(
+                                    onTap: () {
+                                      controller.playSound(index,
+                                          noteIndex.note!, noteIndex.string!);
+                                    },
+                                    child: stringLandscapePress(
+                                        index: index, width: width),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        ///===========================================================
+                      ],
                     ),
+                  ),
 
-                    ///===========================================================
-                  ],
-                ),
-              ),
-
-              //SPACER
-              SizedBox(
-                height: 10,
+                  //SPACER
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
               ),
             ],
           );
         });
   }
 
-  Widget rowDivider(int index, double width) {
+  Widget rowLandscapeDivider(int index, double width) {
     return Padding(
-      padding: EdgeInsets.only(left: getFrethSpace(index, width)),
+      padding: EdgeInsets.only(left: getLandscapeFrethSpace(index, width)),
       child: Container(
         width: width * 0.0025,
         decoration: BoxDecoration(
@@ -254,9 +258,9 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     );
   }
 
-  Widget colDivider(int index, int? selectedString, double width) {
+  Widget colLandscapeDivider(int index, int? selectedString, double width) {
     return Padding(
-      padding: EdgeInsets.only(top: index == 0 ? 18 : 40),
+      padding: EdgeInsets.only(top: index == 0 ? 10 : 42.3),
       child: Container(
         height: index == 6
             ? 5.5
@@ -287,8 +291,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     );
   }
 
-
-  Widget blackCircle({
+  Widget blackLandscapeCircle({
     bool? isColor,
     required double width,
   }) =>
@@ -313,47 +316,46 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
           ),
         ),
       );
-  Widget redGreenCircle({
+
+  Widget redGreenLandscapeCircle({
     bool? isColor,
     required color,
     required int index,
     required double width,
   }) =>
       Padding(
-        padding: EdgeInsets.only(left: getHighLightBasedOnIndex(index, width)),
+        padding: EdgeInsets.only(
+            left: getLandscapeHighLightBasedOnIndex(index, width)),
         child: Container(
           width: width * 0.020,
-          height: width * 0.020,  
+          height: width * 0.020,
           decoration: BoxDecoration(
-             color: isColor == true ? color : Colors.transparent,
+            color: isColor == true ? color : Colors.transparent,
             //color: Colors.red,
             shape: BoxShape.circle,
           ),
-        ),  
+        ),
       );
 
-  Widget stringPress({
+  Widget stringLandscapePress({
     required int index,
     required double width,
   }) =>
       Container(
         // width: 10,
-        height: getFretPressBasedOnIndex(index, width),
-        decoration: BoxDecoration(
-             color: Colors.transparent
+        height: getLandscapeFretPressBasedOnIndex(index, width),
+        decoration: BoxDecoration(color: Colors.transparent
             //color: Colors.green.withOpacity(0.5)
-        ),
-       // child: Text("$index",style: TextStyle(color: Colors.red),),
+            ),
+        // child: Text("$index",style: TextStyle(color: Colors.red),),
       );
 
-
-
-  double getFrethSpace(
-      int index,
-      double width,
-      ) {
-    if (index == 0 ) {
-      return width*0.060;
+  double getLandscapeFrethSpace(
+    int index,
+    double width,
+  ) {
+    if (index == 0) {
+      return width * 0.060;
     } else if (index == 1) {
       return width * 0.057;
     } else if (index == 2) {
@@ -387,13 +389,12 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     }
   }
 
-
-  double getBlackSpace(
-      int index,
-      double width,
-      ) {
-    if (index == 0 ) {
-      return width*0.034;
+  double getLandscapeBlackSpace(
+    int index,
+    double width,
+  ) {
+    if (index == 0) {
+      return width * 0.034;
     } else if (index == 1) {
       return width * 0.034;
     } else if (index == 2) {
@@ -427,8 +428,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     }
   }
 
-
-  double getHighLightBasedOnIndex(
+  double getLandscapeHighLightBasedOnIndex(
     int index,
     double width,
   ) {
@@ -467,7 +467,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     }
   }
 
-  double getFretPressBasedOnIndex(
+  double getLandscapeFretPressBasedOnIndex(
     int index,
     double width,
   ) {
@@ -506,7 +506,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     }
   }
 
-  double getSpace(
+  double getLandscapeSpace(
     int index,
     double width,
   ) {
@@ -565,173 +565,181 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
         init: HomeController(),
         builder: (controller) {
           return SingleChildScrollView(
+            padding: EdgeInsets.zero,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //fretboard
-                Container(
-                  height: height*1.280,
-                  width: width*0.14,
-                  alignment: Alignment.center,
-                  child:
-                  Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-
-                      // BOARD SIZE WITH COLOR
-                      Column(
+                Stack(
+                  children: [
+                    Container(
+                      height: height * 1.185,
+                      width: width * 0.14,
+                      alignment: Alignment.center,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
                         children: [
-                          SizedBox(
-                            height: height * 0.022,
+                          // BOARD SIZE WITH COLOR
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: height * 0.022,
+                              ),
+                              Expanded(
+                                child: Container(
+                                  width: width * 0.14,
+                                  color: AppColors.creamColor,
+                                ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Container(
-                              width: width*0.14,
-                              color: AppColors.creamColor,
+
+                          // BLACK CIRCE
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return Container(
+                                  padding: EdgeInsets.only(
+                                    top: getPortraitBlackSpace(index, height),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      blackPortraitCircle(
+                                        height: height,
+                                        isColor: index == 11 ? true : false,
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.032,
+                                      ),
+                                      blackPortraitCircle(
+                                          height: height,
+                                          isColor: index == 2 ||
+                                                  index == 4 ||
+                                                  index == 6 ||
+                                                  index == 8 ||
+                                                  index == 14
+                                              ? true
+                                              : false),
+                                      SizedBox(width: width * 0.032),
+                                      blackPortraitCircle(
+                                          height: height,
+                                          isColor: index == 11 ? true : false),
+                                    ],
+                                  ),
+                                );
+                              },
+                              itemCount: 15,
                             ),
                           ),
+
+                          // ROW
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: ListView.builder(
+                              itemCount: 15,
+                              shrinkWrap: true,
+                              primary: false,
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, pos) {
+                                return rowPortraitDivider(height, pos);
+                              },
+                            ),
+                          ),
+
+                          // COLUMN
+
+                          RotatedBox(
+                            quarterTurns: 2,
+                            child: ListView.builder(
+                              itemCount: 6,
+                              shrinkWrap: false,
+                              padding: EdgeInsets.zero,
+                              scrollDirection: Axis.horizontal,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return colPortraitDivider(
+                                    width, index, controller.highlightString);
+                              },
+                            ),
+                          ),
+
+                          Align(
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                color: AppColors.blackPrimary,
+                                width: double.infinity,
+                                height: height * 0.022,
+                              )),
+
+                          // /// red green  With Grid
+                          // ///===========================================================
+                          //
+
+                          Align(
+                              alignment: Alignment.topCenter,
+                              child: AlignedGridView.count(
+                                itemCount: 96,
+                                shrinkWrap: true,
+                                padding: EdgeInsets.zero,
+                                physics: const NeverScrollableScrollPhysics(),
+                                crossAxisCount: 6,
+                                mainAxisSpacing: 0,
+                                crossAxisSpacing: 10,
+                                itemBuilder: (context, index) {
+                                  return redGreenPortraitCircle(
+                                      isColor: controller.selectedFret == index
+                                          ? true
+                                          : false,
+                                      color: controller.selectedNote ==
+                                              controller.previousHighlightNode
+                                          ? AppColors.greenPrimary
+                                          : AppColors.redPrimary,
+                                      index: index,
+                                      height: height);
+                                },
+                              )),
+                          //
+                          // /// Fret press With Grid
+                          // ///===========================================================
+                          //
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: AlignedGridView.count(
+                              itemCount: 96,
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 6,
+                              mainAxisSpacing: 3,
+                              crossAxisSpacing: 4,
+                              itemBuilder: (context, index) {
+                                final noteIndex = fretList[index];
+                                return GestureDetector(
+                                  onTap: () {
+                                    controller.playSound(index, noteIndex.note!,
+                                        noteIndex.string!);
+                                  },
+                                  child: stringPortraitPress(
+                                      index: index,
+                                      height: height,
+                                      width: width),
+                                );
+                              },
+                            ),
+                          ),
+
+                          // ///===========================================================
                         ],
                       ),
-
-                      // BLACK CIRCE
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Container(
-                              height: height*0.085,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  blackCircle(
-                                    height: height,
-                                    isColor: index == 11 ? true : false,
-                                  ),
-                                  SizedBox(
-                                    width: index == 11
-                                        ? width * 0.0252
-                                        : width * 0.0089,
-                                  ),
-                                  blackCircle(
-                                      height: height,
-                                      isColor: index == 2 ||
-                                              index == 4 ||
-                                              index == 6 ||
-                                              index == 8 ||
-                                              index == 14
-                                          ? true
-                                          : false),
-                                  SizedBox(
-                                    width: index == 11
-                                        ? width * 0.0252
-                                        : width * 0.0089,
-                                  ),
-                                  blackCircle(
-                                      height: height,
-                                      isColor: index == 11 ? true : false),
-                                ],
-                              ),
-                            );
-                          },
-                          itemCount: 15,
-                        ),
-                      ),
-
-                     // ROW
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: ListView.builder(
-                          itemCount: 15,
-                          shrinkWrap: true,
-                          primary: false,
-                          padding: EdgeInsets.zero,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, pos) {
-                            return rowDivider(height, pos);
-                          },
-                        ),
-                      ),
-
-                      // COLUMN
-
-                      RotatedBox(
-                        quarterTurns: 2,
-                        child: ListView.builder(
-                          itemCount: 6,
-                          shrinkWrap: false,
-                          padding: EdgeInsets.zero,
-                          scrollDirection: Axis.horizontal,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return colDivider(
-                                width, index, controller.highlightString);
-                          },
-                        ),
-                      ),
-
-                      // /// red green  With Grid
-                      // ///===========================================================
-                      //
-
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: AlignedGridView.count(
-                          itemCount: 96,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 6,
-                          mainAxisSpacing: 0,
-                          crossAxisSpacing: 2,
-                          itemBuilder: (context, index) {
-                            return redGreenCircle(
-                                isColor: controller.selectedFret == index
-                                    ? true
-                                    : false,
-                                color: controller.selectedNote ==
-                                        controller.previousHighlightNode
-                                    ? AppColors.greenPrimary
-                                    : AppColors.redPrimary,
-                                index: index,
-                                height: height);
-                          },
-                        )
-                      ),
-                      //
-                      // /// Fret press With Grid
-                      // ///===========================================================
-                      //
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: AlignedGridView.count(
-                          itemCount: 96,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 6,
-                          mainAxisSpacing: 3,
-                          crossAxisSpacing: 4,
-                          itemBuilder: (context, index) {
-                            final noteIndex = fretList[index];
-                            return GestureDetector(
-                              onTap: () {
-                                controller.playSound(
-                                    index, noteIndex.note!, noteIndex.string!);
-                              },
-                              child: stringPress(
-                                  index: index, height: height, width: width),
-                            );
-                          },
-                        ),
-                      ),
-
-                      // ///===========================================================
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 //SPACER
                 SizedBox(
@@ -756,10 +764,9 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                           child: Text(
                             index.toString(),
                             style: TextStyle(
-                              color: AppColors.whitePrimary,
-                              fontWeight: FontWeight.w500,
-                              fontSize: height*0.020
-                            ),
+                                color: AppColors.whitePrimary,
+                                fontWeight: FontWeight.w500,
+                                fontSize: height * 0.020),
                           ),
                         ),
                       );
@@ -772,9 +779,9 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
         });
   }
 
-  Widget rowDivider(double height, int index) {
+  Widget rowPortraitDivider(double height, int index) {
     return Padding(
-      padding: EdgeInsets.only(top: height * 0.0815),
+      padding: EdgeInsets.only(top: getPortraitSpace(index, height)),
       child: Container(
         height: height * 0.0038,
         decoration: BoxDecoration(
@@ -792,10 +799,10 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
     );
   }
 
-  Widget colDivider(double width, int index, int? selectedString) {
+  Widget colPortraitDivider(double width, int index, int? selectedString) {
     return Padding(
       padding:
-          EdgeInsets.only(left: index == 0 ? width * 0.010 : width * 0.0205),
+          EdgeInsets.only(left: index == 0 ? width * 0.007 : width * 0.0218),
       child: Container(
         width: index == 6
             ? width * 0.0045
@@ -825,7 +832,8 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
     );
   }
 
-  Widget blackCircle({bool? isColor, required double height}) => Container(
+  Widget blackPortraitCircle({bool? isColor, required double height}) =>
+      Container(
         width: height * 0.024,
         height: height * 0.024,
         decoration: BoxDecoration(
@@ -834,138 +842,228 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
         ),
       );
 
-  Widget redGreenCircle(
+  Widget redGreenPortraitCircle(
           {bool? isColor,
           required color,
           required int index,
           required double height}) =>
-      Padding( padding: EdgeInsets.only(bottom: getHighLightBasedOnIndex(index, height)),
+      Padding(
+        padding: EdgeInsets.only(
+            bottom: getPortraitHighLightBasedOnIndex(index, height)),
         child: Container(
           width: height * 0.030,
           height: height * 0.030,
           decoration: BoxDecoration(
-            color: isColor == true ? color : Colors.transparent,
-            //color: Colors.red,
+           color: isColor == true ? color : Colors.transparent,
+           //   color: Colors.red,
             shape: BoxShape.circle,
           ),
+          // child: Text("$index",style: TextStyle(color: Colors.white),),
         ),
       );
 
-  Widget stringPress({
+  Widget stringPortraitPress({
     required int index,
     required double height,
     required double width,
   }) =>
       Container(
         width: width * 0.040,
-        height: getFretPressBasedOnIndex(index, height),
-        decoration:  BoxDecoration(
+        height: getPortraitFretPressBasedOnIndex(index, height),
+        decoration: BoxDecoration(
           color: Colors.transparent,
+          // color: Colors.pink.withOpacity(0.5),
         ),
+        //  child: Text("$index",style: TextStyle(color: Colors.white),),
       );
 
-
-
-  double getHighLightBasedOnIndex(
-      int index, double height) {
+  double getPortraitHighLightBasedOnIndex(int index, double height) {
     if (index >= 0 && index <= 5) {
-      return height * 0.002;
+      return height * 0.012;
     } else if (index >= 6 && index <= 11) {
-      return height * 0.052;
-    } else if (index >= 12 && index <= 17) {
-      return height * 0.052;
-    } else if (index >= 18 && index <= 23) {
-      return height * 0.060;
-    } else if (index >= 24 && index <= 29) {
       return height * 0.055;
+    } else if (index >= 12 && index <= 17) {
+      return height * 0.065;
+    } else if (index >= 18 && index <= 23) {
+      return height * 0.065;
+    } else if (index >= 24 && index <= 29) {
+      return height * 0.060;
     } else if (index >= 30 && index <= 35) {
       return height * 0.055;
     } else if (index >= 36 && index <= 41) {
       return height * 0.055;
     } else if (index >= 42 && index <= 47) {
-      return height * 0.055;
+      return height * 0.050;
     } else if (index >= 48 && index <= 53) {
-      return height * 0.055;
+      return height * 0.045;
     } else if (index >= 54 && index <= 59) {
-      return height * 0.055;
+      return height * 0.045;
     } else if (index >= 60 && index <= 65) {
-      return height * 0.055;
+      return height * 0.040;
     } else if (index >= 66 && index <= 71) {
-      return height * 0.055;
+      return height * 0.040;
     } else if (index >= 72 && index <= 77) {
-      return height * 0.055;
+      return height * 0.035;
     } else if (index >= 78 && index <= 83) {
-      return height * 0.055;
+      return height * 0.035;
     } else if (index >= 84 && index <= 89) {
-      return height * 0.055;
+      return height * 0.035;
     } else {
-      return height * 0.055;
+      return height * 0.035;
     }
   }
 
+  double getPortraitSpace(
+    int index,
+    double height,
+  ) {
+    switch (index) {
+      case 0:
+        return height * 0.0960;
+      case 1:
+        return height * 0.0930;
+      case 2:
+        return height * 0.0900;
+      case 3:
+        return height * 0.0870;
+      case 4:
+        return height * 0.0840;
+      case 5:
+        return height * 0.0810;
+      case 6:
+        return height * 0.0780;
+      case 7:
+        return height * 0.0750;
+      case 8:
+        return height * 0.0720;
+      case 9:
+        return height * 0.0690;
+      case 10:
+        return height * 0.0660;
+      case 11:
+        return height * 0.0630;
+      case 12:
+        return height * 0.0600;
+      case 13:
+        return height * 0.0570;
+      case 14:
+        return height * 0.0540;
+      case 15:
+        return height * 0.0510;
+      default:
+        return height * 0.0490;
+    }
+  }
 
-  double getFretPressBasedOnIndex(int index, double height) {
-    if (index >= 0 && index <= 5) {
-      return height * 0.017;
-    } else if (index >= 6 && index <= 11) {
+  double getPortraitBlackSpace(
+    int index,
+    double height,
+  ) {
+    if (index == 0) {
+      return height * 0.055;
+    } else if (index == 1) {
+      return height * 0.058;
+    } else if (index == 2) {
+      return height * 0.068;
+    } else if (index == 3) {
+      return height * 0.070;
+    } else if (index == 4) {
+      return height * 0.068;
+    } else if (index == 5) {
       return height * 0.062;
-    } else if (index >= 12 && index <= 17) {
-      return height * 0.083;
-    } else if (index >= 18 && index <= 23) {
-      return height * 0.080;
-    } else if (index >= 24 && index <= 29) {
-      return height * 0.080;
-    } else if (index >= 30 && index <= 35) {
-      return height * 0.082;
-    } else if (index >= 36 && index <= 41) {
-      return height * 0.082;
-    } else if (index >= 42 && index <= 47) {
-      return height * 0.082;
-    } else if (index >= 48 && index <= 53) {
-      return height * 0.082;
-    } else if (index >= 54 && index <= 59) {
-      return height * 0.082;
-    } else if (index >= 60 && index <= 65) {
-      return height * 0.082;
-    } else if (index >= 66 && index <= 71) {
-      return height * 0.082;
-    } else if (index >= 72 && index <= 77) {
-      return height * 0.082;
-    } else if (index >= 78 && index <= 83) {
-      return height * 0.082;
-    } else if (index >= 84 && index <= 89) {
-      return height * 0.082;
+    } else if (index == 6) {
+      return height * 0.060;
+    } else if (index == 7) {
+      return height * 0.058;
+    } else if (index == 8) {
+      return height * 0.052;
+    } else if (index == 9) {
+      return height * 0.050;
+    } else if (index == 10) {
+      return height * 0.045;
+    } else if (index == 11) {
+      return height * 0.045;
+    } else if (index == 12) {
+      return height * 0.040;
+    } else if (index == 13) {
+      return height * 0.040;
+    } else if (index == 14) {
+      return height * 0.035;
     } else {
+      return height * 0.035;
+    }
+  }
+
+  double getPortraitFretPressBasedOnIndex(int index, double height) {
+    if (index >= 0 && index <= 5) {
+      return height * 0.020;
+    } else if (index >= 6 && index <= 11) {
+      return height * 0.074;
+    } else if (index >= 12 && index <= 17) {
+      return height * 0.094;
+    } else if (index >= 18 && index <= 23) {
+      return height * 0.090;
+    } else if (index >= 24 && index <= 29) {
+      return height * 0.085;
+    } else if (index >= 30 && index <= 35) {
+      return height * 0.085;
+    } else if (index >= 36 && index <= 41) {
       return height * 0.080;
+    } else if (index >= 42 && index <= 47) {
+      return height * 0.078;
+    } else if (index >= 48 && index <= 53) {
+      return height * 0.076;
+    } else if (index >= 54 && index <= 59) {
+      return height * 0.072;
+    } else if (index >= 60 && index <= 65) {
+      return height * 0.069;
+    } else if (index >= 66 && index <= 71) {
+      return height * 0.067;
+    } else if (index >= 72 && index <= 77) {
+      return height * 0.062;
+    } else if (index >= 78 && index <= 83) {
+      return height * 0.060;
+    } else if (index >= 84 && index <= 89) {
+      return height * 0.058;
+    } else {
+      return height * 0.055;
     }
   }
 
   double getPotraitHeight(int index, double height) {
     switch (index) {
       case 0:
-        return height * 0.010;
+        return height * 0.020;
       case 1:
-        return height * 0.042;
+        return height * 0.058;
       case 2:
-        return height * 0.058;
+        return height * 0.065;
       case 3:
-        return height * 0.055;
+        return height * 0.065;
       case 4:
-        return height * 0.056;
+        return height * 0.060;
       case 5:
+        return height * 0.060;
       case 6:
+        return height * 0.060;
       case 7:
-        return height * 0.058;
+        return height * 0.048;
       case 8:
+        return height * 0.045;
       case 9:
+        return height * 0.043;
       case 10:
+        return height * 0.042;
       case 11:
+        return height * 0.040;
       case 12:
+        return height * 0.038;
       case 13:
+        return height * 0.036;
       case 14:
-        return height * 0.056;
+        return height * 0.034;
       default:
-        return height * 0.05;
+        return height * 0.00;
     }
   }
 }

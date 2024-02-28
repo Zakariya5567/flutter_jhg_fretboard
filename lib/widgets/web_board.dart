@@ -72,29 +72,44 @@ class WebBoard extends StatelessWidget {
                 ),
               ),
               //SPACER
+              // SizedBox(
+              //   height: controller.isPortrait ?5 :125,
+              // ),
               SizedBox(
-                height: controller.isPortrait ?5 :125,
+                height:5,
               ),
               // BOARD WITH NUMBER
 
-              /// Landscape
               controller.isPortrait == true ?
 
               Container(
                   height: height*0.64,
                   width: width*0.16,
-                  child: SingleChildScrollView(
-                    child: const WebPortraitGuitarBoard(),
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    height: height*0.64,
+                    width: width*0.16,
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.zero,
+                      child: const WebPortraitGuitarBoard(),
+                    ),
                   )
               ) :
               Container(
-                  height: 300,
+                  height: height*0.64,
                   width: width*0.70,
-                  child: const WebGuitarBoard()
+                  child: Padding(
+                      padding: EdgeInsets.only(top:125),
+                      child: const WebGuitarBoard()
+                  )
               ),
+
               //SPACER
+              // SizedBox(
+              //   height: controller.isPortrait ?8.5 :110,
+              // ),
               SizedBox(
-                height: controller.isPortrait ?8.5 :110,
+                height: 8.5,
               ),
               // TIMER  WITH ADD AND SUBTRACT BUTTONS
               Row(

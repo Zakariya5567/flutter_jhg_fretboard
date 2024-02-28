@@ -23,6 +23,7 @@ static const String string4 = 'String 4';
 static const String string5 = 'String 5';
 static const String string6 = 'String 6';
 static const String stringDescription = 'Turn on/off strings to increase or decrease\ndifficulty';
+static const String stringDescriptionWeb = 'Turn on/off strings to increase or decrease difficulty';
 static const String stringDescriptionLandscape = 'Turn on/off strings to increase or decrease difficulty';
 
 static const String iosYearlySubscriptionId =    "com.jamieharrisonguitar.fretboardtrainer.annual";

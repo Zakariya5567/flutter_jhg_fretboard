@@ -623,7 +623,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       SizedBox(height: 10),
                       //
                       Text(
-                          AppConstant.stringDescription,
+                          AppConstant.stringDescriptionWeb,
                           style: TextStyle(
                             fontFamily: AppConstant.sansFont,
                             color: AppColors.whiteSecondary,
