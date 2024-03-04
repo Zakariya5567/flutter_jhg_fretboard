@@ -14,18 +14,15 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 class LeadershipScreen extends StatelessWidget {
   String? intervalType;
   LeadershipScreen({this.intervalType, super.key});
-  LeaderBoardController lc = Get.put(LeaderBoardController());
   HomeController hc = Get.put(HomeController());
-  //Global g = Global();
 
   @override
   Widget build(BuildContext context) {
-    lc.getLearderBoard();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      body: GetBuilder<LeaderBoardController>(builder: (controller) {
-
-
+      body: GetBuilder<LeaderBoardController>(
+           init: LeaderBoardController(),
+            builder: (controller) {
       return  LayoutBuilder(builder: (context, constraints) {
 
         if (constraints.maxWidth >= 400) {
@@ -33,7 +30,7 @@ class LeadershipScreen extends StatelessWidget {
         } else {
           if (hc.isPortrait == true) {
 
-            return LeaderPortraitView(controller: controller,);
+             return LeaderPortraitView(controller: controller,);
 
           } else {
 

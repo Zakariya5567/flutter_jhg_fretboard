@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fretboard/widgets/web_board.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/widgets/landscape_board.dart';
 import 'package:fretboard/widgets/potrait_board.dart';
+import '../../controllers/leaderboard_controller.dart';
 import '../../utils/app_ colors.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -17,6 +17,8 @@ class HomeScreen  extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
+  LeaderBoardController lc = Get.put(LeaderBoardController());
+
   // Set expiry date when user login to the app
   // we will expire user login after 14 days
   setExpiryDate()async{
@@ -26,8 +28,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   @override
-    void initState() {
+  void initState() {
     final homeController = Get.put(HomeController());
+    lc.getDataFromApi();
     homeController.initializeData();
     setExpiryDate();
     super.initState();
@@ -67,8 +70,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                          LandscapeBoard(controller: controller),
                 );
               }
-
-
             }
           );
         }

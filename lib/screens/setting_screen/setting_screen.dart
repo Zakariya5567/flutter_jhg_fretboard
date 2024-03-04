@@ -597,20 +597,16 @@ class _SettingScreenState extends State<SettingScreen> {
                 //
             Center(
               child: Container(
-                // decoration: BoxDecoration(
-                //   borderRadius: BorderRadius.circular(8),
-                //   color: Colors.black.withOpacity(0.2),
-                // ),
-                width: 45.w,
+                width: 40.w,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
                     children: [
 
                       Text(
                         AppConstant.strings,
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                         style: TextStyle(
                             fontFamily: AppConstant.sansFont,
                             color: AppColors.whiteSecondary,
@@ -624,6 +620,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       //
                       Text(
                           AppConstant.stringDescriptionWeb,
+                          textAlign: TextAlign.left,
                           style: TextStyle(
                             fontFamily: AppConstant.sansFont,
                             color: AppColors.whiteSecondary,
@@ -719,37 +716,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                 ),
-
-                // SPACER
-                SizedBox(height: 20),
-
-                Center(
-                  child: TextButton(
-                    onPressed: () async {
-                      await LocalDB.clearLocalDB();
-                      // ignore: use_build_context_synchronously
-                      Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Welcome(
-                          yearlySubscriptionId: yearlySubscription(),
-                          monthlySubscriptionId: monthlySubscription(),
-                          appVersion: packageInfo.version,
-                          appName: AppConstant.appName,
-                          nextPage: () => const HomeScreen(),
-                        );
-                      }), (route) => false);
-                    },
-                    child: Text(
-                      AppConstant.logout,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.redPrimary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                )
               ],
             ),
           ),

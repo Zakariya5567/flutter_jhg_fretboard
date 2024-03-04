@@ -3,11 +3,12 @@ import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:reg_page/reg_page.dart';
-import '../api/api_provider.dart';
-import '../api/api_triggers.dart';
-import '../model/freth_list.dart';
+import '../data/api/api_provider.dart';
+import '../data/model/freth_list.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart' show compute, kIsWeb;
+
+import 'leaderboard_controller.dart';
 
 class HomeController extends GetxController {
 
@@ -300,7 +301,7 @@ class HomeController extends GetxController {
     if(timerMode == true){
       secondsRemaining.value = 60;
     }else if(leaderboardMode == true){
-      secondsRemaining.value = 10;
+      secondsRemaining.value = 120;
     }else{
       secondsRemaining.value = 0;
     }
@@ -457,7 +458,8 @@ bool getStringStatus(int id){
         timer.cancel();
         await updateScore(score);
         update();
-
+        LeaderBoardController lc = Get.put(LeaderBoardController());
+        lc.getDataFromApi();
       }
     });
   }

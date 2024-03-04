@@ -94,13 +94,14 @@ class WebBoard extends StatelessWidget {
                       child: const WebPortraitGuitarBoard(),
                     ),
                   )
-              ) :
+              )
+                  :
               Container(
                   height: height*0.64,
                   width: width*0.70,
                   child: Padding(
                       padding: EdgeInsets.only(top:125),
-                      child: const WebGuitarBoard()
+                      child: const WebLandscapeGuitarBoard()
                   )
               ),
 

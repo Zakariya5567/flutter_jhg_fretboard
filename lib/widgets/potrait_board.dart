@@ -8,6 +8,7 @@ import 'package:fretboard/widgets/button_icon.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/routes/transitions_type.dart';
+import '../controllers/leaderboard_controller.dart';
 import '../screens/leader_board_screen/leaderboard_screen.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';

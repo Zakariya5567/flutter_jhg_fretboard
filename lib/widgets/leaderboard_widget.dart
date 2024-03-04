@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
-
-import '../decorations/button_decorations.dart';
-import '../styles/custom_text_styles.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import '../controllers/leaderboard_controller.dart';
 import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
+import '../utils/decorations/button_decorations.dart';
+import '../utils/styles/custom_text_styles.dart';
 
 final ScrollController _scrollController = ScrollController();
 
@@ -126,7 +128,10 @@ leaderBoardButton() {
             child: Text(AppConstant.loadMore,
                 style: CustomTextStyles.whiteMediumTextStyle)),
       ),
-      onTap: () {},
+      onTap: () {
+        LeaderBoardController lc = Get.put(LeaderBoardController());
+        lc.getDataFromApi();
+      },
     ),
   );
 }

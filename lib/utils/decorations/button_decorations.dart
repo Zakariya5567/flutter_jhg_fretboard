@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
-import '../utils/app_ colors.dart';
+
+import '../app_ colors.dart';
 
 class ButtonDecorations {
   static BoxDecoration returnButton() {

@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
-import '../api/api_provider.dart';
-import '../api/api_triggers.dart';
+import '../data/api/api_provider.dart';
 
 class LeaderBoardController extends GetxController {
   RxBool isLoading = false.obs;
@@ -17,33 +16,24 @@ class LeaderBoardController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    // getDataFromApi();
+  }
+
+  getDataFromApi(){
     getUserName();
     getLearderBoard();
   }
 
   getUserName()async {
     var usernames  =  await LocalDB.getUserName;
-
     username.value = usernames!;
-
     print("THE USER NAME IS $usernames");
   }
-
-  // Future<dynamic> getLearderBoard() async {
-  //   scoreList([]);
-  //   isLoading(true);
-  //   scoreList.value = await api.getLearderBoard(gameType);
-  //   isLoading(false);
-  //   await highestScorer(scoreList);
-  //   update();
-  //   return scoreList;
-  // }
-
 
   Future<dynamic> getLearderBoard() async {
     scoreList([]);
     isLoading(true);
-   var  value = await compute(getLearderBoardApiRequest,gameType);
+   var  value = await compute(getLeaderBoardApiRequest,gameType);
     scoreList.value = value;
     isLoading(false);
     await highestScorer(scoreList);
@@ -52,7 +42,7 @@ class LeaderBoardController extends GetxController {
   }
 
 
-  static Future<dynamic> getLearderBoardApiRequest(gameType) async {
+  static Future<dynamic> getLeaderBoardApiRequest(gameType) async {
     List scoredList =[];
     debugPrint("URL: ${ApiProvider().getLeaderboardApi}${gameType} ");
     var response =  await ApiProvider().getRequest("${ApiProvider().getLeaderboardApi}${gameType}");

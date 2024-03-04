@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:fretboard/utils/app_%20colors.dart';
-
 import '../controllers/home_controller.dart';
-import '../model/freth_list.dart';
-import '../model/freth_list.dart';
-
+import '../data/model/freth_list.dart';
 class GuitarBoard extends StatefulWidget {
   const GuitarBoard({super.key,required this.isPortrait});
   final bool  isPortrait ;
@@ -128,11 +125,33 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
 
                     Align(
                         alignment: Alignment.topCenter,
-                        child:  Container(
-                        color: AppColors.blackPrimary,
-                        width: double.infinity,
-                        height: height * 0.015,
-                      )),
+                        child:
+                        RotatedBox(
+                          quarterTurns: 2,
+                          child: Container(
+                              width: double.infinity,
+                              height: height * 0.015,
+                            child: ListView.builder(
+                              itemCount: 6,
+                              shrinkWrap: false,
+                              padding: EdgeInsets.zero,
+                              scrollDirection: Axis.horizontal,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                return nutColDivider(width, index, controller.highlightString);
+                              },
+                            ),
+                          ),
+                        ),
+
+                      //   Container(
+                      //   color: AppColors.blackPrimary,
+                      //   width: double.infinity,
+                      //   height: height * 0.015,
+                      // )
+                      //
+
+                    ),
 
 
                     /// red green  With Grid
@@ -247,6 +266,35 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                 AppColors.whiteLight,
                 AppColors.greyPrimary,
                 AppColors.blackPrimary
+              ]),
+        ),
+      ),
+    );
+  }
+
+
+  Widget nutColDivider(double width, int index, int? selectedString) {
+    return Padding(
+      padding:
+      EdgeInsets.only(left: index == 0 ? width * 0.028 : width * 0.076),
+      child: Container(
+        width:
+        index == 6 ? width * 0.011
+            : index == 5 ? width * 0.010
+            : index == 4 ? width * 0.009
+            : index == 3 ? width * 0.008
+            : index == 2 ? width * 0.007
+            : width * 0.006,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: selectedString == index+1
+                  ? [AppColors.redPrimary, AppColors.redPrimary]
+                  : [ AppColors.blackColor,
+                AppColors.blackColor,
+                AppColors.blackColor,
+                AppColors.blackColor
               ]),
         ),
       ),

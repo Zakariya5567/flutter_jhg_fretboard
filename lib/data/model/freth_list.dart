@@ -1,4 +1,4 @@
-import '../utils/app_constant.dart';
+import '../../utils/app_constant.dart';
 import 'board_model.dart';
 
 List<BoardModel> fretList = [

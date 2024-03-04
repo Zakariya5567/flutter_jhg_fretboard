@@ -5,16 +5,16 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:fretboard/utils/app_%20colors.dart';
 import '../controllers/home_controller.dart';
-import '../model/freth_list.dart';
+import '../data/model/freth_list.dart';
 
-class WebGuitarBoard extends StatefulWidget {
-  const WebGuitarBoard({super.key});
+class WebLandscapeGuitarBoard extends StatefulWidget {
+  const WebLandscapeGuitarBoard({super.key});
 
   @override
-  State<WebGuitarBoard> createState() => _WebGuitarBoardState();
+  State<WebLandscapeGuitarBoard> createState() => _WebLandscapeGuitarBoardState();
 }
 
-class _WebGuitarBoardState extends State<WebGuitarBoard> {
+class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -153,9 +153,21 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
                         Align(
                             alignment: Alignment.topLeft,
                             child: Container(
-                              color: AppColors.blackPrimary,
-                              //height: height.,
+                             // color: Colors.green,
+                              height: height,
                               width: width * 0.012,
+                              child:
+                              ListView.builder(
+                                itemCount: 6,
+                                shrinkWrap: false,
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.vertical,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return nutColLandscapeDivider(
+                                      index, controller.highlightString, width);
+                                },
+                              ),
                             )),
 
                         /// red green  With Grid
@@ -171,7 +183,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
                             physics: const NeverScrollableScrollPhysics(),
                             crossAxisCount: 6,
                             mainAxisSpacing: 0,
-                            crossAxisSpacing: 17,
+                            crossAxisSpacing: 20,
                             itemBuilder: (context, index) {
                               return redGreenLandscapeCircle(
                                 width: width,
@@ -237,6 +249,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
         });
   }
 
+
   Widget rowLandscapeDivider(int index, double width) {
     return Padding(
       padding: EdgeInsets.only(left: getLandscapeFrethSpace(index, width)),
@@ -258,6 +271,39 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
     );
   }
 
+
+  Widget nutColLandscapeDivider(int index, int? selectedString, double width) {
+    return Padding(
+      padding: EdgeInsets.only(top: index == 0 ? 10 : 42.3),
+      child: Container(
+        height: index == 6
+            ? 5.5
+            : index == 5
+            ? 5
+            : index == 4
+            ? 4.5
+            : index == 3
+            ? 4
+            : index == 2
+            ? 3.5
+            : 3,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: selectedString == index + 1
+                  ? [AppColors.redPrimary, AppColors.redPrimary]
+                  : [
+                AppColors.blackColor,
+                AppColors.blackColor,
+                AppColors.blackColor,
+                AppColors.blackColor
+              ]),
+        ),
+        //  child: Text("S$index",style: TextStyle(color:Colors.teal ),),
+      ),
+    );
+  }
   Widget colLandscapeDivider(int index, int? selectedString, double width) {
     return Padding(
       padding: EdgeInsets.only(top: index == 0 ? 10 : 42.3),
@@ -325,7 +371,7 @@ class _WebGuitarBoardState extends State<WebGuitarBoard> {
   }) =>
       Padding(
         padding: EdgeInsets.only(
-            left: getLandscapeHighLightBasedOnIndex(index, width)),
+            left: getLandscapeHighLightBasedOnIndex(index, width),top: 2),
         child: Container(
           width: width * 0.020,
           height: width * 0.020,
@@ -672,10 +718,24 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
 
                           Align(
                               alignment: Alignment.topCenter,
-                              child: Container(
-                                color: AppColors.blackPrimary,
-                                width: double.infinity,
-                                height: height * 0.022,
+                              child:RotatedBox(
+                                quarterTurns: 2,
+                                child:
+                            Container(
+                            width: double.infinity,
+                            height: height * 0.022,
+                                  child: ListView.builder(
+                                    itemCount: 6,
+                                    shrinkWrap: false,
+                                    padding: EdgeInsets.zero,
+                                    scrollDirection: Axis.horizontal  ,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return nutColPortraitDivider(
+                                          width, index, controller.highlightString);
+                                    },
+                                  ),
+                                ),
                               )),
 
                           // /// red green  With Grid
@@ -799,6 +859,39 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
     );
   }
 
+
+  Widget nutColPortraitDivider(double width, int index, int? selectedString) {
+    return Padding(
+      padding:
+      EdgeInsets.only(left: index == 0 ? width * 0.007 : width * 0.0218),
+      child: Container(
+        width: index == 6
+            ? width * 0.0045
+            : index == 5
+            ? width * 0.0040
+            : index == 4
+            ? width * 0.0035
+            : index == 3
+            ? width * 0.0030
+            : index == 2
+            ? width * 0.0025
+            : width * 0.002,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: selectedString == index + 1
+                  ? [AppColors.redPrimary, AppColors.redPrimary]
+                  : [
+                AppColors.blackColor,
+                AppColors.blackColor,
+                AppColors.blackColor,
+                AppColors.blackColor
+              ]),
+        ),
+      ),
+    );
+  }
   Widget colPortraitDivider(double width, int index, int? selectedString) {
     return Padding(
       padding:

@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:fretboard/api/req.dart';
+import 'package:fretboard/data/api/req.dart';
 
 class ApiProvider {
   var req = Req();

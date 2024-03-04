@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../utils/app_ colors.dart';
+import '../app_ colors.dart';
+
 
 class CustomTextStyles {
   static final whiteSmallTextStyle = TextStyle(
