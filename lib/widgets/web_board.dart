@@ -98,7 +98,7 @@ class WebBoard extends StatelessWidget {
                   :
               Container(
                   height: height*0.64,
-                  width: width*0.70,
+                  width: width*0.745,
                   child: Padding(
                       padding: EdgeInsets.only(top:125),
                       child: const WebLandscapeGuitarBoard()

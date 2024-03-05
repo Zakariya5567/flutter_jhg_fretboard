@@ -30,7 +30,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                 children: [
                   //NUMBERS
                   Container(
-                    width: width * 0.74,
+                    width: width * 0.78,
                     height: 35,
                     child: ListView.builder(
                       itemCount: 16,
@@ -58,7 +58,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                   //fretboard
                   Container(
                     height: 255,
-                    width: width * 0.70,
+                    width: width * 0.745,
                     // alignment: Alignment.,
                     child: Stack(
                       children: [
@@ -70,12 +70,26 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                             ),
                             Expanded(
                               child: Container(
-                                width: width * 0.80,
+                                width: width * 0.745,
                                 color: AppColors.creamColor,
                               ),
                             ),
                           ],
                         ),
+
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Container(
+                              height: height,
+                              width: width * 0.012,
+                              decoration: BoxDecoration(
+                                color: AppColors.blackColor,
+                                  borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10)
+                                )
+                              ),
+                            )),
 
                         ///============================================================
                         /// BLACK CIRCLE
@@ -96,25 +110,30 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                   children: [
                                     blackLandscapeCircle(
                                         isColor: index == 11 ? true : false,
+                                      //isColor: true,
                                         width: width),
                                     SizedBox(
                                       height: 8.1.h,
                                     ),
                                     blackLandscapeCircle(
                                         width: width,
+                                      //isColor: true,
                                         isColor: index == 2 ||
                                                 index == 4 ||
                                                 index == 6 ||
                                                 index == 8 ||
                                                 index == 14
                                             ? true
-                                            : false),
+                                            : false
+                                    ),
                                     SizedBox(
                                       height: 8.1.h,
                                     ),
                                     blackLandscapeCircle(
                                         width: width,
-                                        isColor: index == 11 ? true : false),
+                                      //isColor: true,
+                                         isColor: index == 11 ? true : false
+                                    ),
                                   ],
                                 ),
                               ),
@@ -150,25 +169,6 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                           },
                         ),
 
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                             // color: Colors.green,
-                              height: height,
-                              width: width * 0.012,
-                              child:
-                              ListView.builder(
-                                itemCount: 6,
-                                shrinkWrap: false,
-                                padding: EdgeInsets.zero,
-                                scrollDirection: Axis.vertical,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return nutColLandscapeDivider(
-                                      index, controller.highlightString, width);
-                                },
-                              ),
-                            )),
 
                         /// red green  With Grid
                         ///===========================================================
@@ -272,38 +272,6 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
   }
 
 
-  Widget nutColLandscapeDivider(int index, int? selectedString, double width) {
-    return Padding(
-      padding: EdgeInsets.only(top: index == 0 ? 10 : 42.3),
-      child: Container(
-        height: index == 6
-            ? 5.5
-            : index == 5
-            ? 5
-            : index == 4
-            ? 4.5
-            : index == 3
-            ? 4
-            : index == 2
-            ? 3.5
-            : 3,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: selectedString == index + 1
-                  ? [AppColors.redPrimary, AppColors.redPrimary]
-                  : [
-                AppColors.blackColor,
-                AppColors.blackColor,
-                AppColors.blackColor,
-                AppColors.blackColor
-              ]),
-        ),
-        //  child: Text("S$index",style: TextStyle(color:Colors.teal ),),
-      ),
-    );
-  }
   Widget colLandscapeDivider(int index, int? selectedString, double width) {
     return Padding(
       padding: EdgeInsets.only(top: index == 0 ? 10 : 42.3),
@@ -340,8 +308,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
   Widget blackLandscapeCircle({
     bool? isColor,
     required double width,
-  }) =>
-      Container(
+  }) => Container(
         width: width * 0.020,
         height: width * 0.020,
         decoration: BoxDecoration(
@@ -390,10 +357,11 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
       Container(
         // width: 10,
         height: getLandscapeFretPressBasedOnIndex(index, width),
-        decoration: BoxDecoration(color: Colors.transparent
-            //color: Colors.green.withOpacity(0.5)
+        decoration: BoxDecoration(
+            color: Colors.transparent
+           // color: Colors.green.withOpacity(0.5)
             ),
-        // child: Text("$index",style: TextStyle(color: Colors.red),),
+        //child: Text("$index",style: TextStyle(color: Colors.red),),
       );
 
   double getLandscapeFrethSpace(
@@ -401,37 +369,37 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
     double width,
   ) {
     if (index == 0) {
-      return width * 0.060;
+      return width * 0.063;
     } else if (index == 1) {
-      return width * 0.057;
+      return width * 0.060;
     } else if (index == 2) {
-      return width * 0.055;
+      return width * 0.058;
     } else if (index == 3) {
-      return width * 0.053;
+      return width * 0.056;
     } else if (index == 4) {
-      return width * 0.051;
+      return width * 0.054;
     } else if (index == 5) {
-      return width * 0.049;
+      return width * 0.052;
     } else if (index == 6) {
-      return width * 0.047;
+      return width * 0.050;
     } else if (index == 7) {
-      return width * 0.044;
+      return width * 0.047;
     } else if (index == 8) {
-      return width * 0.041;
+      return width * 0.044;
     } else if (index == 9) {
-      return width * 0.039;
+      return width * 0.042;
     } else if (index == 10) {
-      return width * 0.037;
+      return width * 0.040;
     } else if (index == 11) {
-      return width * 0.035;
+      return width * 0.038;
     } else if (index == 12) {
-      return width * 0.033;
+      return width * 0.036;
     } else if (index == 13) {
-      return width * 0.031;
+      return width * 0.034;
     } else if (index == 14) {
-      return width * 0.029;
+      return width * 0.032;
     } else {
-      return width * 0.028;
+      return width * 0.031;
     }
   }
 
@@ -440,37 +408,37 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
     double width,
   ) {
     if (index == 0) {
-      return width * 0.034;
+      return width * 0.025;
     } else if (index == 1) {
-      return width * 0.034;
+      return width * 0.040;
     } else if (index == 2) {
-      return width * 0.034;
+      return width * 0.040;
     } else if (index == 3) {
-      return width * 0.034;
+      return width * 0.040;
     } else if (index == 4) {
-      return width * 0.034;
+      return width * 0.040;
     } else if (index == 5) {
       return width * 0.034;
     } else if (index == 6) {
-      return width * 0.030;
+      return width * 0.034;
     } else if (index == 7) {
-      return width * 0.030;
+      return width * 0.032;
     } else if (index == 8) {
       return width * 0.025;
     } else if (index == 9) {
-      return width * 0.020;
+      return width * 0.023;
     } else if (index == 10) {
-      return width * 0.020;
+      return width * 0.023;
     } else if (index == 11) {
-      return width * 0.020;
+      return width * 0.025;
     } else if (index == 12) {
-      return width * 0.015;
+      return width * 0.020;
     } else if (index == 13) {
-      return width * 0.015;
+      return width * 0.020;
     } else if (index == 14) {
       return width * 0.015;
     } else {
-      return width * 0.015;
+      return width * 0.018;
     }
   }
 
@@ -481,35 +449,35 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
     if (index >= 0 && index <= 5) {
       return 0;
     } else if (index >= 6 && index <= 11) {
-      return width * 0.013;
-    } else if (index >= 12 && index <= 17) {
-      return width * 0.029;
-    } else if (index >= 18 && index <= 23) {
-      return width * 0.040;
-    } else if (index >= 24 && index <= 29) {
-      return width * 0.035;
-    } else if (index >= 30 && index <= 35) {
-      return width * 0.033;
-    } else if (index >= 36 && index <= 41) {
-      return width * 0.035;
-    } else if (index >= 42 && index <= 47) {
-      return width * 0.030;
-    } else if (index >= 48 && index <= 53) {
-      return width * 0.028;
-    } else if (index >= 54 && index <= 59) {
-      return width * 0.028;
-    } else if (index >= 60 && index <= 65) {
-      return width * 0.020;
-    } else if (index >= 66 && index <= 71) {
-      return width * 0.018;
-    } else if (index >= 72 && index <= 77) {
-      return width * 0.018;
-    } else if (index >= 78 && index <= 83) {
-      return width * 0.015;
-    } else if (index >= 84 && index <= 89) {
-      return width * 0.018;
-    } else {
       return width * 0.010;
+    } else if (index >= 12 && index <= 17) {
+      return width * 0.036;
+    } else if (index >= 18 && index <= 23) {
+      return width * 0.043;
+    } else if (index >= 24 && index <= 29) {
+      return width * 0.038;
+    } else if (index >= 30 && index <= 35) {
+      return width * 0.036;
+    } else if (index >= 36 && index <= 41) {
+      return width * 0.038;
+    } else if (index >= 42 && index <= 47) {
+      return width * 0.033;
+    } else if (index >= 48 && index <= 53) {
+      return width * 0.031;
+    } else if (index >= 54 && index <= 59) {
+      return width * 0.031;
+    } else if (index >= 60 && index <= 65) {
+      return width * 0.023;
+    } else if (index >= 66 && index <= 71) {
+      return width * 0.021;
+    } else if (index >= 72 && index <= 77) {
+      return width * 0.021;
+    } else if (index >= 78 && index <= 83) {
+      return width * 0.018;
+    } else if (index >= 84 && index <= 89) {
+      return width * 0.021;
+    } else {
+      return width * 0.013;
     }
   }
 
@@ -520,35 +488,35 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
     if (index >= 0 && index <= 5) {
       return width * 0.017;
     } else if (index >= 6 && index <= 11) {
-      return width * 0.039;
+      return width * 0.042;
     } else if (index >= 12 && index <= 17) {
-      return width * 0.055;
+      return width * 0.058;
     } else if (index >= 18 && index <= 23) {
-      return width * 0.055;
+      return width * 0.058;
     } else if (index >= 24 && index <= 29) {
-      return width * 0.052;
+      return width * 0.055;
     } else if (index >= 30 && index <= 35) {
-      return width * 0.050;
+      return width * 0.053;
     } else if (index >= 36 && index <= 41) {
-      return width * 0.048;
+      return width * 0.051;
     } else if (index >= 42 && index <= 47) {
-      return width * 0.045;
+      return width * 0.048;
     } else if (index >= 48 && index <= 53) {
-      return width * 0.043;
+      return width * 0.046;
     } else if (index >= 54 && index <= 59) {
-      return width * 0.040;
+      return width * 0.043;
     } else if (index >= 60 && index <= 65) {
-      return width * 0.038;
+      return width * 0.041;
     } else if (index >= 66 && index <= 71) {
-      return width * 0.037;
+      return width * 0.040;
     } else if (index >= 72 && index <= 77) {
-      return width * 0.033;
+      return width * 0.036;
     } else if (index >= 78 && index <= 83) {
-      return width * 0.033;
+      return width * 0.036;
     } else if (index >= 84 && index <= 89) {
-      return width * 0.030;
+      return width * 0.033;
     } else {
-      return width * 0.030;
+      return width * 0.033;
     }
   }
 
@@ -558,39 +526,39 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
   ) {
     switch (index) {
       case 0:
-        return width * 0.021;
-      case 1:
-        return width * 0.048;
-      case 2:
-        return width * 0.050;
-      case 3:
-        return width * 0.052;
-      case 4:
-        return width * 0.047;
-      case 5:
-        return width * 0.047;
-      case 6:
-        return width * 0.047;
-      case 7:
-        return width * 0.040;
-      case 8:
-        return width * 0.040;
-      case 9:
-        return width * 0.030;
-      case 10:
-        return width * 0.025;
-      case 11:
-        return width * 0.023;
-      case 12:
-        return width * 0.020;
-      case 13:
         return width * 0.024;
+      case 1:
+        return width * 0.051;
+      case 2:
+        return width * 0.053;
+      case 3:
+        return width * 0.055;
+      case 4:
+        return width * 0.050;
+      case 5:
+        return width * 0.050;
+      case 6:
+        return width * 0.050;
+      case 7:
+        return width * 0.043;
+      case 8:
+        return width * 0.043;
+      case 9:
+        return width * 0.033;
+      case 10:
+        return width * 0.028;
+      case 11:
+        return width * 0.026;
+      case 12:
+        return width * 0.023;
+      case 13:
+        return width * 0.027;
       case 14:
-        return width * 0.020;
+        return width * 0.023;
       case 15:
-        return width * 0.015;
+        return width * 0.018;
       default:
-        return width * 0.015;
+        return width * 0.018;
     }
   }
 }
@@ -640,6 +608,24 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                               ),
                             ],
                           ),
+
+                          Align(
+                              alignment: Alignment.topCenter,
+                              child:RotatedBox(
+                                quarterTurns: 2,
+                                child:
+                                Container(
+                                  width: width * 0.14,
+                                  height: height * 0.022,
+                                  decoration: BoxDecoration(
+                                      color: AppColors.blackColor,
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(15),
+                                      bottomLeft: Radius.circular(15),
+                                    )
+                                  ),
+                                ),
+                              )),
 
                           // BLACK CIRCE
                           Align(
@@ -716,27 +702,27 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                             ),
                           ),
 
-                          Align(
-                              alignment: Alignment.topCenter,
-                              child:RotatedBox(
-                                quarterTurns: 2,
-                                child:
-                            Container(
-                            width: double.infinity,
-                            height: height * 0.022,
-                                  child: ListView.builder(
-                                    itemCount: 6,
-                                    shrinkWrap: false,
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.horizontal  ,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemBuilder: (context, index) {
-                                      return nutColPortraitDivider(
-                                          width, index, controller.highlightString);
-                                    },
-                                  ),
-                                ),
-                              )),
+                          // Align(
+                          //     alignment: Alignment.topCenter,
+                          //     child:RotatedBox(
+                          //       quarterTurns: 2,
+                          //       child:
+                          //   Container(
+                          //   width: double.infinity,
+                          //   height: height * 0.022,
+                          //         child: ListView.builder(
+                          //           itemCount: 6,
+                          //           shrinkWrap: false,
+                          //           padding: EdgeInsets.zero,
+                          //           scrollDirection: Axis.horizontal  ,
+                          //           physics: const NeverScrollableScrollPhysics(),
+                          //           itemBuilder: (context, index) {
+                          //             return nutColPortraitDivider(
+                          //                 width, index, controller.highlightString);
+                          //           },
+                          //         ),
+                          //       ),
+                          //     )),
 
                           // /// red green  With Grid
                           // ///===========================================================
@@ -860,38 +846,6 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
   }
 
 
-  Widget nutColPortraitDivider(double width, int index, int? selectedString) {
-    return Padding(
-      padding:
-      EdgeInsets.only(left: index == 0 ? width * 0.007 : width * 0.0218),
-      child: Container(
-        width: index == 6
-            ? width * 0.0045
-            : index == 5
-            ? width * 0.0040
-            : index == 4
-            ? width * 0.0035
-            : index == 3
-            ? width * 0.0030
-            : index == 2
-            ? width * 0.0025
-            : width * 0.002,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: selectedString == index + 1
-                  ? [AppColors.redPrimary, AppColors.redPrimary]
-                  : [
-                AppColors.blackColor,
-                AppColors.blackColor,
-                AppColors.blackColor,
-                AppColors.blackColor
-              ]),
-        ),
-      ),
-    );
-  }
   Widget colPortraitDivider(double width, int index, int? selectedString) {
     return Padding(
       padding:
