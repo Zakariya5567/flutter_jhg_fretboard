@@ -81,7 +81,15 @@ class WebBoard extends StatelessWidget {
               // BOARD WITH NUMBER
 
               controller.isPortrait == true ?
-
+              Container(
+                  height: height*0.64,
+                  width: width*0.900,
+                  //color: Colors.red,
+                  child: Padding(
+                      padding: EdgeInsets.only(top:125),
+                      child: const WebLandscapeGuitarBoard()
+                  )
+              ):
               Container(
                   height: height*0.64,
                   width: width*0.16,
@@ -93,15 +101,6 @@ class WebBoard extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       child: const WebPortraitGuitarBoard(),
                     ),
-                  )
-              )
-                  :
-              Container(
-                  height: height*0.64,
-                  width: width*0.745,
-                  child: Padding(
-                      padding: EdgeInsets.only(top:125),
-                      child: const WebLandscapeGuitarBoard()
                   )
               ),
 
