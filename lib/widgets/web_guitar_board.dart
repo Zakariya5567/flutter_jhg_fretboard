@@ -58,7 +58,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
 
                   //fretboard
                   Container(
-                    height: 255,
+                    height: 235,
                     width: width*0.900,
                     // alignment: Alignment.,
                     child: Stack(
@@ -114,7 +114,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                       //isColor: true,
                                         width: width),
                                     SizedBox(
-                                      height: 8.1.h,
+                                      height: 7.0.h,
                                     ),
                                     blackLandscapeCircle(
                                         width: width,
@@ -128,7 +128,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                             : false
                                     ),
                                     SizedBox(
-                                      height: 8.1.h,
+                                      height: 7.0.h,
                                     ),
                                     blackLandscapeCircle(
                                         width: width,
@@ -275,7 +275,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
 
   Widget colLandscapeDivider(int index, int? selectedString, double width) {
     return Padding(
-      padding: EdgeInsets.only(top: index == 0 ? 10 : 42.3),
+      padding: EdgeInsets.only(top: index == 0 ? 10 : 39.0),
       child: Container(
         height: index == 6
             ? 5.5
@@ -339,7 +339,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
   }) =>
       Padding(
         padding: EdgeInsets.only(
-            left: getLandscapeHighLightBasedOnIndex(index, width),top: 2),
+            left: getLandscapeHighLightBasedOnIndex(index, width),top: 0),
         child: Container(
           width: width * 0.020,
           height: width * 0.020,
