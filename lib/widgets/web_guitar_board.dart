@@ -114,7 +114,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                       //isColor: true,
                                         width: width),
                                     SizedBox(
-                                      height: 7.0.h,
+                                      height: 7.1.h,
                                     ),
                                     blackLandscapeCircle(
                                         width: width,
@@ -128,7 +128,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                             : false
                                     ),
                                     SizedBox(
-                                      height: 7.0.h,
+                                      height: 7.1.h,
                                     ),
                                     blackLandscapeCircle(
                                         width: width,
