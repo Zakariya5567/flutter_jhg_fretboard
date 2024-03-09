@@ -49,33 +49,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: JHGColors.secondryBlack,
-      body: JHGBody(
-        body: GetBuilder<HomeController>(
-            init: HomeController(),
-            builder: (controller) {
-            return LayoutBuilder(
-              builder: (context,constraints) {
-                  if (constraints.maxWidth >= 400) {
-                  return Container(
-                    height: height,
-                    width: width,
-                    color:  AppColors.blackPrimary,
-                    child:WebBoard(controller:controller),
-                  );
-                } else {
-                  return Container(
-                    height: height,
-                    width: width,
-                    color:  AppColors.blackPrimary,
-                    child: controller.isPortrait == true ?
-                           PortraitBoard(controller: controller):
-                           LandscapeBoard(controller: controller),
-                  );
-                }
+      body: GetBuilder<HomeController>(
+          init: HomeController(),
+          builder: (controller) {
+          return LayoutBuilder(
+            builder: (context,constraints) {
+                if (constraints.maxWidth >= 400) {
+                return Container(
+                  height: height,
+                  width: width,
+                  color:  AppColors.blackPrimary,
+                  child:WebBoard(controller:controller),
+                );
+              } else {
+                return Container(
+                  height: height,
+                  width: width,
+                  color:  AppColors.blackPrimary,
+                  child: controller.isPortrait == true ?
+                         JHGBody(body: PortraitBoard(controller: controller)):
+                         SafeArea(child: LandscapeBoard(controller: controller)),
+                );
               }
-            );
-          }
-        ),
+            }
+          );
+        }
       ),
     );
   }
