@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/widgets/web_board.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
@@ -47,32 +48,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.teal,
-      body: GetBuilder<HomeController>(
-          init: HomeController(),
-          builder: (controller) {
-          return LayoutBuilder(
-            builder: (context,constraints) {
-                if (constraints.maxWidth >= 400) {
-                return Container(
-                  height: height,
-                  width: width,
-                  color:  AppColors.blackPrimary,
-                  child:WebBoard(controller:controller),
-                );
-              } else {
-                return Container(
-                  height: height,
-                  width: width,
-                  color:  AppColors.blackPrimary,
-                  child: controller.isPortrait == true ?
-                         PortraitBoard(controller: controller):
-                         LandscapeBoard(controller: controller),
-                );
+      backgroundColor: JHGColors.secondryBlack,
+      body: JHGBody(
+        body: GetBuilder<HomeController>(
+            init: HomeController(),
+            builder: (controller) {
+            return LayoutBuilder(
+              builder: (context,constraints) {
+                  if (constraints.maxWidth >= 400) {
+                  return Container(
+                    height: height,
+                    width: width,
+                    color:  AppColors.blackPrimary,
+                    child:WebBoard(controller:controller),
+                  );
+                } else {
+                  return Container(
+                    height: height,
+                    width: width,
+                    color:  AppColors.blackPrimary,
+                    child: controller.isPortrait == true ?
+                           PortraitBoard(controller: controller):
+                           LandscapeBoard(controller: controller),
+                  );
+                }
               }
-            }
-          );
-        }
+            );
+          }
+        ),
       ),
     );
   }
