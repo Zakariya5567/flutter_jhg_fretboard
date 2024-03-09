@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:get/get.dart';
@@ -201,25 +203,27 @@ class _SettingScreenState extends State<SettingScreen> {
                   controller.setString1(5);
                 }),
             Spacer(),
-            JHGPrimaryBtn(label:  AppConstant.save,
+            JHGPrimaryBtn(
+              label: AppConstant.save,
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            JHGSecondaryBtn(label: AppConstant.logout,
+            JHGSecondaryBtn(
+              label: AppConstant.logout,
               onPressed: () async {
                 await LocalDB.clearLocalDB();
                 // ignore: use_build_context_synchronously
                 Navigator.pushAndRemoveUntil(context,
                     MaterialPageRoute(builder: (context) {
-                      return Welcome(
-                        yearlySubscriptionId: yearlySubscription(),
-                        monthlySubscriptionId: monthlySubscription(),
-                        appVersion: packageInfo.version,
-                        appName: AppConstant.appName,
-                        nextPage: () => const HomeScreen(),
-                      );
-                    }), (route) => false);
+                  return Welcome(
+                    yearlySubscriptionId: yearlySubscription(),
+                    monthlySubscriptionId: monthlySubscription(),
+                    appVersion: packageInfo.version,
+                    appName: AppConstant.appName,
+                    nextPage: () => const HomeScreen(),
+                  );
+                }), (route) => false);
               },
             ),
             // SPACER
@@ -236,210 +240,161 @@ class _SettingScreenState extends State<SettingScreen> {
       {required HomeController controller,
       required double height,
       required double width}) {
-    return RotatedBox(
-      quarterTurns: 1,
-      child: Container(
-        height: width,
-        width: height,
-        color: AppColors.blackPrimary,
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: width * 0.05,
-            left: height * 0.08,
-            right: height * 0.08,
-          ),
+    return JHGBody(
+      padding: EdgeInsets.symmetric(vertical: 24),
+      bgColor: AppColors.blackPrimary,
+      body: RotatedBox(
+        quarterTurns: 1,
+        child: Container(
+          height: width,
+          width: height,
+          color: AppColors.blackPrimary,
+          //color: Colors.red,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      color: AppColors.whiteSecondary,
-                      size: height * 0.030,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BugReportPage(
-                            device: deviceName,
-                            appName: AppConstant.appName,
-                          ),
+              JHGAppBar(
+                trailingWidget: JHGReportAnIssueBtn(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BugReportPage(
+                          device: deviceName,
+                          appName: AppConstant.appName,
                         ),
-                      );
-                    },
-                    child: Row(
-                      children: [
-                        SizedBox(width: height * 0.02),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: 4.0), // Add padding to the right
-                          child: Icon(
-                            Icons.error_outline_rounded,
-                            color: AppColors.redPrimary,
-                            size: 16,
-                          ),
-                        ),
-                        Text(
-                          'Report an Issue',
-                          style: TextStyle(
-                            color: AppColors.redPrimary,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-
-              // SPACER
-              SizedBox(height: height * 0.01),
-
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 0.28),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppConstant.strings,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whiteSecondary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
                       ),
-                    ),
-                    SizedBox(height: height * 0.01),
-                    Text(
-                      AppConstant.stringDescriptionLandscape,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whiteSecondary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: height * 0.015),
-                  ],
+                    );
+                  },
                 ),
               ),
-
-              // SAVE BUTTON
-
-              Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.black.withOpacity(0.2),
-                  ),
-                  height: width * 0.37,
-                  width: height * 0.58,
-                  child: ListView(
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      SettingToggle(
-                          heading: AppConstant.string6,
-                          value: controller.string6,
-                          onChange: () {
-                            controller.setString6(0);
-                          }),
-                      SettingToggle(
-                          heading: AppConstant.string5,
-                          value: controller.string5,
-                          onChange: () {
-                            controller.setString5(1);
-                          }),
-                      SettingToggle(
-                          heading: AppConstant.string4,
-                          value: controller.string4,
-                          onChange: () {
-                            controller.setString4(2);
-                          }),
-                      SettingToggle(
-                          heading: AppConstant.string3,
-                          value: controller.string3,
-                          onChange: () {
-                            controller.setString3(3);
-                          }),
-                      SettingToggle(
-                          heading: AppConstant.string2,
-                          value: controller.string2,
-                          onChange: () {
-                            controller.setString2(4);
-                          }),
-                      SettingToggle(
-                          heading: AppConstant.string1,
-                          value: controller.string1,
-                          onChange: () {
-                            controller.setString1(5);
-                          }),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: height * 0.02),
-              Center(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    height: height * 0.07,
-                    width: width * 0.8,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: AppColors.redPrimary,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Text(
-                      AppConstant.save,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whitePrimary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                      Container(
+                        width: height * 0.58,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppConstant.strings,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: AppConstant.sansFont,
+                                color: AppColors.whiteSecondary,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: height * 0.01),
+                            Text(
+                              AppConstant.stringDescriptionLandscape,
+                              style: TextStyle(
+                                fontFamily: AppConstant.sansFont,
+                                color: AppColors.whiteSecondary,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(height: height * 0.015),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ),
-              Center(
-                child: TextButton(
-                  onPressed: () async {
-                    await LocalDB.clearLocalDB();
-                    // ignore: use_build_context_synchronously
-                    Navigator.pushAndRemoveUntil(context,
-                        MaterialPageRoute(builder: (context) {
-                      return Welcome(
-                        yearlySubscriptionId: yearlySubscription(),
-                        monthlySubscriptionId: monthlySubscription(),
-                        appVersion: packageInfo.version,
-                        appName: AppConstant.appName,
-                        nextPage: () => const HomeScreen(),
-                      );
-                    }), (route) => false);
-                  },
-                  child: Text(
-                    AppConstant.logout,
-                    style: TextStyle(
-                      fontFamily: AppConstant.sansFont,
-                      color: AppColors.redPrimary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+
+                      // SAVE BUTTON
+
+                      Center(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.black.withOpacity(0.2),
+                          ),
+                          //height: width * 0.37,
+                          width: height * 0.58,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              // padding: EdgeInsets.zero,
+                              // shrinkWrap: true,
+                              children: [
+                                SettingToggle(
+                                    heading: AppConstant.string6,
+                                    value: controller.string6,
+                                    onChange: () {
+                                      controller.setString6(0);
+                                    }),
+                                SettingToggle(
+                                    heading: AppConstant.string5,
+                                    value: controller.string5,
+                                    onChange: () {
+                                      controller.setString5(1);
+                                    }),
+                                SettingToggle(
+                                    heading: AppConstant.string4,
+                                    value: controller.string4,
+                                    onChange: () {
+                                      controller.setString4(2);
+                                    }),
+                                SettingToggle(
+                                    heading: AppConstant.string3,
+                                    value: controller.string3,
+                                    onChange: () {
+                                      controller.setString3(3);
+                                    }),
+                                SettingToggle(
+                                    heading: AppConstant.string2,
+                                    value: controller.string2,
+                                    onChange: () {
+                                      controller.setString2(4);
+                                    }),
+                                SettingToggle(
+                                    heading: AppConstant.string1,
+                                    value: controller.string1,
+                                    onChange: () {
+                                      controller.setString1(5);
+                                    }),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: height * 0.02),
+                      Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            JHGPrimaryBtn(
+                              label: AppConstant.save,
+                              width: height * 0.58,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            JHGSecondaryBtn(
+                              label: AppConstant.logout,
+                              width: height * 0.58,
+                              onPressed: () async {
+                                await LocalDB.clearLocalDB();
+                                // ignore: use_build_context_synchronously
+                                Navigator.pushAndRemoveUntil(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return Welcome(
+                                    yearlySubscriptionId: yearlySubscription(),
+                                    monthlySubscriptionId:
+                                        monthlySubscription(),
+                                    appVersion: packageInfo.version,
+                                    appName: AppConstant.appName,
+                                    nextPage: () => const HomeScreen(),
+                                  );
+                                }), (route) => false);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               )
