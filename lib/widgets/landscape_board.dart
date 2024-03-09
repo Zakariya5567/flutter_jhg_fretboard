@@ -107,38 +107,19 @@ class LandscapeBoard extends StatelessWidget {
                 width: width,
                 child: Row(
                   children: [
-                    SizedBox(
-                      width: 24,
-                    ),
+                    Spacer(),
                     // START BUTTON
                     controller.isStart == true
                         ? const SizedBox()
                         : RotatedBox(
                             quarterTurns: 1,
-                            child: InkWell(
-                              onTap: () {
+                            child: JHGPrimaryBtn(
+                              label: AppConstant.start,
+                              width: width * 0.45,
+                              onPressed: () {
                                 controller.startTimer();
                                 controller.startTheGame();
                               },
-                              child: Center(
-                                child: Container(
-                                  height: height * 0.06,
-                                  width: width * 0.45,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      color: AppColors.redPrimary,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Text(
-                                    AppConstant.start,
-                                    style: TextStyle(
-                                      fontFamily: AppConstant.sansFont,
-                                      color: AppColors.whitePrimary,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ),
                           ),
 
