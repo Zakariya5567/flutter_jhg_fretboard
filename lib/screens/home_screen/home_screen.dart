@@ -10,19 +10,18 @@ import '../../controllers/leaderboard_controller.dart';
 import '../../utils/app_ colors.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-class HomeScreen  extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-
   LeaderBoardController lc = Get.put(LeaderBoardController());
 
   // Set expiry date when user login to the app
   // we will expire user login after 14 days
-  setExpiryDate()async{
+  setExpiryDate() async {
     DateTime currentDate = DateTime.now();
     DateTime endDate = currentDate.add(const Duration(days: 14));
     await LocalDB.storeEndDate(endDate.toString());
@@ -36,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     setExpiryDate();
     super.initState();
   }
+
   HomeController? homeController;
   @override
   void didChangeDependencies() {
@@ -52,30 +52,28 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       body: GetBuilder<HomeController>(
           init: HomeController(),
           builder: (controller) {
-          return LayoutBuilder(
-            builder: (context,constraints) {
-                if (constraints.maxWidth >= 400) {
+            return LayoutBuilder(builder: (context, constraints) {
+              if (constraints.maxWidth >= 400) {
                 return Container(
                   height: height,
                   width: width,
-                  color:  AppColors.blackPrimary,
-                  child:WebBoard(controller:controller),
+                  color: AppColors.blackPrimary,
+                  child: WebBoard(controller: controller),
                 );
               } else {
                 return Container(
                   height: height,
                   width: width,
-                  color:  AppColors.blackPrimary,
-                  child: controller.isPortrait == true ?
-                         JHGBody(body: PortraitBoard(controller: controller)):
-                         SafeArea(child: LandscapeBoard(controller: controller)),
+                  color: AppColors.blackPrimary,
+                  child: controller.isPortrait == true
+                      ? JHGBody(body: PortraitBoard(controller: controller))
+                      : JHGBody(
+                          padding: EdgeInsets.symmetric(vertical: 24),
+                          body: LandscapeBoard(controller: controller)),
                 );
               }
-            }
-          );
-        }
-      ),
+            });
+          }),
     );
   }
-
 }
