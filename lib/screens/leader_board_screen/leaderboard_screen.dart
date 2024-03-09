@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fretboard/controllers/home_controller.dart';
@@ -155,107 +157,114 @@ class LeaderLandscapeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 20, left: 5.w, right: 5.w),
-      child: RotatedBox(
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    return JHGBody(
+      padding: EdgeInsets.symmetric(vertical: 24),
+      body: RotatedBox(
         quarterTurns: 1,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SvgPicture.asset(
-                    Images.svg_trophyIcon,
-                    height: 8.w,
-                    width: 8.w,
-                  ),
-                  GestureDetector(
-                      onTap: () => Get.back(),
-                      child: SvgPicture.asset(
-                        Images.svg_forward_button,
-                        width: 8.w,
-                        height: 8.w,
-                      )),
-                ],
+        child: Column(
+          children: [
+            JHGAppBar(
+              autoImplyLeading: false,
+              centerWidget: SvgPicture.asset(
+                Images.svg_trophyIcon,
+                height: 8.w,
+                width: 8.w,
               ),
-              leaderBoardTitleWidget(),
-              controller.isLoading.value
-                  ? Padding(
-                      padding: EdgeInsets.only(top: 40.h),
-                      child: const Center(
-                          child: CircularProgressIndicator(
-                        color: AppColors.redlight,
-                      )),
-                    )
-                  : Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: 20.dp, left: 10.0.dp, right: 10.0.dp),
-                          child: Container(
-                            width: 80.w,
-                            height: 10.h,
-                            padding: EdgeInsets.only(left: 15.dp, right: 15.dp),
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(12),
+              trailingWidget: JHGIconButton(
+                size: 30,
+                onTap: () => Get.back(),
+                svgImg: Images.svg_forward_button,
+              ),
+              bottom: leaderBoardTitleWidget(),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    controller.isLoading.value
+                        ? Container(
+                            height: width,
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                color: AppColors.redlight,
                               ),
-                              border: Border.all(
-                                color: AppColors.greyColor,
-                              ),
-                              color: AppColors.greyColor,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                leaderBoardTextWidget('Current Leader',
-                                    controller.highestUserScore.value),
-                                leaderBoardTextWidget(
-                                    'Score', controller.highScore.value),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: 20.dp, left: 10.0.dp, right: 10.0.dp),
-                          child: Container(
-                            width: 80.w,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 30.dp),
+                            ))
+                        : Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: 20.dp, left: 10.0.dp, right: 10.0.dp),
+                                child: Container(
+                                  width: 80.w,
+                                  height: 10.h,
+                                  padding: EdgeInsets.only(
+                                      left: 15.dp, right: 15.dp),
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                    border: Border.all(
+                                      color: AppColors.greyColor,
+                                    ),
+                                    color: AppColors.greyColor,
+                                  ),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        AppConstant.user,
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                      Text(
-                                        AppConstant.scoreTemp,
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      )
+                                      leaderBoardTextWidget('Current Leader',
+                                          controller.highestUserScore.value),
+                                      leaderBoardTextWidget(
+                                          'Score', controller.highScore.value),
                                     ],
                                   ),
                                 ),
-                                populateScoreList(controller.scoreList),
-                              ],
-                            ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: 20.dp, left: 10.0.dp, right: 10.0.dp),
+                                child: Container(
+                                  width: 80.w,
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 30.dp),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              AppConstant.user,
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            Text(
+                                              AppConstant.scoreTemp,
+                                              style: const TextStyle(
+                                                  color: Colors.white),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      populateScoreList(controller.scoreList),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-            ],
-          ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
