@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -87,8 +88,7 @@ class _SettingScreenState extends State<SettingScreen> {
           //               controller: controller, height:  height, width: width);
           //         }
           // }
-          return
-            LayoutBuilder(builder: (context, constraints) {
+          return LayoutBuilder(builder: (context, constraints) {
             if (constraints.maxWidth >= 1100) {
               return settingWeb(
                   controller: controller, height: height, width: width);
@@ -96,13 +96,12 @@ class _SettingScreenState extends State<SettingScreen> {
               return settingWeb(
                   controller: controller, height: height, width: width);
             } else {
-
               if (controller.isPortrait == false) {
                 return settingLandscape(
                     controller: controller, height: height, width: width);
               } else {
                 return settingPotrait(
-                    controller: controller, height:  height, width: width);
+                    controller: controller, height: height, width: width);
               }
             }
           });
@@ -115,73 +114,34 @@ class _SettingScreenState extends State<SettingScreen> {
       {required HomeController controller,
       required double height,
       required double width}) {
-    return Container(
-      height: height,
-      width: width,
-      color: AppColors.blackPrimary,
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: height * 0.08,
-          left: width * 0.08,
-          right: width * 0.08,
+    return JHGBody(
+      bgColor: AppColors.blackPrimary,
+      bodyAppBar: JHGAppBar(
+        trailingWidget: JHGReportAnIssueBtn(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BugReportPage(
+                  device: deviceName,
+                  appName: AppConstant.appName,
+                ),
+              ),
+            );
+          },
         ),
+      ),
+      body: Container(
+        //color: Colors.blue,
+        height: height,
+        width: width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.whiteSecondary,
-                    size: height * 0.030,
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BugReportPage(
-                          device: deviceName,
-                          appName: AppConstant.appName,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      SizedBox(width: 10),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: 4.0), // Add padding to the right
-                        child: Icon(
-                          Icons.error_outline_rounded,
-                          color: AppColors.redPrimary,
-                          size: 16,
-                        ),
-                      ),
-                      Text(
-                        'Report an Issue',
-                        style: TextStyle(
-                          color: AppColors.redPrimary,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            SizedBox(
+              height: 12,
             ),
-            // SPACER
-            SizedBox(height: height * 0.06),
             Text(
               AppConstant.strings,
               textAlign: TextAlign.center,
@@ -204,98 +164,68 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             SizedBox(height: height * 0.04),
             // SAVE BUTTON
-            SettingToggle(
-                heading: AppConstant.string6,
-                value: controller.string6,
-                onChange: () {
+            JHGSwitchTile(
+                title: AppConstant.string6,
+                initialValue: controller.string6,
+                onChanged: (bool value) {
                   controller.setString6(0);
                 }),
-            SettingToggle(
-                heading: AppConstant.string5,
-                value: controller.string5,
-                onChange: () {
+            JHGSwitchTile(
+                title: AppConstant.string5,
+                initialValue: controller.string5,
+                onChanged: (bool value) {
                   controller.setString5(1);
                 }),
-            SettingToggle(
-                heading: AppConstant.string4,
-                value: controller.string4,
-                onChange: () {
+            JHGSwitchTile(
+                title: AppConstant.string4,
+                initialValue: controller.string4,
+                onChanged: (bool value) {
                   controller.setString4(2);
                 }),
-            SettingToggle(
-                heading: AppConstant.string3,
-                value: controller.string3,
-                onChange: () {
+            JHGSwitchTile(
+                title: AppConstant.string3,
+                initialValue: controller.string3,
+                onChanged: (bool value) {
                   controller.setString3(3);
                 }),
-            SettingToggle(
-                heading: AppConstant.string2,
-                value: controller.string2,
-                onChange: () {
+            JHGSwitchTile(
+                title: AppConstant.string2,
+                initialValue: controller.string2,
+                onChanged: (bool value) {
                   controller.setString2(4);
                 }),
-            SettingToggle(
-                heading: AppConstant.string1,
-                value: controller.string1,
-                onChange: () {
+            JHGSwitchTile(
+                title: AppConstant.string1,
+                initialValue: controller.string1,
+                onChanged: (bool value) {
                   controller.setString1(5);
                 }),
-            SizedBox(height: height * 0.09),
-            Center(
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  height: height * 0.07,
-                  width: width * 1,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: AppColors.redPrimary,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Text(
-                    AppConstant.save,
-                    style: TextStyle(
-                      fontFamily: AppConstant.sansFont,
-                      color: AppColors.whitePrimary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
+            Spacer(),
+            JHGPrimaryBtn(label:  AppConstant.save,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            JHGSecondaryBtn(label: AppConstant.logout,
+              onPressed: () async {
+                await LocalDB.clearLocalDB();
+                // ignore: use_build_context_synchronously
+                Navigator.pushAndRemoveUntil(context,
+                    MaterialPageRoute(builder: (context) {
+                      return Welcome(
+                        yearlySubscriptionId: yearlySubscription(),
+                        monthlySubscriptionId: monthlySubscription(),
+                        appVersion: packageInfo.version,
+                        appName: AppConstant.appName,
+                        nextPage: () => const HomeScreen(),
+                      );
+                    }), (route) => false);
+              },
             ),
             // SPACER
             SizedBox(
-              height: height * 0.005,
+              height: 24,
             ),
-            Center(
-              child: TextButton(
-                onPressed: () async {
-                  await LocalDB.clearLocalDB();
-                  // ignore: use_build_context_synchronously
-                  Navigator.pushAndRemoveUntil(context,
-                      MaterialPageRoute(builder: (context) {
-                    return Welcome(
-                      yearlySubscriptionId: yearlySubscription(),
-                      monthlySubscriptionId: monthlySubscription(),
-                      appVersion: packageInfo.version,
-                      appName: AppConstant.appName,
-                      nextPage: () => const HomeScreen(),
-                    );
-                  }), (route) => false);
-                },
-                child: Text(
-                  AppConstant.logout,
-                  style: TextStyle(
-                    fontFamily: AppConstant.sansFont,
-                    color: AppColors.redPrimary,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),
@@ -595,45 +525,42 @@ class _SettingScreenState extends State<SettingScreen> {
                 // SPACER
                 SizedBox(height: 30),
                 //
-            Center(
-              child: Container(
-                width: 40.w,
+                Center(
+                    child: Container(
+                  width: 40.w,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-
                     children: [
-
                       Text(
                         AppConstant.strings,
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontFamily: AppConstant.sansFont,
-                            color: AppColors.whiteSecondary,
-                            fontSize: 1.6.w,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          fontFamily: AppConstant.sansFont,
+                          color: AppColors.whiteSecondary,
+                          fontSize: 1.6.w,
+                          fontWeight: FontWeight.w600,
                         ),
+                      ),
 
                       //
                       SizedBox(height: 10),
                       //
                       Text(
-                          AppConstant.stringDescriptionWeb,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontFamily: AppConstant.sansFont,
-                            color: AppColors.whiteSecondary,
-                            fontSize: 1.2.w,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        AppConstant.stringDescriptionWeb,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontFamily: AppConstant.sansFont,
+                          color: AppColors.whiteSecondary,
+                          fontSize: 1.2.w,
+                          fontWeight: FontWeight.w500,
                         ),
+                      ),
 
                       SizedBox(height: 20),
                     ],
                   ),
                 )),
-
 
                 Center(
                   child: Container(
