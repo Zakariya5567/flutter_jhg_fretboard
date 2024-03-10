@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 
-import '../app_ colors.dart';
 
 class ButtonDecorations {
   static BoxDecoration returnButton() {
     return BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10.dp)),
-        color: AppColors.greyColor,
+        color: JHGColors.charcolGray,
         shape: BoxShape.rectangle,
         gradient: const LinearGradient(
           begin: Alignment.topRight,
@@ -22,14 +22,14 @@ class ButtonDecorations {
    static BoxDecoration loadButton() {
     return BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10.dp)),
-        color: AppColors.greyColor,
+        color: JHGColors.charcolGray,
         shape: BoxShape.rectangle,
         gradient: const LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            AppColors.greyColor,
-            AppColors.greyColor,
+            JHGColors.charcolGray,
+            JHGColors.charcolGray,
           ],
         ));
   }

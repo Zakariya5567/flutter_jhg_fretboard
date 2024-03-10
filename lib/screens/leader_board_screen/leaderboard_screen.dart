@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
@@ -8,10 +7,8 @@ import 'package:fretboard/utils/app_constant.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/leaderboard_controller.dart';
-import '../../utils/app_ colors.dart';
 import '../../utils/images.dart';
 import '../../widgets/leaderboard_widget.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class LeadershipScreen extends StatelessWidget {
   String? intervalType;
@@ -21,7 +18,7 @@ class LeadershipScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: JHGColors.secondryBlack,
       body: GetBuilder<LeaderBoardController>(
           init: LeaderBoardController(),
           builder: (controller) {
@@ -76,7 +73,7 @@ class LeaderPortraitView extends StatelessWidget {
                   padding: EdgeInsets.only(top: 30.0.h),
                   child: const Center(
                       child: CircularProgressIndicator(
-                    color: AppColors.redlight,
+                    color: JHGColors.primary,
                   )),
                 )
               : Column(
@@ -93,9 +90,9 @@ class LeaderPortraitView extends StatelessWidget {
                             Radius.circular(12),
                           ),
                           border: Border.all(
-                            color: AppColors.greyColor,
+                            color: JHGColors.charcolGray,
                           ),
-                          color: AppColors.greyColor,
+                          color: JHGColors.charcolGray,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -181,7 +178,7 @@ class LeaderLandscapeView extends StatelessWidget {
                             height: width,
                             child: Center(
                               child: CircularProgressIndicator(
-                                color: AppColors.redlight,
+                                color: JHGColors.primary,
                               ),
                             ))
                         : Column(
@@ -199,9 +196,9 @@ class LeaderLandscapeView extends StatelessWidget {
                                       Radius.circular(12),
                                     ),
                                     border: Border.all(
-                                      color: AppColors.greyColor,
+                                      color: JHGColors.charcolGray,
                                     ),
-                                    color: AppColors.greyColor,
+                                    color: JHGColors.charcolGray,
                                   ),
                                   child: Row(
                                     mainAxisAlignment:
@@ -296,7 +293,7 @@ class LeaderWebView extends StatelessWidget {
                   padding: EdgeInsets.only(top: 30.0.h),
                   child: const Center(
                       child: CircularProgressIndicator(
-                    color: AppColors.redlight,
+                    color: JHGColors.primary,
                   )),
                 )
               : Column(
@@ -313,9 +310,9 @@ class LeaderWebView extends StatelessWidget {
                             Radius.circular(12),
                           ),
                           border: Border.all(
-                            color: AppColors.greyColor,
+                            color: JHGColors.charcolGray,
                           ),
-                          color: AppColors.greyColor,
+                          color: JHGColors.charcolGray,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

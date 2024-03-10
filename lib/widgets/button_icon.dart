@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../utils/app_ colors.dart';
 
 
 
@@ -61,7 +61,7 @@ class WebButtonIcon extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           alignment: Alignment.center,
           decoration:BoxDecoration(
-            color: AppColors.greySecondary.withOpacity(0.2),
+            color: JHGColors.whiteGrey.withOpacity(0.2),
             shape: BoxShape.circle,
           ),
 

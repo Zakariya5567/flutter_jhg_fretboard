@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/screens/setting_screen/setting_screen.dart';
 import 'package:fretboard/utils/images.dart';
 import 'package:fretboard/widgets/add_sub_button.dart';
-import 'package:fretboard/widgets/button_icon.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../screens/leader_board_screen/leaderboard_screen.dart';
-import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'guitar_board.dart';
 
@@ -138,7 +134,7 @@ class LandscapeBoard extends StatelessWidget {
                                   AppConstant.scoreText,
                                   style: TextStyle(
                                     fontFamily: AppConstant.sansFont,
-                                    color: AppColors.whitePrimary,
+                                    color: JHGColors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -147,7 +143,7 @@ class LandscapeBoard extends StatelessWidget {
                                   controller.score.toString(),
                                   style: TextStyle(
                                     fontFamily: AppConstant.sansFont,
-                                    color: AppColors.whitePrimary,
+                                    color: JHGColors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -161,7 +157,7 @@ class LandscapeBoard extends StatelessWidget {
                                 controller.highlightNode ?? "",
                                 style: TextStyle(
                                   fontFamily: AppConstant.sansFont,
-                                  color: AppColors.redPrimary,
+                                  color: JHGColors.primary,
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -195,7 +191,7 @@ class LandscapeBoard extends StatelessWidget {
                                 controller.formatTime(value),
                                 style: TextStyle(
                                   fontFamily: AppConstant.sansFont,
-                                  color: AppColors.whitePrimary,
+                                  color: JHGColors.white,
                                   fontSize: 36,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -258,8 +254,8 @@ class LandscapeBoard extends StatelessWidget {
                   JHGIconButton(
                     svgImg: Images.iconSetting,
                     iconColor: controller.leaderboardMode == true
-                        ? AppColors.greySecondary
-                        : AppColors.whitePrimary,
+                        ? JHGColors.whiteGrey
+                        : JHGColors.white,
                     onTap: () {
                       if (controller.leaderboardMode == true) {
                         return;

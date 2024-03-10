@@ -7,8 +7,6 @@ import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/widgets/landscape_board.dart';
 import 'package:fretboard/widgets/potrait_board.dart';
 import '../../controllers/leaderboard_controller.dart';
-import '../../utils/app_ colors.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,14 +55,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 return Container(
                   height: height,
                   width: width,
-                  color: AppColors.blackPrimary,
+                  color: JHGColors.secondryBlack,
                   child: WebBoard(controller: controller),
                 );
               } else {
                 return Container(
                   height: height,
                   width: width,
-                  color: AppColors.blackPrimary,
+                  color: JHGColors.secondryBlack,
                   child: controller.isPortrait == true
                       ? JHGBody(body: PortraitBoard(controller: controller))
                       : JHGBody(

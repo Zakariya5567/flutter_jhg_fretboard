@@ -54,6 +54,7 @@ dependencies:
     git:
       url: https://github.com/jamie2364/flutter_jhg_elements
       ref: main
+  dio: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

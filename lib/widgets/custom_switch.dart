@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
-import '../utils/app_ colors.dart';
 
 
 class CustomSwitch extends StatelessWidget {
@@ -22,7 +22,7 @@ class CustomSwitch extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: value == true ?
-          AppColors.greenPrimary : AppColors.greyPrimary,
+          JHGColors.green : JHGColors.charcolGray,
           borderRadius: BorderRadius.circular(100),
         ),
         child: Padding(
@@ -35,7 +35,7 @@ class CustomSwitch extends StatelessWidget {
                 width: height*0.028,
                 decoration: BoxDecoration(
                     color:  value == true ? Colors.transparent:
-                    AppColors.blackPrimary,
+                    JHGColors.secondryBlack,
                     shape: BoxShape.circle
                 ),),
               Container(
@@ -43,7 +43,7 @@ class CustomSwitch extends StatelessWidget {
                 width: height*0.028,
                 decoration: BoxDecoration(
                     color:  value == true?
-                    AppColors.blackPrimary: Colors.transparent,
+                    JHGColors.secondryBlack: Colors.transparent,
                     shape: BoxShape.circle
                 ),)
             ],
@@ -73,7 +73,7 @@ class WebCustomSwitch extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           color: value == true ?
-          AppColors.greenPrimary : AppColors.greyPrimary,
+          JHGColors.green : JHGColors.charcolGray,
           borderRadius: BorderRadius.circular(100),
         ),
         child: Padding(
@@ -86,7 +86,7 @@ class WebCustomSwitch extends StatelessWidget {
                 width: 1.9.w,
                 decoration: BoxDecoration(
                     color:  value == true ? Colors.transparent:
-                    AppColors.blackPrimary,
+                    JHGColors.secondryBlack,
                     shape: BoxShape.circle
                 ),),
               Container(
@@ -94,7 +94,7 @@ class WebCustomSwitch extends StatelessWidget {
                 width: 1.9.w,
                 decoration: BoxDecoration(
                     color:  value == true?
-                    AppColors.blackPrimary: Colors.transparent,
+                    JHGColors.secondryBlack: Colors.transparent,
                     shape: BoxShape.circle
                 ),)
             ],

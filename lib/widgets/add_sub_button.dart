@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 
-import '../utils/app_ colors.dart';
 
 class AddAndSubtractButton extends StatelessWidget {
   const AddAndSubtractButton({super.key,
@@ -25,14 +25,14 @@ class AddAndSubtractButton extends StatelessWidget {
         width: height * 0.030,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color:  AppColors.redPrimary,
+          color:  JHGColors.primary,
         ),
         child: Center(
             child:
                 isAdd == true?
-            Icon(Icons.add,color: AppColors.whitePrimary,
+            Icon(Icons.add,color: JHGColors.white,
               size: height*0.025,
-            ) :    Icon(Icons.remove,color: AppColors.whitePrimary,
+            ) :    Icon(Icons.remove,color: JHGColors.white,
                   size: height*0.025,)
         ),
       ),
@@ -60,19 +60,19 @@ class WebAddAndSubtractButton extends StatelessWidget {
         width: 2.5.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          color:  AppColors.redPrimary,
+          color:  JHGColors.primary,
         ),
         child: Center(
             child:
             isAdd == true?
             Icon(
               Icons.add,
-              color: AppColors.whitePrimary,
+              color: JHGColors.white,
               size: 2.w,
             ) :
             Icon(
               Icons.remove,
-              color: AppColors.whitePrimary,
+              color: JHGColors.white,
               size: 2.w,
               )
         ),

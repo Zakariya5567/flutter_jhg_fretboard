@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -46,7 +47,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                           child: Text(
                             index.toString(),
                             style: TextStyle(
-                              color: AppColors.whitePrimary,
+                              color: JHGColors.white,
                               fontWeight: FontWeight.w500,
                               fontSize: width * 0.012,
                             ),
@@ -84,7 +85,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                               height: height,
                               width: width * 0.015,
                               decoration: BoxDecoration(
-                                color: AppColors.blackColor,
+                                color: JHGColors.black,
                                   borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   bottomLeft: Radius.circular(10)
@@ -193,8 +194,8 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                     : false,
                                 color: controller.selectedNote ==
                                         controller.previousHighlightNode
-                                    ? AppColors.greenPrimary
-                                    : AppColors.redPrimary,
+                                    ? JHGColors.green
+                                    : JHGColors.primary,
                                 index: index,
                               );
                             },
@@ -263,8 +264,8 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
               colors: [
                 AppColors.whiteLight,
                 AppColors.whiteLight,
-                AppColors.greyPrimary,
-                AppColors.blackPrimary
+                JHGColors.charcolGray,
+                JHGColors.secondryBlack
               ]),
         ),
         // child: Text("r$index",style: TextStyle(color:Colors.white ),),
@@ -293,12 +294,12 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: selectedString == index + 1
-                  ? [AppColors.redPrimary, AppColors.redPrimary]
+                  ? [JHGColors.primary, JHGColors.primary]
                   : [
                       AppColors.whiteLight,
                       AppColors.whiteLight,
-                      AppColors.greyPrimary,
-                      AppColors.blackPrimary
+                      JHGColors.charcolGray,
+                      JHGColors.secondryBlack
                     ]),
         ),
         //  child: Text("S$index",style: TextStyle(color:Colors.teal ),),
@@ -313,7 +314,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
         width: width * 0.020,
         height: width * 0.020,
         decoration: BoxDecoration(
-          color: isColor == true ? AppColors.blackPrimary : Colors.transparent,
+          color: isColor == true ? JHGColors.secondryBlack : Colors.transparent,
           shape: BoxShape.circle,
         ),
         child: Padding(
@@ -323,7 +324,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
             height: width * 0.020,
             decoration: BoxDecoration(
               color: isColor == true
-                  ? AppColors.blackPrimary.withOpacity(0.5)
+                  ? JHGColors.secondryBlack.withOpacity(0.5)
                   : Colors.transparent,
               shape: BoxShape.circle,
             ),
@@ -620,7 +621,7 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                                   width: width * 0.14,
                                   height: height * 0.022,
                                   decoration: BoxDecoration(
-                                      color: AppColors.blackColor,
+                                      color: JHGColors.black,
                                     borderRadius: BorderRadius.only(
                                       bottomRight: Radius.circular(15),
                                       bottomLeft: Radius.circular(15),
@@ -747,8 +748,8 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                                           : false,
                                       color: controller.selectedNote ==
                                               controller.previousHighlightNode
-                                          ? AppColors.greenPrimary
-                                          : AppColors.redPrimary,
+                                          ? JHGColors.green
+                                          : JHGColors.primary,
                                       index: index,
                                       height: height);
                                 },
@@ -812,7 +813,7 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                           child: Text(
                             index.toString(),
                             style: TextStyle(
-                                color: AppColors.whitePrimary,
+                                color: JHGColors.white,
                                 fontWeight: FontWeight.w500,
                                 fontSize: height * 0.020),
                           ),
@@ -839,8 +840,8 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
               colors: [
                 AppColors.whiteLight,
                 AppColors.whiteLight,
-                AppColors.greyPrimary,
-                AppColors.blackPrimary
+                JHGColors.charcolGray,
+                JHGColors.secondryBlack
               ]),
         ),
       ),
@@ -869,12 +870,12 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: selectedString == index + 1
-                  ? [AppColors.redPrimary, AppColors.redPrimary]
+                  ? [JHGColors.primary, JHGColors.primary]
                   : [
                       AppColors.whiteLight,
                       AppColors.whiteLight,
-                      AppColors.greyPrimary,
-                      AppColors.blackPrimary
+                      JHGColors.charcolGray,
+                      JHGColors.secondryBlack
                     ]),
         ),
       ),
@@ -886,7 +887,7 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
         width: height * 0.024,
         height: height * 0.024,
         decoration: BoxDecoration(
-          color: isColor == true ? AppColors.blackPrimary : Colors.transparent,
+          color: isColor == true ? JHGColors.secondryBlack : Colors.transparent,
           shape: BoxShape.circle,
         ),
       );

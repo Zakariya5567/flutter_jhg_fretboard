@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/utils/app_%20colors.dart';
 
@@ -10,7 +11,7 @@ class BoxDecorations {
   static BoxDecoration defaultBoxDecoration() {
     return BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(radius)),
-        color: AppColors.greyPrimary,
+        color: JHGColors.charcolGray,
         shape: BoxShape.rectangle);
   }
 
@@ -18,7 +19,7 @@ class BoxDecorations {
   static BoxDecoration redBoxDecoration() {
     return BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(radius)),
-        color: AppColors.greyPrimary,
+        color: JHGColors.charcolGray,
         shape: BoxShape.rectangle,
         border: Border(
           top: BorderSide(color: AppColors.redColor, width: boderWidth),
@@ -31,7 +32,7 @@ class BoxDecorations {
   static BoxDecoration greenBoxDecoration() {
     return BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(radius)),
-        color: AppColors.greyColor,
+        color: JHGColors.charcolGray,
         shape: BoxShape.rectangle,
         border: Border(
           top: BorderSide(color: AppColors.greenColor, width: boderWidth),

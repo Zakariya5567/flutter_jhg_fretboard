@@ -1,19 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/controllers/home_controller.dart';
-import 'package:fretboard/widgets/guitar_board.dart';
 import 'package:fretboard/screens/setting_screen/setting_screen.dart';
 import 'package:fretboard/utils/images.dart';
-import 'package:fretboard/widgets/button_icon.dart';
 import 'package:fretboard/widgets/web_guitar_board.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/routes/transitions_type.dart';
 import '../screens/leader_board_screen/leaderboard_screen.dart';
-import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'add_sub_button.dart';
 
@@ -37,7 +31,10 @@ class WebBoard extends StatelessWidget {
                 child: Container(
                   //color: Colors.red,
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.only(top: controller.isPortrait ? height * 0.10:  height * 0.060),
+                    padding: EdgeInsets.only(
+                        top: controller.isPortrait
+                            ? height * 0.10
+                            : height * 0.060),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,22 +49,11 @@ class WebBoard extends StatelessWidget {
                                 ))
                             : Container(
                                 //color: Colors.green,
-                                //height: height * 0.64,
                                 width: width * 0.16,
                                 alignment: Alignment.topCenter,
-                                child: Container(
-                                  //height: height * 0.60,
-                                  width: width * 0.16,
-                                  child: SingleChildScrollView(
-                                    padding: EdgeInsets.zero,
-                                    child: const WebPortraitGuitarBoard(),
-                                  ),
+                                child: SingleChildScrollView(
+                                  child: const WebPortraitGuitarBoard(),
                                 )),
-
-                        //SPACER
-                        // SizedBox(
-                        //   height: controller.isPortrait ?8.5 :110,
-                        // ),
                       ],
                     ),
                   ),
@@ -82,10 +68,10 @@ class WebBoard extends StatelessWidget {
                 children: [
                   controller.timerMode == true
                       ? WebAddAndSubtractButton(
-                      onTap: () {
-                        controller.decreaseTime();
-                      },
-                      isAdd: false)
+                          onTap: () {
+                            controller.decreaseTime();
+                          },
+                          isAdd: false)
                       : const SizedBox(),
                   SizedBox(
                     width: 3.w,
@@ -100,7 +86,7 @@ class WebBoard extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: AppConstant.sansFont,
-                            color: AppColors.whitePrimary,
+                            color: JHGColors.white,
                             fontSize: 2.5.w,
                             fontWeight: FontWeight.w600,
                           ),
@@ -113,10 +99,10 @@ class WebBoard extends StatelessWidget {
                   ),
                   controller.timerMode == true
                       ? WebAddAndSubtractButton(
-                      onTap: () {
-                        controller.increaseTime();
-                      },
-                      isAdd: true)
+                          onTap: () {
+                            controller.increaseTime();
+                          },
+                          isAdd: true)
                       : const SizedBox(),
                 ],
               ),
@@ -197,7 +183,7 @@ class WebBoard extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: AppConstant.sansFont,
-                                  color: AppColors.redPrimary,
+                                  color: JHGColors.primary,
                                   fontSize: 2.0.w,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -216,8 +202,8 @@ class WebBoard extends StatelessWidget {
                   trailingWidget:
                       // ROTATE ICON
                       JHGIconButton(
-                        childPadding: EdgeInsets.all(4),
-                        enabled: true,
+                          childPadding: EdgeInsets.all(4),
+                          enabled: true,
                           svgImg: Images.iconRotate,
                           size: 40,
                           onTap: () {
@@ -236,7 +222,7 @@ class WebBoard extends StatelessWidget {
                                 AppConstant.scoreText,
                                 style: TextStyle(
                                   fontFamily: AppConstant.sansFont,
-                                  color: AppColors.whitePrimary,
+                                  color: JHGColors.white,
                                   fontSize: 1.6.w,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -245,7 +231,7 @@ class WebBoard extends StatelessWidget {
                                 controller.score.toString(),
                                 style: TextStyle(
                                   fontFamily: AppConstant.sansFont,
-                                  color: AppColors.whitePrimary,
+                                  color: JHGColors.white,
                                   fontSize: 1.6.w,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -262,7 +248,9 @@ class WebBoard extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    left: width * 0.020, right: width * 0.020, top: height * 0.030),
+                    left: width * 0.020,
+                    right: width * 0.020,
+                    top: height * 0.030),
                 child: JHGAppBar(
                   leadingWidget: JHGIconButton(
                       childPadding: EdgeInsets.all(6),

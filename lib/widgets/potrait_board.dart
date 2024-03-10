@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/widgets/guitar_board.dart';
 import 'package:fretboard/screens/setting_screen/setting_screen.dart';
 import 'package:fretboard/utils/images.dart';
-import 'package:fretboard/widgets/button_icon.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/routes/transitions_type.dart';
-import '../controllers/leaderboard_controller.dart';
 import '../screens/leader_board_screen/leaderboard_screen.dart';
-import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'add_sub_button.dart';
 
@@ -94,7 +88,7 @@ class PortraitBoard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
-                        color: AppColors.whitePrimary,
+                        color: JHGColors.white,
                         fontSize: 36,
                         fontWeight: FontWeight.w600,
                       ),
@@ -168,7 +162,7 @@ class PortraitBoard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: AppConstant.sansFont,
-                        color: AppColors.redPrimary,
+                        color: JHGColors.primary,
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
@@ -199,7 +193,7 @@ class PortraitBoard extends StatelessWidget {
                         AppConstant.scoreText,
                         style: TextStyle(
                           fontFamily: AppConstant.sansFont,
-                          color: AppColors.whitePrimary,
+                          color: JHGColors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -208,7 +202,7 @@ class PortraitBoard extends StatelessWidget {
                         controller.score.toString(),
                         style: TextStyle(
                           fontFamily: AppConstant.sansFont,
-                          color: AppColors.whitePrimary,
+                          color: JHGColors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),

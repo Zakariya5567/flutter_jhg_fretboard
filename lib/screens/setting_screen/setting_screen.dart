@@ -1,12 +1,9 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:fretboard/screens/home_screen/home_screen.dart';
@@ -14,7 +11,6 @@ import 'package:fretboard/widgets/setting_toggle.dart';
 import '../../controllers/home_controller.dart';
 import '../../utils/app_ colors.dart';
 import '../../utils/app_constant.dart';
-import 'package:flutter/services.dart';
 import '../../utils/app_subscription.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -117,7 +113,7 @@ class _SettingScreenState extends State<SettingScreen> {
       required double height,
       required double width}) {
     return JHGBody(
-      bgColor: AppColors.blackPrimary,
+      bgColor: JHGColors.secondryBlack,
       bodyAppBar: JHGAppBar(
         trailingWidget: JHGReportAnIssueBtn(
           onPressed: () {
@@ -242,13 +238,13 @@ class _SettingScreenState extends State<SettingScreen> {
       required double width}) {
     return JHGBody(
       padding: EdgeInsets.symmetric(vertical: 24),
-      bgColor: AppColors.blackPrimary,
+      bgColor: JHGColors.secondryBlack,
       body: RotatedBox(
         quarterTurns: 1,
         child: Container(
           height: width,
           width: height,
-          color: AppColors.blackPrimary,
+          color: JHGColors.secondryBlack,
           //color: Colors.red,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -410,7 +406,7 @@ class _SettingScreenState extends State<SettingScreen> {
       required double height,
       required double width}) {
     return JHGBody(
-      bgColor: AppColors.blackPrimary,
+      bgColor: JHGColors.secondryBlack,
       bodyAppBar: Padding(
         padding: EdgeInsets.only(
             left: width * 0.020, right: width * 0.020, top: height * 0.030),
@@ -433,7 +429,7 @@ class _SettingScreenState extends State<SettingScreen> {
       body: Container(
         height: height,
         width: width,
-        color: AppColors.blackPrimary,
+        color: JHGColors.secondryBlack,
         child: Padding(
           padding: EdgeInsets.only(
             //top: 40,
@@ -548,7 +544,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 20),
-                color: AppColors.blackPrimary,
+                color: JHGColors.secondryBlack,
                 child: Center(
                   child: JHGPrimaryBtn(
                     label: AppConstant.save,

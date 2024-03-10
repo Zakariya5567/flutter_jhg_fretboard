@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:fretboard/utils/app_%20colors.dart';
@@ -59,7 +60,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                           width: double.infinity,
                           height: height * 0.015,
                           decoration: BoxDecoration(
-                            color: AppColors.blackColor,
+                            color: JHGColors.black,
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(10),
                               bottomRight: Radius.circular(10)
@@ -165,8 +166,8 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                                   ? true
                                   : false,
                               color: controller.selectedNote == controller.previousHighlightNode
-                                  ? AppColors.greenPrimary
-                                  : AppColors.redPrimary,
+                                  ? JHGColors.green
+                                  : JHGColors.primary,
                               index: index,
                               height: height);
                         },
@@ -226,7 +227,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                         child: Text(
                           index.toString(),
                           style: TextStyle(
-                            color: AppColors.whitePrimary,
+                            color: JHGColors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
                             height: widget.isPortrait == true ? 1.2 : 2,
@@ -256,8 +257,8 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
               colors: [
                 AppColors.whiteLight,
                 AppColors.whiteLight,
-                AppColors.greyPrimary,
-                AppColors.blackPrimary
+                JHGColors.charcolGray,
+                JHGColors.secondryBlack
               ]),
         ),
       ),
@@ -281,11 +282,11 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: selectedString == index+1
-                  ? [AppColors.redPrimary, AppColors.redPrimary]
+                  ? [JHGColors.primary, JHGColors.primary]
                   : [ AppColors.whiteLight,
                       AppColors.whiteLight,
-                      AppColors.greyPrimary,
-                      AppColors.blackPrimary
+                      JHGColors.charcolGray,
+                      JHGColors.secondryBlack
                     ]),
         ),
       ),
@@ -296,7 +297,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
         width: height * 0.024,
         height: height * 0.024,
         decoration: BoxDecoration(
-          color: isColor == true ? AppColors.blackPrimary : Colors.transparent,
+          color: isColor == true ? JHGColors.secondryBlack : Colors.transparent,
           shape: BoxShape.circle,
         ),
       );

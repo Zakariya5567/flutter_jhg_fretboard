@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../controllers/leaderboard_controller.dart';
-import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
-import '../utils/decorations/button_decorations.dart';
 import '../utils/styles/custom_text_styles.dart';
 
 final ScrollController _scrollController = ScrollController();
@@ -100,7 +97,7 @@ leaderBoardTextWidget(String text1, String text2) {
           text1,
           style: TextStyle(
             fontSize: Adaptive.sp(12),
-            color: AppColors.whiteColor,
+            color: JHGColors.white,
           ),
           overflow: TextOverflow.ellipsis,
         ),
@@ -108,7 +105,7 @@ leaderBoardTextWidget(String text1, String text2) {
           text2,
           style: TextStyle(
               fontSize: Adaptive.sp(16),
-              color: AppColors.whiteColor,
+              color: JHGColors.white,
               fontWeight: FontWeight.w500),
           overflow: TextOverflow.ellipsis,
         ),
@@ -122,7 +119,7 @@ leaderBoardButton() {
     padding: const EdgeInsets.all(16.0),
     child: JHGPrimaryBtn(label: AppConstant.loadMore,
       width: 200,
-      bgColor: AppColors.greyColor,
+      bgColor: JHGColors.charcolGray,
       onPressed: () {
         LeaderBoardController lc = Get.put(LeaderBoardController());
         lc.getDataFromApi();
