@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
@@ -28,261 +29,223 @@ class WebBoard extends StatelessWidget {
     final dpr = MediaQuery.of(context).devicePixelRatio;
     // final w = MediaQuery.of(context).size.width;
     return JHGBody(
-      body: Padding(
+      bodyAppBar: Padding(
         padding: EdgeInsets.only(
-          top: 5.h,
+            left: width * 0.020, right: width * 0.020, top: height * 0.030),
+        child: JHGAppBar(
+          leadingWidget: JHGIconButton(
+              childPadding: EdgeInsets.all(6),
+              enabled: true,
+              svgImg: Images.iconTropy,
+              onTap: () {
+                Get.to(() => LeadershipScreen(),
+                    transition: Transition.leftToRight);
+              }),
+          trailingWidget: JHGSettingsButton(
+            enabled: !controller.leaderboardMode,
+            onTap: () {
+              if (controller.leaderboardMode == true) {
+                return;
+              } else {
+                controller.resetGame(false);
+                Get.to(() => SettingScreen(),
+                    transition: Transition.rightToLeft);
+              }
+            },
+          ),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // TROPHY AND SETTING ICON
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 3.w,
-                  right: 3.w,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    WebButtonIcon(
-                        icon: Images.iconTropy,
-                        width: 2.w,
-                        height: 2.w,
-                        onTap: () {
-                          Get.to(() => LeadershipScreen(),
-                              transition: Transition.leftToRight);
-                        }),
-                    WebButtonIcon(
-                      icon: Images.iconSetting,
-                      color: controller.leaderboardMode == true
-                          ? AppColors.greySecondary
-                          : AppColors.whitePrimary,
-                      width: 2.2.w,
-                      height: 2.2.w,
-                      onTap: () {
-                        if (controller.leaderboardMode == true) {
-                          return;
-                        } else {
-                          controller.resetGame(false);
-                          Get.to(() => SettingScreen(),
-                              transition: Transition.rightToLeft);
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              //SPACER
-              // SizedBox(
-              //   height: controller.isPortrait ?5 :125,
-              // ),
-              SizedBox(
-                height: 5,
-              ),
-              // BOARD WITH NUMBER
-
-              controller.isPortrait == true
-                  ? Container(
-                      height: height * 0.64,
-                      width: width * 0.900,
-                      //color: Colors.red,
-                      child: Padding(
-                          padding: EdgeInsets.only(top: 125),
-                          child: const WebLandscapeGuitarBoard()))
-                  : Container(
-                      height: height * 0.64,
-                      width: width * 0.16,
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        height: height * 0.64,
-                        width: width * 0.16,
-                        child: SingleChildScrollView(
-                          padding: EdgeInsets.zero,
-                          child: const WebPortraitGuitarBoard(),
-                        ),
-                      )),
-
-              //SPACER
-              // SizedBox(
-              //   height: controller.isPortrait ?8.5 :110,
-              // ),
-              SizedBox(
-                height: 8.5,
-              ),
-              // TIMER  WITH ADD AND SUBTRACT BUTTONS
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  controller.timerMode == true
-                      ? WebAddAndSubtractButton(
-                          onTap: () {
-                            controller.decreaseTime();
-                          },
-                          isAdd: false)
-                      : const SizedBox(),
+                  controller.isPortrait == true
+                      ? Container(
+                          height: height * 0.54,
+                          width: width * 0.900,
+                          child: Center(
+                            child: const WebLandscapeGuitarBoard(),
+                          ))
+                      : Container(
+                          height: height * 0.64,
+                          width: width * 0.16,
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                            height: height * 0.64,
+                            width: width * 0.16,
+                            child: SingleChildScrollView(
+                              padding: EdgeInsets.zero,
+                              child: const WebPortraitGuitarBoard(),
+                            ),
+                          )),
+
+                  //SPACER
+                  // SizedBox(
+                  //   height: controller.isPortrait ?8.5 :110,
+                  // ),
                   SizedBox(
-                    width: 3.w,
+                    height: 8.5,
                   ),
-                  Center(
-                    child: ValueListenableBuilder<int>(
-                      valueListenable: controller.secondsRemaining,
-                      //widget.model.seconds,
-                      builder: (context, value, child) {
-                        return Text(
-                          controller.formatTime(value),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: AppConstant.sansFont,
-                            color: AppColors.whitePrimary,
-                            fontSize: 2.5.w,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  controller.timerMode == true
-                      ? WebAddAndSubtractButton(
-                          onTap: () {
-                            controller.increaseTime();
-                          },
-                          isAdd: true)
-                      : const SizedBox(),
-                ],
-              ),
-              // //TIMER , STOPWATCH , ROTATE ICON
-              SizedBox(
-                height: 7,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 3.w,
-                  right: 3.w,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    controller.isStart == true
-                        ? WebButtonIcon(
-                            icon: Images.iconReset,
-                            width: 2.0.w,
-                            height: 2.0.w,
-                            onTap: () {
-                              controller.setTimerMode(false);
-                              controller.setLeaderMode(false);
-                              controller.resetGame(false);
-                            })
-                        :
-
-                        // ICON STOP WATCH
-                        controller.timerMode == false &&
-                                controller.leaderboardMode == false
-                            ? WebButtonIcon(
-                                icon: Images.iconStopwatch,
-                                width: 2.2.w,
-                                height: 2.2.w,
-                                onTap: () {
-                                  controller.setTimerMode(true);
-                                  controller.setLeaderMode(false);
-                                  controller.resetTimer();
-                                })
-                            :
-
-                            // ICON TIMER
-                            controller.timerMode == true
-                                ? WebButtonIcon(
-                                    icon: Images.iconTimer,
-                                    width: 2.2.w,
-                                    height: 2.2.w,
-                                    onTap: () {
-                                      controller.setTimerMode(false);
-                                      controller.setLeaderMode(true);
-                                      controller.resetTimer();
-                                    })
-                                :
-
-                                // ICON LEADERBOARD
-                                controller.leaderboardMode == true
-                                    ? WebButtonIcon(
-                                        icon: Images.iconTropy,
-                                        width: 2.0.w,
-                                        height: 2.0.w,
-                                        onTap: () {
-                                          controller.setLeaderMode(false);
-                                          controller.setTimerMode(false);
-                                          controller.resetTimer();
-                                        })
-                                    : SizedBox(),
-
-                    // HIGILITED NOTE
-                    controller.isStart == true
-                        ? Container(
-                            height: 45,
-                            width: 22.w,
-                            alignment: Alignment.topCenter,
-                            //color: Colors.red,
-                            child: Text(
-                              "    ${controller.highlightNode ?? ""}",
+                  // TIMER  WITH ADD AND SUBTRACT BUTTONS
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      controller.timerMode == true
+                          ? WebAddAndSubtractButton(
+                              onTap: () {
+                                controller.decreaseTime();
+                              },
+                              isAdd: false)
+                          : const SizedBox(),
+                      SizedBox(
+                        width: 3.w,
+                      ),
+                      Center(
+                        child: ValueListenableBuilder<int>(
+                          valueListenable: controller.secondsRemaining,
+                          //widget.model.seconds,
+                          builder: (context, value, child) {
+                            return Text(
+                              controller.formatTime(value),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: AppConstant.sansFont,
-                                color: AppColors.redPrimary,
-                                fontSize: 2.0.w,
-                                fontWeight: FontWeight.bold,
+                                color: AppColors.whitePrimary,
+                                fontSize: 2.5.w,
+                                fontWeight: FontWeight.w600,
                               ),
-                            ),
-                          )
-                        :
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: 3.w,
+                      ),
+                      controller.timerMode == true
+                          ? WebAddAndSubtractButton(
+                              onTap: () {
+                                controller.increaseTime();
+                              },
+                              isAdd: true)
+                          : const SizedBox(),
+                    ],
+                  ),
+                  // //TIMER , STOPWATCH , ROTATE ICON
+                  SizedBox(
+                    height: 7,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                left: width * 0.020,
+                right: width * 0.020,
+                bottom: height * 0.030),
+            child: JHGAppBar(
+              // leading
+              leadingWidget: controller.isStart == true
+                  ? JHGResetBtn(
+                      enabled: true,
+                      onTap: () {
+                        controller.setTimerMode(false);
+                        controller.setLeaderMode(false);
+                        controller.resetGame(false);
+                      })
+                  :
 
-                        // START BUTTON
-                        InkWell(
-                            onTap: () {
-                              controller.startTimer();
-                              controller.startTheGame();
-                            },
-                            child: Center(
-                              child: Container(
-                                width: 20.w,
-                                height: 55,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: AppColors.redPrimary,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Text(
-                                  AppConstant.start,
-                                  style: TextStyle(
-                                    fontFamily: AppConstant.sansFont,
-                                    color: AppColors.whitePrimary,
-                                    fontSize: 1.4.w,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
+                  // ICON STOP WATCH
+                  controller.timerMode == false &&
+                          controller.leaderboardMode == false
+                      ? JHGIconButton(
+                          childPadding: EdgeInsets.all(4),
+                          enabled: true,
+                          size: 40,
+                          svgImg: Images.iconStopwatch,
+                          onTap: () {
+                            controller.setTimerMode(true);
+                            controller.setLeaderMode(false);
+                            controller.resetTimer();
+                          })
+                      :
+
+                      // ICON TIMER
+                      controller.timerMode == true
+                          ? JHGIconButton(
+                              childPadding: EdgeInsets.all(4),
+                              enabled: true,
+                              size: 40,
+                              svgImg: Images.iconTimer,
+                              onTap: () {
+                                controller.setTimerMode(false);
+                                controller.setLeaderMode(true);
+                                controller.resetTimer();
+                              })
+                          :
+
+                          // ICON LEADERBOARD
+                          controller.leaderboardMode == true
+                              ? JHGIconButton(
+                                  size: 40,
+                                  childPadding: EdgeInsets.all(6),
+                                  enabled: true,
+                                  svgImg: Images.iconTropy,
+                                  onTap: () {
+                                    controller.setLeaderMode(false);
+                                    controller.setTimerMode(false);
+                                    controller.resetTimer();
+                                  })
+                              : SizedBox(),
+              centerWidget:
+
+                  // HIGILITED NOTE
+                  controller.isStart == true
+                      ? Container(
+                          height: 45,
+                          width: 22.w,
+                          alignment: Alignment.topCenter,
+                          //color: Colors.red,
+                          child: Text(
+                            "    ${controller.highlightNode ?? ""}",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: AppConstant.sansFont,
+                              color: AppColors.redPrimary,
+                              fontSize: 2.0.w,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-
-                    // ROTATE ICON
-                    WebButtonIcon(
-                        icon: Images.iconRotate,
-                        width: 2.4.w,
-                        height: 2.4.w,
-                        onTap: () {
-                          controller.toggleOrientation();
-                        })
-                  ],
-                ),
-              ),
-              //SPACE
-              SizedBox(height: 5),
-              controller.isStart == true
+                        )
+                      :
+                      // START BUTTON
+                      JHGPrimaryBtn(
+                          label: AppConstant.start,
+                          width: 20.w,
+                          onPressed: () {
+                            controller.startTimer();
+                            controller.startTheGame();
+                          },
+                        ),
+              trailingWidget:
+                  // ROTATE ICON
+                  JHGIconButton(
+                    childPadding: EdgeInsets.all(4),
+                    enabled: true,
+                      svgImg: Images.iconRotate,
+                      size: 40,
+                      onTap: () {
+                        controller.toggleOrientation();
+                      }),
+              bottom: controller.isStart == true
                   ?
 
                   // SCORE TEXT
+
                   Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -309,9 +272,9 @@ class WebBoard extends StatelessWidget {
                       ),
                     )
                   : const SizedBox(),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
