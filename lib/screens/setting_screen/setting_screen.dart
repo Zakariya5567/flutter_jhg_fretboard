@@ -409,199 +409,160 @@ class _SettingScreenState extends State<SettingScreen> {
       {required HomeController controller,
       required double height,
       required double width}) {
-    return Container(
-      height: height,
-      width: width,
-      color: AppColors.blackPrimary,
-      child: Wrap(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              top: 40,
-              left: 2.w,
-              right: 2.w,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // BACK ICON  WITH REPORT AN ISSUE TEXT BUTTON
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return JHGBody(
+      bgColor: AppColors.blackPrimary,
+      bodyAppBar: Padding(
+        padding: EdgeInsets.only(
+            left: width * 0.020, right: width * 0.020, top: height * 0.030),
+        child: JHGAppBar(
+          trailingWidget: JHGReportAnIssueBtn(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BugReportPage(
+                    device: deviceName,
+                    appName: AppConstant.appName,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+      body: Container(
+        height: height,
+        width: width,
+        color: AppColors.blackPrimary,
+        child: Padding(
+          padding: EdgeInsets.only(
+            //top: 40,
+            left: 2.w,
+            right: 2.w,
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        color: AppColors.whiteSecondary,
-                        size: 2.w,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BugReportPage(
-                              device: deviceName,
-                              appName: AppConstant.appName,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Row(
+                    // SPACER
+                    SizedBox(height: 20),
+                    //
+                    Center(
+                        child: Container(
+                      width: 40.w,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(width: 3.w),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                right: 1.w), // Add padding to the right
-                            child: Icon(
-                              Icons.error_outline_rounded,
-                              color: AppColors.redPrimary,
-                              size: 2.w,
-                            ),
-                          ),
                           Text(
-                            'Report an Issue',
+                            AppConstant.strings,
+                            textAlign: TextAlign.left,
                             style: TextStyle(
-                              color: AppColors.redPrimary,
-                              fontSize: 1.2.w,
+                              fontFamily: AppConstant.sansFont,
+                              color: AppColors.whiteSecondary,
+                              fontSize: 1.6.w,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
+
+                          //
+                          SizedBox(height: 10),
+                          //
+                          Text(
+                            AppConstant.stringDescriptionWeb,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontFamily: AppConstant.sansFont,
+                              color: AppColors.whiteSecondary,
+                              fontSize: 1.2.w,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+
+                          SizedBox(height: 20),
                         ],
                       ),
+                    )),
+                    // LIST SWITCH BUTTON
+                    Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.black.withOpacity(0.2),
+                        ),
+                        width: 40.w,
+                        child: ListView(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          children: [
+                            JHGSwitchTile(
+                                title: AppConstant.string6,
+                                initialValue: controller.string6,
+                                onChanged: (value) {
+                                  controller.setString6(0);
+                                }),
+                            JHGSwitchTile(
+                                title: AppConstant.string5,
+                                initialValue: controller.string5,
+                                onChanged: (value) {
+                                  controller.setString5(1);
+                                }),
+                            JHGSwitchTile(
+                                title: AppConstant.string4,
+                                initialValue: controller.string4,
+                                onChanged: (value) {
+                                  controller.setString4(2);
+                                }),
+                            JHGSwitchTile(
+                                title: AppConstant.string3,
+                                initialValue: controller.string3,
+                                onChanged: (value) {
+                                  controller.setString3(3);
+                                }),
+                            JHGSwitchTile(
+                                title: AppConstant.string2,
+                                initialValue: controller.string2,
+                                onChanged: (value) {
+                                  controller.setString2(4);
+                                }),
+                            JHGSwitchTile(
+                                title: AppConstant.string1,
+                                initialValue: controller.string1,
+                                onChanged: (value) {
+                                  controller.setString1(5);
+                                }),
+                          ],
+                        ).paddingSymmetric(
+                          horizontal: 10,
+                          vertical: 10,
+                        ),
+                      ),
                     ),
+                    SizedBox(height: 20),
                   ],
                 ),
 
-                // SPACER
-                SizedBox(height: 30),
-                //
-                Center(
-                    child: Container(
-                  width: 40.w,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppConstant.strings,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontFamily: AppConstant.sansFont,
-                          color: AppColors.whiteSecondary,
-                          fontSize: 1.6.w,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      //
-                      SizedBox(height: 10),
-                      //
-                      Text(
-                        AppConstant.stringDescriptionWeb,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontFamily: AppConstant.sansFont,
-                          color: AppColors.whiteSecondary,
-                          fontSize: 1.2.w,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-
-                      SizedBox(height: 20),
-                    ],
-                  ),
-                )),
-
-                Center(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.black.withOpacity(0.2),
-                    ),
-                    height: 380,
-                    width: 40.w,
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      children: [
-                        WebSettingToggle(
-                            heading: AppConstant.string6,
-                            value: controller.string6,
-                            onChange: () {
-                              controller.setString6(0);
-                            }),
-                        WebSettingToggle(
-                            heading: AppConstant.string5,
-                            value: controller.string5,
-                            onChange: () {
-                              controller.setString5(1);
-                            }),
-                        WebSettingToggle(
-                            heading: AppConstant.string4,
-                            value: controller.string4,
-                            onChange: () {
-                              controller.setString4(2);
-                            }),
-                        WebSettingToggle(
-                            heading: AppConstant.string3,
-                            value: controller.string3,
-                            onChange: () {
-                              controller.setString3(3);
-                            }),
-                        WebSettingToggle(
-                            heading: AppConstant.string2,
-                            value: controller.string2,
-                            onChange: () {
-                              controller.setString2(4);
-                            }),
-                        WebSettingToggle(
-                            heading: AppConstant.string1,
-                            value: controller.string1,
-                            onChange: () {
-                              controller.setString1(5);
-                            }),
-                      ],
-                    ).paddingSymmetric(
-                      horizontal: 2.w,
-                      vertical: 20,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30),
-
-                Center(
-                  child: InkWell(
-                    onTap: () {
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                color: AppColors.blackPrimary,
+                child: Center(
+                  child: JHGPrimaryBtn(
+                    label: AppConstant.save,
+                    width: 25.w,
+                    onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Container(
-                      height: 45,
-                      width: 25.w,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: AppColors.redPrimary,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Text(
-                        AppConstant.save,
-                        style: TextStyle(
-                          fontFamily: AppConstant.sansFont,
-                          color: AppColors.whitePrimary,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+              SizedBox(height:  height * 0.030,),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

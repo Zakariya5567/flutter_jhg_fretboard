@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -118,17 +119,11 @@ leaderBoardTextWidget(String text1, String text2) {
 
 leaderBoardButton() {
   return Padding(
-    padding: EdgeInsets.only(left: 50.dp, right: 50.dp, bottom: 35.dp),
-    child: GestureDetector(
-      child: Container(
-        height: 40.dp,
-        margin: EdgeInsets.only(top: 20.dp),
-        decoration: ButtonDecorations.loadButton(),
-        child: Center(
-            child: Text(AppConstant.loadMore,
-                style: CustomTextStyles.whiteMediumTextStyle)),
-      ),
-      onTap: () {
+    padding: const EdgeInsets.all(16.0),
+    child: JHGPrimaryBtn(label: AppConstant.loadMore,
+      width: 200,
+      bgColor: AppColors.greyColor,
+      onPressed: () {
         LeaderBoardController lc = Get.put(LeaderBoardController());
         lc.getDataFromApi();
       },

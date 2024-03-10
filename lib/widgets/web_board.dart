@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/widgets/guitar_board.dart';
@@ -15,9 +16,8 @@ import '../utils/app_ colors.dart';
 import '../utils/app_constant.dart';
 import 'add_sub_button.dart';
 
-
 class WebBoard extends StatelessWidget {
-  const WebBoard({super.key,required this.controller});
+  const WebBoard({super.key, required this.controller});
 
   final HomeController controller;
   @override
@@ -26,10 +26,12 @@ class WebBoard extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     final dpr = MediaQuery.of(context).devicePixelRatio;
-   // final w = MediaQuery.of(context).size.width;
-    return
-      Padding(
-        padding: EdgeInsets.only(top: 5.h ,),
+    // final w = MediaQuery.of(context).size.width;
+    return JHGBody(
+      body: Padding(
+        padding: EdgeInsets.only(
+          top: 5.h,
+        ),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -37,37 +39,38 @@ class WebBoard extends StatelessWidget {
             children: [
               // TROPHY AND SETTING ICON
               Padding(
-                padding:EdgeInsets.only(
-                  left: 3.w, right: 3.w,),
+                padding: EdgeInsets.only(
+                  left: 3.w,
+                  right: 3.w,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                      WebButtonIcon(
-                          icon: Images.iconTropy,
-                          width: 2.w,
-                          height: 2.w,
-                          onTap: (){
-                            Get.to(() => LeadershipScreen(),
-                                transition: Transition.leftToRight);
-                          }),
-                      WebButtonIcon(
-                        icon:Images.iconSetting,
-                        color: controller.leaderboardMode == true ? AppColors.greySecondary :
-                        AppColors.whitePrimary,
-                        width: 2.2.w,
-                        height: 2.2.w,
-                        onTap: (){
-
-                          if(controller.leaderboardMode == true){
-                            return ;
-                          }else{
-                            controller.resetGame(false);
-                            Get.to(() => SettingScreen(),
-                                transition: Transition.rightToLeft);
-                          }
-
-                        },),
-
+                    WebButtonIcon(
+                        icon: Images.iconTropy,
+                        width: 2.w,
+                        height: 2.w,
+                        onTap: () {
+                          Get.to(() => LeadershipScreen(),
+                              transition: Transition.leftToRight);
+                        }),
+                    WebButtonIcon(
+                      icon: Images.iconSetting,
+                      color: controller.leaderboardMode == true
+                          ? AppColors.greySecondary
+                          : AppColors.whitePrimary,
+                      width: 2.2.w,
+                      height: 2.2.w,
+                      onTap: () {
+                        if (controller.leaderboardMode == true) {
+                          return;
+                        } else {
+                          controller.resetGame(false);
+                          Get.to(() => SettingScreen(),
+                              transition: Transition.rightToLeft);
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -76,33 +79,30 @@ class WebBoard extends StatelessWidget {
               //   height: controller.isPortrait ?5 :125,
               // ),
               SizedBox(
-                height:5,
+                height: 5,
               ),
               // BOARD WITH NUMBER
 
-              controller.isPortrait == true ?
-              Container(
-                  height: height*0.64,
-                  width: width*0.900,
-                  //color: Colors.red,
-                  child: Padding(
-                      padding: EdgeInsets.only(top:125),
-                      child: const WebLandscapeGuitarBoard()
-                  )
-              ):
-              Container(
-                  height: height*0.64,
-                  width: width*0.16,
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: height*0.64,
-                    width: width*0.16,
-                    child: SingleChildScrollView(
-                      padding: EdgeInsets.zero,
-                      child: const WebPortraitGuitarBoard(),
-                    ),
-                  )
-              ),
+              controller.isPortrait == true
+                  ? Container(
+                      height: height * 0.64,
+                      width: width * 0.900,
+                      //color: Colors.red,
+                      child: Padding(
+                          padding: EdgeInsets.only(top: 125),
+                          child: const WebLandscapeGuitarBoard()))
+                  : Container(
+                      height: height * 0.64,
+                      width: width * 0.16,
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        height: height * 0.64,
+                        width: width * 0.16,
+                        child: SingleChildScrollView(
+                          padding: EdgeInsets.zero,
+                          child: const WebPortraitGuitarBoard(),
+                        ),
+                      )),
 
               //SPACER
               // SizedBox(
@@ -115,162 +115,163 @@ class WebBoard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  controller.timerMode == true ?
-                  WebAddAndSubtractButton(
-                      onTap: (){
-                        controller.decreaseTime();
-                      },
-                      isAdd: false)
+                  controller.timerMode == true
+                      ? WebAddAndSubtractButton(
+                          onTap: () {
+                            controller.decreaseTime();
+                          },
+                          isAdd: false)
                       : const SizedBox(),
                   SizedBox(
                     width: 3.w,
                   ),
                   Center(
-                    child:
-                    ValueListenableBuilder<int>(
+                    child: ValueListenableBuilder<int>(
                       valueListenable: controller.secondsRemaining,
                       //widget.model.seconds,
                       builder: (context, value, child) {
-                        return
-                          Text(
-                            controller.formatTime(value),
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: AppConstant.sansFont,
-                              color: AppColors.whitePrimary,
-                              fontSize: 2.5.w,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          );
+                        return Text(
+                          controller.formatTime(value),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: AppConstant.sansFont,
+                            color: AppColors.whitePrimary,
+                            fontSize: 2.5.w,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        );
                       },
                     ),
                   ),
                   SizedBox(
                     width: 3.w,
                   ),
-                  controller.timerMode == true ?
-
-                  WebAddAndSubtractButton(
-                      onTap: (){
-                        controller.increaseTime();
-                      },
-                      isAdd: true)
+                  controller.timerMode == true
+                      ? WebAddAndSubtractButton(
+                          onTap: () {
+                            controller.increaseTime();
+                          },
+                          isAdd: true)
                       : const SizedBox(),
                 ],
               ),
               // //TIMER , STOPWATCH , ROTATE ICON
               SizedBox(
-                height:7,
+                height: 7,
               ),
               Padding(
-                padding:  EdgeInsets.only(
+                padding: EdgeInsets.only(
                   left: 3.w,
-                  right: 3.w,),
+                  right: 3.w,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    controller.isStart == true
+                        ? WebButtonIcon(
+                            icon: Images.iconReset,
+                            width: 2.0.w,
+                            height: 2.0.w,
+                            onTap: () {
+                              controller.setTimerMode(false);
+                              controller.setLeaderMode(false);
+                              controller.resetGame(false);
+                            })
+                        :
 
-                    controller.isStart == true ?
-                    WebButtonIcon(
-                        icon:  Images.iconReset,
-                        width: 2.0.w,
-                        height: 2.0.w,
-                        onTap: (){
-                          controller.setTimerMode(false);
-                          controller.setLeaderMode(false);
-                          controller.resetGame(false);
-                        }) :
+                        // ICON STOP WATCH
+                        controller.timerMode == false &&
+                                controller.leaderboardMode == false
+                            ? WebButtonIcon(
+                                icon: Images.iconStopwatch,
+                                width: 2.2.w,
+                                height: 2.2.w,
+                                onTap: () {
+                                  controller.setTimerMode(true);
+                                  controller.setLeaderMode(false);
+                                  controller.resetTimer();
+                                })
+                            :
 
-                  // ICON STOP WATCH
-                    controller.timerMode == false && controller.leaderboardMode == false?
-                    WebButtonIcon(
-                        icon: Images.iconStopwatch,
-                        width: 2.2.w,
-                        height: 2.2.w,
-                        onTap: (){
-                          controller.setTimerMode(true);
-                          controller.setLeaderMode(false);
-                          controller.resetTimer();
-                        }):
+                            // ICON TIMER
+                            controller.timerMode == true
+                                ? WebButtonIcon(
+                                    icon: Images.iconTimer,
+                                    width: 2.2.w,
+                                    height: 2.2.w,
+                                    onTap: () {
+                                      controller.setTimerMode(false);
+                                      controller.setLeaderMode(true);
+                                      controller.resetTimer();
+                                    })
+                                :
 
-                        // ICON TIMER
-                    controller.timerMode == true?
-                    WebButtonIcon(
-                        icon: Images.iconTimer,
-                        width: 2.2.w,
-                        height: 2.2.w,
-                        onTap: (){
-                          controller.setTimerMode(false);
-                          controller.setLeaderMode(true);
-                          controller.resetTimer();
-                        }):
-
-                        // ICON LEADERBOARD
-                    controller.leaderboardMode == true ?
-                    WebButtonIcon(
-                        icon:
-                        Images.iconTropy,
-                        width: 2.0.w,
-                        height: 2.0.w,
-                        onTap: (){
-                          controller.setLeaderMode(false);
-                          controller.setTimerMode(false);
-                          controller.resetTimer();
-                        }) : SizedBox(),
+                                // ICON LEADERBOARD
+                                controller.leaderboardMode == true
+                                    ? WebButtonIcon(
+                                        icon: Images.iconTropy,
+                                        width: 2.0.w,
+                                        height: 2.0.w,
+                                        onTap: () {
+                                          controller.setLeaderMode(false);
+                                          controller.setTimerMode(false);
+                                          controller.resetTimer();
+                                        })
+                                    : SizedBox(),
 
                     // HIGILITED NOTE
-                    controller.isStart == true?
-                    Container(
-                      height:45,
-                      width: 22.w,
-                      alignment: Alignment.topCenter,
-                      //color: Colors.red,
-                      child: Text(
-                        "    ${controller.highlightNode ?? ""}",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: AppConstant.sansFont,
-                          color: AppColors.redPrimary,
-                          fontSize: 2.0.w,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ):
+                    controller.isStart == true
+                        ? Container(
+                            height: 45,
+                            width: 22.w,
+                            alignment: Alignment.topCenter,
+                            //color: Colors.red,
+                            child: Text(
+                              "    ${controller.highlightNode ?? ""}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: AppConstant.sansFont,
+                                color: AppColors.redPrimary,
+                                fontSize: 2.0.w,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          )
+                        :
 
-                    // START BUTTON
-                    InkWell(
-                      onTap: () {
-                        controller.startTimer();
-                        controller.startTheGame();
-                      },
-                      child: Center(
-                        child:
-                        Container(
-                          width: 20.w,
-                          height: 55,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: AppColors.redPrimary,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Text(
-                            AppConstant.start,
-                            style: TextStyle(
-                              fontFamily: AppConstant.sansFont,
-                              color: AppColors.whitePrimary,
-                              fontSize: 1.4.w,
-                              fontWeight: FontWeight.w600,
+                        // START BUTTON
+                        InkWell(
+                            onTap: () {
+                              controller.startTimer();
+                              controller.startTheGame();
+                            },
+                            child: Center(
+                              child: Container(
+                                width: 20.w,
+                                height: 55,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: AppColors.redPrimary,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Text(
+                                  AppConstant.start,
+                                  style: TextStyle(
+                                    fontFamily: AppConstant.sansFont,
+                                    color: AppColors.whitePrimary,
+                                    fontSize: 1.4.w,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
 
                     // ROTATE ICON
                     WebButtonIcon(
                         icon: Images.iconRotate,
                         width: 2.4.w,
                         height: 2.4.w,
-                        onTap: (){
+                        onTap: () {
                           controller.toggleOrientation();
                         })
                   ],
@@ -278,39 +279,40 @@ class WebBoard extends StatelessWidget {
               ),
               //SPACE
               SizedBox(height: 5),
-              controller.isStart == true?
+              controller.isStart == true
+                  ?
 
-              // SCORE TEXT
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppConstant.scoreText,
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whitePrimary,
-                        fontSize: 1.6.w,
-                        fontWeight: FontWeight.w600,
+                  // SCORE TEXT
+                  Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppConstant.scoreText,
+                            style: TextStyle(
+                              fontFamily: AppConstant.sansFont,
+                              color: AppColors.whitePrimary,
+                              fontSize: 1.6.w,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            controller.score.toString(),
+                            style: TextStyle(
+                              fontFamily: AppConstant.sansFont,
+                              color: AppColors.whitePrimary,
+                              fontSize: 1.6.w,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      controller.score.toString(),
-                      style: TextStyle(
-                        fontFamily: AppConstant.sansFont,
-                        color: AppColors.whitePrimary,
-                        fontSize: 1.6.w,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ) : const  SizedBox(),
+                    )
+                  : const SizedBox(),
             ],
           ),
         ),
-      );
+      ),
+    );
   }
 }
-
-
