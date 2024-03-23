@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:fretboard/repositories/fretboard_repository.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
-import '../data/api/api_provider.dart';
 
 class LeaderBoardController extends GetxController {
   RxBool isLoading = false.obs;
@@ -20,16 +20,15 @@ class LeaderBoardController extends GetxController {
 
   getDataFromApi(){
     getUserName();
-    getLearderBoard();
+    getLeaderBoard();
   }
 
   getUserName()async {
     var usernames  =  await LocalDB.getUserName;
     username.value = usernames!;
-    print("THE USER NAME IS $usernames");
   }
 
-  Future<dynamic> getLearderBoard() async {
+  Future<dynamic> getLeaderBoard() async {
     scoreList([]);
     isLoading(true);
    var  value = await compute(getLeaderBoardApiRequest,gameType);
@@ -43,8 +42,7 @@ class LeaderBoardController extends GetxController {
 
   static Future<dynamic> getLeaderBoardApiRequest(gameType) async {
     List scoredList =[];
-    debugPrint("URL: ${ApiProvider().getLeaderboardApi}${gameType} ");
-    var response =  await ApiProvider().getRequest("${ApiProvider().getLeaderboardApi}${gameType}");
+    var response =  await FretBoardRepository().getRequest("${FretBoardRepository().getLeaderboardApi}${gameType}");
     for (var scores in response['leaderboard']) {
       scoredList.add(scores);
     }
@@ -68,10 +66,6 @@ class LeaderBoardController extends GetxController {
     if (highestScorer != null) {
       highestUserScore.value = highestScorer.toString();
       highScore.value = highestScore.toString();
-      print(
-          "The user with the highest score is $highestScorer with a score of $highestScore");
-    } else {
-      print("No user with a positive score found in the leaderboard.");
     }
     update();
     return highestScorer;

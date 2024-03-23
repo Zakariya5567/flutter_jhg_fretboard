@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
-import 'package:fretboard/utils/app_constant.dart';
-import 'package:fretboard/utils/app_subscription.dart';
+import 'package:fretboard/app_utils/app_strings.dart';
+import 'package:fretboard/app_utils/app_subscription.dart';
+import 'package:fretboard/views/screens/home/home_screen.dart';
 import 'package:get/get.dart';
-import 'package:fretboard/screens/home_screen/home_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:reg_page/reg_page.dart';
 
-
-Future<void> main() async{
-
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -19,7 +17,6 @@ Future<void> main() async{
   ]);
 
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatefulWidget {
@@ -30,7 +27,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   PackageInfo packageInfo = PackageInfo(
     appName: '',
     packageName: '',
@@ -48,45 +44,44 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
-      packageInfo = info;
+    packageInfo = info;
   }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent, // Transparent status bar
       statusBarBrightness: Brightness.dark, // Dark text for status bar
     ));
 
     return FlutterSizer(
-      builder: (BuildContext , Orientation , ScreenType ) {
+      builder: (BuildContext, Orientation, ScreenType) {
         return GetMaterialApp(
-            builder: (context, child){
-              return  MediaQuery(data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0), child: child!,);
-              },
-            debugShowCheckedModeBanner: false,
-            title: 'JHG fretboard',
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
-           // home:  const HomeScreen()
-            home:
-            kIsWeb ?  const HomeScreen() :
-
-            SplashScreen(
-            yearlySubscriptionId: yearlySubscription(),
-            monthlySubscriptionId: monthlySubscription(),
-            appName: AppConstant.appName,
-            appVersion: packageInfo.version,
-            nextPage: () => const HomeScreen(),
+          builder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: child!,
+            );
+          },
+          debugShowCheckedModeBanner: false,
+          title: 'JHG fretboard',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
           ),
+          // home:  const HomeScreen()
+          home: kIsWeb
+              ? const HomeScreen()
+              : SplashScreen(
+                  yearlySubscriptionId: yearlySubscription(),
+                  monthlySubscriptionId: monthlySubscription(),
+                  appName: AppStrings.appName,
+                  appVersion: packageInfo.version,
+                  nextPage: () => const HomeScreen(),
+                ),
         );
       },
     );
   }
 }
-
-

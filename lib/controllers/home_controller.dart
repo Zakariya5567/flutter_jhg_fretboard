@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fretboard/models/freth_list.dart';
+import 'package:fretboard/repositories/fretboard_repository.dart';
 import 'package:reg_page/reg_page.dart';
-import '../data/api/api_provider.dart';
-import '../data/model/freth_list.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart' show compute, kIsWeb;
 
@@ -21,7 +21,6 @@ class HomeController extends GetxController {
 
   getUserName()async {
     var userName  =  await LocalDB.getUserName;
-    print("THE USER NAME IS $userName");
   }
 
   // Initialize  animation controller
@@ -66,17 +65,6 @@ class HomeController extends GetxController {
              selectedString = str;
              selectedNote = note;
 
-             print("Highlight note: $highlightNode");
-             print("selected note: $selectedNote");
-
-             print("Highlight string: $highlightString");
-             print("selected string : $selectedString");
-
-             print("highlight fret : $highlightFret");
-             print("selected fret : $selectedFret");
-
-
-
              await player.play(AssetSource(element.fretSound!),volume: 1.0);
              if(highlightNode == selectedNote  && selectedString == highlightString ){
                previousHighlightFret = highlightFret;
@@ -116,15 +104,6 @@ class HomeController extends GetxController {
              selectedFret = index;
              selectedString = str;
              selectedNote = note;
-
-             print("Highlight note: $highlightNode");
-             print("selected note: $selectedNote");
-
-             print("Highlight string: $highlightString");
-             print("selected string : $selectedString");
-
-             print("highlight fret : $highlightFret");
-             print("selected fret : $selectedFret");
 
              await player.play(AssetSource(element.fretSound!),volume: 1.0);
              if(highlightNode == selectedNote  && selectedString == highlightString ){
@@ -217,9 +196,6 @@ class HomeController extends GetxController {
   highlightFret = randomIndex;
   highlightNode = fretList[randomIndex].note;
   highlightString = fretList[randomIndex].string;
-  print("Highlight note ========>>>>: $highlightNode");
-  print("Highlight fret ========>>>>: $highlightFret");
-  print("Highlight string ========>>>>: $highlightString");
   update();
 }
 
@@ -242,9 +218,6 @@ class HomeController extends GetxController {
     previousHighlightNode = highlightNode;
     highlightNode = fretList[randomIndex].note;
     highlightString = fretList[randomIndex].string;
-    print("Highlight note ========>>>>: $highlightNode");
-    print("Highlight fret ========>>>>: $highlightFret");
-    print("Highlight string ========>>>>: $highlightString");
     update();
   }
 // TIMER
@@ -503,12 +476,11 @@ bool getStringStatus(int id){
 
   Future<dynamic> updateScore(score) async {
     var response = await compute(updateScoreApiRequest, "FretboardTrainer");
-    print(response);
     return response;
   }
 
   Future<dynamic> updateScoreApiRequest(gameType) async {
-    var response = await ApiProvider().postRequest("${ApiProvider().updateScoreApi}/$gameType/$userName", {'score': score});
+    var response = await FretBoardRepository().postRequest("${FretBoardRepository().updateScoreApi}/$gameType/$userName", {'score': score});
     return response;
   }
 
