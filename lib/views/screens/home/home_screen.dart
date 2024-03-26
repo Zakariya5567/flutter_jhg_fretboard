@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           init: HomeController(),
           builder: (controller) {
             return LayoutBuilder(builder: (context, constraints) {
-              if (constraints.maxWidth >= 400) {
+              if (constraints.maxWidth >= 450) {
                 return Container(
                   height: height,
                   width: width,
