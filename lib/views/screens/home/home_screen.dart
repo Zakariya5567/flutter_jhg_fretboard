@@ -7,9 +7,11 @@ import 'package:fretboard/views/screens/home/widgets/web_board.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:fretboard/controllers/home_controller.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -35,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   HomeController? homeController;
+
   @override
   void didChangeDependencies() {
     homeController = Get.put(HomeController());
@@ -50,27 +53,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       body: GetBuilder<HomeController>(
           init: HomeController(),
           builder: (controller) {
-            return LayoutBuilder(builder: (context, constraints) {
-              if (constraints.maxWidth >= 450) {
-                return Container(
-                  height: height,
-                  width: width,
-                  color: JHGColors.secondryBlack,
-                  child: WebBoard(controller: controller),
-                );
-              } else {
-                return Container(
-                  height: height,
-                  width: width,
-                  color: JHGColors.secondryBlack,
-                  child: controller.isPortrait == true
-                      ? JHGBody(body: PortraitBoard(controller: controller))
-                      : JHGBody(
-                          padding: EdgeInsets.symmetric(vertical: 24),
-                          body: LandscapeBoard(controller: controller)),
-                );
-              }
-            });
+            return kIsWeb
+                ? Container(
+                    height: height,
+                    width: width,
+                    color: JHGColors.secondryBlack,
+                    child: WebBoard(controller: controller),
+                  )
+                : Container(
+                    height: height,
+                    width: width,
+                    color: JHGColors.secondryBlack,
+                    child: controller.isPortrait == true
+                        ? JHGBody(body: PortraitBoard(controller: controller))
+                        : JHGBody(
+                            padding: EdgeInsets.symmetric(vertical: 24),
+                            body: LandscapeBoard(controller: controller)),
+                  );
           }),
     );
   }
