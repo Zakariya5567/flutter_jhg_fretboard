@@ -216,6 +216,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     yearlySubscriptionId: yearlySubscription(),
                     monthlySubscriptionId: monthlySubscription(),
                     appVersion: packageInfo.version,
+                    featuresList: getFeaturesList(),
                     appName: AppStrings.appName,
                     nextPage: () => const HomeScreen(),
                   );
@@ -540,7 +541,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     SizedBox(height: 20),
                   ],
                 ),
-
               ),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 20),
@@ -555,7 +555,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
               ),
-              SizedBox(height:  height * 0.030,),
+              SizedBox(
+                height: height * 0.030,
+              ),
             ],
           ),
         ),

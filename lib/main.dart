@@ -78,6 +78,7 @@ class _MyAppState extends State<MyApp> {
                   monthlySubscriptionId: monthlySubscription(),
                   appName: AppStrings.appName,
                   appVersion: packageInfo.version,
+                  featuresList: getFeaturesList(),
                   nextPage: () => const HomeScreen(),
                 ),
         );
