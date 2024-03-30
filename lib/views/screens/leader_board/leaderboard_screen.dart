@@ -9,6 +9,7 @@ import 'package:fretboard/controllers/leaderboard_controller.dart';
 import 'package:fretboard/views/screens/leader_board/widgets/leaderboard_widget.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class LeadershipScreen extends StatelessWidget {
   String? intervalType;
   LeadershipScreen({this.intervalType, super.key});
@@ -59,7 +60,7 @@ class LeaderPortraitView extends StatelessWidget {
           width: 8.w,
         ),
         trailingWidget: JHGIconButton(
-          size: 30,
+          size: 24,
           onTap: () => Get.back(),
           svgImg: AppAssets.svg_forward_button,
         ),
@@ -160,7 +161,7 @@ class LeaderLandscapeView extends StatelessWidget {
                 width: 8.w,
               ),
               trailingWidget: JHGIconButton(
-                size: 30,
+                size: 24,
                 onTap: () => Get.back(),
                 svgImg: AppAssets.svg_forward_button,
               ),

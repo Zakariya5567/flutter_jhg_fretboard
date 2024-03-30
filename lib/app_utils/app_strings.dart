@@ -13,6 +13,7 @@ class AppStrings {
   static const String strings = 'Strings';
   static String user = "User";
   static String scoreTemp = "score";
+  static String reportAnIssue = "Report an Issue";
 
   static const String string1 = 'String 1';
   static const String string2 = 'String 2';

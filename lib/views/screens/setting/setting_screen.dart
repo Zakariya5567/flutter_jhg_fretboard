@@ -114,19 +114,45 @@ class _SettingScreenState extends State<SettingScreen> {
       required double width}) {
     return JHGBody(
       bgColor: JHGColors.secondryBlack,
-      bodyAppBar: JHGAppBar(
-        trailingWidget: JHGReportAnIssueBtn(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BugReportPage(
-                  device: deviceName,
-                  appName: AppStrings.appName,
-                ),
+      bodyAppBar: Padding(
+        padding: EdgeInsets.symmetric(vertical: kVrSpace),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            JHGBackButton(),
+            FittedBox(
+                child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BugReportPage(
+                      device: deviceName,
+                      appName: AppStrings.appName,
+                    ),
+                  ),
+                );
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.error_outline_rounded,
+                    color: JHGColors.primary,
+                    size: 16,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    AppStrings.reportAnIssue,
+                    style: TextStyle(
+                      color: JHGColors.primary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
-            );
-          },
+            ))
+          ],
         ),
       ),
       body: Container(

@@ -170,6 +170,7 @@ class PortraitBoard extends StatelessWidget {
                   )
                 : JHGPrimaryBtn(
                     label: AppStrings.start,
+                    height: 45,
                     onPressed: () {
                       controller.startTimer();
                       controller.startTheGame();

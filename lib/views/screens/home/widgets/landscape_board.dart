@@ -92,11 +92,8 @@ class LandscapeBoard extends StatelessWidget {
           ),
 
           // BOARD
-
-          Container(
-            //color: Colors.blueGrey,
+          Expanded(child: Container(
             height: height * 0.75,
-            width: width,
             child: Row(
               children: [
                 Spacer(),
@@ -107,6 +104,7 @@ class LandscapeBoard extends StatelessWidget {
                         quarterTurns: 1,
                         child: JHGPrimaryBtn(
                           label: AppStrings.start,
+                          height: 45,
                           width: width * 0.45,
                           onPressed: () {
                             controller.startTimer();
@@ -228,11 +226,11 @@ class LandscapeBoard extends StatelessWidget {
                 Spacer(),
               ],
             ),
-          ),
+          )),
 
           //SPACER
           SizedBox(
-            height: height * 0.036,
+            height: height * 0.025,
           ),
 
           Container(
