@@ -382,6 +382,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     monthlySubscriptionId:
                                         monthlySubscription(),
                                     appVersion: packageInfo.version,
+                                    featuresList: getFeaturesList(),
                                     appName: AppStrings.appName,
                                     nextPage: () => const HomeScreen(),
                                   );
