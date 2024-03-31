@@ -14,6 +14,8 @@ class AppStrings {
   static String user = "User";
   static String scoreTemp = "score";
   static String reportAnIssue = "Report an Issue";
+  static String timerInterval = 'Timer Interval';
+  static String enterSeconds = "Enter Seconds";
 
   static const String string1 = 'String 1';
   static const String string2 = 'String 2';

@@ -13,6 +13,7 @@ class PortraitBoard extends StatelessWidget {
   const PortraitBoard({super.key, required this.controller});
 
   final HomeController controller;
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -170,7 +171,8 @@ class PortraitBoard extends StatelessWidget {
                   )
                 : JHGPrimaryBtn(
                     label: AppStrings.start,
-                    height: 45,
+                    height: 50,
+                    width: width * 0.45,
                     onPressed: () {
                       controller.startTimer();
                       controller.startTheGame();

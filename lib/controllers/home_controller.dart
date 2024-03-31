@@ -4,6 +4,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fretboard/models/freth_list.dart';
 import 'package:fretboard/repositories/fretboard_repository.dart';
+import 'package:fretboard/services/local_db_service.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart' show compute, kIsWeb;
@@ -11,137 +12,144 @@ import 'package:flutter/foundation.dart' show compute, kIsWeb;
 import 'leaderboard_controller.dart';
 
 class HomeController extends GetxController {
-
   // Instance of the Player
   final player = AudioPlayer();
   int? selectedFret;
   String? selectedNote;
   int? selectedString;
   String? userName;
+  TextEditingController timerIntervalEditingController =
+      new TextEditingController();
+  TextEditingController minutesEditingController = new TextEditingController();
+  String defaultTimerSelectedValue = "Stopwatch";
 
-  getUserName()async {
-    var userName  =  await LocalDB.getUserName;
+  getUserName() async {
+    var userName = await LocalDB.getUserName;
   }
 
   // Initialize  animation controller
-  initializeData()async{
-     isStart = false;
-     selectedFret = null;
-     selectedString = null;
-     selectedNote = null;
-     highlightFret = null;
-     highlightString = null;
-     highlightNode = null;
-     previousHighlightFret = null;
-     previousHighlightNode = null;
-     score = 0;
-     timer =  null;
-     //isTimerSet = false;
-     secondsRemaining.value = 0;
-     timerMode = false;
-     leaderboardMode  = false;
-     await getUserName();
-     update();
+  initializeData() async {
+    isStart = false;
+    selectedFret = null;
+    selectedString = null;
+    selectedNote = null;
+    highlightFret = null;
+    highlightString = null;
+    highlightNode = null;
+    previousHighlightFret = null;
+    previousHighlightNode = null;
+    score = 0;
+    timer = null;
+    //isTimerSet = false;
+    secondsRemaining.value = 0;
+    timerMode = false;
+    leaderboardMode = false;
+    int seconds = await SharedPref.getTimerIntervalValue();
+    int minutes = await SharedPref.getDefaultTimerMinutesValue();
+    String? defaultTimerType = await SharedPref.getDefaultTimerTypeValue();
+    if (defaultTimerType != null) {
+      defaultTimerSelectedValue = defaultTimerType;
+    }
+    minutesEditingController.text = minutes.toString();
+    timerIntervalEditingController.text = seconds.toString();
+    await getUserName();
+    update();
   }
 
   // PLAY SOUND ACCORDING TO SELECTED NOTES , STRING AND FRET
-  Future playSound(int index,String note,int str)async{
+  Future playSound(int index, String note, int str) async {
+    if (kIsWeb) {
+      // STOP SOUND IF PLAYING
+      await player.stop();
+      // EXECUTE LOOP
+      fretList.forEach((element) async {
+        // if(element.id == index){
+        if (element.note == note && element.string == str) {
+          // GET ALLOW STRING STATUS
+          final stringStatus = getStringStatus(element.string!);
 
-     if(kIsWeb){
+          // CHECK IF THE STATUS IS TRUE AND GAME IS START
+          // THEN WE WILL HIGHLIGHT THINGS
+          if (stringStatus == true && isStart == true) {
+            selectedFret = index;
+            selectedString = str;
+            selectedNote = note;
 
-       // STOP SOUND IF PLAYING
-       await player.stop();
-       // EXECUTE LOOP
-       fretList.forEach((element) async {
-         // if(element.id == index){
-         if(element.note == note && element.string == str){
-           // GET ALLOW STRING STATUS
-           final stringStatus = getStringStatus(element.string!);
+            await player.play(AssetSource(element.fretSound!), volume: 1.0);
+            if (highlightNode == selectedNote &&
+                selectedString == highlightString) {
+              previousHighlightFret = highlightFret;
+              previousHighlightNode = highlightNode;
+              incrementScore();
+              highLightTheGame();
+              Future.delayed(Duration(milliseconds: 300), () {
+                selectedFret = null;
+                update();
+              });
+            } else {
+              decrementScore();
+            }
+            update();
+          } else {
+            await player.play(AssetSource(element.fretSound!), volume: 1.0);
+          }
+          return;
+        }
+      });
+    } else {
+      // STOP SOUND IF PLAYING
+      await player.stop();
+      // EXECUTE LOOP
+      fretList.forEach((element) async {
+        // if(element.id == index){
+        if (element.note == note && element.string == str) {
+          // GET ALLOW STRING STATUS
+          final stringStatus = getStringStatus(element.string!);
 
-           // CHECK IF THE STATUS IS TRUE AND GAME IS START
-           // THEN WE WILL HIGHLIGHT THINGS
-           if(stringStatus == true && isStart == true){
-             selectedFret = index;
-             selectedString = str;
-             selectedNote = note;
+          // CHECK IF THE STATUS IS TRUE AND GAME IS START
+          // THEN WE WILL HIGHLIGHT THINGS
+          if (stringStatus == true && isStart == true) {
+            selectedFret = index;
+            selectedString = str;
+            selectedNote = note;
 
-             await player.play(AssetSource(element.fretSound!),volume: 1.0);
-             if(highlightNode == selectedNote  && selectedString == highlightString ){
-               previousHighlightFret = highlightFret;
-               previousHighlightNode = highlightNode;
-               incrementScore();
-               highLightTheGame();
-               Future.delayed(Duration(milliseconds:300),(){
-                 selectedFret = null;
-                 update();
-               });
-             }else{
-               decrementScore();
-             }
-             update();
-           }else{
-             await player.play(AssetSource(element.fretSound!),volume: 1.0);
-           }
-           return;
-         }
-       });
-
-     }
-     else{
-       // STOP SOUND IF PLAYING
-       await player.stop();
-       // EXECUTE LOOP
-       fretList.forEach((element) async {
-         // if(element.id == index){
-         if(element.note == note && element.string == str){
-
-           // GET ALLOW STRING STATUS
-           final stringStatus = getStringStatus(element.string!);
-
-           // CHECK IF THE STATUS IS TRUE AND GAME IS START
-           // THEN WE WILL HIGHLIGHT THINGS
-           if(stringStatus == true && isStart == true){
-             selectedFret = index;
-             selectedString = str;
-             selectedNote = note;
-
-             await player.play(AssetSource(element.fretSound!),volume: 1.0);
-             if(highlightNode == selectedNote  && selectedString == highlightString ){
-               previousHighlightFret = highlightFret;
-               previousHighlightNode = highlightNode;
-               incrementScore();
-               highLightTheGame();
-               Future.delayed(Duration(milliseconds:300),(){
-                 selectedFret = null;
-                 update();
-               });
-             }else{
-               decrementScore();
-             }
-             update();
-           }else{
-             await player.play(AssetSource(element.fretSound!),volume: 1.0);
-           }
-           return;
-         }
-       });
-     }
-
+            await player.play(AssetSource(element.fretSound!), volume: 1.0);
+            if (highlightNode == selectedNote &&
+                selectedString == highlightString) {
+              previousHighlightFret = highlightFret;
+              previousHighlightNode = highlightNode;
+              incrementScore();
+              highLightTheGame();
+              Future.delayed(Duration(milliseconds: 300), () {
+                selectedFret = null;
+                update();
+              });
+            } else {
+              decrementScore();
+            }
+            update();
+          } else {
+            await player.play(AssetSource(element.fretSound!), volume: 1.0);
+          }
+          return;
+        }
+      });
+    }
   }
 
   // SCALE FOR ORIENTATION ANIMATION
-  double scale  = 1 ;
+  double scale = 1;
+
   bool isPortrait = true;
 
   void toggleOrientation() {
-
-    scale  = 0.5;
-    Future.delayed(const Duration(milliseconds: 100),(){
+    scale = 0.5;
+    Future.delayed(const Duration(milliseconds: 100), () {
       isPortrait = !isPortrait;
       update();
     });
-    Future.delayed(const Duration(milliseconds: 300),(){
-      scale  = 1;
+    Future.delayed(const Duration(milliseconds: 300), () {
+      scale = 1;
       update();
     });
   }
@@ -151,33 +159,30 @@ class HomeController extends GetxController {
   // Correct increment , incorrect decrement
   int score = 0;
 
-  incrementScore(){
-    score = score +1;
+  incrementScore() {
+    score = score + 1;
     update();
   }
 
-  decrementScore(){
-    score = score -1;
+  decrementScore() {
+    score = score - 1;
     update();
   }
 
- //Modes
+  //Modes
 
   bool timerMode = false;
   bool leaderboardMode = false;
 
-  setTimerMode(bool mode){
+  setTimerMode(bool mode) {
     timerMode = mode;
     update();
   }
 
-  setLeaderMode(bool mode){
+  setLeaderMode(bool mode) {
     leaderboardMode = mode;
     update();
   }
-
-
-
 
   // START THE GAME
   // SELECT AND HIGHLIGHT STRING, FRET AND NOTE
@@ -190,27 +195,27 @@ class HomeController extends GetxController {
   int? previousHighlightFret;
 
   // WHEN PRESS CORRECT NOTE THEN HIGHLIGHT ANOTHER ONE TO SELECT
- highLightTheGame(){
-  // Get randomly highlight node
-  int randomIndex = getRandomIndex();
-  highlightFret = randomIndex;
-  highlightNode = fretList[randomIndex].note;
-  highlightString = fretList[randomIndex].string;
-  update();
-}
+  highLightTheGame() {
+    // Get randomly highlight node
+    int randomIndex = getRandomIndex();
+    highlightFret = randomIndex;
+    highlightNode = fretList[randomIndex].note;
+    highlightString = fretList[randomIndex].string;
+    update();
+  }
 
 // GET RANDOM INDEX ACCORDING TO  ALLOW STRING
- getRandomIndex() {
+  getRandomIndex() {
     Random random = Random();
     int randomIndex;
     do {
       randomIndex = random.nextInt(fretList.length);
-    } while (getStringStatus(fretList[randomIndex].string!) == false );
+    } while (getStringStatus(fretList[randomIndex].string!) == false);
     return randomIndex;
   }
 
   // START THE GAME ON START BUTTON
-  startTheGame(){
+  startTheGame() {
     isStart = true;
     int randomIndex = getRandomIndex();
     highlightFret = randomIndex;
@@ -220,29 +225,32 @@ class HomeController extends GetxController {
     highlightString = fretList[randomIndex].string;
     update();
   }
+
 // TIMER
 
-
- // int secondsRemaining = 0; // Initial countdown time in seconds
+  // int secondsRemaining = 0; // Initial countdown time in seconds
   Timer? timer;
- // bool isTimerSet = false;
 
-  increaseTime(){
-    if (isStart != true){
-      secondsRemaining.value = secondsRemaining.value+10;
+  // bool isTimerSet = false;
+
+  increaseTime() {
+    if (isStart != true) {
+      secondsRemaining.value = secondsRemaining.value +
+          int.parse(timerIntervalEditingController.text);
       update();
     }
   }
 
-  decreaseTime(){
-    if(secondsRemaining.value>10 && isStart != true ){
-      secondsRemaining.value = secondsRemaining.value-10;
+  decreaseTime() {
+    if (secondsRemaining.value > 10 && isStart != true) {
+      secondsRemaining.value = secondsRemaining.value -
+          int.parse(timerIntervalEditingController.text);
       update();
     }
   }
 
-  resetGame(bool resetAll){
-    if(timer != null){
+  resetGame(bool resetAll) {
+    if (timer != null) {
       timer!.cancel();
     }
     isStart = false;
@@ -256,36 +264,36 @@ class HomeController extends GetxController {
     previousHighlightNode = null;
     score = 0;
     secondsRemaining.value = 0;
-   // isTimerSet = false;
-    timer =  null;
+    // isTimerSet = false;
+    timer = null;
 
-    if(resetAll == true){
-      if(timerMode == true){
+    if (resetAll == true) {
+      if (timerMode == true) {
         timerMode = false;
-      }else{
+      } else {
         leaderboardMode = false;
       }
     }
     update();
   }
 
-  resetTimer(){
+  resetTimer() {
     //isTimerSet = true;
-    if(timerMode == true){
-      secondsRemaining.value = 60;
-    }else if(leaderboardMode == true){
+    if (timerMode == true) {
+      secondsRemaining.value = 60 * int.parse(minutesEditingController.text);
+    } else if (leaderboardMode == true) {
       secondsRemaining.value = 120;
-    }else{
+    } else {
       secondsRemaining.value = 0;
     }
     update();
   }
 
-  startTimer(){
-    if(timerMode == true){
+  startTimer() {
+    if (timerMode == true) {
       startCountDownTimer();
-    }else if(leaderboardMode == true){
-      offString  = [true,true,true,true,true,true];
+    } else if (leaderboardMode == true) {
+      offString = [true, true, true, true, true, true];
       string1 = true;
       string2 = true;
       string3 = true;
@@ -294,132 +302,128 @@ class HomeController extends GetxController {
       string6 = true;
       notifyChildrens();
       startLeaderBoardCountDownTimer();
-    }
-    else{
+    } else {
       startCountUpTimer();
     }
-
   }
-
 
   String formatTime(int seconds) {
     // Format the remaining time as mm:ss
     int minutes = seconds ~/ 60;
     int remainingSeconds = seconds % 60;
     return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
-
   }
 
   //GET STRING STATUS WHICH STRING IS ALLOW
-bool getStringStatus(int id){
-
-    if(string1 == true && id == 1){
+  bool getStringStatus(int id) {
+    if (string1 == true && id == 1) {
       return true;
-    }
-    else if(string2 == true && id == 2){
+    } else if (string2 == true && id == 2) {
       return true;
-    }
-    else if(string3 == true && id == 3){
+    } else if (string3 == true && id == 3) {
       return true;
-    }
-    else if(string4 == true && id == 4){
+    } else if (string4 == true && id == 4) {
       return true;
-    }
-    else if(string5 == true && id == 5){
+    } else if (string5 == true && id == 5) {
       return true;
-    }
-    else if(string6 == true && id == 6){
-     return true;
-    }
-    else{
+    } else if (string6 == true && id == 6) {
+      return true;
+    } else {
       return false;
     }
-
   }
 
-
-  List offString  = [true,true,true,true,true,true];
+  List offString = [true, true, true, true, true, true];
 
   //STRING TOGGLES
   // STRING 1
   bool string1 = true;
-  setString1(int index){
+
+  setString1(int index) {
     string1 = !string1;
     offString[index] = string1;
-    if(!offString.contains(true)){
+    if (!offString.contains(true)) {
       offString[index] = true;
       string1 = true;
     }
-    update();}
+    update();
+  }
 
   // STRING 2
   bool string2 = true;
-  setString2(int index){
+
+  setString2(int index) {
     string2 = !string2;
     offString[index] = string2;
-    if(!offString.contains(true)){
+    if (!offString.contains(true)) {
       offString[index] = true;
       string2 = true;
     }
-    update();}
+    update();
+  }
 
   // STRING 3
   bool string3 = true;
-  setString3(int index){
+
+  setString3(int index) {
     string3 = !string3;
     offString[index] = string3;
-    if(!offString.contains(true)){
+    if (!offString.contains(true)) {
       offString[index] = true;
       string3 = true;
     }
-    update();}
+    update();
+  }
 
   // STRING 4
   bool string4 = true;
-  setString4(int index){
+
+  setString4(int index) {
     string4 = !string4;
     offString[index] = string4;
-    if(!offString.contains(true)){
+    if (!offString.contains(true)) {
       offString[index] = true;
       string4 = true;
     }
-    update();}
+    update();
+  }
 
   // STRING 5
   bool string5 = true;
-  setString5(int index){
+
+  setString5(int index) {
     string5 = !string5;
     offString[index] = string5;
-    if(!offString.contains(true)){
+    if (!offString.contains(true)) {
       offString[index] = true;
       string5 = true;
     }
-    update();}
+    update();
+  }
 
   // STRING 6
   bool string6 = true;
-  setString6(int index){
 
+  setString6(int index) {
     string6 = !string6;
     offString[index] = string6;
-    if(!offString.contains(true)){
+    if (!offString.contains(true)) {
       offString[index] = true;
       string6 = true;
     }
-    update();}
+    update();
+  }
 
   // Value Notifier listener
 
   ValueNotifier<int> secondsRemaining = ValueNotifier(0);
 
-
-
   startLeaderBoardCountDownTimer() {
-    if(secondsRemaining.value == 0){
+    if (secondsRemaining.value == 0) {
       secondsRemaining.value = 10;
     }
     update();
-    if(timer != null){
+    if (timer != null) {
       timer!.cancel();
     }
     // Create a timer that runs every second
@@ -438,11 +442,11 @@ bool getStringStatus(int id){
   }
 
   startCountDownTimer() {
-    if(secondsRemaining.value == 0){
-      secondsRemaining.value = 60;
+    if (secondsRemaining.value == 0) {
+      secondsRemaining.value = 60 * int.parse(minutesEditingController.text);
     }
     update();
-    if(timer != null){
+    if (timer != null) {
       timer!.cancel();
     }
     // Create a timer that runs every second
@@ -455,7 +459,6 @@ bool getStringStatus(int id){
         timer.cancel();
         // Cancel the timer when the countdown reaches 0
         update();
-
       }
     });
   }
@@ -463,7 +466,7 @@ bool getStringStatus(int id){
   startCountUpTimer() {
     secondsRemaining.value = 0;
     update();
-    if(timer != null){
+    if (timer != null) {
       timer!.cancel();
     }
     // Create a timer that runs every second
@@ -473,17 +476,54 @@ bool getStringStatus(int id){
     });
   }
 
-
   Future<dynamic> updateScore(score) async {
     var response = await compute(updateScoreApiRequest, "FretboardTrainer");
     return response;
   }
 
   Future<dynamic> updateScoreApiRequest(gameType) async {
-    var response = await FretBoardRepository().postRequest("${FretBoardRepository().updateScoreApi}/$gameType/$userName", {'score': score});
+    var response = await FretBoardRepository().postRequest(
+        "${FretBoardRepository().updateScoreApi}/$gameType/$userName",
+        {'score': score});
     return response;
   }
 
-
+  void onClickSave(BuildContext context) async {
+    String seconds = timerIntervalEditingController.text;
+    String minutes = minutesEditingController.text;
+    SharedPref.storeDefaultTimerTypeValue(defaultTimerSelectedValue);
+    if (defaultTimerSelectedValue == "Countdown") {
+      if (seconds.isNotEmpty && minutes.isNotEmpty) {
+        if (int.parse(seconds) < 10) {
+          showToast(
+              context: context,
+              message:
+                  "Timer interval seconds should be greater then or equal to 10",
+              isError: true);
+        } else if (int.parse(minutes) < 1) {
+          showToast(
+              context: context,
+              message: "Minutes should be greater then or equal to 1",
+              isError: true);
+        } else {
+          SharedPref.storeTimerIntervalValue(seconds);
+          SharedPref.storeDefaultTimerMinutesValue(minutes);
+          Navigator.pop(context);
+        }
+      } else if (seconds.isEmpty) {
+        showToast(
+            context: context,
+            message:
+                "Timer interval seconds should be greater then or equal to 10",
+            isError: true);
+      } else if (minutes.isEmpty) {
+        showToast(
+            context: context,
+            message: "Minutes should be greater then or equal to 1",
+            isError: true);
+      }
+    } else {
+      Navigator.pop(context);
+    }
+  }
 }
-

@@ -104,7 +104,7 @@ class LandscapeBoard extends StatelessWidget {
                         quarterTurns: 1,
                         child: JHGPrimaryBtn(
                           label: AppStrings.start,
-                          height: 45,
+                          height: 50,
                           width: width * 0.45,
                           onPressed: () {
                             controller.startTimer();
