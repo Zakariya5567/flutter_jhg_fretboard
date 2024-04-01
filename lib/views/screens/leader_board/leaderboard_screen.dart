@@ -23,7 +23,7 @@ class LeadershipScreen extends StatelessWidget {
           init: LeaderBoardController(),
           builder: (controller) {
             return LayoutBuilder(builder: (context, constraints) {
-              if (constraints.maxWidth >= 400) {
+              if (constraints.maxWidth >= 450) {
                 return LeaderWebView(
                   controller: controller,
                 );
