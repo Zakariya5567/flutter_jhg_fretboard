@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/app_utils/app_strings.dart';
@@ -49,21 +50,25 @@ class PortraitBoard extends StatelessWidget {
               },
             ),
           ),
-          Spacer(),
+          SizedBox(
+            height: height * 0.01,
+          ),
 
           // BOARD WITH NUMBER
-          Padding(
-            padding: EdgeInsets.only(left: width * 0.070),
-            child: Container(
-                //color: Colors.red,
-                height:
-                    controller.isStart == true ? height * 0.64 : height * 0.64,
-                child: const GuitarBoard(
-                  isPortrait: true,
-                )),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(left: width * 0.070),
+              child: Container(
+                  //color: Colors.red,
+                  child: const GuitarBoard(
+                    isPortrait: true,
+                  )),
+            ),
           ),
           //SPACER
-          Spacer(),
+          SizedBox(
+            height: height * 0.02,
+          ),
 
           // TIMER
           Row(

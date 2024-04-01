@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_subscription.dart';
@@ -67,7 +68,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'JHG fretboard',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(seedColor: JHGColors.primary),
             useMaterial3: true,
           ),
           // home:  const HomeScreen()

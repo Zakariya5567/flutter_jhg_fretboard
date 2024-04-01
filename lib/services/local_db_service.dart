@@ -55,7 +55,7 @@ class SharedPref {
 
   static Future<void> storeDefaultTimerTypeValue(String value) async {
     final pref = await LocalDB.getPref;
-    pref!.setInt(defaultTimerTypeKey, int.parse(value));
+    pref!.setString(defaultTimerTypeKey, value);
   }
 
   static Future<String?> getDefaultTimerTypeValue() async {

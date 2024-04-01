@@ -231,10 +231,10 @@ class _SettingScreenState extends State<SettingScreen> {
                         controller.setString1(5);
                       }),
                   JHGSettingsDefaultTimer(
-                      selectedValue: controller.defaultTimerSelectedValue,
+                      selectedValue: controller.defaultTimerSelectedValue.value,
                       onChanged: (String? value) {
                         if (value != null) {
-                          controller.defaultTimerSelectedValue = value;
+                          controller.defaultTimerSelectedValue.value = value;
                         }
                       },
                       minutesController: controller.minutesEditingController,
@@ -408,10 +408,10 @@ class _SettingScreenState extends State<SettingScreen> {
                       SizedBox(
                         width: height * 0.58,
                         child: JHGSettingsDefaultTimer(
-                            selectedValue: controller.defaultTimerSelectedValue,
+                            selectedValue: controller.defaultTimerSelectedValue.value,
                             onChanged: (String? value) {
                               if (value != null) {
-                                controller.defaultTimerSelectedValue = value;
+                                controller.defaultTimerSelectedValue.value = value;
                               }
                             },
                             minutesController:
@@ -599,10 +599,10 @@ class _SettingScreenState extends State<SettingScreen> {
                             ),
                             JHGSettingsDefaultTimer(
                                 selectedValue:
-                                    controller.defaultTimerSelectedValue,
+                                    controller.defaultTimerSelectedValue.value,
                                 onChanged: (String? value) {
                                   if (value != null) {
-                                    controller.defaultTimerSelectedValue =
+                                    controller.defaultTimerSelectedValue.value =
                                         value;
                                   }
                                 },

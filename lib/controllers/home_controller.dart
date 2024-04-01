@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:fretboard/models/freth_list.dart';
 import 'package:fretboard/repositories/fretboard_repository.dart';
 import 'package:fretboard/services/local_db_service.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart' show compute, kIsWeb;
@@ -21,7 +22,7 @@ class HomeController extends GetxController {
   TextEditingController timerIntervalEditingController =
       new TextEditingController();
   TextEditingController minutesEditingController = new TextEditingController();
-  String defaultTimerSelectedValue = "Stopwatch";
+  RxString defaultTimerSelectedValue = "Stopwatch".obs;
 
   getUserName() async {
     var userName = await LocalDB.getUserName;
@@ -47,8 +48,9 @@ class HomeController extends GetxController {
     int seconds = await SharedPref.getTimerIntervalValue();
     int minutes = await SharedPref.getDefaultTimerMinutesValue();
     String? defaultTimerType = await SharedPref.getDefaultTimerTypeValue();
+    print("object===${defaultTimerType}");
     if (defaultTimerType != null) {
-      defaultTimerSelectedValue = defaultTimerType;
+      defaultTimerSelectedValue.value = defaultTimerType;
     }
     minutesEditingController.text = minutes.toString();
     timerIntervalEditingController.text = seconds.toString();
@@ -275,6 +277,8 @@ class HomeController extends GetxController {
       }
     }
     update();
+
+    resetTimer();
   }
 
   resetTimer() {
@@ -491,7 +495,6 @@ class HomeController extends GetxController {
   void onClickSave(BuildContext context) async {
     String seconds = timerIntervalEditingController.text;
     String minutes = minutesEditingController.text;
-    SharedPref.storeDefaultTimerTypeValue(defaultTimerSelectedValue);
     if (defaultTimerSelectedValue == "Countdown") {
       if (seconds.isNotEmpty && minutes.isNotEmpty) {
         if (int.parse(seconds) < 10) {
@@ -506,9 +509,10 @@ class HomeController extends GetxController {
               message: "Minutes should be greater then or equal to 1",
               isError: true);
         } else {
+          SharedPref.storeDefaultTimerTypeValue(defaultTimerSelectedValue.value);
           SharedPref.storeTimerIntervalValue(seconds);
           SharedPref.storeDefaultTimerMinutesValue(minutes);
-          Navigator.pop(context);
+          popup(context);
         }
       } else if (seconds.isEmpty) {
         showToast(
@@ -523,7 +527,13 @@ class HomeController extends GetxController {
             isError: true);
       }
     } else {
-      Navigator.pop(context);
+      SharedPref.storeDefaultTimerTypeValue(defaultTimerSelectedValue.value);
+      popup(context);
     }
+  }
+
+  void popup(BuildContext context){
+    resetTimer();
+    Navigator.pop(context);
   }
 }
