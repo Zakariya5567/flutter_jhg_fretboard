@@ -497,11 +497,11 @@ class HomeController extends GetxController {
     String minutes = minutesEditingController.text;
     if (defaultTimerSelectedValue == "Countdown") {
       if (seconds.isNotEmpty && minutes.isNotEmpty) {
-        if (int.parse(seconds) < 10) {
+        if (int.parse(seconds) < 1) {
           showToast(
               context: context,
               message:
-                  "Timer interval seconds should be greater then or equal to 10",
+                  "Timer interval seconds should be greater then or equal to 1",
               isError: true);
         } else if (int.parse(minutes) < 1) {
           showToast(
@@ -518,7 +518,7 @@ class HomeController extends GetxController {
         showToast(
             context: context,
             message:
-                "Timer interval seconds should be greater then or equal to 10",
+                "Timer interval seconds should be greater then or equal to 1",
             isError: true);
       } else if (minutes.isEmpty) {
         showToast(
