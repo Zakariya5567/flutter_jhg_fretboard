@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_assets.dart';
+import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/views/screens/home/widgets/guitar_board.dart';
 import 'package:fretboard/views/screens/leader_board/leaderboard_screen.dart';
@@ -38,15 +38,12 @@ class PortraitBoard extends StatelessWidget {
                     transition: Transition.leftToRight);
               },
             ),
-            trailingWidget: JHGSettingsButton(
+            trailingWidget: JHGSettingsOptBtn(
+              btnEnabled: !controller.leaderboardMode,
               onTap: () {
-                if (controller.leaderboardMode == true) {
-                  return;
-                } else {
-                  controller.resetGame(false);
-                  Get.to(() => SettingScreen(),
-                      transition: Transition.rightToLeft);
-                }
+                controller.resetGame(false);
+                Get.to(() => SettingScreen(),
+                    transition: Transition.rightToLeft);
               },
             ),
           ),
@@ -61,8 +58,8 @@ class PortraitBoard extends StatelessWidget {
               child: Container(
                   //color: Colors.red,
                   child: const GuitarBoard(
-                    isPortrait: true,
-                  )),
+                isPortrait: true,
+              )),
             ),
           ),
           //SPACER

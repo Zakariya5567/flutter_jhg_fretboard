@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_assets.dart';
+import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
+import 'package:fretboard/views/screens/home/widgets/web_guitar_board.dart';
 import 'package:fretboard/views/screens/leader_board/leaderboard_screen.dart';
 import 'package:fretboard/views/screens/setting/setting_screen.dart';
-import 'package:fretboard/views/screens/home/widgets/web_guitar_board.dart';
 import 'package:fretboard/views/widgets/add_sub_button.dart';
 import 'package:get/get.dart';
 
@@ -258,16 +258,12 @@ class WebBoard extends StatelessWidget {
                         Get.to(() => LeadershipScreen(),
                             transition: Transition.leftToRight);
                       }),
-                  trailingWidget: JHGSettingsButton(
-                    enabled: !controller.leaderboardMode,
+                  trailingWidget: JHGSettingsOptBtn(
+                    btnEnabled: !controller.leaderboardMode,
                     onTap: () {
-                      if (controller.leaderboardMode == true) {
-                        return;
-                      } else {
-                        controller.resetGame(false);
-                        Get.to(() => SettingScreen(),
-                            transition: Transition.rightToLeft);
-                      }
+                      controller.resetGame(false);
+                      Get.to(() => SettingScreen(),
+                          transition: Transition.rightToLeft);
                     },
                   ),
                 ),
