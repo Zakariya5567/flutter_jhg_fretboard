@@ -227,9 +227,7 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                         quarterTurns: widget.isPortrait ? 0 : 1,
                         child: Text(
                           index.toString(),
-                          style: TextStyle(
-                            color: JHGColors.white,
-                            fontWeight: FontWeight.bold,
+                          style: JHGTextStyles.lrlabelStyle.copyWith(
                             fontSize: 14,
                             height: widget.isPortrait == true ? 1.2 : 2,
                           ),

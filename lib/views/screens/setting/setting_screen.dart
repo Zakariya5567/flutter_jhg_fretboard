@@ -143,10 +143,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   SizedBox(width: 10),
                   Text(
                     AppStrings.reportAnIssue,
-                    style: TextStyle(
+                    style: JHGTextStyles.bodyStyle.copyWith(
                       color: JHGColors.primary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
@@ -175,18 +173,15 @@ class _SettingScreenState extends State<SettingScreen> {
                   Text(
                     AppStrings.strings,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: AppStrings.sansFont,
+                    style: JHGTextStyles.labelStyle.copyWith(
                       color: AppColors.whiteSecondary,
                       fontSize: 16,
-                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(height: height * 0.01),
                   Text(
                     AppStrings.stringDescription,
-                    style: TextStyle(
-                      fontFamily: AppStrings.sansFont,
+                    style: JHGTextStyles.subLabelStyle.copyWith(
                       color: AppColors.whiteSecondary,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -325,8 +320,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             Text(
                               AppStrings.strings,
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: AppStrings.sansFont,
+                              style:  JHGTextStyles.labelStyle.copyWith(
                                 color: AppColors.whiteSecondary,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -335,11 +329,9 @@ class _SettingScreenState extends State<SettingScreen> {
                             SizedBox(height: height * 0.01),
                             Text(
                               AppStrings.stringDescriptionLandscape,
-                              style: TextStyle(
-                                fontFamily: AppStrings.sansFont,
+                              style: JHGTextStyles.subLabelStyle.copyWith(
                                 color: AppColors.whiteSecondary,
                                 fontSize: 14,
-                                fontWeight: FontWeight.w500,
                               ),
                             ),
                             SizedBox(height: height * 0.015),
@@ -520,11 +512,9 @@ class _SettingScreenState extends State<SettingScreen> {
                           Text(
                             AppStrings.strings,
                             textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontFamily: AppStrings.sansFont,
+                            style: JHGTextStyles.smlabelStyle.copyWith(
                               color: AppColors.whiteSecondary,
                               fontSize: 1.6.w,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
 
@@ -534,11 +524,9 @@ class _SettingScreenState extends State<SettingScreen> {
                           Text(
                             AppStrings.stringDescriptionWeb,
                             textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontFamily: AppStrings.sansFont,
+                            style: JHGTextStyles.subLabelStyle.copyWith(
                               color: AppColors.whiteSecondary,
                               fontSize: 1.2.w,
-                              fontWeight: FontWeight.w500,
                             ),
                           ),
 

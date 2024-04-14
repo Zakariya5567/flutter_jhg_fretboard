@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/app_utils/app_%20colors.dart';
 import 'package:fretboard/app_utils/app_strings.dart';
@@ -25,11 +26,9 @@ class SettingToggle extends StatelessWidget {
           Text(
             heading,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: AppStrings.sansFont,
+            style: JHGTextStyles.labelStyle.copyWith(
               color: AppColors.whiteSecondary,
               fontSize: 16,
-              fontWeight: FontWeight.bold
             ),
           ),
           CustomSwitch(value: value, onChange: onChange,
@@ -61,11 +60,9 @@ class WebSettingToggle extends StatelessWidget {
           Text(
             heading,
             textAlign: TextAlign.center,
-            style: TextStyle(
-                fontFamily: AppStrings.sansFont,
+            style: JHGTextStyles.smlabelStyle.copyWith(
                 color: AppColors.whiteSecondary,
                 fontSize: 1.2.w,
-                fontWeight: FontWeight.bold
             ),
           ),
           WebCustomSwitch(value: value, onChange: onChange,)

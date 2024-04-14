@@ -1,5 +1,4 @@
 class AppStrings {
-  static const String sansFont = 'PlusJakartaSans-Regular';
   static const String appName = 'JHG Fretboard Trainer';
   static const String logout = 'Logout';
   static const String start = 'Start';

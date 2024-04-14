@@ -130,20 +130,14 @@ class LandscapeBoard extends StatelessWidget {
                               children: [
                                 Text(
                                   AppStrings.scoreText,
-                                  style: TextStyle(
-                                    fontFamily: AppStrings.sansFont,
-                                    color: JHGColors.white,
+                                  style: JHGTextStyles.labelStyle.copyWith(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                                 Text(
                                   controller.score.toString(),
-                                  style: TextStyle(
-                                    fontFamily: AppStrings.sansFont,
-                                    color: JHGColors.white,
+                                  style: JHGTextStyles.labelStyle.copyWith(
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ],
@@ -153,11 +147,9 @@ class LandscapeBoard extends StatelessWidget {
                               quarterTurns: 1,
                               child: Text(
                                 controller.highlightNode ?? "",
-                                style: TextStyle(
-                                  fontFamily: AppStrings.sansFont,
+                                style: JHGTextStyles.smlabelStyle.copyWith(
                                   color: JHGColors.primary,
                                   fontSize: 28,
-                                  fontWeight: FontWeight.bold,
                                 ),
                               )),
                         ],
@@ -187,11 +179,8 @@ class LandscapeBoard extends StatelessWidget {
                             builder: (context, value, child) {
                               return Text(
                                 controller.formatTime(value),
-                                style: TextStyle(
-                                  fontFamily: AppStrings.sansFont,
-                                  color: JHGColors.white,
+                                style: JHGTextStyles.lrlabelStyle.copyWith(
                                   fontSize: 36,
-                                  fontWeight: FontWeight.w700,
                                 ),
                               );
                             },

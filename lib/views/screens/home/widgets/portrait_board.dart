@@ -89,9 +89,7 @@ class PortraitBoard extends StatelessWidget {
                     return Text(
                       controller.formatTime(value),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: AppStrings.sansFont,
-                        color: JHGColors.white,
+                      style: JHGTextStyles.lrlabelStyle.copyWith(
                         fontSize: 36,
                         fontWeight: FontWeight.w600,
                       ),
@@ -163,11 +161,8 @@ class PortraitBoard extends StatelessWidget {
                     child: Text(
                       "    ${controller.highlightNode ?? ""}",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: AppStrings.sansFont,
+                      style: JHGTextStyles.mdlabelStyle.copyWith(
                         color: JHGColors.primary,
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   )
@@ -196,18 +191,13 @@ class PortraitBoard extends StatelessWidget {
                     children: [
                       Text(
                         AppStrings.scoreText,
-                        style: TextStyle(
-                          fontFamily: AppStrings.sansFont,
-                          color: JHGColors.white,
+                        style: JHGTextStyles.labelStyle.copyWith(
                           fontSize: 16,
-                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
                         controller.score.toString(),
-                        style: TextStyle(
-                          fontFamily: AppStrings.sansFont,
-                          color: JHGColors.white,
+                        style: JHGTextStyles.subLabelStyle.copyWith(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),

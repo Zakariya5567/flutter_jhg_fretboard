@@ -67,7 +67,7 @@ class _MyAppState extends State<MyApp> {
           },
           debugShowCheckedModeBanner: false,
           title: 'JHG fretboard',
-          theme: JHGTheme.themeData.copyWith(),
+          theme: JHGTheme.themeData,
           // home:  const HomeScreen()
           home: kIsWeb
               ? const HomeScreen()

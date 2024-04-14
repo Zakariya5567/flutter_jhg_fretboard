@@ -82,9 +82,7 @@ class WebBoard extends StatelessWidget {
                         return Text(
                           controller.formatTime(value),
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: AppStrings.sansFont,
-                            color: JHGColors.white,
+                          style: JHGTextStyles.subLabelStyle.copyWith(
                             fontSize: 2.5.w,
                             fontWeight: FontWeight.w600,
                           ),
@@ -179,8 +177,7 @@ class WebBoard extends StatelessWidget {
                               child: Text(
                                 "    ${controller.highlightNode ?? ""}",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: AppStrings.sansFont,
+                                style: JHGTextStyles.subLabelStyle.copyWith(
                                   color: JHGColors.primary,
                                   fontSize: 2.0.w,
                                   fontWeight: FontWeight.bold,
@@ -218,20 +215,14 @@ class WebBoard extends StatelessWidget {
                             children: [
                               Text(
                                 AppStrings.scoreText,
-                                style: TextStyle(
-                                  fontFamily: AppStrings.sansFont,
-                                  color: JHGColors.white,
+                                style: JHGTextStyles.labelStyle.copyWith(
                                   fontSize: 1.6.w,
-                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                               Text(
                                 controller.score.toString(),
-                                style: TextStyle(
-                                  fontFamily: AppStrings.sansFont,
-                                  color: JHGColors.white,
+                                style: JHGTextStyles.labelStyle.copyWith(
                                   fontSize: 1.6.w,
-                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ],

@@ -118,11 +118,11 @@ class LeaderPortraitView extends StatelessWidget {
                               children: [
                                 Text(
                                   AppStrings.user,
-                                  style: const TextStyle(color: Colors.white),
+                                  style: JHGTextStyles.subLabelStyle,
                                 ),
                                 Text(
                                   AppStrings.scoreTemp,
-                                  style: const TextStyle(color: Colors.white),
+                                  style: JHGTextStyles.subLabelStyle,
                                 )
                               ],
                             ),
@@ -230,13 +230,11 @@ class LeaderLandscapeView extends StatelessWidget {
                                           children: [
                                             Text(
                                               AppStrings.user,
-                                              style: const TextStyle(
-                                                  color: Colors.white),
+                                              style: JHGTextStyles.subLabelStyle,
                                             ),
                                             Text(
                                               AppStrings.scoreTemp,
-                                              style: const TextStyle(
-                                                  color: Colors.white),
+                                              style: JHGTextStyles.subLabelStyle,
                                             )
                                           ],
                                         ),
@@ -341,11 +339,11 @@ class LeaderWebView extends StatelessWidget {
                                 children: [
                                   Text(
                                     AppStrings.user,
-                                    style: const TextStyle(color: Colors.white),
+                                    style: JHGTextStyles.subLabelStyle,
                                   ),
                                   Text(
                                     AppStrings.scoreTemp,
-                                    style: const TextStyle(color: Colors.white),
+                                    style: JHGTextStyles.subLabelStyle,
                                   )
                                 ],
                               ),

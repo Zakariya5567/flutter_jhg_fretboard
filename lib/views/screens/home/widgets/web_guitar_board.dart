@@ -46,9 +46,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                               right: getLandscapeSpace(index, width)),
                           child: Text(
                             index.toString(),
-                            style: TextStyle(
-                              color: JHGColors.white,
-                              fontWeight: FontWeight.w500,
+                            style: JHGTextStyles.subLabelStyle.copyWith(
                               fontSize: width * 0.012,
                             ),
                           ),
@@ -812,9 +810,7 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                           quarterTurns: 0,
                           child: Text(
                             index.toString(),
-                            style: TextStyle(
-                                color: JHGColors.white,
-                                fontWeight: FontWeight.w500,
+                            style: JHGTextStyles.subLabelStyle.copyWith(
                                 fontSize: height * 0.020),
                           ),
                         ),

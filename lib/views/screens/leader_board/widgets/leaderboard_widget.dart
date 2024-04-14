@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/app_utils/app_strings.dart';
-import 'package:fretboard/app_utils/styles/custom_text_styles.dart';
 import 'package:fretboard/controllers/leaderboard_controller.dart';
 import 'package:get/get.dart';
 
@@ -45,13 +44,15 @@ Widget populateScoreList(List data) {
                                     children: [
                                       Text(
                                         "$count. ",
-                                        style: CustomTextStyles
-                                            .whiteLargeTextStyle,
+                                        style: JHGTextStyles.smlabelStyle
+                                            .copyWith(
+                                                fontSize: Adaptive.sp(14.0)),
                                       ),
                                       Text(
                                         "${model[AppStrings.username]}",
-                                        style: CustomTextStyles
-                                            .whiteLargeTextStyle,
+                                        style: JHGTextStyles.smlabelStyle
+                                            .copyWith(
+                                                fontSize: Adaptive.sp(14.0)),
                                       ),
                                     ],
                                   ),
@@ -61,7 +62,8 @@ Widget populateScoreList(List data) {
                                   child: Text(
                                     "${model[AppStrings.score]}",
                                     textAlign: TextAlign.end,
-                                    style: CustomTextStyles.whiteLargeTextStyle,
+                                    style: JHGTextStyles.smlabelStyle
+                                        .copyWith(fontSize: Adaptive.sp(14.0)),
                                   ),
                                 )
                               ],
@@ -95,18 +97,13 @@ leaderBoardTextWidget(String text1, String text2) {
       children: [
         Text(
           text1,
-          style: TextStyle(
-            fontSize: Adaptive.sp(12),
-            color: JHGColors.white,
-          ),
+          style: JHGTextStyles.bodyStyle,
           overflow: TextOverflow.ellipsis,
         ),
         Text(
           text2,
-          style: TextStyle(
-              fontSize: Adaptive.sp(16),
-              color: JHGColors.white,
-              fontWeight: FontWeight.w500),
+          style:
+          JHGTextStyles.btnLabelStyle.copyWith(fontWeight: FontWeight.w600),
           overflow: TextOverflow.ellipsis,
         ),
       ],
@@ -117,7 +114,8 @@ leaderBoardTextWidget(String text1, String text2) {
 leaderBoardButton() {
   return Padding(
     padding: const EdgeInsets.all(16.0),
-    child: JHGPrimaryBtn(label: AppStrings.loadMore,
+    child: JHGPrimaryBtn(
+      label: AppStrings.loadMore,
       width: 200,
       bgColor: JHGColors.charcolGray,
       onPressed: () {
@@ -133,7 +131,8 @@ leaderBoardTitleWidget() {
     padding: EdgeInsets.only(top: 17.dp),
     child: Text(
       AppStrings.titleLeaderBoardTitle,
-      style: CustomTextStyles.goldNormalTextStyle,
+      style: JHGTextStyles.lrlabelStyle
+          .copyWith(color: Color(0XFFF8A44B), fontSize: Adaptive.sp(18)),
     ),
   );
 }
