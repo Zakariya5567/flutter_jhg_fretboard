@@ -45,7 +45,9 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
-    packageInfo = info;
+    setState(() {
+      packageInfo = info;
+    });
   }
 
   // This widget is the root of your application.
