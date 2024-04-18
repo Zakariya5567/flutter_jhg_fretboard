@@ -38,37 +38,3 @@ class SettingToggle extends StatelessWidget {
     );
   }
 }
-
-
-class WebSettingToggle extends StatelessWidget {
-  const WebSettingToggle({super.key,
-    required this.heading,
-    required this.value,required this.onChange});
-
-  final String heading;
-  final  bool value;
-  final  VoidCallback onChange;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding:  EdgeInsets.symmetric(vertical:10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-
-          Text(
-            heading,
-            textAlign: TextAlign.center,
-            style: JHGTextStyles.smlabelStyle.copyWith(
-                color: AppColors.whiteSecondary,
-                fontSize: 1.2.w,
-            ),
-          ),
-          WebCustomSwitch(value: value, onChange: onChange,)
-
-        ],
-      ),
-    );
-  }
-}

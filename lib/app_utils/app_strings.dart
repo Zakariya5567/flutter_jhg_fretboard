@@ -5,7 +5,6 @@ class AppStrings {
   static String loadMore = "Load more";
   static String username = "username";
   static String score = "score";
-  static const String returnString = 'Return';
   static const String titleLeaderBoardTitle = "Leaderboard - Fretboard Trainer";
   static const String save = 'Save';
   static const String scoreText = 'Score:  ';
@@ -13,8 +12,6 @@ class AppStrings {
   static String user = "User";
   static String scoreTemp = "score";
   static String reportAnIssue = "Report an Issue";
-  static String timerInterval = 'Timer Interval';
-  static String enterSeconds = "Enter Seconds";
 
   static const String string1 = 'String 1';
   static const String string2 = 'String 2';
