@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +14,10 @@ import 'package:flutter/foundation.dart' show compute, kIsWeb;
 import 'leaderboard_controller.dart';
 
 class HomeController extends GetxController {
+  // disable the web active status is true
+  var userNameWeb = 'DefaultUserName';
+  var isActive = true;
+
   // Instance of the Player
   final player = AudioPlayer();
   int? selectedFret;
@@ -509,7 +514,8 @@ class HomeController extends GetxController {
               message: "Minutes should be greater then or equal to 1",
               isError: true);
         } else {
-          SharedPref.storeDefaultTimerTypeValue(defaultTimerSelectedValue.value);
+          SharedPref.storeDefaultTimerTypeValue(
+              defaultTimerSelectedValue.value);
           SharedPref.storeTimerIntervalValue(seconds);
           SharedPref.storeDefaultTimerMinutesValue(minutes);
           popup(context);
@@ -532,8 +538,17 @@ class HomeController extends GetxController {
     }
   }
 
-  void popup(BuildContext context){
+  void popup(BuildContext context) {
     resetTimer();
     Navigator.pop(context);
+  }
+
+  void getUserNameFromRL() async {
+    try {
+      var uri = Uri.parse(window.location.href);
+      userNameWeb = uri.queryParameters['username'].toString();
+      isActive = bool.parse(uri.queryParameters['active'].toString());
+      update();
+    } on Exception {}
   }
 }

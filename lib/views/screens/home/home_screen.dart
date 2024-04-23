@@ -6,6 +6,7 @@ import 'package:fretboard/controllers/leaderboard_controller.dart';
 import 'package:fretboard/views/screens/home/widgets/landscape_board.dart';
 import 'package:fretboard/views/screens/home/widgets/portrait_board.dart';
 import 'package:fretboard/views/screens/home/widgets/web_board.dart';
+import 'package:fretboard/views/widgets/show_toast.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
 
@@ -32,6 +33,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final homeController = Get.put(HomeController());
     lc.getDataFromApi();
     homeController.initializeData();
+    if(kIsWeb){
+      homeController.getUserNameFromRL();
+    }
     setExpiryDate();
     super.initState();
   }
@@ -53,23 +57,41 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       body: GetBuilder<HomeController>(
           init: HomeController(),
           builder: (controller) {
-            return kIsWeb
-                ? Container(
-                    height: height,
-                    width: width,
-                    color: JHGColors.secondryBlack,
-                    child: WebBoard(controller: controller),
-                  )
-                : Container(
-                    width: width,
-                    height: height,
-                    color: JHGColors.secondryBlack,
-                    child: controller.isPortrait == true
-                        ? JHGBody(body: PortraitBoard(controller: controller))
-                        : JHGBody(
-                            padding: EdgeInsets.symmetric(vertical: 24),
-                            body: LandscapeBoard(controller: controller)),
-                  );
+            return GestureDetector(
+              child: AbsorbPointer(
+                absorbing: kIsWeb
+                    ? controller.isActive == true
+                        ? false
+                        : true
+                    : false,
+                child: kIsWeb
+                    ? Container(
+                        height: height,
+                        width: width,
+                        color: JHGColors.secondryBlack,
+                        child: WebBoard(controller: controller),
+                      )
+                    : Container(
+                        width: width,
+                        height: height,
+                        color: JHGColors.secondryBlack,
+                        child: controller.isPortrait == true
+                            ? JHGBody(
+                                body: PortraitBoard(controller: controller))
+                            : JHGBody(
+                                padding: EdgeInsets.symmetric(vertical: 24),
+                                body: LandscapeBoard(controller: controller)),
+                      ),
+              ),
+              onTap: () {
+                if (!controller.isActive) {
+                  showCustomToast(
+                      context: context,
+                      message:
+                          "Sorry but you do not have an active subscription");
+                }
+              },
+            );
           }),
     );
   }
