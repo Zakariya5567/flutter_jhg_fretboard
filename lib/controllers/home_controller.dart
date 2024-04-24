@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +9,7 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart' show compute, kIsWeb;
-
+import 'package:universal_html/html.dart';
 import 'leaderboard_controller.dart';
 
 class HomeController extends GetxController {
@@ -540,7 +539,7 @@ class HomeController extends GetxController {
 
   void popup(BuildContext context) {
     resetTimer();
-    Navigator.pop(context);
+    Get.back();
   }
 
   void getUserNameFromRL() async {
