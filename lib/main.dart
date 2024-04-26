@@ -16,7 +16,7 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
+  StringsDownloadService();
   runApp(const MyApp());
 }
 

@@ -81,7 +81,7 @@ class HomeController extends GetxController {
             selectedString = str;
             selectedNote = note;
 
-            await player.play(AssetSource(element.fretSound!), volume: 1.0);
+            await player.play(DeviceFileSource(getAsset(element.fretSound!).path), volume: 1.0);
             if (highlightNode == selectedNote &&
                 selectedString == highlightString) {
               previousHighlightFret = highlightFret;
@@ -97,7 +97,7 @@ class HomeController extends GetxController {
             }
             update();
           } else {
-            await player.play(AssetSource(element.fretSound!), volume: 1.0);
+            await player.play(DeviceFileSource(getAsset(element.fretSound!).path), volume: 1.0);
           }
           return;
         }
@@ -119,7 +119,7 @@ class HomeController extends GetxController {
             selectedString = str;
             selectedNote = note;
 
-            await player.play(AssetSource(element.fretSound!), volume: 1.0);
+            await player.play(DeviceFileSource(getAsset(element.fretSound!).path), volume: 1.0);
             if (highlightNode == selectedNote &&
                 selectedString == highlightString) {
               previousHighlightFret = highlightFret;
@@ -135,7 +135,7 @@ class HomeController extends GetxController {
             }
             update();
           } else {
-            await player.play(AssetSource(element.fretSound!), volume: 1.0);
+            await player.play(DeviceFileSource(getAsset(element.fretSound!).path), volume: 1.0);
           }
           return;
         }

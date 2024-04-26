@@ -101,9 +101,3 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
-    - assets/audio/str_1/
-    - assets/audio/str_2/
-    - assets/audio/str_3/
-    - assets/audio/str_4/
-    - assets/audio/str_5/
-    - assets/audio/str_6/
