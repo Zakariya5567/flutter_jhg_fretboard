@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:fretboard/models/freth_list.dart';
 import 'package:fretboard/repositories/fretboard_repository.dart';
 import 'package:fretboard/services/local_db_service.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart' show compute, kIsWeb;
@@ -80,8 +81,9 @@ class HomeController extends GetxController {
             selectedFret = index;
             selectedString = str;
             selectedNote = note;
-
-            await player.play(DeviceFileSource(getAsset(element.fretSound!).path), volume: 1.0);
+            player.setVolume(1.0);
+            player.setAsset("web/${element.fretSound!}");
+            player.play();
             if (highlightNode == selectedNote &&
                 selectedString == highlightString) {
               previousHighlightFret = highlightFret;
@@ -97,7 +99,10 @@ class HomeController extends GetxController {
             }
             update();
           } else {
-            await player.play(DeviceFileSource(getAsset(element.fretSound!).path), volume: 1.0);
+            player.setVolume(1.0);
+            player.setAsset("web/${element.fretSound!}");
+            player.play();
+
           }
           return;
         }
@@ -118,8 +123,9 @@ class HomeController extends GetxController {
             selectedFret = index;
             selectedString = str;
             selectedNote = note;
-
-            await player.play(DeviceFileSource(getAsset(element.fretSound!).path), volume: 1.0);
+            player.setVolume(1.0);
+            player.setFilePath(getAsset(element.fretSound!).path);
+            player.play();
             if (highlightNode == selectedNote &&
                 selectedString == highlightString) {
               previousHighlightFret = highlightFret;
@@ -135,7 +141,9 @@ class HomeController extends GetxController {
             }
             update();
           } else {
-            await player.play(DeviceFileSource(getAsset(element.fretSound!).path), volume: 1.0);
+            player.setVolume(1.0);
+            player.setFilePath(getAsset(element.fretSound!).path);
+            player.play();
           }
           return;
         }

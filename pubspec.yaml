@@ -43,8 +43,8 @@ dependencies:
   package_info_plus: ^5.0.1
   device_info_plus: ^9.1.1
   universal_html: ^2.2.4
-  audioplayers:
-  #just_audio: ^0.9.36
+#  audioplayers:
+  just_audio: ^0.9.36
   reg_page:
     git:
       url: https://github.com/jamie2364/flutter-jhg-reg-page
@@ -101,3 +101,9 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - web/assets/audio/str_1/
+    - web/assets/audio/str_2/
+    - web/assets/audio/str_3/
+    - web/assets/audio/str_4/
+    - web/assets/audio/str_5/
+    - web/assets/audio/str_6/

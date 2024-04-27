@@ -38,7 +38,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     setExpiryDate();
     super.initState();
-    StringsDownloadService().isStringsDownloaded(context, "jhg-fretboard-trainer");
+    if(!kIsWeb) {
+      StringsDownloadService().isStringsDownloaded(
+          context, "jhg-fretboard-trainer");
+    }
   }
 
   HomeController? homeController;
