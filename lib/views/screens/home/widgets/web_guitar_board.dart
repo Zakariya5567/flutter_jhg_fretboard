@@ -12,7 +12,8 @@ class WebLandscapeGuitarBoard extends StatefulWidget {
   const WebLandscapeGuitarBoard({super.key});
 
   @override
-  State<WebLandscapeGuitarBoard> createState() => _WebLandscapeGuitarBoardState();
+  State<WebLandscapeGuitarBoard> createState() =>
+      _WebLandscapeGuitarBoardState();
 }
 
 class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
@@ -33,7 +34,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                   Container(
                     width: width * 0.90,
                     height: 35,
-                   // color: Colors.green,
+                    // color: Colors.green,
                     child: ListView.builder(
                       itemCount: 16,
                       shrinkWrap: true,
@@ -58,7 +59,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                   //fretboard
                   Container(
                     height: 235,
-                    width: width*0.900,
+                    width: width * 0.900,
                     // alignment: Alignment.,
                     child: Stack(
                       children: [
@@ -70,7 +71,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                             ),
                             Expanded(
                               child: Container(
-                                width:  width*0.900,
+                                width: width * 0.900,
                                 color: AppColors.creamColor,
                               ),
                             ),
@@ -83,12 +84,10 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                               height: height,
                               width: width * 0.015,
                               decoration: BoxDecoration(
-                                color: JHGColors.black,
+                                  color: JHGColors.black,
                                   borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10)
-                                )
-                              ),
+                                      topLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10))),
                             )),
 
                         ///============================================================
@@ -110,30 +109,28 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                   children: [
                                     blackLandscapeCircle(
                                         isColor: index == 11 ? true : false,
-                                      //isColor: true,
+                                        //isColor: true,
                                         width: width),
                                     SizedBox(
                                       height: 7.1.h,
                                     ),
                                     blackLandscapeCircle(
                                         width: width,
-                                      //isColor: true,
+                                        //isColor: true,
                                         isColor: index == 2 ||
                                                 index == 4 ||
                                                 index == 6 ||
                                                 index == 8 ||
                                                 index == 14
                                             ? true
-                                            : false
-                                    ),
+                                            : false),
                                     SizedBox(
                                       height: 7.1.h,
                                     ),
                                     blackLandscapeCircle(
                                         width: width,
-                                      //isColor: true,
-                                         isColor: index == 11 ? true : false
-                                    ),
+                                        //isColor: true,
+                                        isColor: index == 11 ? true : false),
                                   ],
                                 ),
                               ),
@@ -168,7 +165,6 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                 index, controller.highlightString, width);
                           },
                         ),
-
 
                         /// red green  With Grid
                         ///===========================================================
@@ -219,14 +215,18 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                 crossAxisSpacing: 4,
                                 itemBuilder: (context, index) {
                                   final noteIndex = fretList[index];
-                                  return GestureDetector(
-                                    onTap: () {
-                                      controller.playSound(index,
-                                          noteIndex.note!, noteIndex.string!);
-                                    },
-                                    child: stringLandscapePress(
-                                        index: index, width: width),
-                                  );
+                                  return MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          controller.playSound(
+                                              index,
+                                              noteIndex.note!,
+                                              noteIndex.string!);
+                                        },
+                                        child: stringLandscapePress(
+                                            index: index, width: width),
+                                      ));
                                 },
                               ),
                             ),
@@ -249,7 +249,6 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
         });
   }
 
-
   Widget rowLandscapeDivider(int index, double width) {
     return Padding(
       padding: EdgeInsets.only(left: getLandscapeFrethSpace(index, width)),
@@ -270,7 +269,6 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
       ),
     );
   }
-
 
   Widget colLandscapeDivider(int index, int? selectedString, double width) {
     return Padding(
@@ -308,7 +306,8 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
   Widget blackLandscapeCircle({
     bool? isColor,
     required double width,
-  }) => Container(
+  }) =>
+      Container(
         width: width * 0.020,
         height: width * 0.020,
         decoration: BoxDecoration(
@@ -338,13 +337,13 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
   }) =>
       Padding(
         padding: EdgeInsets.only(
-            left: getLandscapeHighLightBasedOnIndex(index, width),top: 0),
+            left: getLandscapeHighLightBasedOnIndex(index, width), top: 0),
         child: Container(
           width: width * 0.020,
           height: width * 0.020,
           decoration: BoxDecoration(
-           color: isColor == true ? color : Colors.transparent,
-           // color: Colors.red,
+            color: isColor == true ? color : Colors.transparent,
+            // color: Colors.red,
             shape: BoxShape.circle,
           ),
           //child: Text("$index",),
@@ -359,10 +358,10 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
         // width: 10,
         height: getLandscapeFretPressBasedOnIndex(index, width),
         decoration: BoxDecoration(
-           // color: Colors.transparent
-           // color: Colors.green.withOpacity(0.5)
+            // color: Colors.transparent
+            // color: Colors.green.withOpacity(0.5)
             ),
-            //child: Text("$index",style: TextStyle(color: Colors.red),),
+        //child: Text("$index",style: TextStyle(color: Colors.red),),
       );
 
   double getLandscapeFrethSpace(
@@ -612,19 +611,17 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
 
                           Align(
                               alignment: Alignment.topCenter,
-                              child:RotatedBox(
+                              child: RotatedBox(
                                 quarterTurns: 2,
-                                child:
-                                Container(
+                                child: Container(
                                   width: width * 0.14,
                                   height: height * 0.022,
                                   decoration: BoxDecoration(
                                       color: JHGColors.black,
-                                    borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(15),
-                                      bottomLeft: Radius.circular(15),
-                                    )
-                                  ),
+                                      borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(15),
+                                        bottomLeft: Radius.circular(15),
+                                      )),
                                 ),
                               )),
 
@@ -768,16 +765,18 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                               crossAxisSpacing: 4,
                               itemBuilder: (context, index) {
                                 final noteIndex = fretList[index];
-                                return GestureDetector(
-                                  onTap: () {
-                                    controller.playSound(index, noteIndex.note!,
-                                        noteIndex.string!);
-                                  },
-                                  child: stringPortraitPress(
-                                      index: index,
-                                      height: height,
-                                      width: width),
-                                );
+                                return MouseRegion(
+                                    cursor: SystemMouseCursors.click,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        controller.playSound(index,
+                                            noteIndex.note!, noteIndex.string!);
+                                      },
+                                      child: stringPortraitPress(
+                                          index: index,
+                                          height: height,
+                                          width: width),
+                                    ));
                               },
                             ),
                           ),
@@ -810,8 +809,8 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                           quarterTurns: 0,
                           child: Text(
                             index.toString(),
-                            style: JHGTextStyles.subLabelStyle.copyWith(
-                                fontSize: height * 0.020),
+                            style: JHGTextStyles.subLabelStyle
+                                .copyWith(fontSize: height * 0.020),
                           ),
                         ),
                       );
@@ -843,7 +842,6 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
       ),
     );
   }
-
 
   Widget colPortraitDivider(double width, int index, int? selectedString) {
     return Padding(
@@ -900,8 +898,8 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
           width: height * 0.030,
           height: height * 0.030,
           decoration: BoxDecoration(
-           color: isColor == true ? color : Colors.transparent,
-           //   color: Colors.red,
+            color: isColor == true ? color : Colors.transparent,
+            //   color: Colors.red,
             shape: BoxShape.circle,
           ),
           // child: Text("$index",style: TextStyle(color: Colors.white),),
