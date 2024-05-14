@@ -119,7 +119,15 @@ class _SettingScreenState extends State<SettingScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            JHGBackButton(),
+            Row(
+              children: [
+                JHGBackButton(),
+                Text(
+                  'Settings',
+                  style: JHGTextStyles.smlabelStyle,
+                ),
+              ],
+            ),
             FittedBox(
                 child: GestureDetector(
               onTap: () {

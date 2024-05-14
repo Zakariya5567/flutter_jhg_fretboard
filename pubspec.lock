@@ -217,11 +217,9 @@ packages:
   flutter_jhg_elements:
     dependency: "direct main"
     description:
-      path: "."
-      ref: main
-      resolved-ref: efd9dae251b41ef506b3b3690d2198fde9659435
-      url: "https://github.com/jamie2364/flutter_jhg_elements"
-    source: git
+      path: "../flutter_jhg_elements"
+      relative: true
+    source: path
     version: "0.0.1"
   flutter_launcher_icons:
     dependency: "direct dev"
@@ -247,6 +245,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  flutter_slidable:
+    dependency: transitive
+    description:
+      name: flutter_slidable
+      sha256: "673403d2eeef1f9e8483bd6d8d92aae73b1d8bd71f382bc3930f699c731bc27c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -273,6 +279,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: transitive
+    description:
+      name: font_awesome_flutter
+      sha256: "275ff26905134bcb59417cf60ad979136f1f8257f2f449914b2c3e05bbb4cd6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.7.0"
   get:
     dependency: "direct main"
     description:
@@ -628,11 +642,9 @@ packages:
   reg_page:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: c985ad5aa7544602af7f118b3b8ac8afb6e14cb5
-      url: "https://github.com/jamie2364/flutter-jhg-reg-page"
-    source: git
+      path: "../flutter-jhg-reg-page"
+      relative: true
+    source: path
     version: "0.0.1"
   rxdart:
     dependency: transitive
