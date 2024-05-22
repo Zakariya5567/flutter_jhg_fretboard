@@ -16,6 +16,7 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  JHGAdsHelper().init();
   StringsDownloadService();
   runApp(const MyApp());
 }

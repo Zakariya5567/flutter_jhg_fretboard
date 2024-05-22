@@ -51,7 +51,7 @@ dependencies:
        ref: master
   flutter_jhg_elements:
      git:
-       url: https://github.com/jamie2364/flutter_jhg_elements
+       url: https://github.com/jamie2364/flutter_jhg_elements.git
        ref: main
   dio: any
 dev_dependencies:

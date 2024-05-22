@@ -67,8 +67,14 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    final width = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Scaffold(
       body: GetBuilder<HomeController>(
         init: HomeController(),
@@ -108,10 +114,9 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Widget settingPotrait(
-      {required HomeController controller,
-      required double height,
-      required double width}) {
+  Widget settingPotrait({required HomeController controller,
+    required double height,
+    required double width}) {
     return JHGBody(
       bgColor: JHGColors.secondryBlack,
       bodyAppBar: Padding(
@@ -130,34 +135,35 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             FittedBox(
                 child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BugReportPage(
-                      device: deviceName,
-                      appName: AppStrings.appName,
-                    ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            BugReportPage(
+                              device: deviceName,
+                              appName: AppStrings.appName,
+                            ),
+                      ),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.error_outline_rounded,
+                        color: JHGColors.primary,
+                        size: 16,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        AppStrings.reportAnIssue,
+                        style: JHGTextStyles.bodyStyle.copyWith(
+                          color: JHGColors.primary,
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.error_outline_rounded,
-                    color: JHGColors.primary,
-                    size: 16,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    AppStrings.reportAnIssue,
-                    style: JHGTextStyles.bodyStyle.copyWith(
-                      color: JHGColors.primary,
-                    ),
-                  ),
-                ],
-              ),
-            ))
+                ))
           ],
         ),
       ),
@@ -171,84 +177,91 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             Expanded(
                 child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    AppStrings.strings,
-                    textAlign: TextAlign.center,
-                    style: JHGTextStyles.labelStyle.copyWith(
-                      color: AppColors.whiteSecondary,
-                      fontSize: 16,
-                    ),
-                  ),
-                  SizedBox(height: height * 0.01),
-                  Text(
-                    AppStrings.stringDescription,
-                    style: JHGTextStyles.subLabelStyle.copyWith(
-                      color: AppColors.whiteSecondary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: height * 0.04),
-                  // SAVE BUTTON
-                  JHGSwitchTile(
-                      title: AppStrings.string6,
-                      initialValue: controller.string6,
-                      onChanged: (bool value) {
-                        controller.setString6(0);
-                      }),
-                  JHGSwitchTile(
-                      title: AppStrings.string5,
-                      initialValue: controller.string5,
-                      onChanged: (bool value) {
-                        controller.setString5(1);
-                      }),
-                  JHGSwitchTile(
-                      title: AppStrings.string4,
-                      initialValue: controller.string4,
-                      onChanged: (bool value) {
-                        controller.setString4(2);
-                      }),
-                  JHGSwitchTile(
-                      title: AppStrings.string3,
-                      initialValue: controller.string3,
-                      onChanged: (bool value) {
-                        controller.setString3(3);
-                      }),
-                  JHGSwitchTile(
-                      title: AppStrings.string2,
-                      initialValue: controller.string2,
-                      onChanged: (bool value) {
-                        controller.setString2(4);
-                      }),
-                  JHGSwitchTile(
-                      title: AppStrings.string1,
-                      initialValue: controller.string1,
-                      onChanged: (bool value) {
-                        controller.setString1(5);
-                      }),
-                  JHGSettingsDefaultTimer(
-                      selectedValue: controller.defaultTimerSelectedValue.value,
-                      onChanged: (String? value) {
-                        if (value != null) {
-                          controller.defaultTimerSelectedValue.value = value;
-                        }
-                      },
-                      minutesController: controller.minutesEditingController,
-                      secondsController:
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Text(
+                        AppStrings.strings,
+                        textAlign: TextAlign.center,
+                        style: JHGTextStyles.labelStyle.copyWith(
+                          color: AppColors.whiteSecondary,
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(height: height * 0.01),
+                      Text(
+                        AppStrings.stringDescription,
+                        style: JHGTextStyles.subLabelStyle.copyWith(
+                          color: AppColors.whiteSecondary,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(height: height * 0.04),
+                      // SAVE BUTTON
+                      JHGSwitchTile(
+                          title: AppStrings.string6,
+                          initialValue: controller.string6,
+                          onChanged: (bool value) {
+                            controller.setString6(0);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string5,
+                          initialValue: controller.string5,
+                          onChanged: (bool value) {
+                            controller.setString5(1);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string4,
+                          initialValue: controller.string4,
+                          onChanged: (bool value) {
+                            controller.setString4(2);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string3,
+                          initialValue: controller.string3,
+                          onChanged: (bool value) {
+                            controller.setString3(3);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string2,
+                          initialValue: controller.string2,
+                          onChanged: (bool value) {
+                            controller.setString2(4);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string1,
+                          initialValue: controller.string1,
+                          onChanged: (bool value) {
+                            controller.setString1(5);
+                          }),
+                      JHGSettingsDefaultTimer(
+                          selectedValue: controller.defaultTimerSelectedValue
+                              .value,
+                          onChanged: (String? value) {
+                            if (value != null) {
+                              controller.defaultTimerSelectedValue.value =
+                                  value;
+                            }
+                          },
+                          minutesController: controller
+                              .minutesEditingController,
+                          secondsController:
                           controller.timerIntervalEditingController),
-                  SizedBox(
-                    height: 50,
-                  )
-                ],
-              ),
-            )),
+                      SizedBox(
+                        height: 50,
+                      )
+                    ],
+                  ),
+                )),
+
+            Padding(padding: EdgeInsets.symmetric(vertical: 15),
+              child: JHGNativeBanner(adID: nativeBannerAdId,),),
+
             JHGPrimaryBtn(
               label: AppStrings.save,
               onPressed: () {
@@ -262,15 +275,15 @@ class _SettingScreenState extends State<SettingScreen> {
                 // ignore: use_build_context_synchronously
                 Navigator.pushAndRemoveUntil(context,
                     MaterialPageRoute(builder: (context) {
-                  return Welcome(
-                    yearlySubscriptionId: yearlySubscription(),
-                    monthlySubscriptionId: monthlySubscription(),
-                    appVersion: packageInfo.version,
-                    featuresList: getFeaturesList(),
-                    appName: AppStrings.appName,
-                    nextPage: () => const HomeScreen(),
-                  );
-                }), (route) => false);
+                      return Welcome(
+                        yearlySubscriptionId: yearlySubscription(),
+                        monthlySubscriptionId: monthlySubscription(),
+                        appVersion: packageInfo.version,
+                        featuresList: getFeaturesList(),
+                        appName: AppStrings.appName,
+                        nextPage: () => const HomeScreen(),
+                      );
+                    }), (route) => false);
               },
             ),
             // SPACER
@@ -283,10 +296,9 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Widget settingLandscape(
-      {required HomeController controller,
-      required double height,
-      required double width}) {
+  Widget settingLandscape({required HomeController controller,
+    required double height,
+    required double width}) {
     return JHGBody(
       padding: EdgeInsets.symmetric(vertical: 24),
       bgColor: JHGColors.secondryBlack,
@@ -307,10 +319,11 @@ class _SettingScreenState extends State<SettingScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BugReportPage(
-                          device: deviceName,
-                          appName: AppStrings.appName,
-                        ),
+                        builder: (context) =>
+                            BugReportPage(
+                              device: deviceName,
+                              appName: AppStrings.appName,
+                            ),
                       ),
                     );
                   },
@@ -328,7 +341,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             Text(
                               AppStrings.strings,
                               textAlign: TextAlign.center,
-                              style:  JHGTextStyles.labelStyle.copyWith(
+                              style: JHGTextStyles.labelStyle.copyWith(
                                 color: AppColors.whiteSecondary,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -408,16 +421,18 @@ class _SettingScreenState extends State<SettingScreen> {
                       SizedBox(
                         width: height * 0.58,
                         child: JHGSettingsDefaultTimer(
-                            selectedValue: controller.defaultTimerSelectedValue.value,
+                            selectedValue: controller.defaultTimerSelectedValue
+                                .value,
                             onChanged: (String? value) {
                               if (value != null) {
-                                controller.defaultTimerSelectedValue.value = value;
+                                controller.defaultTimerSelectedValue.value =
+                                    value;
                               }
                             },
                             minutesController:
-                                controller.minutesEditingController,
+                            controller.minutesEditingController,
                             secondsController:
-                                controller.timerIntervalEditingController),
+                            controller.timerIntervalEditingController),
                       ),
                       SizedBox(height: height * 0.02),
                       Center(
@@ -439,16 +454,16 @@ class _SettingScreenState extends State<SettingScreen> {
                                 // ignore: use_build_context_synchronously
                                 Navigator.pushAndRemoveUntil(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return Welcome(
-                                    yearlySubscriptionId: yearlySubscription(),
-                                    monthlySubscriptionId:
+                                      return Welcome(
+                                        yearlySubscriptionId: yearlySubscription(),
+                                        monthlySubscriptionId:
                                         monthlySubscription(),
-                                    appVersion: packageInfo.version,
-                                    featuresList: getFeaturesList(),
-                                    appName: AppStrings.appName,
-                                    nextPage: () => const HomeScreen(),
-                                  );
-                                }), (route) => false);
+                                        appVersion: packageInfo.version,
+                                        featuresList: getFeaturesList(),
+                                        appName: AppStrings.appName,
+                                        nextPage: () => const HomeScreen(),
+                                      );
+                                    }), (route) => false);
                               },
                             ),
                           ],
@@ -465,10 +480,9 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Widget settingWeb(
-      {required HomeController controller,
-      required double height,
-      required double width}) {
+  Widget settingWeb({required HomeController controller,
+    required double height,
+    required double width}) {
     return JHGBody(
       bgColor: JHGColors.secondryBlack,
       bodyAppBar: Padding(
@@ -480,10 +494,11 @@ class _SettingScreenState extends State<SettingScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BugReportPage(
-                    device: deviceName,
-                    appName: AppStrings.appName,
-                  ),
+                  builder: (context) =>
+                      BugReportPage(
+                        device: deviceName,
+                        appName: AppStrings.appName,
+                      ),
                 ),
               );
             },
@@ -512,36 +527,36 @@ class _SettingScreenState extends State<SettingScreen> {
                     //
                     Center(
                         child: Container(
-                      width: 40.w,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppStrings.strings,
-                            textAlign: TextAlign.left,
-                            style: JHGTextStyles.smlabelStyle.copyWith(
-                              color: AppColors.whiteSecondary,
-                              fontSize: 1.6.w,
-                            ),
-                          ),
+                          width: 40.w,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                AppStrings.strings,
+                                textAlign: TextAlign.left,
+                                style: JHGTextStyles.smlabelStyle.copyWith(
+                                  color: AppColors.whiteSecondary,
+                                  fontSize: 1.6.w,
+                                ),
+                              ),
 
-                          //
-                          SizedBox(height: 10),
-                          //
-                          Text(
-                            AppStrings.stringDescriptionWeb,
-                            textAlign: TextAlign.left,
-                            style: JHGTextStyles.subLabelStyle.copyWith(
-                              color: AppColors.whiteSecondary,
-                              fontSize: 1.2.w,
-                            ),
-                          ),
+                              //
+                              SizedBox(height: 10),
+                              //
+                              Text(
+                                AppStrings.stringDescriptionWeb,
+                                textAlign: TextAlign.left,
+                                style: JHGTextStyles.subLabelStyle.copyWith(
+                                  color: AppColors.whiteSecondary,
+                                  fontSize: 1.2.w,
+                                ),
+                              ),
 
-                          SizedBox(height: 20),
-                        ],
-                      ),
-                    )),
+                              SizedBox(height: 20),
+                            ],
+                          ),
+                        )),
                     // LIST SWITCH BUTTON
                     Center(
                       child: Container(
@@ -595,7 +610,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             ),
                             JHGSettingsDefaultTimer(
                                 selectedValue:
-                                    controller.defaultTimerSelectedValue.value,
+                                controller.defaultTimerSelectedValue.value,
                                 onChanged: (String? value) {
                                   if (value != null) {
                                     controller.defaultTimerSelectedValue.value =
@@ -603,9 +618,9 @@ class _SettingScreenState extends State<SettingScreen> {
                                   }
                                 },
                                 minutesController:
-                                    controller.minutesEditingController,
+                                controller.minutesEditingController,
                                 secondsController:
-                                    controller.timerIntervalEditingController),
+                                controller.timerIntervalEditingController),
                           ],
                         ).paddingSymmetric(
                           horizontal: 10,

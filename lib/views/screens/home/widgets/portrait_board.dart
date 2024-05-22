@@ -34,6 +34,7 @@ class PortraitBoard extends StatelessWidget {
               size: 30,
               svgImg: AppAssets.iconTropy,
               onTap: () {
+                controller.interstitialAd?.showInterstitial();
                 Get.to(() => LeadershipScreen(),
                     transition: Transition.leftToRight);
               },
@@ -42,6 +43,7 @@ class PortraitBoard extends StatelessWidget {
               btnEnabled: !controller.leaderboardMode,
               onTap: () {
                 controller.resetGame(false);
+                controller.interstitialAd?.showInterstitial();
                 Get.to(() => SettingScreen(),
                     transition: Transition.rightToLeft);
               },

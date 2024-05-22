@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
+import 'package:fretboard/app_utils/app_subscription.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/controllers/leaderboard_controller.dart';
 import 'package:fretboard/views/screens/home/widgets/landscape_board.dart';
@@ -20,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   LeaderBoardController lc = Get.put(LeaderBoardController());
 
+
   // Set expiry date when user login to the app
   // we will expire user login after 14 days
   setExpiryDate() async {
@@ -33,14 +35,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final homeController = Get.put(HomeController());
     lc.getDataFromApi();
     homeController.initializeData();
-    if(kIsWeb){
+    if (kIsWeb) {
       homeController.getUserNameFromRL();
     }
     setExpiryDate();
     super.initState();
-    if(!kIsWeb) {
-      StringsDownloadService().isStringsDownloaded(
-          context, "jhg-fretboard-trainer");
+    if (!kIsWeb) {
+      StringsDownloadService()
+          .isStringsDownloaded(context, "jhg-fretboard-trainer");
+      homeController.interstitialAd = JHGInterstitialAd(interstitialAdId);
+      homeController.interstitialAd?.loadAd();
     }
   }
 

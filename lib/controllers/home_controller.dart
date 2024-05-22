@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/models/freth_list.dart';
 import 'package:fretboard/repositories/fretboard_repository.dart';
 import 'package:fretboard/services/local_db_service.dart';
@@ -28,6 +29,7 @@ class HomeController extends GetxController {
       new TextEditingController();
   TextEditingController minutesEditingController = new TextEditingController();
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
+  JHGInterstitialAd? interstitialAd;
 
   getUserName() async {
     var userName = await LocalDB.getUserName;
