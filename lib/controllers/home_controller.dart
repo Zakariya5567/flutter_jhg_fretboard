@@ -25,8 +25,7 @@ class HomeController extends GetxController {
   String? selectedNote;
   int? selectedString;
   String? userName;
-  TextEditingController timerIntervalEditingController =
-      new TextEditingController();
+  TextEditingController timerIntervalEditingController = new TextEditingController();
   TextEditingController minutesEditingController = new TextEditingController();
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
   JHGInterstitialAd? interstitialAd;
@@ -66,94 +65,59 @@ class HomeController extends GetxController {
   }
 
   // PLAY SOUND ACCORDING TO SELECTED NOTES , STRING AND FRET
+
+  bool isPlayed = false;
+
   Future playSound(int index, String note, int str) async {
-    if (kIsWeb) {
-      // STOP SOUND IF PLAYING
-      await player.stop();
-      // EXECUTE LOOP
-      fretList.forEach((element) async {
-        // if(element.id == index){
-        if (element.note == note && element.string == str) {
-          // GET ALLOW STRING STATUS
-          final stringStatus = getStringStatus(element.string!);
+    isPlayed = false;
+    await player.stop();
+    // EXECUTE LOOP
+    fretList.forEach((element) async {
+      // if(element.id == index){
+      if (element.note == note && element.string == str && isPlayed == false) {
+        // GET ALLOW STRING STATUS
+        final stringStatus = getStringStatus(element.string!);
 
-          // CHECK IF THE STATUS IS TRUE AND GAME IS START
-          // THEN WE WILL HIGHLIGHT THINGS
-          if (stringStatus == true && isStart == true) {
-            selectedFret = index;
-            selectedString = str;
-            selectedNote = note;
-            player.setVolume(1.0);
+        // CHECK IF THE STATUS IS TRUE AND GAME IS START
+        // THEN WE WILL HIGHLIGHT THINGS
+        if (stringStatus == true && isStart == true) {
+          selectedFret = index;
+          selectedString = str;
+          selectedNote = note;
+          player.setVolume(1.0);
+          if (kIsWeb) {
             player.setAsset("web/${element.fretSound!}");
-            player.play();
-            if (highlightNode == selectedNote &&
-                selectedString == highlightString) {
-              previousHighlightFret = highlightFret;
-              previousHighlightNode = highlightNode;
-              incrementScore();
-              highLightTheGame();
-              Future.delayed(Duration(milliseconds: 300), () {
-                selectedFret = null;
-                update();
-              });
-            } else {
-              decrementScore();
-            }
-            update();
+          }else{
+            player.setFilePath(getAsset(element.fretSound!).path);
+          }
+          player.play();
+          if (highlightNode == selectedNote && selectedString == highlightString) {
+            previousHighlightFret = highlightFret;
+            previousHighlightNode = highlightNode;
+            incrementScore();
+            highLightTheGame();
+            Future.delayed(Duration(milliseconds: 300), () {
+              selectedFret = null;
+              update();
+            });
           } else {
-            player.setVolume(1.0);
+            decrementScore();
+          }
+          update();
+        } else {
+          player.setVolume(1.0);
+          if (kIsWeb) {
             player.setAsset("web/${element.fretSound!}");
-            player.play();
-
-          }
-          return;
-        }
-      });
-    } else {
-      // STOP SOUND IF PLAYING
-      await player.stop();
-      // EXECUTE LOOP
-      fretList.forEach((element) async {
-        // if(element.id == index){
-        if (element.note == note && element.string == str) {
-          // GET ALLOW STRING STATUS
-          final stringStatus = getStringStatus(element.string!);
-
-          // CHECK IF THE STATUS IS TRUE AND GAME IS START
-          // THEN WE WILL HIGHLIGHT THINGS
-          if (stringStatus == true && isStart == true) {
-            selectedFret = index;
-            selectedString = str;
-            selectedNote = note;
-            player.setVolume(1.0);
+          }else{
             player.setFilePath(getAsset(element.fretSound!).path);
-            player.play();
-            if (highlightNode == selectedNote &&
-                selectedString == highlightString) {
-              previousHighlightFret = highlightFret;
-              previousHighlightNode = highlightNode;
-              incrementScore();
-              highLightTheGame();
-              Future.delayed(Duration(milliseconds: 300), () {
-                selectedFret = null;
-                update();
-              });
-            } else {
-              decrementScore();
-            }
-            update();
-          } else {
-            player.setVolume(1.0);
-            player.setFilePath(getAsset(element.fretSound!).path);
-            player.play();
           }
-          return;
+          player.play();
         }
-      });
-    }
+        return;
+      }
+    });
+
   }
-
-  // SCALE FOR ORIENTATION ANIMATION
   double scale = 1;
 
   bool isPortrait = true;
@@ -177,11 +141,13 @@ class HomeController extends GetxController {
 
   incrementScore() {
     score = score + 1;
+    isPlayed = true;
     update();
   }
 
   decrementScore() {
     score = score - 1;
+    isPlayed = true;
     update();
   }
 
