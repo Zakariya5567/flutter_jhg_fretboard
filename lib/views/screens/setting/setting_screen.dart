@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
@@ -517,8 +518,10 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           child: Column(
             children: [
-              Expanded(
-                child: ListView(
+             Expanded(
+                child:
+                ListView(
+                  shrinkWrap: true,
                   // mainAxisAlignment: MainAxisAlignment.start,
                   // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -540,7 +543,6 @@ class _SettingScreenState extends State<SettingScreen> {
                                   fontSize: 1.6.w,
                                 ),
                               ),
-
                               //
                               SizedBox(height: 10),
                               //
@@ -558,77 +560,80 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         )),
                     // LIST SWITCH BUTTON
-                    Center(
-                      child: Container(
+                    Center(child: Container(
+                        height: MediaQuery.of(context).size.height*0.58,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: Colors.black.withOpacity(0.2),
                         ),
-                        width: 40.w,
-                        child: ListView(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          children: [
-                            JHGSwitchTile(
-                                title: AppStrings.string6,
-                                initialValue: controller.string6,
-                                onChanged: (value) {
-                                  controller.setString6(0);
-                                }),
-                            JHGSwitchTile(
-                                title: AppStrings.string5,
-                                initialValue: controller.string5,
-                                onChanged: (value) {
-                                  controller.setString5(1);
-                                }),
-                            JHGSwitchTile(
-                                title: AppStrings.string4,
-                                initialValue: controller.string4,
-                                onChanged: (value) {
-                                  controller.setString4(2);
-                                }),
-                            JHGSwitchTile(
-                                title: AppStrings.string3,
-                                initialValue: controller.string3,
-                                onChanged: (value) {
-                                  controller.setString3(3);
-                                }),
-                            JHGSwitchTile(
-                                title: AppStrings.string2,
-                                initialValue: controller.string2,
-                                onChanged: (value) {
-                                  controller.setString2(4);
-                                }),
-                            JHGSwitchTile(
-                                title: AppStrings.string1,
-                                initialValue: controller.string1,
-                                onChanged: (value) {
-                                  controller.setString1(5);
-                                }),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            JHGSettingsDefaultTimer(
-                                selectedValue:
-                                controller.defaultTimerSelectedValue.value,
-                                onChanged: (String? value) {
-                                  if (value != null) {
-                                    controller.defaultTimerSelectedValue.value =
-                                        value;
-                                  }
-                                },
-                                minutesController:
-                                controller.minutesEditingController,
-                                secondsController:
-                                controller.timerIntervalEditingController),
-                          ],
-                        ).paddingSymmetric(
-                          horizontal: 10,
-                          vertical: 10,
+                        width:40.w,
+                        child: Scrollbar(
+                          thumbVisibility: true,
+                          child: ListView(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            children: [
+                              JHGSwitchTile(
+                                  title: AppStrings.string6,
+                                  initialValue: controller.string6,
+                                  onChanged: (value) {
+                                    controller.setString6(0);
+                                  }),
+                              JHGSwitchTile(
+                                  title: AppStrings.string5,
+                                  initialValue: controller.string5,
+                                  onChanged: (value) {
+                                    controller.setString5(1);
+                                  }),
+                              JHGSwitchTile(
+                                  title: AppStrings.string4,
+                                  initialValue: controller.string4,
+                                  onChanged: (value) {
+                                    controller.setString4(2);
+                                  }),
+                              JHGSwitchTile(
+                                  title: AppStrings.string3,
+                                  initialValue: controller.string3,
+                                  onChanged: (value) {
+                                    controller.setString3(3);
+                                  }),
+                              JHGSwitchTile(
+                                  title: AppStrings.string2,
+                                  initialValue: controller.string2,
+                                  onChanged: (value) {
+                                    controller.setString2(4);
+                                  }),
+                              JHGSwitchTile(
+                                  title: AppStrings.string1,
+                                  initialValue: controller.string1,
+                                  onChanged: (value) {
+                                    controller.setString1(5);
+                                  }),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              JHGSettingsDefaultTimer(
+                                  selectedValue:
+                                  controller.defaultTimerSelectedValue.value,
+                                  onChanged: (String? value) {
+                                    if (value != null) {
+                                      controller.defaultTimerSelectedValue.value =
+                                          value;
+                                    }
+                                  },
+                                  minutesController:
+                                  controller.minutesEditingController,
+                                  secondsController:
+                                  controller.timerIntervalEditingController),
+                            ],
+                          ).paddingSymmetric(
+                            horizontal: 10,
+                            vertical: 10,
+                          ),
                         ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
+                      ),),
+                    //
+                    SizedBox(height: height*0.015),
                   ],
                 ),
               ),
@@ -645,9 +650,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: height * 0.030,
-              ),
+              SizedBox(height: height*0.020),
             ],
           ),
         ),
