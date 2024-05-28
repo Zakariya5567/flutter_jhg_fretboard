@@ -610,7 +610,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     controller.setString1(5);
                                   }),
                               SizedBox(
-                                height: 20,
+                                height: height*0.010,
                               ),
                               JHGSettingsDefaultTimer(
                                   selectedValue:
@@ -625,15 +625,16 @@ class _SettingScreenState extends State<SettingScreen> {
                                   controller.minutesEditingController,
                                   secondsController:
                                   controller.timerIntervalEditingController),
+                              SizedBox( height: height*0.10,),
                             ],
                           ).paddingSymmetric(
                             horizontal: 10,
-                            vertical: 10,
+                            vertical: 0,
                           ),
                         ),
-                      ),),
+                      ),), 
                     //
-                    SizedBox(height: height*0.015),
+                    SizedBox(height: 15),
                   ],
                 ),
               ),
