@@ -130,35 +130,22 @@ class _SettingScreenState extends State<SettingScreen> {
               ],
             ),
             FittedBox(
-                child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BugReportPage(
-                      device: deviceName,
-                      appName: AppStrings.appName,
+              child: kIsWeb
+                  ? SizedBox()
+                  : JHGReportAnIssueBtn(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BugReportPage(
+                              device: deviceName,
+                              appName: AppStrings.appName,
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  ),
-                );
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.error_outline_rounded,
-                    color: JHGColors.primary,
-                    size: 16,
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    AppStrings.reportAnIssue,
-                    style: JHGTextStyles.bodyStyle.copyWith(
-                      color: JHGColors.primary,
-                    ),
-                  ),
-                ],
-              ),
-            ))
+            ),
           ],
         ),
       ),
