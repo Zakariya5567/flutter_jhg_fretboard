@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
@@ -7,7 +8,6 @@ import 'package:fretboard/app_utils/app_subscription.dart';
 import 'package:fretboard/views/screens/home/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:reg_page/reg_page.dart';
 
 Future<void> main() async {
@@ -64,12 +64,13 @@ class _MyAppState extends State<MyApp> {
         return GetMaterialApp(
           builder: (context, child) {
             return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: TextScaler.linear(1.0)),
               child: child!,
             );
           },
           debugShowCheckedModeBanner: false,
-          title: 'JHG fretboard',
+          title: 'JHG Fretboard',
           theme: JHGTheme.themeData,
           // home:  const HomeScreen()
           home: kIsWeb

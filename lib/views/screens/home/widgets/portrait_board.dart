@@ -29,6 +29,7 @@ class PortraitBoard extends StatelessWidget {
         children: [
           // TROPHY AND SETTING ICON
           JHGAppBar(
+            isResponsive: true,
             leadingWidget: JHGIconButton(
               childPadding: EdgeInsets.all(3),
               size: 30,
@@ -117,6 +118,8 @@ class PortraitBoard extends StatelessWidget {
             height: height * 0.010,
           ),
           JHGAppBar(
+            isBottom: true,
+            isResponsive: true,
             crossAxisAlignment: CrossAxisAlignment.center,
             leadingWidget: controller.isStart == true
                 ? JHGResetBtn(onTap: () {
