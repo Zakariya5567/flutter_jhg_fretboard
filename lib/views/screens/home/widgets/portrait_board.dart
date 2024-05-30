@@ -120,7 +120,7 @@ class PortraitBoard extends StatelessWidget {
           JHGAppBar(
             isBottom: true,
             isResponsive: true,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             leadingWidget: controller.isStart == true
                 ? JHGResetBtn(onTap: () {
                     controller.setTimerMode(false);

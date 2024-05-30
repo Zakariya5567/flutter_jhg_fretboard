@@ -129,6 +129,7 @@ class WebBoard extends StatelessWidget {
                 JHGAppBar(
                   isResponsive: true,
                   isBottom: true,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   leadingWidget: controller.isStart == true
                       ? JHGResetBtn(
                           enabled: true,
