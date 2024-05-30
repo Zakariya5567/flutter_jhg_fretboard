@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_assets.dart';
+import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/controllers/leaderboard_controller.dart';
 import 'package:fretboard/views/screens/leader_board/widgets/leaderboard_widget.dart';
@@ -27,7 +27,6 @@ class LeadershipScreen extends StatelessWidget {
                 return LeaderWebView(
                   controller: controller,
                 );
-                ;
               } else {
                 if (hc.isPortrait == true) {
                   return LeaderPortraitView(
@@ -54,6 +53,7 @@ class LeaderPortraitView extends StatelessWidget {
     return JHGBody(
       bodyAppBar: JHGAppBar(
         autoImplyLeading: false,
+        isResponsive: true,
         centerWidget: SvgPicture.asset(
           AppAssets.svg_trophyIcon,
           height: 8.w,
@@ -230,11 +230,13 @@ class LeaderLandscapeView extends StatelessWidget {
                                           children: [
                                             Text(
                                               AppStrings.user,
-                                              style: JHGTextStyles.subLabelStyle,
+                                              style:
+                                                  JHGTextStyles.subLabelStyle,
                                             ),
                                             Text(
                                               AppStrings.scoreTemp,
-                                              style: JHGTextStyles.subLabelStyle,
+                                              style:
+                                                  JHGTextStyles.subLabelStyle,
                                             )
                                           ],
                                         ),
@@ -285,7 +287,6 @@ class LeaderWebView extends StatelessWidget {
       ),
       body: Column(
         children: [
-
           controller.isLoading.value
               ? Padding(
                   padding: EdgeInsets.only(top: 30.0.h),

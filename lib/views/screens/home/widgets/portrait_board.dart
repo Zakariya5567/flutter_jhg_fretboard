@@ -29,6 +29,7 @@ class PortraitBoard extends StatelessWidget {
         children: [
           // TROPHY AND SETTING ICON
           JHGAppBar(
+            isResponsive: true,
             leadingWidget: JHGIconButton(
               childPadding: EdgeInsets.all(3),
               size: 30,
@@ -117,6 +118,8 @@ class PortraitBoard extends StatelessWidget {
             height: height * 0.010,
           ),
           JHGAppBar(
+            isBottom: true,
+            isResponsive: true,
             crossAxisAlignment: CrossAxisAlignment.center,
             leadingWidget: controller.isStart == true
                 ? JHGResetBtn(onTap: () {
@@ -186,30 +189,32 @@ class PortraitBoard extends StatelessWidget {
 
           //SCORE
 
-          controller.isStart == true
-              ? Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        AppStrings.scoreText,
-                        style: JHGTextStyles.labelStyle.copyWith(
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        controller.score.toString(),
-                        style: JHGTextStyles.subLabelStyle.copyWith(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
+          if (controller.isStart)
+            // == true
+            //     ?
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppStrings.scoreText,
+                    style: JHGTextStyles.labelStyle.copyWith(
+                      fontSize: 16,
+                    ),
                   ),
-                )
-              : const SizedBox(
-                  height: 23,
-                ),
+                  Text(
+                    controller.score.toString(),
+                    style: JHGTextStyles.subLabelStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          // : const SizedBox(
+          //     height: 23,
+          //   ),
         ],
       ),
     );

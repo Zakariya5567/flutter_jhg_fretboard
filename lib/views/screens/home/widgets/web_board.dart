@@ -21,98 +21,114 @@ class WebBoard extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return JHGBody(
-      body: Stack(
+      body: Column(
         children: [
-          Column(
-            children: [
-              Expanded(
-                child: Container(
-                  //color: Colors.red,
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.only(
-                        top: controller.isPortrait
-                            ? height * 0.10
-                            : height * 0.060),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        controller.isPortrait == true
-                            ? Container(
-                                //color: Colors.blue,
-                                height: height * 0.65,
-                                width: width * 0.900,
-                                child: Center(
-                                  child: const WebLandscapeGuitarBoard(),
-                                ))
-                            : Container(
-                                //color: Colors.green,
-                                width: width * 0.16,
-                                alignment: Alignment.topCenter,
-                                child: SingleChildScrollView(
-                                  child: const WebPortraitGuitarBoard(),
-                                )),
-                      ],
+          JHGAppBar(
+            isResponsive: true,
+            leadingWidget: JHGIconButton(
+                childPadding: EdgeInsets.all(6),
+                enabled: true,
+                svgImg: AppAssets.iconTropy,
+                onTap: () {
+                  Get.to(() => LeadershipScreen(),
+                      transition: Transition.leftToRight);
+                }),
+            trailingWidget: JHGSettingsOptBtn(
+              btnEnabled: !controller.leaderboardMode,
+              onTap: () {
+                controller.resetGame(false);
+                Get.to(() => SettingScreen(),
+                    transition: Transition.rightToLeft);
+              },
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    //color: Colors.red,
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.only(
+                          top: controller.isPortrait
+                              ? height * 0.10
+                              : height * 0.060),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          controller.isPortrait == true
+                              ? Container(
+                                  //color: Colors.blue,
+                                  height: height * 0.65,
+                                  width: width * 0.900,
+                                  child: Center(
+                                    child: const WebLandscapeGuitarBoard(),
+                                  ))
+                              : Container(
+                                  //color: Colors.green,
+                                  width: width * 0.16,
+                                  alignment: Alignment.topCenter,
+                                  child: SingleChildScrollView(
+                                    child: const WebPortraitGuitarBoard(),
+                                  )),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 14,
-              ),
-              // TIMER  WITH ADD AND SUBTRACT BUTTONS
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  controller.timerMode == true
-                      ? WebAddAndSubtractButton(
-                          onTap: () {
-                            controller.decreaseTime();
-                          },
-                          isAdd: false)
-                      : const SizedBox(),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  Center(
-                    child: ValueListenableBuilder<int>(
-                      valueListenable: controller.secondsRemaining,
-                      //widget.model.seconds,
-                      builder: (context, value, child) {
-                        return Text(
-                          controller.formatTime(value),
-                          textAlign: TextAlign.center,
-                          style: JHGTextStyles.subLabelStyle.copyWith(
-                            fontSize: 2.5.w,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        );
-                      },
+                SizedBox(
+                  height: 14,
+                ),
+                // TIMER  WITH ADD AND SUBTRACT BUTTONS
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    controller.timerMode == true
+                        ? WebAddAndSubtractButton(
+                            onTap: () {
+                              controller.decreaseTime();
+                            },
+                            isAdd: false)
+                        : const SizedBox(),
+                    SizedBox(
+                      width: 3.w,
                     ),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  controller.timerMode == true
-                      ? WebAddAndSubtractButton(
-                          onTap: () {
-                            controller.increaseTime();
-                          },
-                          isAdd: true)
-                      : const SizedBox(),
-                ],
-              ),
-              // //TIMER , STOPWATCH , ROTATE ICON
-              SizedBox(
-                height: 7,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: width * 0.020,
-                    right: width * 0.020,
-                    bottom: height * 0.030),
-                child: JHGAppBar(
-                  // leading
+                    Center(
+                      child: ValueListenableBuilder<int>(
+                        valueListenable: controller.secondsRemaining,
+                        //widget.model.seconds,
+                        builder: (context, value, child) {
+                          return Text(
+                            controller.formatTime(value),
+                            textAlign: TextAlign.center,
+                            style: JHGTextStyles.subLabelStyle.copyWith(
+                              fontSize: 2.5.w,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: 3.w,
+                    ),
+                    controller.timerMode == true
+                        ? WebAddAndSubtractButton(
+                            onTap: () {
+                              controller.increaseTime();
+                            },
+                            isAdd: true)
+                        : const SizedBox(),
+                  ],
+                ),
+                // //TIMER , STOPWATCH , ROTATE ICON
+                SizedBox(
+                  height: 7,
+                ),
+                JHGAppBar(
+                  isResponsive: true,
+                  isBottom: true,
                   leadingWidget: controller.isStart == true
                       ? JHGResetBtn(
                           enabled: true,
@@ -230,37 +246,8 @@ class WebBoard extends StatelessWidget {
                         )
                       : const SizedBox(),
                 ),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                    left: width * 0.020,
-                    right: width * 0.020,
-                    top: height * 0.030),
-                child: JHGAppBar(
-                  leadingWidget: JHGIconButton(
-                      childPadding: EdgeInsets.all(6),
-                      enabled: true,
-                      svgImg: AppAssets.iconTropy,
-                      onTap: () {
-                        Get.to(() => LeadershipScreen(),
-                            transition: Transition.leftToRight);
-                      }),
-                  trailingWidget: JHGSettingsOptBtn(
-                    btnEnabled: !controller.leaderboardMode,
-                    onTap: () {
-                      controller.resetGame(false);
-                      Get.to(() => SettingScreen(),
-                          transition: Transition.rightToLeft);
-                    },
-                  ),
-                ),
-              ),
-              Spacer(),
-            ],
+              ],
+            ),
           ),
         ],
       ),
