@@ -17,6 +17,7 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
   JHGAdsHelper().init();
+  JHGAdsHelper().addATestDevice(""); // place your deviceID for test Ads
   StringsDownloadService();
   runApp(const MyApp());
 }
