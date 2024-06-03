@@ -62,7 +62,7 @@ class LeaderPortraitView extends StatelessWidget {
         trailingWidget: JHGIconButton(
           size: 24,
           onTap: () => Get.back(),
-          iconData: Icons.arrow_forward_ios,
+          iconData: Icons.close,
         ),
         bottom: leaderBoardTitleWidget(),
       ),

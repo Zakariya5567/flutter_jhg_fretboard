@@ -54,6 +54,7 @@ dependencies:
        url: https://github.com/jamie2364/flutter_jhg_elements.git
        ref: main
   dio: any
+  vs_scrollbar: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
