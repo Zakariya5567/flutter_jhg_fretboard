@@ -219,8 +219,8 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: ac290a8bd1da7219df3991ceb6ac9d38ed8a7dd7
-      url: "https://github.com/jamie2364/flutter_jhg_elements.git"
+      resolved-ref: "268e54b227581fbc8daea3e0a7de5efad184e72c"
+      url: "https://github.com/jamie2364/flutter_jhg_elements"
     source: git
     version: "0.0.1"
   flutter_launcher_icons:
