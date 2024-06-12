@@ -78,9 +78,9 @@ class LandscapeBoard extends StatelessWidget {
                   JHGIconButton(
                       svgImg: AppAssets.iconTrophyLandscape,
                       onTap: () {
-                        controller.interstitialAd?.showInterstitial();
-                        Get.to(() => LeadershipScreen(),
-                            transition: Transition.leftToRight);
+                        controller.leadershipInterstitialAd?.showInterstitial();
+                        // Get.to(() => LeadershipScreen(),
+                        //     transition: Transition.leftToRight);
                       }),
                 ],
               ),
@@ -249,9 +249,9 @@ class LandscapeBoard extends StatelessWidget {
                         return;
                       } else {
                         controller.resetGame(false);
-                        controller.interstitialAd?.showInterstitial();
-                        Get.to(() => SettingScreen(),
-                            transition: Transition.rightToLeft);
+                        controller.settingInterstitialAd?.showInterstitial();
+                        // Get.to(() => SettingScreen(),
+                        //     transition: Transition.rightToLeft);
                       }
                     },
                   )

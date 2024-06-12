@@ -25,7 +25,7 @@ class LeaderBoardController extends GetxController {
 
   getUserName()async {
     var usernames  =  await LocalDB.getUserName;
-    username.value = usernames!;
+    username.value = usernames??'';
   }
 
   Future<dynamic> getLeaderBoard() async {

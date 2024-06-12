@@ -5,7 +5,6 @@ import 'package:fretboard/app_utils/app_assets.dart';
 import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/views/screens/home/widgets/guitar_board.dart';
-import 'package:fretboard/views/screens/leader_board/leaderboard_screen.dart';
 import 'package:fretboard/views/screens/setting/setting_screen.dart';
 import 'package:fretboard/views/widgets/add_sub_button.dart';
 import 'package:get/get.dart';
@@ -35,18 +34,18 @@ class PortraitBoard extends StatelessWidget {
               size: 30,
               svgImg: AppAssets.iconTropy,
               onTap: () {
-                controller.interstitialAd?.showInterstitial();
-                Get.to(() => LeadershipScreen(),
-                    transition: Transition.leftToRight);
+                controller.leadershipInterstitialAd?.showInterstitial();
+                // Get.to(() => LeadershipScreen(),
+                //     transition: Transition.leftToRight);
               },
             ),
             trailingWidget: JHGSettingsOptBtn(
               btnEnabled: !controller.leaderboardMode,
               onTap: () {
                 controller.resetGame(false);
-                controller.interstitialAd?.showInterstitial();
-                Get.to(() => SettingScreen(),
-                    transition: Transition.rightToLeft);
+                controller.settingInterstitialAd?.showInterstitial();
+                // Get.to(() => SettingScreen(),
+                //     transition: Transition.rightToLeft);
               },
             ),
           ),

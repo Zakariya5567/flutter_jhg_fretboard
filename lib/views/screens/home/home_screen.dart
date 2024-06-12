@@ -7,6 +7,8 @@ import 'package:fretboard/controllers/leaderboard_controller.dart';
 import 'package:fretboard/views/screens/home/widgets/landscape_board.dart';
 import 'package:fretboard/views/screens/home/widgets/portrait_board.dart';
 import 'package:fretboard/views/screens/home/widgets/web_board.dart';
+import 'package:fretboard/views/screens/leader_board/leaderboard_screen.dart';
+import 'package:fretboard/views/screens/setting/setting_screen.dart';
 import 'package:fretboard/views/widgets/show_toast.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
@@ -20,7 +22,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   LeaderBoardController lc = Get.put(LeaderBoardController());
-
 
   // Set expiry date when user login to the app
   // we will expire user login after 14 days
@@ -43,8 +44,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (!kIsWeb) {
       StringsDownloadService()
           .isStringsDownloaded(context, "jhg-fretboard-trainer");
-      homeController.interstitialAd = JHGInterstitialAd(interstitialAdId);
-      homeController.interstitialAd?.loadAd();
+      homeController.leadershipInterstitialAd = JHGInterstitialAd(
+        interstitialAdId,
+        onAdClosed: (ad) {
+          Get.to(() => LeadershipScreen(), transition: Transition.leftToRight);
+        },
+      );
+      homeController.leadershipInterstitialAd?.loadAd();
+      homeController.settingInterstitialAd = JHGInterstitialAd(
+        interstitialAdId,
+        onAdClosed: (ad) {
+          Get.to(() => SettingScreen(), transition: Transition.rightToLeft);
+        },
+      );
+      homeController.settingInterstitialAd?.loadAd();
     }
   }
 
