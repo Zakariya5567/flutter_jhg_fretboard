@@ -5,9 +5,7 @@ import 'package:fretboard/app_utils/app_assets.dart';
 import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/views/screens/home/widgets/guitar_board.dart';
-import 'package:fretboard/views/screens/setting/setting_screen.dart';
 import 'package:fretboard/views/widgets/add_sub_button.dart';
-import 'package:get/get.dart';
 
 class PortraitBoard extends StatelessWidget {
   const PortraitBoard({super.key, required this.controller});

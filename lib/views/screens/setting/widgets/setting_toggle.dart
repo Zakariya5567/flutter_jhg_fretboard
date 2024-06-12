@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:fretboard/app_utils/app_%20colors.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/views/widgets/custom_switch.dart';
 
 class SettingToggle extends StatelessWidget {

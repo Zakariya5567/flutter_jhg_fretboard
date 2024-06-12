@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/models/freth_list.dart';
 import 'package:fretboard/repositories/fretboard_repository.dart';
 import 'package:fretboard/services/local_db_service.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:get/get.dart';
