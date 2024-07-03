@@ -227,7 +227,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "58f286c63693f1d13ba4162b90d9355da367d018"
+      resolved-ref: f85923d4926a95ec12efb63103e222df0be1530e
       url: "https://github.com/jamie2364/flutter_jhg_elements"
     source: git
     version: "0.0.1"
@@ -381,10 +381,10 @@ packages:
     dependency: transitive
     description:
       name: in_app_purchase_storekit
-      sha256: "3eea5e173fca0a59ab2fcec5201bea14bb808dfad01004d2b1d7bfdb9244c5e6"
+      sha256: "9a087c3c051266642468f031737c5a09f6fd90ff2b21d953e130563f3fd4cb34"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.16"
+    version: "0.3.17"
   internet_connection_checker:
     dependency: transitive
     description:
@@ -662,7 +662,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "10cb3a1352a219783e44832688fb805654397bca"
+      resolved-ref: "6c030b6eb9adfb0ff036c4ca31934c25fb748f6c"
       url: "https://github.com/jamie2364/flutter-jhg-reg-page"
     source: git
     version: "0.0.1"
