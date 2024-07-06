@@ -4,7 +4,10 @@ import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_assets.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/views/screens/home/widgets/guitar_board.dart';
+import 'package:fretboard/views/screens/leader_board/leaderboard_screen.dart';
+import 'package:fretboard/views/screens/setting/setting_screen.dart';
 import 'package:fretboard/views/widgets/add_sub_button.dart';
+import 'package:get/get.dart';
 
 class LandscapeBoard extends StatelessWidget {
   const LandscapeBoard({super.key, required this.controller});
@@ -75,6 +78,7 @@ class LandscapeBoard extends StatelessWidget {
                   JHGIconButton(
                       svgImg: AppAssets.iconTrophyLandscape,
                       onTap: () {
+                        Get.to(() => LeadershipScreen(), transition: Transition.leftToRight);
                         controller.leadershipInterstitialAd?.showInterstitial();
                         // Get.to(() => LeadershipScreen(),
                         //     transition: Transition.leftToRight);
@@ -246,6 +250,7 @@ class LandscapeBoard extends StatelessWidget {
                         return;
                       } else {
                         controller.resetGame(false);
+                        Get.to(() => SettingScreen(), transition: Transition.rightToLeft);
                         controller.settingInterstitialAd?.showInterstitial();
                         // Get.to(() => SettingScreen(),
                         //     transition: Transition.rightToLeft);

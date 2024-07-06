@@ -44,19 +44,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (!kIsWeb) {
       StringsDownloadService()
           .isStringsDownloaded(context, "jhg-fretboard-trainer");
-      homeController.leadershipInterstitialAd = JHGInterstitialAd(
-        interstitialAdId,
-        onAdClosed: (ad) {
-          Get.to(() => LeadershipScreen(), transition: Transition.leftToRight);
-        },
-      );
+      homeController.leadershipInterstitialAd = JHGInterstitialAd(interstitialAdId);
       homeController.leadershipInterstitialAd?.loadAd();
-      homeController.settingInterstitialAd = JHGInterstitialAd(
-        interstitialAdId,
-        onAdClosed: (ad) {
-          Get.to(() => SettingScreen(), transition: Transition.rightToLeft);
-        },
-      );
+      homeController.settingInterstitialAd = JHGInterstitialAd(interstitialAdId);
       homeController.settingInterstitialAd?.loadAd();
     }
   }
