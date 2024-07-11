@@ -4,6 +4,7 @@ import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/app_utils/app_subscription.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/controllers/leaderboard_controller.dart';
+import 'package:fretboard/main.dart';
 import 'package:fretboard/views/screens/home/widgets/landscape_board.dart';
 import 'package:fretboard/views/screens/home/widgets/portrait_board.dart';
 import 'package:fretboard/views/screens/home/widgets/web_board.dart';
@@ -44,10 +45,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (!kIsWeb) {
       StringsDownloadService()
           .isStringsDownloaded(context, "jhg-fretboard-trainer");
-      homeController.leadershipInterstitialAd = JHGInterstitialAd(interstitialAdId);
-      homeController.leadershipInterstitialAd?.loadAd();
-      homeController.settingInterstitialAd = JHGInterstitialAd(interstitialAdId);
-      homeController.settingInterstitialAd?.loadAd();
+      LocalDB.getIsFreePlan().then((value){
+        isFreePlan = value;
+        if(value) {
+          homeController.interstitialAds = JHGInterstitialAd(interstitialAdId);
+          homeController.interstitialAds?.loadAd();
+        }
+      });
     }
   }
 

@@ -27,8 +27,7 @@ class HomeController extends GetxController {
   TextEditingController minutesEditingController = new TextEditingController();
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
   // JHGInterstitialAd? interstitialAd;
-  JHGInterstitialAd? leadershipInterstitialAd;
-  JHGInterstitialAd? settingInterstitialAd;
+  JHGInterstitialAd? interstitialAds;
 
   getUserName() async {
     var userName = await LocalDB.getUserName;

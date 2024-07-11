@@ -8,6 +8,7 @@ import 'package:fretboard/app_utils/app_%20colors.dart';
 import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_subscription.dart';
 import 'package:fretboard/controllers/home_controller.dart';
+import 'package:fretboard/main.dart';
 import 'package:fretboard/views/screens/home/home_screen.dart';
 import 'package:fretboard/views/screens/setting/widgets/setting_toggle.dart';
 import 'package:get/get.dart';
@@ -122,12 +123,12 @@ class _SettingScreenState extends State<SettingScreen> {
                     },
                   ),
           ),
-          trailing: Padding(
+          trailing: isFreePlan? Padding(
             padding: EdgeInsets.symmetric(vertical: 15),
             child: JHGNativeBanner(
               adID: nativeBannerAdId,
             ),
-          ),
+          ) : const SizedBox(),
           body: controller.isPortrait
               ? settingPortrait(
                   controller: controller, height: height, width: width)
