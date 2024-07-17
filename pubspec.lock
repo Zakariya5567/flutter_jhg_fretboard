@@ -267,10 +267,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_slidable
-      sha256: "673403d2eeef1f9e8483bd6d8d92aae73b1d8bd71f382bc3930f699c731bc27c"
+      sha256: "2c5611c0b44e20d180e4342318e1bbc28b0a44ad2c442f5df16962606fd3e8e3"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.0"
+    version: "3.1.1"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -670,7 +670,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: c0a482eb8cff3bf3e770a8aae6a04e2cbfba4fa6
+      resolved-ref: "7d175d684f0f770cc8e5055273f45faf2092b3a3"
       url: "https://github.com/jamie2364/flutter-jhg-reg-page"
     source: git
     version: "0.0.1"
@@ -811,10 +811,10 @@ packages:
     dependency: transitive
     description:
       name: super_tooltip
-      sha256: "925bbc20d825922e415e9445b22a41987c10be5812f292b9f8b44c4b3ff16e21"
+      sha256: ef1c009a719fccbe35730010b3c252dc81a0f2133e55a37f13446b76a813e3e2
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.7"
+    version: "2.0.8"
   term_glyph:
     dependency: transitive
     description:
@@ -875,10 +875,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_ios
-      sha256: "7068716403343f6ba4969b4173cbf3b84fc768042124bc2c011e5d782b24fe89"
+      sha256: e43b677296fadce447e987a2f519dcf5f6d1e527dc35d01ffab4fff5b8a7063e
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.0"
+    version: "6.3.1"
   url_launcher_linux:
     dependency: transitive
     description:
@@ -923,10 +923,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: "814e9e88f21a176ae1359149021870e87f7cddaf633ab678a5d2b0bff7fd1ba8"
+      sha256: "83d37c7ad7aaf9aa8e275490669535c8080377cfa7a7004c24dfac53afffaa90"
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.0"
+    version: "4.4.2"
   vector_graphics:
     dependency: transitive
     description:
