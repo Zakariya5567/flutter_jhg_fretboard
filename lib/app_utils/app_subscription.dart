@@ -19,13 +19,13 @@ String get nativeBannerAdId => kIsWeb
     ? ''
     : Platform.isAndroid
     ? 'ca-app-pub-8243857750402094/2199455522'
-    : 'ca-app-pub-3940256099942544/3986624511';
+    : 'ca-app-pub-8243857750402094/6682261445';
 
 String get interstitialAdId => kIsWeb
     ? ''
     : Platform.isAndroid
     ? 'ca-app-pub-8243857750402094/3512537192'
-    : 'ca-app-pub-3940256099942544/4411468910';
+    : 'ca-app-pub-8243857750402094/7038683778';
 
 List<String> getFeaturesList() {
   var featuresList = <String>[];
