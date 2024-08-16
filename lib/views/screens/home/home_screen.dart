@@ -42,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     setExpiryDate();
     super.initState();
+    print('user session ${SplashScreen.session}');
     if (!kIsWeb) {
       StringsDownloadService()
           .isStringsDownloaded(context, "jhg-fretboard-trainer");
