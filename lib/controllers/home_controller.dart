@@ -30,7 +30,7 @@ class HomeController extends GetxController {
   JHGInterstitialAd? interstitialAds;
 
   getUserName() async {
-    var userName = await LocalDB.getUserName;
+    userName = await LocalDB.getUserName;
   }
 
   // Initialize  animation controller
@@ -53,7 +53,6 @@ class HomeController extends GetxController {
     int seconds = await SharedPref.getTimerIntervalValue();
     int minutes = await SharedPref.getDefaultTimerMinutesValue();
     String? defaultTimerType = await SharedPref.getDefaultTimerTypeValue();
-    print("object===${defaultTimerType}");
     if (defaultTimerType != null) {
       defaultTimerSelectedValue.value = defaultTimerType;
     }

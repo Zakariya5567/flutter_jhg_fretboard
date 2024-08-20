@@ -2,7 +2,7 @@ import 'package:fretboard/services/base_api_service.dart';
 
 class FretBoardRepository {
   var baseApiService = BaseApiService();
-  String baseURL = "https://www.jamieharrisonguitar.com/wp-json/wp/v2";
+  String baseURL = "https://www.musictools.io/wp-json/wp/v2";
   String getLeaderboardApi = "leaderboard/get?game=";
   String updateScoreApi = "leaderboard";
 

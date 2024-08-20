@@ -8,8 +8,6 @@ import 'package:fretboard/main.dart';
 import 'package:fretboard/views/screens/home/widgets/landscape_board.dart';
 import 'package:fretboard/views/screens/home/widgets/portrait_board.dart';
 import 'package:fretboard/views/screens/home/widgets/web_board.dart';
-import 'package:fretboard/views/screens/leader_board/leaderboard_screen.dart';
-import 'package:fretboard/views/screens/setting/setting_screen.dart';
 import 'package:fretboard/views/widgets/show_toast.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
