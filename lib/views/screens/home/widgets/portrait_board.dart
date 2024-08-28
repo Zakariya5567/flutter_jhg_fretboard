@@ -67,11 +67,14 @@ class PortraitBoard extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(left: width * 0.070),
-              child: Container(
-                  //color: Colors.red,
-                  child: const GuitarBoard(
-                isPortrait: true,
-              )),
+              child: IgnorePointer(
+                ignoring: !controller.isStart,
+                child: Container(
+                    //color: Colors.red,
+                    child: const GuitarBoard(
+                  isPortrait: true,
+                )),
+              ),
             ),
           ),
           //SPACER

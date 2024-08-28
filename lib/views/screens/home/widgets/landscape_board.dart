@@ -213,12 +213,15 @@ class LandscapeBoard extends StatelessWidget {
                 //  SizedBox(width: width*0.06,),
 
                 // BOARD
-                Container(
-                    //color: Colors.blue,
-                    height: height * 0.74,
-                    child: const GuitarBoard(
-                      isPortrait: false,
-                    )),
+                IgnorePointer(
+                  ignoring: !controller.isStart,
+                  child: Container(
+                      //color: Colors.blue,
+                      height: height * 0.74,
+                      child: const GuitarBoard(
+                        isPortrait: false,
+                      )),
+                ),
                 Spacer(),
               ],
             ),
