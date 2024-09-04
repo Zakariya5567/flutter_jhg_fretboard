@@ -12,7 +12,6 @@ import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/main.dart';
 import 'package:fretboard/views/screens/setting/widgets/setting_toggle.dart';
 import 'package:get/get.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 
@@ -24,15 +23,6 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  PackageInfo packageInfo = PackageInfo(
-    appName: '',
-    packageName: '',
-    version: '',
-    buildNumber: '',
-    buildSignature: '',
-    installerStore: '',
-  );
-
   String deviceName = 'Unknown';
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
@@ -59,8 +49,6 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   Future<void> _initPackageInfo() async {
-    final info = await PackageInfo.fromPlatform();
-    packageInfo = info;
     await getDeviceInfo();
   }
 
@@ -73,31 +61,6 @@ class _SettingScreenState extends State<SettingScreen> {
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (controller) {
-        //
-        // if(kIsWeb){
-        //   return settingWeb(
-        //               controller: controller, height: height, width: width);
-        // }else{
-        //   if (controller.isPortrait == false) {
-        //           return settingLandscape(
-        //               controller: controller, height: height, width: width);
-        //         } else {
-        //           return settingPotrait(
-        //               controller: controller, height:  height, width: width);
-        //         }
-        // }
-        // return LayoutBuilder(builder: (context, constraints) {
-        //   if (constraints.maxWidth >= 1100) {
-        //     return settingWeb(
-        //         controller: controller, height: height, width: width);
-        //   } else if (constraints.maxWidth >= 450) {
-        //     return settingWeb(
-        //         controller: controller, height: height, width: width);
-        //   } else {
-
-        //   }
-        // });
-
         return JHGSettings(
           androidAppIdentifier: "",
           iosAppIdentifier: "",
@@ -135,82 +98,6 @@ class _SettingScreenState extends State<SettingScreen> {
                   controller: controller, height: height, width: width)
               : settingLandscape(
                   controller: controller, height: height, width: width),
-          // Column(
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     SizedBox(
-          //       height: 12,
-          //     ),
-          //     Text(
-          //       AppStrings.strings,
-          //       textAlign: TextAlign.center,
-          //       style: JHGTextStyles.labelStyle.copyWith(
-          //         color: AppColors.whiteSecondary,
-          //         fontSize: 16,
-          //       ),
-          //     ),
-          //     SizedBox(height: height * 0.01),
-          //     Text(
-          //       AppStrings.stringDescription,
-          //       style: JHGTextStyles.subLabelStyle.copyWith(
-          //         color: AppColors.whiteSecondary,
-          //         fontSize: 14,
-          //         fontWeight: FontWeight.w500,
-          //       ),
-          //     ),
-          //     SizedBox(height: height * 0.04),
-          //     // SAVE BUTTON
-          //     JHGSwitchTile(
-          //         title: AppStrings.string6,
-          //         initialValue: controller.string6,
-          //         onChanged: (bool value) {
-          //           controller.setString6(0);
-          //         }),
-          //     JHGSwitchTile(
-          //         title: AppStrings.string5,
-          //         initialValue: controller.string5,
-          //         onChanged: (bool value) {
-          //           controller.setString5(1);
-          //         }),
-          //     JHGSwitchTile(
-          //         title: AppStrings.string4,
-          //         initialValue: controller.string4,
-          //         onChanged: (bool value) {
-          //           controller.setString4(2);
-          //         }),
-          //     JHGSwitchTile(
-          //         title: AppStrings.string3,
-          //         initialValue: controller.string3,
-          //         onChanged: (bool value) {
-          //           controller.setString3(3);
-          //         }),
-          //     JHGSwitchTile(
-          //         title: AppStrings.string2,
-          //         initialValue: controller.string2,
-          //         onChanged: (bool value) {
-          //           controller.setString2(4);
-          //         }),
-          //     JHGSwitchTile(
-          //         title: AppStrings.string1,
-          //         initialValue: controller.string1,
-          //         onChanged: (bool value) {
-          //           controller.setString1(5);
-          //         }),
-          //     JHGSettingsDefaultTimer(
-          //         selectedValue: controller.defaultTimerSelectedValue.value,
-          //         onChanged: (String? value) {
-          //           if (value != null) {
-          //             controller.defaultTimerSelectedValue.value = value;
-          //           }
-          //         },
-          //         minutesController: controller.minutesEditingController,
-          //         secondsController: controller.timerIntervalEditingController),
-          //     SizedBox(
-          //       height: 50,
-          //     )
-          //   ],
-          // ),
           onTapSave: () => controller.onClickSave(context),
           onTapLogout: () async {
             await LocalDB.clearLocalDB();
