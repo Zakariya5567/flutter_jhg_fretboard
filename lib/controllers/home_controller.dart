@@ -86,7 +86,7 @@ class HomeController extends GetxController {
           if (kIsWeb) {
             player.setAsset("web/${element.fretSound!}");
           }else{
-            player.setFilePath(getAsset(element.fretSound!).path);
+            player.setFilePath(Utils.getAsset(element.fretSound!).path);
           }
           player.play();
           if (highlightNode == selectedNote && selectedString == highlightString) {
@@ -107,7 +107,7 @@ class HomeController extends GetxController {
           if (kIsWeb) {
             player.setAsset("web/${element.fretSound!}");
           }else{
-            player.setFilePath(getAsset(element.fretSound!).path);
+            player.setFilePath(Utils.getAsset(element.fretSound!).path);
           }
           player.play();
         }

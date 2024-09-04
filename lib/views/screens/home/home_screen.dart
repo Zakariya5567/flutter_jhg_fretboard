@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     print('user session ${SplashScreen.session}');
     if (!kIsWeb) {
       StringsDownloadService()
-          .isStringsDownloaded(context, "jhg-fretboard-trainer");
+          .isStringsDownloaded( "jhg-fretboard-trainer");
       LocalDB.getIsFreePlan().then((value){
         isFreePlan = value;
         if(value) {

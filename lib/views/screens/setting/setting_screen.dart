@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
@@ -9,7 +10,6 @@ import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_subscription.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/main.dart';
-import 'package:fretboard/views/screens/home/home_screen.dart';
 import 'package:fretboard/views/screens/setting/widgets/setting_toggle.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -114,21 +114,22 @@ class _SettingScreenState extends State<SettingScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BugReportPage(
+                          builder: (context) => BugReportScreen(
                             device: deviceName,
-                            appName: AppStrings.appName,
                           ),
                         ),
                       );
                     },
                   ),
           ),
-          trailing: isFreePlan? Padding(
-            padding: EdgeInsets.symmetric(vertical: 15),
-            child: JHGNativeBanner(
-              adID: nativeBannerAdId,
-            ),
-          ) : const SizedBox(),
+          trailing: isFreePlan
+              ? Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  child: JHGNativeBanner(
+                    adID: nativeBannerAdId,
+                  ),
+                )
+              : const SizedBox(),
           body: controller.isPortrait
               ? settingPortrait(
                   controller: controller, height: height, width: width)
@@ -216,14 +217,7 @@ class _SettingScreenState extends State<SettingScreen> {
             // ignore: use_build_context_synchronously
             Navigator.pushAndRemoveUntil(context,
                 MaterialPageRoute(builder: (context) {
-              return Welcome(
-                yearlySubscriptionId: yearlySubscription(),
-                monthlySubscriptionId: monthlySubscription(),
-                appVersion: packageInfo.version,
-                featuresList: getFeaturesList(),
-                appName: AppStrings.appName,
-                nextPage: () => const HomeScreen(),
-              );
+              return WelcomeScreen();
             }), (route) => false);
           },
         );
@@ -471,16 +465,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                       // ignore: use_build_context_synchronously
                                       Navigator.pushAndRemoveUntil(context,
                                           MaterialPageRoute(builder: (context) {
-                                        return Welcome(
-                                          yearlySubscriptionId:
-                                              yearlySubscription(),
-                                          monthlySubscriptionId:
-                                              monthlySubscription(),
-                                          appVersion: packageInfo.version,
-                                          featuresList: getFeaturesList(),
-                                          appName: AppStrings.appName,
-                                          nextPage: () => const HomeScreen(),
-                                        );
+                                        return WelcomeScreen();
                                       }), (route) => false);
                                     },
                                   ),
@@ -615,16 +600,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     // ignore: use_build_context_synchronously
                                     Navigator.pushAndRemoveUntil(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return Welcome(
-                                        yearlySubscriptionId:
-                                            yearlySubscription(),
-                                        monthlySubscriptionId:
-                                            monthlySubscription(),
-                                        appVersion: packageInfo.version,
-                                        featuresList: getFeaturesList(),
-                                        appName: AppStrings.appName,
-                                        nextPage: () => const HomeScreen(),
-                                      );
+                                      return WelcomeScreen();
                                     }), (route) => false);
                                   },
                                 ),
@@ -658,9 +634,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BugReportPage(
+                        builder: (context) => BugReportScreen(
                           device: deviceName,
-                          appName: AppStrings.appName,
                         ),
                       ),
                     );
