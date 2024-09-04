@@ -7,7 +7,6 @@ import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_subscription.dart';
 import 'package:fretboard/views/screens/home/home_screen.dart';
 import 'package:get/get.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:reg_page/reg_page.dart';
 
 var isFreePlan = false;
@@ -23,6 +22,7 @@ Future<void> main() async {
   StringsDownloadService();
   runApp(const MyApp());
 }
+
 final navKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatefulWidget {
@@ -33,28 +33,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  PackageInfo packageInfo = PackageInfo(
-    appName: '',
-    packageName: '',
-    version: '',
-    buildNumber: '',
-    buildSignature: '',
-    installerStore: '',
-  );
-
-  @override
-  void initState() {
-    super.initState();
-    _initPackageInfo();
-  }
-
-  Future<void> _initPackageInfo() async {
-    final info = await PackageInfo.fromPlatform();
-    setState(() {
-      packageInfo = info;
-    });
-  }
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -84,9 +62,8 @@ class _MyAppState extends State<MyApp> {
                   yearlySubscriptionId: yearlySubscription(),
                   monthlySubscriptionId: monthlySubscription(),
                   appName: AppStrings.appName,
-                  appVersion: packageInfo.version,
                   featuresList: getFeaturesList(),
-            navKey: navKey,
+                  navKey: navKey,
                   nextPage: () => const HomeScreen(),
                 ),
         );
