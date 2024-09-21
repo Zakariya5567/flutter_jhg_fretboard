@@ -67,7 +67,7 @@ class _SettingScreenState extends State<SettingScreen> {
           bodyAppBar: JHGAppBar(
             isResponsive: true,
             title: Text(
-              "Setting",
+              "Settings",
               style: JHGTextStyles.smlabelStyle,
             ),
             trailingWidget: kIsWeb
