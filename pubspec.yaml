@@ -44,13 +44,13 @@ dependencies:
 #  audioplayers:
   just_audio: ^0.9.36
   reg_page:
-      git:
-       url: https://github.com/jamie2364/flutter-jhg-reg-page
-       ref: master
+    git:
+      url: https://github.com/jamie2364/flutter-jhg-reg-page
+      ref: master
   flutter_jhg_elements:
-     git:
-       url: https://github.com/jamie2364/flutter_jhg_elements.git
-       ref: main
+    git:
+      url: https://github.com/jamie2364/flutter_jhg_elements.git
+      ref: main
   dio: any
   vs_scrollbar: ^1.0.0
 dev_dependencies:
