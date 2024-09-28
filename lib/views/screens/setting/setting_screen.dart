@@ -390,30 +390,28 @@ class _SettingScreenState extends State<SettingScreen> {
                   children: [
                     Container(
                       width: height * 0.78,
-                      child: Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              AppStrings.strings,
-                              textAlign: TextAlign.center,
-                              style: JHGTextStyles.labelStyle.copyWith(
-                                color: AppColors.whiteSecondary,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppStrings.strings,
+                            textAlign: TextAlign.center,
+                            style: JHGTextStyles.labelStyle.copyWith(
+                              color: AppColors.whiteSecondary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
                             ),
-                            SizedBox(height: height * 0.01),
-                            Text(
-                              AppStrings.stringDescriptionLandscape,
-                              style: JHGTextStyles.subLabelStyle.copyWith(
-                                color: AppColors.whiteSecondary,
-                                fontSize: 14,
-                              ),
+                          ),
+                          SizedBox(height: height * 0.01),
+                          Text(
+                            AppStrings.stringDescriptionLandscape,
+                            style: JHGTextStyles.subLabelStyle.copyWith(
+                              color: AppColors.whiteSecondary,
+                              fontSize: 14,
                             ),
-                            SizedBox(height: height * 0.015),
-                          ],
-                        ),
+                          ),
+                          SizedBox(height: height * 0.015),
+                        ],
                       ),
                     ),
 
@@ -423,51 +421,54 @@ class _SettingScreenState extends State<SettingScreen> {
                           borderRadius: BorderRadius.circular(8),
                           color: Colors.black.withOpacity(0.2),
                         ),
-                        // height: width * 0.85,
+                        height: width * 0.55,
                         width: height * 0.78,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            // padding: EdgeInsets.zero,
-                            // shrinkWrap: true,
-                            children: [
-                              SettingToggle(
-                                  heading: AppStrings.string6,
-                                  value: controller.string6,
-                                  onChange: () {
-                                    controller.setString6(0);
-                                  }),
-                              SettingToggle(
-                                  heading: AppStrings.string5,
-                                  value: controller.string5,
-                                  onChange: () {
-                                    controller.setString5(1);
-                                  }),
-                              SettingToggle(
-                                  heading: AppStrings.string4,
-                                  value: controller.string4,
-                                  onChange: () {
-                                    controller.setString4(2);
-                                  }),
-                              SettingToggle(
-                                  heading: AppStrings.string3,
-                                  value: controller.string3,
-                                  onChange: () {
-                                    controller.setString3(3);
-                                  }),
-                              SettingToggle(
-                                  heading: AppStrings.string2,
-                                  value: controller.string2,
-                                  onChange: () {
-                                    controller.setString2(4);
-                                  }),
-                              SettingToggle(
-                                  heading: AppStrings.string1,
-                                  value: controller.string1,
-                                  onChange: () {
-                                    controller.setString1(5);
-                                  }),
-                            ],
+                        padding: EdgeInsets.symmetric(horizontal: height * 0.02),
+                        child: SizedBox(
+                          height: width * 0.7,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              // padding: EdgeInsets.zero,
+                              // shrinkWrap: true,
+                              children: [
+                                SettingToggle(
+                                    heading: AppStrings.string6,
+                                    value: controller.string6,
+                                    onChange: () {
+                                      controller.setString6(0);
+                                    }),
+                                SettingToggle(
+                                    heading: AppStrings.string5,
+                                    value: controller.string5,
+                                    onChange: () {
+                                      controller.setString5(1);
+                                    }),
+                                SettingToggle(
+                                    heading: AppStrings.string4,
+                                    value: controller.string4,
+                                    onChange: () {
+                                      controller.setString4(2);
+                                    }),
+                                SettingToggle(
+                                    heading: AppStrings.string3,
+                                    value: controller.string3,
+                                    onChange: () {
+                                      controller.setString3(3);
+                                    }),
+                                SettingToggle(
+                                    heading: AppStrings.string2,
+                                    value: controller.string2,
+                                    onChange: () {
+                                      controller.setString2(4);
+                                    }),
+                                SettingToggle(
+                                    heading: AppStrings.string1,
+                                    value: controller.string1,
+                                    onChange: () {
+                                      controller.setString1(5);
+                                    }),
+                              ],
+                            ),
                           ),
                         ),
                       ),
