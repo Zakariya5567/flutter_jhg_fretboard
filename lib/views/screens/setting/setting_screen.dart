@@ -53,6 +53,9 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   bool toggle = true;
+  ValueNotifier<bool> isExpanded = ValueNotifier(false);
+
+  // HomeController homeController = Get.isRegistered<HomeController>() ? Get.find<HomeController>() : Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +108,7 @@ class _SettingScreenState extends State<SettingScreen> {
             : JHGSettingsLandscape(
                 androidAppIdentifier: "",
                 iosAppIdentifier: "",
+                isExpanded: controller.isExpanded,
                 bodyAppBar: JHGAppBar(
                   isResponsive: true,
                   title: Text(
@@ -229,7 +233,7 @@ class _SettingScreenState extends State<SettingScreen> {
   Widget settingLandscape(
       {required HomeController controller, required double height, required double width}) {
     return Container(
-      height: width,
+      // height: isExpanded ? width : width * 0.45,
       width: height,
       color: JHGColors.secondryBlack,
       //color: Colors.red,
@@ -237,244 +241,233 @@ class _SettingScreenState extends State<SettingScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: kIsWeb
-                ? VsScrollbar(
-                    controller: ScrollController(),
-                    showTrackOnHover: true,
-                    // default false
-                    isAlwaysShown: true,
-                    // default false
-                    scrollbarFadeDuration: Duration(milliseconds: 500),
-                    // default : Duration(milliseconds: 300)
-                    scrollbarTimeToFade: Duration(milliseconds: 800),
-                    // default : Duration(milliseconds: 600)
-                    style: VsScrollbarStyle(
-                      hoverThickness: 10.0, // default 12.0
-                      radius: Radius.circular(10), // default Radius.circular(8.0)
-                      thickness: 10.0, // [ default 8.0 ]
-                      color: Colors.white, // default ColorScheme Theme
-                    ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Container(
-                            width: height * 0.58,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppStrings.strings,
-                                  textAlign: TextAlign.center,
-                                  style: JHGTextStyles.labelStyle.copyWith(
-                                    color: AppColors.whiteSecondary,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+          kIsWeb
+              ? VsScrollbar(
+                  controller: ScrollController(),
+                  showTrackOnHover: true,
+                  // default false
+                  isAlwaysShown: true,
+                  // default false
+                  scrollbarFadeDuration: Duration(milliseconds: 500),
+                  // default : Duration(milliseconds: 300)
+                  scrollbarTimeToFade: Duration(milliseconds: 800),
+                  // default : Duration(milliseconds: 600)
+                  style: VsScrollbarStyle(
+                    hoverThickness: 10.0, // default 12.0
+                    radius: Radius.circular(10), // default Radius.circular(8.0)
+                    thickness: 10.0, // [ default 8.0 ]
+                    color: Colors.white, // default ColorScheme Theme
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: height * 0.58,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                AppStrings.strings,
+                                textAlign: TextAlign.center,
+                                style: JHGTextStyles.labelStyle.copyWith(
+                                  color: AppColors.whiteSecondary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                                SizedBox(height: height * 0.01),
-                                Text(
-                                  AppStrings.stringDescriptionLandscape,
-                                  style: JHGTextStyles.subLabelStyle.copyWith(
-                                    color: AppColors.whiteSecondary,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                SizedBox(height: height * 0.015),
-                              ],
-                            ),
-                          ),
-
-                          // SAVE BUTTON
-
-                          Center(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colors.black.withOpacity(0.2),
                               ),
-                              //height: width * 0.37,
-                              width: height * 0.58,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  // padding: EdgeInsets.zero,
-                                  // shrinkWrap: true,
-                                  children: [
-                                    SettingToggle(
-                                        heading: AppStrings.string6,
-                                        value: controller.string6,
-                                        onChange: () {
-                                          controller.setString6(0);
-                                        }),
-                                    SettingToggle(
-                                        heading: AppStrings.string5,
-                                        value: controller.string5,
-                                        onChange: () {
-                                          controller.setString5(1);
-                                        }),
-                                    SettingToggle(
-                                        heading: AppStrings.string4,
-                                        value: controller.string4,
-                                        onChange: () {
-                                          controller.setString4(2);
-                                        }),
-                                    SettingToggle(
-                                        heading: AppStrings.string3,
-                                        value: controller.string3,
-                                        onChange: () {
-                                          controller.setString3(3);
-                                        }),
-                                    SettingToggle(
-                                        heading: AppStrings.string2,
-                                        value: controller.string2,
-                                        onChange: () {
-                                          controller.setString2(4);
-                                        }),
-                                    SettingToggle(
-                                        heading: AppStrings.string1,
-                                        value: controller.string1,
-                                        onChange: () {
-                                          controller.setString1(5);
-                                        }),
-                                  ],
+                              SizedBox(height: height * 0.01),
+                              Text(
+                                AppStrings.stringDescriptionLandscape,
+                                style: JHGTextStyles.subLabelStyle.copyWith(
+                                  color: AppColors.whiteSecondary,
+                                  fontSize: 14,
                                 ),
+                              ),
+                              SizedBox(height: height * 0.015),
+                            ],
+                          ),
+                        ),
+
+                        // SAVE BUTTON
+
+                        Center(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.black.withOpacity(0.2),
+                            ),
+                            //height: width * 0.37,
+                            width: height * 0.58,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                // padding: EdgeInsets.zero,
+                                // shrinkWrap: true,
+                                children: [
+                                  SettingToggle(
+                                      heading: AppStrings.string6,
+                                      value: controller.string6,
+                                      onChange: () {
+                                        controller.setString6(0);
+                                      }),
+                                  SettingToggle(
+                                      heading: AppStrings.string5,
+                                      value: controller.string5,
+                                      onChange: () {
+                                        controller.setString5(1);
+                                      }),
+                                  SettingToggle(
+                                      heading: AppStrings.string4,
+                                      value: controller.string4,
+                                      onChange: () {
+                                        controller.setString4(2);
+                                      }),
+                                  SettingToggle(
+                                      heading: AppStrings.string3,
+                                      value: controller.string3,
+                                      onChange: () {
+                                        controller.setString3(3);
+                                      }),
+                                  SettingToggle(
+                                      heading: AppStrings.string2,
+                                      value: controller.string2,
+                                      onChange: () {
+                                        controller.setString2(4);
+                                      }),
+                                  SettingToggle(
+                                      heading: AppStrings.string1,
+                                      value: controller.string1,
+                                      onChange: () {
+                                        controller.setString1(5);
+                                      }),
+                                ],
                               ),
                             ),
                           ),
-                          SizedBox(height: height * 0.02),
-                          SizedBox(
-                            width: height * 0.58,
-                            child: JHGSettingsDefaultTimer(
-                                selectedValue: controller.defaultTimerSelectedValue.value,
-                                onChanged: (String? value) {
-                                  if (value != null) {
-                                    controller.defaultTimerSelectedValue.value = value;
-                                  }
+                        ),
+                        SizedBox(height: height * 0.02),
+                        SizedBox(
+                          width: height * 0.58,
+                          child: JHGSettingsDefaultTimer(
+                              selectedValue: controller.defaultTimerSelectedValue.value,
+                              onChanged: (String? value) {
+                                if (value != null) {
+                                  controller.defaultTimerSelectedValue.value = value;
+                                }
+                              },
+                              minutesController: controller.minutesEditingController,
+                              secondsController: controller.timerIntervalEditingController),
+                        ),
+                        SizedBox(height: height * 0.02),
+                        Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              JHGPrimaryBtn(
+                                label: AppStrings.save,
+                                width: height * 0.58,
+                                onPressed: () {
+                                  controller.onClickSave(context);
                                 },
-                                minutesController: controller.minutesEditingController,
-                                secondsController: controller.timerIntervalEditingController),
-                          ),
-                          SizedBox(height: height * 0.02),
-                          Center(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                JHGPrimaryBtn(
-                                  label: AppStrings.save,
-                                  width: height * 0.58,
-                                  onPressed: () {
-                                    controller.onClickSave(context);
-                                  },
-                                ),
-                                JHGSecondaryBtn(
-                                  label: AppStrings.logout,
-                                  width: height * 0.58,
-                                  onPressed: () async {
-                                    await LocalDB.clearLocalDB();
-                                    // ignore: use_build_context_synchronously
-                                    Navigator.pushAndRemoveUntil(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return WelcomeScreen();
-                                    }), (route) => false);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : Column(
-                  children: [
-                    Container(
-                      width: height * 0.78,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppStrings.strings,
-                            textAlign: TextAlign.center,
-                            style: JHGTextStyles.labelStyle.copyWith(
-                              color: AppColors.whiteSecondary,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(height: height * 0.01),
-                          Text(
-                            AppStrings.stringDescriptionLandscape,
-                            style: JHGTextStyles.subLabelStyle.copyWith(
-                              color: AppColors.whiteSecondary,
-                              fontSize: 14,
-                            ),
-                          ),
-                          SizedBox(height: height * 0.015),
-                        ],
-                      ),
-                    ),
-
-                    Center(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: Colors.black.withOpacity(0.2),
-                        ),
-                        height: width * 0.55,
-                        width: height * 0.78,
-                        padding: EdgeInsets.symmetric(horizontal: height * 0.02),
-                        child: SizedBox(
-                          height: width * 0.7,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              // padding: EdgeInsets.zero,
-                              // shrinkWrap: true,
-                              children: [
-                                SettingToggle(
-                                    heading: AppStrings.string6,
-                                    value: controller.string6,
-                                    onChange: () {
-                                      controller.setString6(0);
-                                    }),
-                                SettingToggle(
-                                    heading: AppStrings.string5,
-                                    value: controller.string5,
-                                    onChange: () {
-                                      controller.setString5(1);
-                                    }),
-                                SettingToggle(
-                                    heading: AppStrings.string4,
-                                    value: controller.string4,
-                                    onChange: () {
-                                      controller.setString4(2);
-                                    }),
-                                SettingToggle(
-                                    heading: AppStrings.string3,
-                                    value: controller.string3,
-                                    onChange: () {
-                                      controller.setString3(3);
-                                    }),
-                                SettingToggle(
-                                    heading: AppStrings.string2,
-                                    value: controller.string2,
-                                    onChange: () {
-                                      controller.setString2(4);
-                                    }),
-                                SettingToggle(
-                                    heading: AppStrings.string1,
-                                    value: controller.string1,
-                                    onChange: () {
-                                      controller.setString1(5);
-                                    }),
-                              ],
-                            ),
+                              ),
+                              JHGSecondaryBtn(
+                                label: AppStrings.logout,
+                                width: height * 0.58,
+                                onPressed: () async {
+                                  await LocalDB.clearLocalDB();
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.pushAndRemoveUntil(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return WelcomeScreen();
+                                  }), (route) => false);
+                                },
+                              ),
+                            ],
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                    SizedBox(
-                      width: height * 0.78,
+                  ),
+                )
+              : ExpansionTile(
+                    backgroundColor: Colors.transparent,
+                    collapsedIconColor: JHGColors.white,
+                      iconColor: JHGColors.white,
+                      childrenPadding: EdgeInsets.symmetric(horizontal: height * 0.02),
+                      onExpansionChanged: (val) {
+                        controller.updateIsExpanded(val);
+                      },
+                      title: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                                AppStrings.strings,
+                                textAlign: TextAlign.center,
+                                style: JHGTextStyles.labelStyle.copyWith(
+                                  color: AppColors.whiteSecondary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                      ),
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                              AppStrings.stringDescriptionLandscape,
+                              style: JHGTextStyles.subLabelStyle.copyWith(
+                                color: AppColors.whiteSecondary,
+                                fontSize: 14,
+                              ),
+                            ),
+                      ),
+                      SizedBox(
+                        height: width * 0.02,
+                      ),
+                      SettingToggle(
+                          heading: AppStrings.string6,
+                          value: controller.string6,
+                          onChange: () {
+                            controller.setString6(0);
+                          }),
+                      SettingToggle(
+                          heading: AppStrings.string5,
+                          value: controller.string5,
+                          onChange: () {
+                            controller.setString5(1);
+                          }),
+                      SettingToggle(
+                          heading: AppStrings.string4,
+                          value: controller.string4,
+                          onChange: () {
+                            controller.setString4(2);
+                          }),
+                      SettingToggle(
+                          heading: AppStrings.string3,
+                          value: controller.string3,
+                          onChange: () {
+                            controller.setString3(3);
+                          }),
+                      SettingToggle(
+                          heading: AppStrings.string2,
+                          value: controller.string2,
+                          onChange: () {
+                            controller.setString2(4);
+                          }),
+                      SettingToggle(
+                          heading: AppStrings.string1,
+                          value: controller.string1,
+                          onChange: () {
+                            controller.setString1(5);
+                          }),
+                    ],
+                  ),
+                  SizedBox(
+                    height: width * 0.04,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: height * 0.02),
+                    child: SizedBox(
+                      width: height * 0.85,
                       child: JHGSettingsDefaultTimer(
                           selectedValue: controller.defaultTimerSelectedValue.value,
                           onChanged: (String? value) {
@@ -482,41 +475,13 @@ class _SettingScreenState extends State<SettingScreen> {
                               controller.defaultTimerSelectedValue.value = value;
                             }
                           },
+                          paddingTop: EdgeInsets.zero,
                           minutesController: controller.minutesEditingController,
                           secondsController: controller.timerIntervalEditingController),
                     ),
-                    // SizedBox(height: height * 0.02),
-                    // Center(
-                    //   child: Column(
-                    //     crossAxisAlignment: CrossAxisAlignment.center,
-                    //     children: [
-                    //       JHGPrimaryBtn(
-                    //         label: AppStrings.save,
-                    //         width: height * 0.58,
-                    //         onPressed: () {
-                    //           controller.onClickSave(context);
-                    //         },
-                    //       ),
-                    //       JHGSecondaryBtn(
-                    //         label: AppStrings.logout,
-                    //         width: height * 0.58,
-                    //         onPressed: () async {
-                    //           await LocalDB.clearLocalDB();
-                    //           // ignore: use_build_context_synchronously
-                    //           Navigator.pushAndRemoveUntil(context,
-                    //               MaterialPageRoute(builder: (context) {
-                    //             return WelcomeScreen();
-                    //           }), (route) => false);
-                    //         },
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
-                  ],
-                ),
-          )
-        ],
-      ),
+                  ),
+                ],
+              )
     );
   }
 

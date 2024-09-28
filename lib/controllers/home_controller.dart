@@ -28,9 +28,14 @@ class HomeController extends GetxController {
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
   // JHGInterstitialAd? interstitialAd;
   JHGInterstitialAd? interstitialAds;
+  RxBool isExpanded = RxBool(false);
 
   getUserName() async {
     userName = await LocalDB.getUserName;
+  }
+
+  void updateIsExpanded(bool value){
+    isExpanded.value = value;
   }
 
   // Initialize  animation controller
