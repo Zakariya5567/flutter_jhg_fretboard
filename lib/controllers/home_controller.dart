@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart' show compute, kIsWeb;
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/models/freth_list.dart';
 import 'package:fretboard/repositories/fretboard_repository.dart';
 import 'package:fretboard/services/local_db_service.dart';
+import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:get/get.dart';
-import 'package:flutter/foundation.dart' show compute, kIsWeb;
 import 'package:universal_html/html.dart';
+
 import 'leaderboard_controller.dart';
 
 class HomeController extends GetxController {
@@ -23,7 +25,8 @@ class HomeController extends GetxController {
   String? selectedNote;
   int? selectedString;
   String? userName;
-  TextEditingController timerIntervalEditingController = new TextEditingController();
+  TextEditingController timerIntervalEditingController =
+      new TextEditingController();
   TextEditingController minutesEditingController = new TextEditingController();
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
   // JHGInterstitialAd? interstitialAd;
@@ -34,8 +37,8 @@ class HomeController extends GetxController {
     userName = await LocalDB.getUserName;
   }
 
-  void updateIsExpanded(bool value){
-    isExpanded.value = value;
+  void updateIsExpanded() {
+    isExpanded.value = !isExpanded.value;
   }
 
   // Initialize  animation controller
@@ -90,11 +93,12 @@ class HomeController extends GetxController {
           player.setVolume(1.0);
           if (kIsWeb) {
             player.setAsset("web/${element.fretSound!}");
-          }else{
+          } else {
             player.setFilePath(Utils.getAsset(element.fretSound!).path);
           }
           player.play();
-          if (highlightNode == selectedNote && selectedString == highlightString) {
+          if (highlightNode == selectedNote &&
+              selectedString == highlightString) {
             previousHighlightFret = highlightFret;
             previousHighlightNode = highlightNode;
             incrementScore();
@@ -111,7 +115,7 @@ class HomeController extends GetxController {
           player.setVolume(1.0);
           if (kIsWeb) {
             player.setAsset("web/${element.fretSound!}");
-          }else{
+          } else {
             player.setFilePath(Utils.getAsset(element.fretSound!).path);
           }
           player.play();
@@ -119,8 +123,8 @@ class HomeController extends GetxController {
         return;
       }
     });
-
   }
+
   double scale = 1;
 
   bool isPortrait = true;
