@@ -235,7 +235,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "579487fba55fe0cfd0fbe0495ee173a072f0c93c"
+      resolved-ref: "912fc2b67ce7e81996e1449cc6e39529ad5882d6"
       url: "https://github.com/jamie2364/flutter_jhg_elements.git"
     source: git
     version: "0.0.1"
