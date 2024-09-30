@@ -76,6 +76,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     'com.jamieharrisonguitar.jhg_fretboard_trainer',
                 iosAppIdentifier: 'com.jamieharrisonguitar.fretboard-trainer',
                 appStoreId: '6461420247',
+                appName: 'mt-fretboard-trainer',
                 bodyAppBar: JHGAppBar(
                   isResponsive: true,
                   title: Text(
@@ -120,6 +121,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     'com.jamieharrisonguitar.jhg_fretboard_trainer',
                 iosAppIdentifier: 'com.jamieharrisonguitar.fretboard-trainer',
                 appStoreId: '6461420247',
+                appName: 'mt-fretboard-trainer',
                 isExpanded: expansionStream.stream,
                 bodyAppBar: JHGAppBar(
                   isResponsive: true,
