@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -55,13 +54,11 @@ class _SettingScreenState extends State<SettingScreen> {
   ValueNotifier<bool> isExpanded = ValueNotifier(false);
   StreamController<bool> expansionStream = StreamController<bool>.broadcast();
 
-
   @override
   void dispose() {
     expansionStream.close();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +69,10 @@ class _SettingScreenState extends State<SettingScreen> {
       builder: (controller) {
         return controller.isPortrait
             ? JHGSettings(
-                androidAppIdentifier:
-                    'com.jamieharrisonguitar.jhg_fretboard_trainer',
-                iosAppIdentifier: 'com.jamieharrisonguitar.fretboard-trainer',
-                appStoreId: '6461420247',
-                appName: 'mt-fretboard-trainer',
+                androidAppIdentifier: AppStrings.androidBuildId,
+                iosAppIdentifier: AppStrings.iOSBuildId,
+                appStoreId: AppStrings.appStoreId,
+                appName: AppStrings.appName,
                 bodyAppBar: JHGAppBar(
                   isResponsive: true,
                   title: Text(
@@ -117,11 +113,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 },
               )
             : JHGSettingsLandscape(
-                androidAppIdentifier:
-                    'com.jamieharrisonguitar.jhg_fretboard_trainer',
-                iosAppIdentifier: 'com.jamieharrisonguitar.fretboard-trainer',
-                appStoreId: '6461420247',
-                appName: 'mt-fretboard-trainer',
+                androidAppIdentifier: AppStrings.androidBuildId,
+                iosAppIdentifier: AppStrings.iOSBuildId,
+                appStoreId: AppStrings.appStoreId,
+                appName: AppStrings.appName,
                 isExpanded: expansionStream.stream,
                 bodyAppBar: JHGAppBar(
                   isResponsive: true,
@@ -204,95 +199,96 @@ class _SettingScreenState extends State<SettingScreen> {
 
   Widget buildSettingsUi(HomeController controller) {
     return StreamBuilder<bool>(
-          stream: expansionStream.stream,
-          initialData: false,
-          builder: (context, snapshot){
-            bool val = snapshot.data ?? false;
-            return Column(
-              children: [
-                JHGHeadWithActions(
-                  AppStrings.strings,
-                  subLabel: AppStrings.stringDescriptionLandscape,
-                  onTapTitle: () {
-                    expansionStream.sink.add(!val);
-                  },
-                  onArrowDownTap: () {
-                    expansionStream.sink.add(!val);
-                  },
-                  arrowIcon: val
-                      ? Icons.keyboard_arrow_up_rounded
-                      : Icons.keyboard_arrow_down_rounded,
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.black.withOpacity(0.2),
-                  ),
-                  child: JHGExpandableSection(
-                    expand: val,
-                    child: Visibility(
-                      visible: val,
-                      child: Column(
-                        children: [
-                          JHGSwitchTile(
-                              title: AppStrings.string6,
-                              initialValue: controller.string6,
-                              onChanged: (val) {
-                                controller.setString6(0);
-                              }),
-                          JHGSwitchTile(
-                              title: AppStrings.string5,
-                              initialValue: controller.string5,
-                              onChanged: (val) {
-                                controller.setString5(1);
-                              }),
-                          JHGSwitchTile(
-                              title: AppStrings.string4,
-                              initialValue: controller.string4,
-                              onChanged: (val) {
-                                controller.setString4(2);
-                              }),
-                          JHGSwitchTile(
-                              title: AppStrings.string3,
-                              initialValue: controller.string3,
-                              onChanged: (val) {
-                                controller.setString3(3);
-                              }),
-                          JHGSwitchTile(
-                              title: AppStrings.string2,
-                              initialValue: controller.string2,
-                              onChanged: (val) {
-                                controller.setString2(4);
-                              }),
-                          JHGSwitchTile(
-                              title: AppStrings.string1,
-                              initialValue: controller.string1,
-                              onChanged: (val) {
-                                controller.setString1(5);
-                              }),
-                        ],
-                      ),
-                    ),
+      stream: expansionStream.stream,
+      initialData: false,
+      builder: (context, snapshot) {
+        bool val = snapshot.data ?? false;
+        return Column(
+          children: [
+            JHGHeadWithActions(
+              AppStrings.strings,
+              subLabel: AppStrings.stringDescriptionLandscape,
+              onTapTitle: () {
+                expansionStream.sink.add(!val);
+              },
+              onArrowDownTap: () {
+                expansionStream.sink.add(!val);
+              },
+              arrowIcon: val
+                  ? Icons.keyboard_arrow_up_rounded
+                  : Icons.keyboard_arrow_down_rounded,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.black.withOpacity(0.2),
+              ),
+              child: JHGExpandableSection(
+                expand: val,
+                child: Visibility(
+                  visible: val,
+                  child: Column(
+                    children: [
+                      JHGSwitchTile(
+                          title: AppStrings.string6,
+                          initialValue: controller.string6,
+                          onChanged: (val) {
+                            controller.setString6(0);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string5,
+                          initialValue: controller.string5,
+                          onChanged: (val) {
+                            controller.setString5(1);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string4,
+                          initialValue: controller.string4,
+                          onChanged: (val) {
+                            controller.setString4(2);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string3,
+                          initialValue: controller.string3,
+                          onChanged: (val) {
+                            controller.setString3(3);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string2,
+                          initialValue: controller.string2,
+                          onChanged: (val) {
+                            controller.setString2(4);
+                          }),
+                      JHGSwitchTile(
+                          title: AppStrings.string1,
+                          initialValue: controller.string1,
+                          onChanged: (val) {
+                            controller.setString1(5);
+                          }),
+                    ],
                   ),
                 ),
-                SizedBox(height: 20),
-                SizedBox(
-                  width: MediaQuery.sizeOf(context).height * 0.85,
-                  child: JHGSettingsDefaultTimer(
-                      selectedValue: controller.defaultTimerSelectedValue.value,
-                      onChanged: (String? value) {
-                        if (value != null) {
-                          controller.defaultTimerSelectedValue.value = value;
-                        }
-                      },
-                      paddingTop: EdgeInsets.zero,
-                      minutesController: controller.minutesEditingController,
-                      secondsController: controller.timerIntervalEditingController),
-                ),
-              ],
-            );
-          },);
+              ),
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: MediaQuery.sizeOf(context).height * 0.85,
+              child: JHGSettingsDefaultTimer(
+                  selectedValue: controller.defaultTimerSelectedValue.value,
+                  onChanged: (String? value) {
+                    if (value != null) {
+                      controller.defaultTimerSelectedValue.value = value;
+                    }
+                  },
+                  paddingTop: EdgeInsets.zero,
+                  minutesController: controller.minutesEditingController,
+                  secondsController: controller.timerIntervalEditingController),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   VsScrollbar buildLandWebSettingsUi(double height, HomeController controller) {
