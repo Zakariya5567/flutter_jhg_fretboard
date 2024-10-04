@@ -226,48 +226,45 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               child: JHGExpandableSection(
                 expand: val,
-                child: Visibility(
-                  visible: val,
-                  child: Column(
-                    children: [
-                      JHGSwitchTile(
-                          title: AppStrings.string6,
-                          initialValue: controller.string6,
-                          onChanged: (val) {
-                            controller.setString6(0);
-                          }),
-                      JHGSwitchTile(
-                          title: AppStrings.string5,
-                          initialValue: controller.string5,
-                          onChanged: (val) {
-                            controller.setString5(1);
-                          }),
-                      JHGSwitchTile(
-                          title: AppStrings.string4,
-                          initialValue: controller.string4,
-                          onChanged: (val) {
-                            controller.setString4(2);
-                          }),
-                      JHGSwitchTile(
-                          title: AppStrings.string3,
-                          initialValue: controller.string3,
-                          onChanged: (val) {
-                            controller.setString3(3);
-                          }),
-                      JHGSwitchTile(
-                          title: AppStrings.string2,
-                          initialValue: controller.string2,
-                          onChanged: (val) {
-                            controller.setString2(4);
-                          }),
-                      JHGSwitchTile(
-                          title: AppStrings.string1,
-                          initialValue: controller.string1,
-                          onChanged: (val) {
-                            controller.setString1(5);
-                          }),
-                    ],
-                  ),
+                child: Column(
+                  children: [
+                    JHGSwitchTile(
+                        title: AppStrings.string6,
+                        initialValue: controller.string6,
+                        onChanged: (val) {
+                          controller.setString6(0);
+                        }),
+                    JHGSwitchTile(
+                        title: AppStrings.string5,
+                        initialValue: controller.string5,
+                        onChanged: (val) {
+                          controller.setString5(1);
+                        }),
+                    JHGSwitchTile(
+                        title: AppStrings.string4,
+                        initialValue: controller.string4,
+                        onChanged: (val) {
+                          controller.setString4(2);
+                        }),
+                    JHGSwitchTile(
+                        title: AppStrings.string3,
+                        initialValue: controller.string3,
+                        onChanged: (val) {
+                          controller.setString3(3);
+                        }),
+                    JHGSwitchTile(
+                        title: AppStrings.string2,
+                        initialValue: controller.string2,
+                        onChanged: (val) {
+                          controller.setString2(4);
+                        }),
+                    JHGSwitchTile(
+                        title: AppStrings.string1,
+                        initialValue: controller.string1,
+                        onChanged: (val) {
+                          controller.setString1(5);
+                        }),
+                  ],
                 ),
               ),
             ),
