@@ -678,7 +678,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: b91fc00859dea396e4904e6e6d297c1e9017a6d0
+      resolved-ref: b963196b37e7118f19db69db378eb0ef57a72ffb
       url: "https://github.com/jamie2364/flutter-jhg-reg-page"
     source: git
     version: "0.0.1"
@@ -1043,10 +1043,10 @@ packages:
     dependency: transitive
     description:
       name: xdg_directories
-      sha256: faea9dee56b520b55a566385b84f2e8de55e7496104adada9962e0bd11bcff1d
+      sha256: "7a3f37b05d989967cdddcbb571f1ea834867ae2faa29725fd085180e0883aa15"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.4"
+    version: "1.1.0"
   xml:
     dependency: transitive
     description:

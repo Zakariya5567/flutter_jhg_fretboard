@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/app_utils/app_assets.dart';
@@ -33,7 +32,7 @@ class PortraitBoard extends StatelessWidget {
             isResponsive: true,
             leadingWidget: JHGIconButton(
               childPadding: EdgeInsets.all(3),
-              size: 30,
+              enabled: true,
               svgImg: AppAssets.iconTropy,
               onTap: () {
                 Get.to(() => LeadershipScreen(),
@@ -142,8 +141,9 @@ class PortraitBoard extends StatelessWidget {
                 : controller.timerMode == false &&
                         controller.leaderboardMode == false
                     ? JHGIconButton(
-                        size: 30,
+                        size: 36,
                         svgImg: AppAssets.iconStopwatch,
+                        enabled: true,
                         onTap: () {
                           controller.setTimerMode(true);
                           controller.setLeaderMode(false);
@@ -151,7 +151,8 @@ class PortraitBoard extends StatelessWidget {
                         })
                     : controller.timerMode == true
                         ? JHGIconButton(
-                            size: 30,
+                            size: 36,
+                            enabled: true,
                             svgImg: AppAssets.iconTimer,
                             onTap: () {
                               controller.setTimerMode(false);
@@ -161,7 +162,8 @@ class PortraitBoard extends StatelessWidget {
                         : controller.leaderboardMode == true
                             ? JHGIconButton(
                                 childPadding: EdgeInsets.all(3),
-                                size: 30,
+                                size: 36,
+                                enabled: true,
                                 svgImg: AppAssets.iconTropy,
                                 onTap: () {
                                   controller.setLeaderMode(false);
@@ -194,6 +196,9 @@ class PortraitBoard extends StatelessWidget {
                   ),
             trailingWidget: JHGIconButton(
                 svgImg: AppAssets.iconRotate,
+                size: 36,
+                enabled: true,
+                childPadding: EdgeInsets.all(2),
                 onTap: () {
                   controller.toggleOrientation();
                 }),
