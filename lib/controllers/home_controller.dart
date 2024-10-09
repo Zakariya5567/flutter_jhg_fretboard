@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show compute, kIsWeb;
+import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/models/freth_list.dart';
 import 'package:fretboard/repositories/fretboard_repository.dart';
@@ -43,6 +44,7 @@ class HomeController extends GetxController {
 
   // Initialize  animation controller
   initializeData() async {
+    selectedColor  = Colors.transparent;
     isStart = false;
     selectedFret = null;
     selectedString = null;
@@ -75,6 +77,11 @@ class HomeController extends GetxController {
   bool isPlayed = false;
 
   Future playSound(int index, String note, int str) async {
+
+    print("===================================");
+    print("Highlight Freth ******  : $index");
+    print("highlightNode ******  : $note");
+    print("highlightString ****** : $str");
     isPlayed = false;
     await player.stop();
     // EXECUTE LOOP
@@ -97,14 +104,14 @@ class HomeController extends GetxController {
             player.setFilePath(Utils.getAsset(element.fretSound!).path);
           }
           player.play();
-          if (highlightNode == selectedNote &&
-              selectedString == highlightString) {
+          if (highlightNode == selectedNote && selectedString == highlightString) {
             previousHighlightFret = highlightFret;
             previousHighlightNode = highlightNode;
             incrementScore();
             highLightTheGame();
             Future.delayed(Duration(milliseconds: 300), () {
               selectedFret = null;
+              selectedColor = Colors.transparent;
               update();
             });
           } else {
@@ -149,12 +156,14 @@ class HomeController extends GetxController {
   incrementScore() {
     score = score + 1;
     isPlayed = true;
+    selectedColor =  JHGColors.green;
     update();
   }
 
   decrementScore() {
     score = score - 1;
     isPlayed = true;
+    selectedColor = JHGColors.primary;
     update();
   }
 
@@ -182,6 +191,7 @@ class HomeController extends GetxController {
   String? highlightNode;
   String? previousHighlightNode;
   int? previousHighlightFret;
+  Color? selectedColor;
 
   // WHEN PRESS CORRECT NOTE THEN HIGHLIGHT ANOTHER ONE TO SELECT
   highLightTheGame() {
@@ -190,6 +200,12 @@ class HomeController extends GetxController {
     highlightFret = randomIndex;
     highlightNode = fretList[randomIndex].note;
     highlightString = fretList[randomIndex].string;
+
+    print("===================================");
+    print("Highlight Freth ===>  : $randomIndex");
+    print("highlightNode====>  : $highlightNode");
+    print("highlightString=====>  : $highlightString");
+
     update();
   }
 
@@ -212,6 +228,14 @@ class HomeController extends GetxController {
     previousHighlightNode = highlightNode;
     highlightNode = fretList[randomIndex].note;
     highlightString = fretList[randomIndex].string;
+
+    print("===================================");
+    print("Highlight Freth : $randomIndex");
+    print("PreviousHighlightFret Freth : $previousHighlightFret");
+    print("previousHighlightNode  : $previousHighlightNode");
+    print("highlightNode  : $highlightNode");
+    print("highlightString  : $highlightString");
+
     update();
   }
 

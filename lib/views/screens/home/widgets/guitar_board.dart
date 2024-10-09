@@ -166,9 +166,10 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                               isColor: controller.selectedFret == index
                                   ? true
                                   : false,
-                              color: controller.selectedNote == controller.previousHighlightNode
-                                  ? JHGColors.green
-                                  : JHGColors.primary,
+                              color: controller.selectedColor,
+                              // controller.selectedNote == controller.previousHighlightNode
+                              //     ? JHGColors.green
+                              //     : JHGColors.primary,
                               index: index,
                               height: height);
                         },
