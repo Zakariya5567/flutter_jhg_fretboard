@@ -15,8 +15,8 @@ List<BoardModel> fretList = [
   BoardModel(id: 7, string: 5, fret: 1, note: "A#", fretSound: AppStrings.str5Fr1),
   BoardModel(id: 8, string: 4, fret: 1, note: "D#", fretSound: AppStrings.str4Fr1),
   BoardModel(id: 9, string: 3, fret: 1, note: "G#", fretSound: AppStrings.str3Fr1),
-  BoardModel(id: 10, string: 2, fret: 1, note: "C", fretSound: AppStrings.str2Fr1),
-  BoardModel(id: 11, string:  1, fret: 1, note: "F", fretSound: AppStrings.str1Fr1),
+  BoardModel(id: 10, string:2, fret: 1, note: "C", fretSound: AppStrings.str2Fr1),
+  BoardModel(id: 11, string: 1, fret: 1, note: "F", fretSound: AppStrings.str1Fr1),
 
   BoardModel(id: 12, string: 6, fret: 2, note: "F#", fretSound: AppStrings.str6Fr2),
   BoardModel(id: 13, string: 5, fret: 2, note: "B", fretSound: AppStrings.str5Fr2),

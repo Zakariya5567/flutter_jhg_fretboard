@@ -222,7 +222,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                           controller.playSound(
                                               index,
                                               noteIndex.note!,
-                                              noteIndex.string!);
+                                              noteIndex.string!,fretList[index].fretSound!);
                                         },
                                         child: stringLandscapePress(
                                             index: index, width: width),
@@ -770,7 +770,7 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                                     child: GestureDetector(
                                       onTap: () {
                                         controller.playSound(index,
-                                            noteIndex.note!, noteIndex.string!);
+                                            noteIndex.note!, noteIndex.string!,fretList[index].fretSound!);
                                       },
                                       child: stringPortraitPress(
                                           index: index,

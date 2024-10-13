@@ -191,9 +191,10 @@ class _GuitarBoardAltState extends State<GuitarBoard> {
                         crossAxisSpacing: 4,
                         itemBuilder: (context, index) {
                           final noteIndex = fretList[index];
+                          final sound = fretList[index].fretSound;
                           return GestureDetector(
                             onTap: () {
-                              controller.playSound(index,noteIndex.note!,noteIndex.string!);
+                              controller.playSound(index,noteIndex.note!,noteIndex.string!,fretList[index].fretSound!);
                             },
                             child: stringPress(
                                 index: index, height: height, width: width),

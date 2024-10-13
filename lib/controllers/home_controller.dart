@@ -76,7 +76,7 @@ class HomeController extends GetxController {
 
   bool isPlayed = false;
 
-  Future playSound(int index, String note, int str) async {
+  Future playSound(int index, String note, int str, String tune) async {
 
     print("===================================");
     print("Highlight Freth ******  : $index");
@@ -99,9 +99,9 @@ class HomeController extends GetxController {
           selectedNote = note;
           player.setVolume(1.0);
           if (kIsWeb) {
-            player.setAsset("web/${element.fretSound!}");
+            player.setAsset("web/${tune}");
           } else {
-            player.setFilePath(Utils.getAsset(element.fretSound!).path);
+            player.setFilePath(Utils.getAsset(tune).path);
           }
           player.play();
           if (highlightNode == selectedNote && selectedString == highlightString) {
@@ -121,9 +121,9 @@ class HomeController extends GetxController {
         } else {
           player.setVolume(1.0);
           if (kIsWeb) {
-            player.setAsset("web/${element.fretSound!}");
+            player.setAsset("web/${tune}");
           } else {
-            player.setFilePath(Utils.getAsset(element.fretSound!).path);
+            player.setFilePath(Utils.getAsset(tune).path);
           }
           player.play();
         }
@@ -133,7 +133,7 @@ class HomeController extends GetxController {
   }
 
   double scale = 1;
-
+ 
   bool isPortrait = true;
 
   void toggleOrientation() {
