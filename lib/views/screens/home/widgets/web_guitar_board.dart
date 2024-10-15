@@ -186,10 +186,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                 isColor: controller.selectedFret == index
                                     ? true
                                     : false,
-                                color: controller.selectedNote ==
-                                        controller.previousHighlightNode
-                                    ? JHGColors.green
-                                    : JHGColors.primary,
+                                 color: controller.selectedColor,
                                 index: index,
                               );
                             },
@@ -741,10 +738,7 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                                       isColor: controller.selectedFret == index
                                           ? true
                                           : false,
-                                      color: controller.selectedNote ==
-                                              controller.previousHighlightNode
-                                          ? JHGColors.green
-                                          : JHGColors.primary,
+                                      color: controller.selectedColor,
                                       index: index,
                                       height: height);
                                 },
