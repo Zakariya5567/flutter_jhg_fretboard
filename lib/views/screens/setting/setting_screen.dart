@@ -67,8 +67,8 @@ class _SettingScreenState extends State<SettingScreen> {
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (controller) {
-        return controller.isPortrait
-            ? JHGSettings(
+        return controller.isPortrait || kIsWeb ?
+              JHGSettings(
                 androidAppIdentifier: AppStrings.androidBuildId,
                 iosAppIdentifier: AppStrings.iOSBuildId,
                 appStoreId: AppStrings.appStoreId,
@@ -112,7 +112,8 @@ class _SettingScreenState extends State<SettingScreen> {
                   }), (route) => false);
                 },
               )
-            : JHGSettingsLandscape(
+
+            :JHGSettingsLandscape(
                 androidAppIdentifier: AppStrings.androidBuildId,
                 iosAppIdentifier: AppStrings.iOSBuildId,
                 appStoreId: AppStrings.appStoreId,
@@ -179,17 +180,13 @@ class _SettingScreenState extends State<SettingScreen> {
       required double height,
       required double width}) {
     return Container(
-        // height: isExpanded ? width : width * 0.45,
         width: height,
         color: JHGColors.secondryBlack,
-        //color: Colors.red,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            kIsWeb
-                ? buildLandWebSettingsUi(height, controller)
-                : buildSettingsUi(controller),
+            buildSettingsUi(controller),
             SizedBox(
               height: width * 0.04,
             ),
@@ -288,53 +285,4 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  VsScrollbar buildLandWebSettingsUi(double height, HomeController controller) {
-    return VsScrollbar(
-      controller: ScrollController(),
-      showTrackOnHover: true,
-      isAlwaysShown: true,
-      scrollbarFadeDuration: Duration(milliseconds: 500),
-      scrollbarTimeToFade: Duration(milliseconds: 800),
-      style: VsScrollbarStyle(
-        hoverThickness: 10.0, // default 12.0
-        radius: Radius.circular(10), // default Radius.circular(8.0)
-        thickness: 10.0, // [ default 8.0 ]
-        color: Colors.white, // default ColorScheme Theme
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            buildSettingsUi(controller),
-            SizedBox(height: height * 0.02),
-            Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  JHGPrimaryBtn(
-                    label: AppStrings.save,
-                    width: height * 0.58,
-                    onPressed: () {
-                      controller.onClickSave(context);
-                    },
-                  ),
-                  JHGSecondaryBtn(
-                    label: AppStrings.logout,
-                    width: height * 0.58,
-                    onPressed: () async {
-                      await LocalDB.clearLocalDB();
-                      // ignore: use_build_context_synchronously
-                      Navigator.pushAndRemoveUntil(context,
-                          MaterialPageRoute(builder: (context) {
-                        return WelcomeScreen();
-                      }), (route) => false);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
