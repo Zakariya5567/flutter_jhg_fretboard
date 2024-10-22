@@ -26,8 +26,7 @@ class HomeController extends GetxController {
   String? selectedNote;
   int? selectedString;
   String? userName;
-  TextEditingController timerIntervalEditingController =
-      new TextEditingController();
+  TextEditingController timerIntervalEditingController =  new TextEditingController();
   TextEditingController minutesEditingController = new TextEditingController();
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
   // JHGInterstitialAd? interstitialAd;
@@ -45,7 +44,7 @@ class HomeController extends GetxController {
   // Initialize  animation controller
   initializeData() async {
     selectedColor  = Colors.transparent;
-    isStart = false;
+    isStart =  false;
     selectedFret = null;
     selectedString = null;
     selectedNote = null;
@@ -58,7 +57,7 @@ class HomeController extends GetxController {
     timer = null;
     //isTimerSet = false;
     secondsRemaining.value = 0;
-    timerMode = false;
+    timerMode =  false;
     leaderboardMode = false;
     int seconds = await SharedPref.getTimerIntervalValue();
     int minutes = await SharedPref.getDefaultTimerMinutesValue();
@@ -87,7 +86,7 @@ class HomeController extends GetxController {
     // EXECUTE LOOP
     fretList.forEach((element) async {
       // if(element.id == index){
-      if (element.note == note && element.string == str && isPlayed == false) {
+      if (element.note  ==  note && element.string == str && isPlayed == false) {
         // GET ALLOW STRING STATUS
         final stringStatus = getStringStatus(element.string!);
 
@@ -95,7 +94,7 @@ class HomeController extends GetxController {
         // THEN WE WILL HIGHLIGHT THINGS
         if (stringStatus == true && isStart == true) {
           selectedFret = index;
-          selectedString = str;
+          selectedString =  str;
           selectedNote = note;
           player.setVolume(1.0);
           if (kIsWeb) {
@@ -138,7 +137,7 @@ class HomeController extends GetxController {
 
   void toggleOrientation() {
     scale = 0.5;
-    Future.delayed(const Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds:  100), () {
       isPortrait = !isPortrait;
       update();
     });

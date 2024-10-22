@@ -77,6 +77,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   isResponsive: true,
                   title: Text(
                     'Settings',
+
                     style: JHGTextStyles.smlabelStyle,
                   ),
                   trailingWidget: kIsWeb
