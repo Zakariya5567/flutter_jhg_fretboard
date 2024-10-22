@@ -96,9 +96,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 trailing: isFreePlan
                     ? Padding(
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        child: JHGNativeBanner(
-                          adID: nativeBannerAdId,
-                        ),
+                        child: JHGBannerAd(adId: bannerAdId)
+                        // JHGNativeBanner(
+                        //   adID: nativeBannerAdId,
+                        // ),
                       )
                     : const SizedBox(),
                 body: settingPortrait(
@@ -142,9 +143,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 trailing: isFreePlan
                     ? Padding(
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        child: JHGNativeBanner(
-                          adID: nativeBannerAdId,
-                        ),
+                        child: JHGBannerAd(adId: bannerAdId)
+                        // JHGNativeBanner(
+                        //   adID: nativeBannerAdId,
+                        // ),
                       )
                     : const SizedBox(),
                 body: settingLandscape(
