@@ -208,6 +208,7 @@ class _SettingScreenState extends State<SettingScreen> {
             JHGHeadWithActions(
               AppStrings.strings,
               subLabel: AppStrings.stringDescriptionLandscape,
+              subtitleStyle: JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),
               onTapTitle: () {
                 expansionStream.sink.add(!val);
               },
@@ -278,7 +279,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       controller.defaultTimerSelectedValue.value = value;
                     }
                   },
-                  paddingTop: EdgeInsets.zero,
+                  paddingTop: EdgeInsets.symmetric(vertical: 10),
                   minutesController: controller.minutesEditingController,
                   secondsController: controller.timerIntervalEditingController),
             ),
