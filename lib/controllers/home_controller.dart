@@ -490,15 +490,31 @@ class HomeController extends GetxController {
     });
   }
 
-  Future<dynamic> updateScore(score) async {
-    var response = await compute(updateScoreApiRequest, "FretboardTrainer");
+  Future<dynamic> updateScore(int score) async {
+    // Package the data into a Map
+    var data = {
+      'gameType': 'fretboardtrainer',
+      'userName': userName,
+      'score': score,
+    };
+
+    // Pass the Map to compute
+    var response = await compute(updateScoreApiRequest, data);
+
     return response;
   }
 
-  Future<dynamic> updateScoreApiRequest(gameType) async {
+  static Future<dynamic> updateScoreApiRequest(Map<String, dynamic> data) async {
+    String gameType = data['gameType'];
+    String userName = data['userName'];
+    int score = data['score'];
+
+    // Perform the API request with the unpacked data
     var response = await FretBoardRepository().postRequest(
         "${FretBoardRepository().updateScoreApi}/$gameType/$userName",
-        {'score': score});
+        {'score': score}
+    );
+
     return response;
   }
 

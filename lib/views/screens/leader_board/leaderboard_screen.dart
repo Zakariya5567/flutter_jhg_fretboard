@@ -14,14 +14,13 @@ class LeadershipScreen extends StatelessWidget {
   String? intervalType;
   LeadershipScreen({this.intervalType, super.key});
   HomeController hc = Get.put(HomeController());
-
+  LeaderBoardController  controller = Get.put(LeaderBoardController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: JHGColors.secondryBlack,
       body: GetBuilder<LeaderBoardController>(
-          init: LeaderBoardController(),
-          builder: (controller) {
+          builder: (con) {
             return LayoutBuilder(builder: (context, constraints) {
               if (constraints.maxWidth >= 450) {
                 return LeaderWebView(
