@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_assets.dart';
+import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/main.dart';
 import 'package:fretboard/views/screens/home/widgets/guitar_board.dart';
@@ -51,8 +51,8 @@ class LandscapeBoard extends StatelessWidget {
                               quarterTurns:
                                   controller.isPortrait == true ? 0 : 1,
                               child: JHGIconButton(
-                                  size: 30,
-                                  //childPadding: EdgeInsets.all(3),
+                                  size: 36,
+                                  enabled: true,
                                   svgImg: AppAssets.iconStopwatchLandscape,
                                   onTap: () {
                                     controller.setTimerMode(true);
@@ -61,6 +61,8 @@ class LandscapeBoard extends StatelessWidget {
                             )
                           : controller.timerMode == true
                               ? JHGIconButton(
+                                  size: 36,
+                                  enabled: true,
                                   svgImg: AppAssets.iconTimerLandscape,
                                   onTap: () {
                                     controller.setTimerMode(false);
@@ -69,6 +71,8 @@ class LandscapeBoard extends StatelessWidget {
                                   })
                               : controller.leaderboardMode == true
                                   ? JHGIconButton(
+                                      size: 36,
+                                      enabled: true,
                                       svgImg: AppAssets.iconTrophyLandscape,
                                       onTap: () {
                                         controller.setLeaderMode(false);
@@ -77,6 +81,8 @@ class LandscapeBoard extends StatelessWidget {
                                       })
                                   : SizedBox(),
                   JHGIconButton(
+                      size: 36,
+                      enabled: true,
                       svgImg: AppAssets.iconTrophyLandscape,
                       onTap: () {
                         Get.to(() => LeadershipScreen(),
@@ -244,11 +250,16 @@ class LandscapeBoard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   JHGIconButton(
+                      size: 36,
+                      enabled: true,
+                      childPadding: EdgeInsets.all(1),
                       svgImg: AppAssets.iconRotateLandscape,
                       onTap: () {
                         controller.toggleOrientation();
                       }),
                   JHGIconButton(
+                    size: 36,
+                    enabled: true,
                     svgImg: AppAssets.iconSetting,
                     iconColor: controller.leaderboardMode == true
                         ? JHGColors.whiteGrey

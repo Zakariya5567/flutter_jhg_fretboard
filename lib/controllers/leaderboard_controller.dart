@@ -9,34 +9,38 @@ class LeaderBoardController extends GetxController {
   RxString username = "user1".obs;
   RxString highestUserScore = "".obs;
   RxString highScore = "0".obs;
-
   RxList scoreList = [].obs;
 
   @override
   void onInit() {
+    getDataFromApi();
     super.onInit();
-    // getDataFromApi();
+  }
+  
+
+  getDataFromApi() async {
+    await getUserName();
+     await getLeaderBoard();
   }
 
-  getDataFromApi(){
-    getUserName();
-    getLeaderBoard();
-  }
-
-  getUserName()async {
+ Future getUserName()async {
     var usernames  =  await LocalDB.getUserName;
     username.value = usernames??'';
   }
 
   Future<dynamic> getLeaderBoard() async {
-    scoreList([]);
-    isLoading(true);
-   var  value = await compute(getLeaderBoardApiRequest,gameType);
-    scoreList.value = value;
-    isLoading(false);
-    await highestScorer(scoreList);
-    update();
-    return scoreList;
+    try{
+      scoreList([]);
+      isLoading(true);
+      var value = await compute(getLeaderBoardApiRequest,gameType.value);
+      scoreList.value = value;
+      isLoading(false);
+      await highestScorer(scoreList);
+      update();
+      return scoreList;
+    }catch (e){
+      isLoading(false);
+    }
   }
 
 

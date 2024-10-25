@@ -1,15 +1,18 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart' show compute, kIsWeb;
+import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/models/freth_list.dart';
 import 'package:fretboard/repositories/fretboard_repository.dart';
 import 'package:fretboard/services/local_db_service.dart';
+import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:get/get.dart';
-import 'package:flutter/foundation.dart' show compute, kIsWeb;
 import 'package:universal_html/html.dart';
+
 import 'leaderboard_controller.dart';
 
 class HomeController extends GetxController {
@@ -23,19 +26,25 @@ class HomeController extends GetxController {
   String? selectedNote;
   int? selectedString;
   String? userName;
-  TextEditingController timerIntervalEditingController = new TextEditingController();
+  TextEditingController timerIntervalEditingController =  new TextEditingController();
   TextEditingController minutesEditingController = new TextEditingController();
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
   // JHGInterstitialAd? interstitialAd;
   JHGInterstitialAd? interstitialAds;
+  RxBool isExpanded = RxBool(false);
 
   getUserName() async {
     userName = await LocalDB.getUserName;
   }
 
+  void updateIsExpanded() {
+    isExpanded.value = !isExpanded.value;
+  }
+
   // Initialize  animation controller
   initializeData() async {
-    isStart = false;
+    selectedColor  = Colors.transparent;
+    isStart =  false;
     selectedFret = null;
     selectedString = null;
     selectedNote = null;
@@ -48,7 +57,7 @@ class HomeController extends GetxController {
     timer = null;
     //isTimerSet = false;
     secondsRemaining.value = 0;
-    timerMode = false;
+    timerMode =  false;
     leaderboardMode = false;
     int seconds = await SharedPref.getTimerIntervalValue();
     int minutes = await SharedPref.getDefaultTimerMinutesValue();
@@ -66,13 +75,18 @@ class HomeController extends GetxController {
 
   bool isPlayed = false;
 
-  Future playSound(int index, String note, int str) async {
+  Future playSound(int index, String note, int str, String tune) async {
+
+    print("===================================");
+    print("Highlight Freth ******  : $index");
+    print("highlightNode ******  : $note");
+    print("highlightString ****** : $str");
     isPlayed = false;
     await player.stop();
     // EXECUTE LOOP
     fretList.forEach((element) async {
       // if(element.id == index){
-      if (element.note == note && element.string == str && isPlayed == false) {
+      if (element.note  ==  note && element.string == str && isPlayed == false) {
         // GET ALLOW STRING STATUS
         final stringStatus = getStringStatus(element.string!);
 
@@ -80,13 +94,13 @@ class HomeController extends GetxController {
         // THEN WE WILL HIGHLIGHT THINGS
         if (stringStatus == true && isStart == true) {
           selectedFret = index;
-          selectedString = str;
+          selectedString =  str;
           selectedNote = note;
           player.setVolume(1.0);
           if (kIsWeb) {
-            player.setAsset("web/${element.fretSound!}");
-          }else{
-            player.setFilePath(Utils.getAsset(element.fretSound!).path);
+            player.setAsset("web/${tune}");
+          } else {
+            player.setFilePath(Utils.getAsset(tune).path);
           }
           player.play();
           if (highlightNode == selectedNote && selectedString == highlightString) {
@@ -96,6 +110,7 @@ class HomeController extends GetxController {
             highLightTheGame();
             Future.delayed(Duration(milliseconds: 300), () {
               selectedFret = null;
+              selectedColor = Colors.transparent;
               update();
             });
           } else {
@@ -105,24 +120,24 @@ class HomeController extends GetxController {
         } else {
           player.setVolume(1.0);
           if (kIsWeb) {
-            player.setAsset("web/${element.fretSound!}");
-          }else{
-            player.setFilePath(Utils.getAsset(element.fretSound!).path);
+            player.setAsset("web/${tune}");
+          } else {
+            player.setFilePath(Utils.getAsset(tune).path);
           }
           player.play();
         }
         return;
       }
     });
-
   }
-  double scale = 1;
 
+  double scale = 1;
+ 
   bool isPortrait = true;
 
   void toggleOrientation() {
     scale = 0.5;
-    Future.delayed(const Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds:  100), () {
       isPortrait = !isPortrait;
       update();
     });
@@ -140,12 +155,14 @@ class HomeController extends GetxController {
   incrementScore() {
     score = score + 1;
     isPlayed = true;
+    selectedColor =  JHGColors.green;
     update();
   }
 
   decrementScore() {
     score = score - 1;
     isPlayed = true;
+    selectedColor = JHGColors.primary;
     update();
   }
 
@@ -173,6 +190,7 @@ class HomeController extends GetxController {
   String? highlightNode;
   String? previousHighlightNode;
   int? previousHighlightFret;
+  Color? selectedColor;
 
   // WHEN PRESS CORRECT NOTE THEN HIGHLIGHT ANOTHER ONE TO SELECT
   highLightTheGame() {
@@ -181,6 +199,12 @@ class HomeController extends GetxController {
     highlightFret = randomIndex;
     highlightNode = fretList[randomIndex].note;
     highlightString = fretList[randomIndex].string;
+
+    print("===================================");
+    print("Highlight Freth ===>  : $randomIndex");
+    print("highlightNode====>  : $highlightNode");
+    print("highlightString=====>  : $highlightString");
+
     update();
   }
 
@@ -203,6 +227,14 @@ class HomeController extends GetxController {
     previousHighlightNode = highlightNode;
     highlightNode = fretList[randomIndex].note;
     highlightString = fretList[randomIndex].string;
+
+    print("===================================");
+    print("Highlight Freth : $randomIndex");
+    print("PreviousHighlightFret Freth : $previousHighlightFret");
+    print("previousHighlightNode  : $previousHighlightNode");
+    print("highlightNode  : $highlightNode");
+    print("highlightString  : $highlightString");
+
     update();
   }
 
@@ -458,15 +490,31 @@ class HomeController extends GetxController {
     });
   }
 
-  Future<dynamic> updateScore(score) async {
-    var response = await compute(updateScoreApiRequest, "FretboardTrainer");
+  Future<dynamic> updateScore(int score) async {
+    // Package the data into a Map
+    var data = {
+      'gameType': 'fretboardtrainer',
+      'userName': userName,
+      'score': score,
+    };
+
+    // Pass the Map to compute
+    var response = await compute(updateScoreApiRequest, data);
+
     return response;
   }
 
-  Future<dynamic> updateScoreApiRequest(gameType) async {
+  static Future<dynamic> updateScoreApiRequest(Map<String, dynamic> data) async {
+    String gameType = data['gameType'];
+    String userName = data['userName'];
+    int score = data['score'];
+
+    // Perform the API request with the unpacked data
     var response = await FretBoardRepository().postRequest(
         "${FretBoardRepository().updateScoreApi}/$gameType/$userName",
-        {'score': score});
+        {'score': score}
+    );
+
     return response;
   }
 

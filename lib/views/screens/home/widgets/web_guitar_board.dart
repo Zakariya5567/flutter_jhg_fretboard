@@ -186,10 +186,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                 isColor: controller.selectedFret == index
                                     ? true
                                     : false,
-                                color: controller.selectedNote ==
-                                        controller.previousHighlightNode
-                                    ? JHGColors.green
-                                    : JHGColors.primary,
+                                 color: controller.selectedColor,
                                 index: index,
                               );
                             },
@@ -222,7 +219,7 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
                                           controller.playSound(
                                               index,
                                               noteIndex.note!,
-                                              noteIndex.string!);
+                                              noteIndex.string!,fretList[index].fretSound!);
                                         },
                                         child: stringLandscapePress(
                                             index: index, width: width),
@@ -342,11 +339,11 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
           width: width * 0.020,
           height: width * 0.020,
           decoration: BoxDecoration(
-            color: isColor == true ? color : Colors.transparent,
             // color: Colors.red,
             shape: BoxShape.circle,
+            color: isColor == true ? color : Colors.transparent,
           ),
-          //child: Text("$index",),
+         // child: Text("${fretList[index].note}",style: TextStyle(color: Colors.red),),
         ),
       );
 
@@ -446,10 +443,10 @@ class _WebLandscapeGuitarBoardState extends State<WebLandscapeGuitarBoard> {
     int index,
     double width,
   ) {
-    if (index >= 0 && index <= 5) {
+    if (index >= 0 &&  index <= 5) {
       return 0;
     } else if (index >= 6 && index <= 11) {
-      return width * 0.010;
+      return width *  0.010;
     } else if (index >= 12 && index <= 17) {
       return width * 0.050;
     } else if (index >= 18 && index <= 23) {
@@ -741,10 +738,7 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                                       isColor: controller.selectedFret == index
                                           ? true
                                           : false,
-                                      color: controller.selectedNote ==
-                                              controller.previousHighlightNode
-                                          ? JHGColors.green
-                                          : JHGColors.primary,
+                                      color: controller.selectedColor,
                                       index: index,
                                       height: height);
                                 },
@@ -770,7 +764,7 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
                                     child: GestureDetector(
                                       onTap: () {
                                         controller.playSound(index,
-                                            noteIndex.note!, noteIndex.string!);
+                                            noteIndex.note!, noteIndex.string!,fretList[index].fretSound!);
                                       },
                                       child: stringPortraitPress(
                                           index: index,

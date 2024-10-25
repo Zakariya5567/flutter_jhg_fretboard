@@ -1,5 +1,9 @@
 class AppStrings {
-  static const String appName = 'JHG Fretboard Trainer';
+  static const String appName = 'Fretboard Trainer';
+  static const String appStoreId = '6461420247';
+  static const String androidBuildId =
+      'com.jamieharrisonguitar.jhg_fretboard_trainer';
+  static const String iOSBuildId = 'com.jamieharrisonguitar.fretboard-trainer';
   static const String logout = 'Logout';
   static const String start = 'Start';
   static String loadMore = "Load more";
