@@ -72,8 +72,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           builder: (controller) {
             return GestureDetector(
               child: AbsorbPointer(
-                absorbing: kIsWeb
-                    ? controller.isActive == true
+                absorbing:
+                kIsWeb
+                    ?
+                controller.isActive == true
                         ? false
                         : true
                     : false,

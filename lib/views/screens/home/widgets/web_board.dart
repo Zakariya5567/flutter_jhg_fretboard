@@ -53,26 +53,29 @@ class WebBoard extends StatelessWidget {
                           top: controller.isPortrait
                               ? height * 0.10
                               : height * 0.060),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          controller.isPortrait == true
-                              ? Container(
-                                  //color: Colors.blue,
-                                  height: height * 0.65,
-                                  width: width * 0.900,
-                                  child: Center(
-                                    child: const WebLandscapeGuitarBoard(),
-                                  ))
-                              : Container(
-                                  //color: Colors.green,
-                                  width: width * 0.16,
-                                  alignment: Alignment.topCenter,
-                                  child: SingleChildScrollView(
-                                    child: const WebPortraitGuitarBoard(),
-                                  )),
-                        ],
+                      child: IgnorePointer(
+                        ignoring: !controller.isStart,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            controller.isPortrait == true
+                                ? Container(
+                                    //color: Colors.blue,
+                                    height: height * 0.65,
+                                    width: width * 0.900,
+                                    child: Center(
+                                      child: const WebLandscapeGuitarBoard(),
+                                    ))
+                                : Container(
+                                    //color: Colors.green,
+                                    width: width * 0.16,
+                                    alignment: Alignment.topCenter,
+                                    child: SingleChildScrollView(
+                                      child: const WebPortraitGuitarBoard(),
+                                    )),
+                          ],
+                        ),
                       ),
                     ),
                   ),

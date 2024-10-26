@@ -534,8 +534,7 @@ class HomeController extends GetxController {
               message: "Minutes should be greater then or equal to 1",
               isError: true);
         } else {
-          SharedPref.storeDefaultTimerTypeValue(
-              defaultTimerSelectedValue.value);
+          SharedPref.storeDefaultTimerTypeValue(defaultTimerSelectedValue.value);
           SharedPref.storeTimerIntervalValue(seconds);
           SharedPref.storeDefaultTimerMinutesValue(minutes);
           popup(context);
