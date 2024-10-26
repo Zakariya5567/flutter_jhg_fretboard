@@ -11,7 +11,6 @@ import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/main.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
-import 'package:vs_scrollbar/vs_scrollbar.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
