@@ -137,8 +137,7 @@ class WebBoard extends StatelessWidget {
                       ? JHGResetBtn(
                           enabled: true,
                           onTap: () {
-                            controller.setTimerMode(false);
-                            controller.setLeaderMode(false);
+                            controller.setGameMode(timer: false, leaderboard: false);
                             controller.resetGame(false);
                           })
                       :
@@ -152,8 +151,7 @@ class WebBoard extends StatelessWidget {
                               size: 40,
                               svgImg: AppAssets.iconStopwatch,
                               onTap: () {
-                                controller.setTimerMode(true);
-                                controller.setLeaderMode(false);
+                                controller.setGameMode(timer: true, leaderboard: false);
                                 controller.resetTimer();
                               })
                           :
@@ -166,8 +164,7 @@ class WebBoard extends StatelessWidget {
                                   size: 40,
                                   svgImg: AppAssets.iconTimer,
                                   onTap: () {
-                                    controller.setTimerMode(false);
-                                    controller.setLeaderMode(true);
+                                    controller.setGameMode(timer: false, leaderboard: true);
                                     controller.resetTimer();
                                   })
                               :
@@ -180,8 +177,7 @@ class WebBoard extends StatelessWidget {
                                       enabled: true,
                                       svgImg: AppAssets.iconTropy,
                                       onTap: () {
-                                        controller.setLeaderMode(false);
-                                        controller.setTimerMode(false);
+                                        controller.setGameMode(timer: false, leaderboard: false);
                                         controller.resetTimer();
                                       })
                                   : SizedBox(),

@@ -134,8 +134,7 @@ class PortraitBoard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             leadingWidget: controller.isStart == true
                 ? JHGResetBtn(onTap: () {
-                    controller.setTimerMode(false);
-                    controller.setLeaderMode(false);
+                    controller.setGameMode(timer: false, leaderboard: false);
                     controller.resetGame(false);
                   })
                 : controller.timerMode == false &&
@@ -145,8 +144,7 @@ class PortraitBoard extends StatelessWidget {
                         svgImg: AppAssets.iconStopwatch,
                         enabled: true,
                         onTap: () {
-                          controller.setTimerMode(true);
-                          controller.setLeaderMode(false);
+                          controller.setGameMode(timer: true, leaderboard: false);
                           controller.resetTimer();
                         })
                     : controller.timerMode == true
@@ -155,8 +153,7 @@ class PortraitBoard extends StatelessWidget {
                             enabled: true,
                             svgImg: AppAssets.iconTimer,
                             onTap: () {
-                              controller.setTimerMode(false);
-                              controller.setLeaderMode(true);
+                              controller.setGameMode(timer: false, leaderboard: true);
                               controller.resetTimer();
                             })
                         : controller.leaderboardMode == true
@@ -166,8 +163,7 @@ class PortraitBoard extends StatelessWidget {
                                 enabled: true,
                                 svgImg: AppAssets.iconTropy,
                                 onTap: () {
-                                  controller.setLeaderMode(false);
-                                  controller.setTimerMode(false);
+                                  controller.setGameMode(timer: false, leaderboard: false);
                                   controller.resetTimer();
                                 })
                             : SizedBox(),

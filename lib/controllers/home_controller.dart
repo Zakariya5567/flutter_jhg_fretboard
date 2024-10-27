@@ -95,13 +95,7 @@ class HomeController extends GetxController {
           selectedFret = index;
           selectedString =  str;
           selectedNote = note;
-          player.setVolume(1.0);
-          if (kIsWeb) {
-            player.setAsset("web/${tune}");
-          } else {
-            player.setFilePath(Utils.getAsset(tune).path);
-          }
-          player.play();
+          element.playSound();
           if (highlightNode == selectedNote && selectedString == highlightString) {
             previousHighlightFret = highlightFret;
             previousHighlightNode = highlightNode;
@@ -117,13 +111,7 @@ class HomeController extends GetxController {
           }
           update();
         } else {
-          player.setVolume(1.0);
-          if (kIsWeb) {
-            player.setAsset("web/${tune}");
-          } else {
-            player.setFilePath(Utils.getAsset(tune).path);
-          }
-          player.play();
+          element.playSound();
         }
         return;
       }
@@ -170,13 +158,10 @@ class HomeController extends GetxController {
   bool timerMode = false;
   bool leaderboardMode = false;
 
-  setTimerMode(bool mode) {
-    timerMode = mode;
-    update();
-  }
 
-  setLeaderMode(bool mode) {
-    leaderboardMode = mode;
+  setGameMode({required bool timer, required bool leaderboard}) {
+    timerMode = timer;
+    leaderboardMode = leaderboard;
     update();
   }
 
@@ -281,7 +266,7 @@ class HomeController extends GetxController {
     if (resetAll == true) {
       if (timerMode == true) {
         timerMode = false;
-      } else {
+      } else if(leaderboardMode == true){
         leaderboardMode = false;
       }
     }

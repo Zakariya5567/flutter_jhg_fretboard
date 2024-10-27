@@ -41,8 +41,7 @@ class LandscapeBoard extends StatelessWidget {
                 children: [
                   controller.isStart == true
                       ? JHGResetBtn(onTap: () {
-                          controller.setTimerMode(false);
-                          controller.setLeaderMode(false);
+                          controller.setGameMode(timer: false, leaderboard: false);
                           controller.resetGame(false);
                         })
                       : controller.timerMode == false &&
@@ -55,7 +54,7 @@ class LandscapeBoard extends StatelessWidget {
                                   enabled: true,
                                   svgImg: AppAssets.iconStopwatchLandscape,
                                   onTap: () {
-                                    controller.setTimerMode(true);
+                                    controller.setGameMode(timer: true, leaderboard: false);
                                     controller.resetTimer();
                                   }),
                             )
@@ -65,8 +64,7 @@ class LandscapeBoard extends StatelessWidget {
                                   enabled: true,
                                   svgImg: AppAssets.iconTimerLandscape,
                                   onTap: () {
-                                    controller.setTimerMode(false);
-                                    controller.setLeaderMode(true);
+                                    controller.setGameMode(timer: false, leaderboard: true);
                                     controller.resetTimer();
                                   })
                               : controller.leaderboardMode == true
@@ -75,8 +73,7 @@ class LandscapeBoard extends StatelessWidget {
                                       enabled: true,
                                       svgImg: AppAssets.iconTrophyLandscape,
                                       onTap: () {
-                                        controller.setLeaderMode(false);
-                                        controller.setTimerMode(false);
+                                        controller.setGameMode(timer: false, leaderboard: false);
                                         controller.resetTimer();
                                       })
                                   : SizedBox(),
