@@ -35,6 +35,7 @@ class PortraitBoard extends StatelessWidget {
               enabled: true,
               svgImg: AppAssets.iconTropy,
               onTap: () {
+                //controller.updateScore(21);
                 Get.to(() => LeadershipScreen(),
                     transition: Transition.leftToRight);
                 if (isFreePlan) {

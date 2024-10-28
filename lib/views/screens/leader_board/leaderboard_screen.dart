@@ -275,11 +275,10 @@ class LeaderWebView extends StatelessWidget {
           centerWidget: SvgPicture.asset(
             AppAssets.svg_trophyIcon,
           ),
-          trailingWidget: RotatedBox(
-            quarterTurns: 2,
-            child: JHGBackButton(
-              onTap: () => Get.back(),
-            ),
+          trailingWidget: JHGIconButton(
+            size: 24,
+            onTap: () => Get.back(),
+            iconData: Icons.close,
           ),
           bottom: leaderBoardTitleWidget(),
         ),
