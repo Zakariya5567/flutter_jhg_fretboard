@@ -1,86 +1,114 @@
-import 'package:reg_page/reg_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPref {
-  static String defaultBpmKey = "defaultBpmKey";
-  static String defaultSoundKey = "defaultSoundKey";
-  static String defaultTimingKey = "defaultTimingKey";
-  static String defaultTimerTypeKey = "defaultTimerTypeKey";
-  static String defaultTimerIntervalKey = "defaultTimerIntervalKey";
-  static String defaultTimerMinutesKey = "defaultTimerMinutesKey";
+class SharedPrefHelper {
+  static final SharedPrefHelper instance = SharedPrefHelper._init();
+  static SharedPreferences? _prefs;
 
-  // Store default BPM
-  static Future<void> storeDefaultBPM(double value) async {
-    // initialized shared preferences
-    final pref = await LocalDB.getPref;
-    pref!.setDouble(defaultBpmKey, value);
+  SharedPrefHelper._init();
+
+  Future<SharedPreferences> get preferences async {
+    if (_prefs == null) {
+      _prefs = await _initPrefs();
+    }
+    return _prefs!;
   }
 
-  // Get default BPM
-  static Future<double?> get getDefaultBPM async {
-    // Initialized shared preferences
-    final pref = await LocalDB.getPref;
-    double? bpm = pref!.getDouble(defaultBpmKey);
-    return bpm;
+  Future<SharedPreferences> _initPrefs() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs;
   }
 
-  // Set default sound
-  static Future<void> storeDefaultSound(int value) async {
-    // initialized shared preferences
-    final pref = await LocalDB.getPref;
-    pref!.setInt(defaultSoundKey, value);
+  // Keys
+  static const String defaultTimerTypeKey = 'defaultTimerTypeKey';
+  static const String defaultTimerIntervalKey = 'defaultTimerIntervalKey';
+  static const String defaultTimerMinutesKey = 'defaultTimerMinutesKey';
+  static const String string1Key = 'string1';
+  static const String string2Key = 'string2';
+  static const String string3Key = 'string3';
+  static const String string4Key = 'string4';
+  static const String string5Key = 'string5';
+  static const String string6Key = 'string6';
+
+  // Timer type operations
+  Future<bool> storeDefaultTimerType(String value) async {
+    final prefs = await preferences;
+    return await prefs.setString(defaultTimerTypeKey, value);
   }
 
-  // Get default sound
-  static Future<int?> get getDefaultSound async {
-    // Initialized shared preferences
-    final pref = await LocalDB.getPref;
-    int? bpm = pref!.getInt(defaultSoundKey);
-    return bpm;
+  Future<String?> getDefaultTimerType() async {
+    final prefs = await preferences;
+    final value = prefs.getString(defaultTimerTypeKey);
+    return value;
   }
 
-  // Set default timing
-  static Future<void> storeDefaultTiming(int value) async {
-    // initialized shared preferences
-    final pref = await LocalDB.getPref;
-    pref!.setInt(defaultTimingKey, value);
+  // Timer minutes operations
+  Future<bool> storeDefaultTimerMinutes(String value) async {
+    final prefs = await preferences;
+    return await prefs.setInt(defaultTimerMinutesKey, int.parse(value));
   }
 
-  // Get default timing
-  static Future<int?> get getDefaultTiming async {
-    // Initialized shared preferences
-    final pref = await LocalDB.getPref;
-    int? bpm = pref!.getInt(defaultTimingKey);
-    return bpm;
+  Future<int> getDefaultTimerMinutes() async {
+    final prefs = await preferences;
+    final value = prefs.getInt(defaultTimerMinutesKey) ?? 1;
+    return value;
   }
 
-  static Future<void> storeDefaultTimerTypeValue(String value) async {
-    final pref = await LocalDB.getPref;
-    pref!.setString(defaultTimerTypeKey, value);
+  // Timer interval operations
+  Future<bool> storeTimerInterval(String value) async {
+    final prefs = await preferences;
+    return await prefs.setInt(defaultTimerIntervalKey, int.parse(value));
   }
 
-  static Future<String?> getDefaultTimerTypeValue() async {
-    final pref = await LocalDB.getPref;
-    return await pref!.getString(defaultTimerTypeKey);
+  Future<int> getTimerInterval() async {
+    final prefs = await preferences;
+    final value = prefs.getInt(defaultTimerIntervalKey) ?? 10;
+    return value;
   }
 
-  static Future<void> storeDefaultTimerMinutesValue(String value) async {
-    final pref = await LocalDB.getPref;
-    pref!.setInt(defaultTimerMinutesKey, int.parse(value));
+  Future<void> saveStrings(bool string1, bool string2, bool string3,
+      bool string4, bool string5, bool string6) async {
+    final prefs = await preferences;
+    await prefs.setBool(string1Key, string1);
+    await prefs.setBool(string2Key, string2);
+    await prefs.setBool(string3Key, string3);
+    await prefs.setBool(string4Key, string4);
+    await prefs.setBool(string5Key, string5);
+    await prefs.setBool(string6Key, string6);
   }
 
-  static Future<int> getDefaultTimerMinutesValue() async {
-    final pref = await LocalDB.getPref;
-    return await pref!.getInt(defaultTimerMinutesKey) ?? 1;
+  // Clear all preferences
+  Future<bool> clearAll() async {
+    final prefs = await preferences;
+    return await prefs.clear();
   }
 
-  static Future<void> storeTimerIntervalValue(String value) async {
-    final pref = await LocalDB.getPref;
-    pref!.setInt(defaultTimerIntervalKey, int.parse(value));
+  Future<bool> getString1() async {
+    final prefs = await preferences;
+    return prefs.getBool(string1Key) ?? true;
   }
 
-  static Future<int> getTimerIntervalValue() async {
-    final pref = await LocalDB.getPref;
+  Future<bool> getString2() async {
+    final prefs = await preferences;
+    return prefs.getBool(string2Key) ?? true;
+  }
 
-    return await pref!.getInt(defaultTimerIntervalKey) ?? 10;
+  Future<bool> getString3() async {
+    final prefs = await preferences;
+    return prefs.getBool(string3Key) ?? true;
+  }
+
+  Future<bool> getString4() async {
+    final prefs = await preferences;
+    return prefs.getBool(string4Key) ?? true;
+  }
+
+  Future<bool> getString5() async {
+    final prefs = await preferences;
+    return prefs.getBool(string5Key) ?? true;
+  }
+
+  Future<bool> getString6() async {
+    final prefs = await preferences;
+    return prefs.getBool(string6Key) ?? true;
   }
 }

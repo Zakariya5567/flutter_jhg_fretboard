@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
@@ -65,8 +66,8 @@ class _SettingScreenState extends State<SettingScreen> {
     return GetBuilder<HomeController>(
       init: HomeController(),
       builder: (controller) {
-        return controller.isPortrait || kIsWeb ?
-              JHGSettings(
+        return controller.isPortrait || kIsWeb
+            ? JHGSettings(
                 androidAppIdentifier: AppStrings.androidBuildId,
                 iosAppIdentifier: AppStrings.iOSBuildId,
                 appStoreId: AppStrings.appStoreId,
@@ -75,7 +76,6 @@ class _SettingScreenState extends State<SettingScreen> {
                   isResponsive: true,
                   title: Text(
                     'Settings',
-
                     style: JHGTextStyles.smlabelStyle,
                   ),
                   trailingWidget: kIsWeb
@@ -98,7 +98,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         // JHGNativeBanner(
                         //   adID: nativeBannerAdId,
                         // ),
-                      )
+                        )
                     : const SizedBox(),
                 body: settingPortrait(
                     controller: controller, height: height, width: width),
@@ -112,8 +112,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   }), (route) => false);
                 },
               )
-
-            :JHGSettingsLandscape(
+            : JHGSettingsLandscape(
                 androidAppIdentifier: AppStrings.androidBuildId,
                 iosAppIdentifier: AppStrings.iOSBuildId,
                 appStoreId: AppStrings.appStoreId,
@@ -145,7 +144,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         // JHGNativeBanner(
                         //   adID: nativeBannerAdId,
                         // ),
-                      )
+                        )
                     : const SizedBox(),
                 body: settingLandscape(
                     controller: controller, height: height, width: width),
@@ -205,6 +204,7 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             JHGHeadWithActions(
               AppStrings.strings,
+              margin: EdgeInsets.only(top: 6),
               subLabel: AppStrings.stringDescriptionLandscape,
               subtitleStyle: JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),
               onTapTitle: () {
@@ -286,5 +286,4 @@ class _SettingScreenState extends State<SettingScreen> {
       },
     );
   }
-
 }
