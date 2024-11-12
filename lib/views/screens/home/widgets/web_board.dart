@@ -69,6 +69,7 @@ class WebBoard extends StatelessWidget {
                                     ))
                                 : SingleChildScrollView(
                                   child: Container(
+                                    // color: Colors.blue,
                                       width: width * 0.28,
                                       alignment: Alignment.topCenter,
                                       child: const WebPortraitGuitarBoard()),
