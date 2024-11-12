@@ -20,7 +20,7 @@ class LeaderBoardController extends GetxController {
 
   getDataFromApi() async {
     await getUserName();
-     await getLeaderBoard();
+    await getLeaderBoard();
   }
 
  Future getUserName()async {

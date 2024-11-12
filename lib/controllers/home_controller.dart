@@ -424,7 +424,8 @@ class HomeController extends GetxController {
         secondsRemaining.value--;
       } else {
         timer.cancel();
-        await updateScore(score);
+        updateScore(score);
+        resetGame(false);
         update();
         LeaderBoardController lc = Get.put(LeaderBoardController());
         lc.getDataFromApi();
@@ -450,6 +451,7 @@ class HomeController extends GetxController {
         timer.cancel();
         // Cancel the timer when the countdown reaches 0
         update();
+        resetGame(false);
       }
     });
   }
@@ -471,7 +473,7 @@ class HomeController extends GetxController {
     // Package the data into a Map
     var data = {
       'gameType': 'fretboardtrainer',
-      'userName': userName,
+      'userName':  userName ?? "",
       'score': score,
     };
 
