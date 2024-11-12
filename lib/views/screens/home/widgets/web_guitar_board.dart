@@ -575,244 +575,216 @@ class _WebPortraitGuitarBoardState extends State<WebPortraitGuitarBoard> {
     return GetBuilder<HomeController>(
         init: HomeController(),
         builder: (controller) {
-          return SingleChildScrollView(
-            padding: EdgeInsets.zero,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //fretboard
-                Stack(
-                  children: [
-                    Container(
-                      height: height * 1.185,
-                      width: width * 0.14,
-                      alignment: Alignment.center,
-                      child: Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          // BOARD SIZE WITH COLOR
-                          Column(
-                            children: [
-                              SizedBox(
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //fretboard
+              Stack(
+                children: [
+                  Container(
+                    height: height * 1.185,
+                    width: width * 0.14,
+                    alignment: Alignment.center,
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        // BOARD SIZE WITH COLOR
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: height * 0.022,
+                            ),
+                            Expanded(
+                              child: Container(
+                                width: width * 0.14,
+                                color: AppColors.creamColor,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Align(
+                            alignment: Alignment.topCenter,
+                            child: RotatedBox(
+                              quarterTurns: 2,
+                              child: Container(
+                                width: width * 0.14,
                                 height: height * 0.022,
+                                decoration: BoxDecoration(
+                                    color: JHGColors.black,
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(15),
+                                      bottomLeft: Radius.circular(15),
+                                    )),
                               ),
-                              Expanded(
-                                child: Container(
-                                  width: width * 0.14,
-                                  color: AppColors.creamColor,
-                                ),
-                              ),
-                            ],
-                          ),
+                            )),
 
-                          Align(
-                              alignment: Alignment.topCenter,
-                              child: RotatedBox(
-                                quarterTurns: 2,
-                                child: Container(
-                                  width: width * 0.14,
-                                  height: height * 0.022,
-                                  decoration: BoxDecoration(
-                                      color: JHGColors.black,
-                                      borderRadius: BorderRadius.only(
-                                        bottomRight: Radius.circular(15),
-                                        bottomLeft: Radius.circular(15),
-                                      )),
+                        // BLACK CIRCE
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: EdgeInsets.only(
+                                  top: getPortraitBlackSpace(index, height),
                                 ),
-                              )),
-
-                          // BLACK CIRCE
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              padding: EdgeInsets.zero,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  padding: EdgeInsets.only(
-                                    top: getPortraitBlackSpace(index, height),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      blackPortraitCircle(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    blackPortraitCircle(
+                                      height: height,
+                                      isColor: index == 11 ? true : false,
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.032,
+                                    ),
+                                    blackPortraitCircle(
                                         height: height,
-                                        isColor: index == 11 ? true : false,
-                                      ),
-                                      SizedBox(
-                                        width: width * 0.032,
-                                      ),
-                                      blackPortraitCircle(
-                                          height: height,
-                                          isColor: index == 2 ||
-                                                  index == 4 ||
-                                                  index == 6 ||
-                                                  index == 8 ||
-                                                  index == 14
-                                              ? true
-                                              : false),
-                                      SizedBox(width: width * 0.032),
-                                      blackPortraitCircle(
-                                          height: height,
-                                          isColor: index == 11 ? true : false),
-                                    ],
-                                  ),
-                                );
-                              },
-                              itemCount: 15,
-                            ),
+                                        isColor: index == 2 ||
+                                                index == 4 ||
+                                                index == 6 ||
+                                                index == 8 ||
+                                                index == 14
+                                            ? true
+                                            : false),
+                                    SizedBox(width: width * 0.032),
+                                    blackPortraitCircle(
+                                        height: height,
+                                        isColor: index == 11 ? true : false),
+                                  ],
+                                ),
+                              );
+                            },
+                            itemCount: 15,
                           ),
+                        ),
 
-                          // ROW
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: ListView.builder(
-                              itemCount: 15,
-                              shrinkWrap: true,
-                              primary: false,
-                              padding: EdgeInsets.zero,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, pos) {
-                                return rowPortraitDivider(height, pos);
-                              },
-                            ),
+                        // ROW
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: ListView.builder(
+                            itemCount: 15,
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: EdgeInsets.zero,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, pos) {
+                              return rowPortraitDivider(height, pos);
+                            },
                           ),
+                        ),
 
-                          // COLUMN
+                        // COLUMN
 
-                          RotatedBox(
-                            quarterTurns: 2,
-                            child: ListView.builder(
-                              itemCount: 6,
-                              shrinkWrap: false,
-                              padding: EdgeInsets.zero,
-                              scrollDirection: Axis.horizontal,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return colPortraitDivider(
-                                    width, index, controller.highlightString);
-                              },
-                            ),
+                        RotatedBox(
+                          quarterTurns: 2,
+                          child: ListView.builder(
+                            itemCount: 6,
+                            shrinkWrap: false,
+                            padding: EdgeInsets.zero,
+                            scrollDirection: Axis.horizontal,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return colPortraitDivider(
+                                  width, index, controller.highlightString);
+                            },
                           ),
+                        ),
 
-                          // Align(
-                          //     alignment: Alignment.topCenter,
-                          //     child:RotatedBox(
-                          //       quarterTurns: 2,
-                          //       child:
-                          //   Container(
-                          //   width: double.infinity,
-                          //   height: height * 0.022,
-                          //         child: ListView.builder(
-                          //           itemCount: 6,
-                          //           shrinkWrap: false,
-                          //           padding: EdgeInsets.zero,
-                          //           scrollDirection: Axis.horizontal  ,
-                          //           physics: const NeverScrollableScrollPhysics(),
-                          //           itemBuilder: (context, index) {
-                          //             return nutColPortraitDivider(
-                          //                 width, index, controller.highlightString);
-                          //           },
-                          //         ),
-                          //       ),
-                          //     )),
 
-                          // /// red green  With Grid
-                          // ///===========================================================
-                          //
-
-                          Align(
-                              alignment: Alignment.topCenter,
-                              child: AlignedGridView.count(
-                                itemCount: 96,
-                                shrinkWrap: true,
-                                padding: EdgeInsets.zero,
-                                physics: const NeverScrollableScrollPhysics(),
-                                crossAxisCount: 6,
-                                mainAxisSpacing: 0,
-                                crossAxisSpacing: 10,
-                                itemBuilder: (context, index) {
-                                  return redGreenPortraitCircle(
-                                      isColor: controller.selectedFret == index
-                                          ? true
-                                          : false,
-                                      color: controller.selectedColor,
-                                      index: index,
-                                      height: height);
-                                },
-                              )),
-                          //
-                          // /// Fret press With Grid
-                          // ///===========================================================
-                          //
-                          Align(
+                        Align(
                             alignment: Alignment.topCenter,
                             child: AlignedGridView.count(
-                              itemCount: 96,
+                              itemCount: 96,  
                               shrinkWrap: true,
                               padding: EdgeInsets.zero,
                               physics: const NeverScrollableScrollPhysics(),
                               crossAxisCount: 6,
-                              mainAxisSpacing: 3,
-                              crossAxisSpacing: 4,
+                              mainAxisSpacing: 0,
+                              crossAxisSpacing: 10,
                               itemBuilder: (context, index) {
-                                final noteIndex = fretList[index];
-                                return MouseRegion(
-                                    cursor: SystemMouseCursors.click,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        controller.playSound(index,
-                                            noteIndex.note!, noteIndex.string!,fretList[index].fretSound!);
-                                      },
-                                      child: stringPortraitPress(
-                                          index: index,
-                                          height: height,
-                                          width: width),
-                                    ));
+                                return redGreenPortraitCircle(
+                                    isColor: controller.selectedFret == index
+                                        ? true
+                                        : false,
+                                    color: controller.selectedColor,
+                                    index: index,
+                                    height: height);
                               },
-                            ),
-                          ),
+                            )),
 
-                          // ///===========================================================
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                //SPACER
-                SizedBox(
-                  width: width * 0.004,
-                ),
-                // NUMBERS
-                Container(
-                  // color: Colors.red,
-                  width: width * 0.016,
-                  child: ListView.builder(
-                    itemCount: 16,
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(
-                          bottom: getPotraitHeight(index, height),
-                        ),
-                        child: RotatedBox(
-                          quarterTurns: 0,
-                          child: Text(
-                            index.toString(),
-                            style: JHGTextStyles.subLabelStyle
-                                .copyWith(fontSize: height * 0.020),
+
+                        // /// Fret press With Grid
+                        // ///===========================================================
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: AlignedGridView.count(
+                            itemCount: 96,
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            physics: const NeverScrollableScrollPhysics(),
+                            crossAxisCount: 6,
+                            mainAxisSpacing: 3,
+                            crossAxisSpacing: 4,
+                            itemBuilder: (context, index) {
+                              final noteIndex = fretList[index];
+                              return MouseRegion(
+                                  cursor: SystemMouseCursors.click,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      controller.playSound(index,
+                                          noteIndex.note!, noteIndex.string!,fretList[index].fretSound!);
+                                    },
+                                    child: stringPortraitPress(
+                                        index: index,
+                                        height: height,
+                                        width: width),
+                                  ));
+                            },
                           ),
                         ),
-                      );
-                    },
+
+                        // ///===========================================================
+                      ],
+                    ),
                   ),
+                ],
+              ),
+              //SPACER
+              SizedBox(
+                width: width * 0.004,
+              ),
+              // NUMBERS
+              Container(
+                // color: Colors.red,
+                width: width * 0.016,
+                child: ListView.builder(
+                  itemCount: 16,
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        bottom: getPotraitHeight(index, height),
+                      ),
+                      child: RotatedBox(
+                        quarterTurns: 0,
+                        child: Text(
+                          index.toString(),
+                          style: JHGTextStyles.subLabelStyle
+                              .copyWith(fontSize: height * 0.020),
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         });
   }

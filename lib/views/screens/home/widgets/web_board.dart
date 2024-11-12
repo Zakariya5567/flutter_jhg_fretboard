@@ -67,12 +67,15 @@ class WebBoard extends StatelessWidget {
                                     child: Center(
                                       child: const WebLandscapeGuitarBoard(),
                                     ))
-                                : SingleChildScrollView(
-                                  child: Container(
-                                    // color: Colors.blue,
-                                      width: width * 0.28,
-                                      alignment: Alignment.topCenter,
-                                      child: const WebPortraitGuitarBoard()),
+                                :    ScrollConfiguration(
+                                 behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                                  child: SingleChildScrollView(
+                                    child: Container(
+                                      // color: Colors.blue,
+                                        width: width * 0.28,
+                                        alignment: Alignment.topCenter,
+                                        child: const WebPortraitGuitarBoard()),
+                                  ),
                                 ),
                           ],
                         ),
