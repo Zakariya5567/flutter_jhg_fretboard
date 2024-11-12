@@ -25,8 +25,9 @@ class HomeController extends GetxController {
   String? selectedNote;
   int? selectedString;
   String? userName;
-  TextEditingController timerIntervalEditingController =  new TextEditingController();
-  TextEditingController minutesEditingController = new TextEditingController();
+  TextEditingController timerIntervalEditingController =
+      new TextEditingController();
+  TextEditingController minutesEditingController = new TextEditingController(); 
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
   // JHGInterstitialAd? interstitialAd;
   JHGInterstitialAd? interstitialAds;
@@ -42,8 +43,8 @@ class HomeController extends GetxController {
 
   // Initialize  animation controller
   initializeData() async {
-    selectedColor  = Colors.transparent;
-    isStart =  false;
+    selectedColor = Colors.transparent;
+    isStart = false;
     selectedFret = null;
     selectedString = null;
     selectedNote = null;
@@ -56,16 +57,9 @@ class HomeController extends GetxController {
     timer = null;
     //isTimerSet = false;
     secondsRemaining.value = 0;
-    timerMode =  false;
+    timerMode = false;
     leaderboardMode = false;
-    int seconds = await SharedPref.getTimerIntervalValue();
-    int minutes = await SharedPref.getDefaultTimerMinutesValue();
-    String? defaultTimerType = await SharedPref.getDefaultTimerTypeValue();
-    if (defaultTimerType != null) {
-      defaultTimerSelectedValue.value = defaultTimerType;
-    }
-    minutesEditingController.text = minutes.toString();
-    timerIntervalEditingController.text = seconds.toString();
+    initLocalDbData();
     await getUserName();
     update();
   }
@@ -75,7 +69,6 @@ class HomeController extends GetxController {
   bool isPlayed = false;
 
   Future playSound(int index, String note, int str, String tune) async {
-
     print("===================================");
     print("Highlight Freth ******  : $index");
     print("highlightNode ******  : $note");
@@ -85,7 +78,7 @@ class HomeController extends GetxController {
     // EXECUTE LOOP
     fretList.forEach((element) async {
       // if(element.id == index){
-      if (element.note  ==  note && element.string == str && isPlayed == false) {
+      if (element.note == note && element.string == str && isPlayed == false) {
         // GET ALLOW STRING STATUS
         final stringStatus = getStringStatus(element.string!);
 
@@ -93,10 +86,11 @@ class HomeController extends GetxController {
         // THEN WE WILL HIGHLIGHT THINGS
         if (stringStatus == true && isStart == true) {
           selectedFret = index;
-          selectedString =  str;
+          selectedString = str;
           selectedNote = note;
           element.playSound();
-          if (highlightNode == selectedNote && selectedString == highlightString) {
+          if (highlightNode == selectedNote &&
+              selectedString == highlightString) {
             previousHighlightFret = highlightFret;
             previousHighlightNode = highlightNode;
             incrementScore();
@@ -119,12 +113,12 @@ class HomeController extends GetxController {
   }
 
   double scale = 1;
- 
+
   bool isPortrait = true;
 
   void toggleOrientation() {
     scale = 0.5;
-    Future.delayed(const Duration(milliseconds:  100), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       isPortrait = !isPortrait;
       update();
     });
@@ -142,7 +136,7 @@ class HomeController extends GetxController {
   incrementScore() {
     score = score + 1;
     isPlayed = true;
-    selectedColor =  JHGColors.green;
+    selectedColor = JHGColors.green;
     update();
   }
 
@@ -157,7 +151,6 @@ class HomeController extends GetxController {
 
   bool timerMode = false;
   bool leaderboardMode = false;
-
 
   setGameMode({required bool timer, required bool leaderboard}) {
     timerMode = timer;
@@ -266,7 +259,7 @@ class HomeController extends GetxController {
     if (resetAll == true) {
       if (timerMode == true) {
         timerMode = false;
-      } else if(leaderboardMode == true){
+      } else if (leaderboardMode == true) {
         leaderboardMode = false;
       }
     }
@@ -488,7 +481,8 @@ class HomeController extends GetxController {
     return response;
   }
 
-  static Future<dynamic> updateScoreApiRequest(Map<String, dynamic> data) async {
+  static Future<dynamic> updateScoreApiRequest(
+      Map<String, dynamic> data) async {
     String gameType = data['gameType'];
     String userName = data['userName'];
     int score = data['score'];
@@ -496,8 +490,7 @@ class HomeController extends GetxController {
     // Perform the API request with the unpacked data
     var response = await FretBoardRepository().postRequest(
         "${FretBoardRepository().updateScoreApi}/$gameType/$userName",
-        {'score': score}
-    );
+        {'score': score});
 
     return response;
   }
@@ -505,6 +498,7 @@ class HomeController extends GetxController {
   void onClickSave(BuildContext context) async {
     String seconds = timerIntervalEditingController.text;
     String minutes = minutesEditingController.text;
+    saveStrings();
     if (defaultTimerSelectedValue == "Countdown") {
       if (seconds.isNotEmpty && minutes.isNotEmpty) {
         if (int.parse(seconds) < 1) {
@@ -519,9 +513,10 @@ class HomeController extends GetxController {
               message: "Minutes should be greater then or equal to 1",
               isError: true);
         } else {
-          SharedPref.storeDefaultTimerTypeValue(defaultTimerSelectedValue.value);
-          SharedPref.storeTimerIntervalValue(seconds);
-          SharedPref.storeDefaultTimerMinutesValue(minutes);
+          SharedPrefHelper.instance
+              .storeDefaultTimerType(defaultTimerSelectedValue.value);
+          SharedPrefHelper.instance.storeTimerInterval(seconds);
+          SharedPrefHelper.instance.storeDefaultTimerMinutes(minutes);
           popup(context);
         }
       } else if (seconds.isEmpty) {
@@ -537,9 +532,15 @@ class HomeController extends GetxController {
             isError: true);
       }
     } else {
-      SharedPref.storeDefaultTimerTypeValue(defaultTimerSelectedValue.value);
+      SharedPrefHelper.instance
+          .storeDefaultTimerType(defaultTimerSelectedValue.value);
       popup(context);
     }
+  }
+
+  Future<void> saveStrings() async {
+    await SharedPrefHelper.instance
+        .saveStrings(string1, string2, string3, string4, string5, string6);
   }
 
   void popup(BuildContext context) {
@@ -554,5 +555,20 @@ class HomeController extends GetxController {
       isActive = bool.parse(uri.queryParameters['active'].toString());
       update();
     } on Exception {}
+  }
+
+  Future<void> initLocalDbData() async {
+    defaultTimerSelectedValue(
+        await SharedPrefHelper.instance.getDefaultTimerType());
+    minutesEditingController.text =
+        '${await SharedPrefHelper.instance.getDefaultTimerMinutes()}';
+    timerIntervalEditingController.text =
+        '${await SharedPrefHelper.instance.getTimerInterval()}';
+    string1 = await SharedPrefHelper.instance.getString1();
+    string2 = await SharedPrefHelper.instance.getString2();
+    string3 = await SharedPrefHelper.instance.getString3();
+    string4 = await SharedPrefHelper.instance.getString4();
+    string5 = await SharedPrefHelper.instance.getString5();
+    string6 = await SharedPrefHelper.instance.getString6();
   }
 }
