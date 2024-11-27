@@ -17,6 +17,17 @@ import 'leaderboard_controller.dart';
 class HomeController extends GetxController {
   // disable the web active status is true
   var userNameWeb = 'DefaultUserName';
+
+  List<String> defaultTimer = ['Stopwatch', "Countdown"];
+  RxString selectedDropDownValue = "".obs;
+
+  onDefaultTimerInitialized(){
+    selectedDropDownValue.value = "Stopwatch";
+    timerIntervalValue.value = 10;
+    minutesValue.value = 1;
+  }
+
+
   var isActive = true;
 
   // Instance of the Player
@@ -25,9 +36,14 @@ class HomeController extends GetxController {
   String? selectedNote;
   int? selectedString;
   String? userName;
-  TextEditingController timerIntervalEditingController =
-      new TextEditingController();
-  TextEditingController minutesEditingController = new TextEditingController(); 
+  // TextEditingController timerIntervalEditingController = new TextEditingController();
+  // TextEditingController minutesEditingController = new TextEditingController();
+
+  RxBool timerIntervalExpanded = false.obs;
+  RxInt timerIntervalValue = 10.obs;
+  RxInt minutesValue = 1.obs;
+
+
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
   // JHGInterstitialAd? interstitialAd;
   JHGInterstitialAd? interstitialAds;
@@ -224,16 +240,14 @@ class HomeController extends GetxController {
 
   increaseTime() {
     if (isStart != true) {
-      secondsRemaining.value = secondsRemaining.value +
-          int.parse(timerIntervalEditingController.text);
+      secondsRemaining.value = secondsRemaining.value + timerIntervalValue.value;
       update();
     }
   }
 
   decreaseTime() {
     if (secondsRemaining.value > 10 && isStart != true) {
-      secondsRemaining.value = secondsRemaining.value -
-          int.parse(timerIntervalEditingController.text);
+      secondsRemaining.value = secondsRemaining.value - timerIntervalValue.value;
       update();
     }
   }
@@ -271,7 +285,7 @@ class HomeController extends GetxController {
   resetTimer() {
     //isTimerSet = true;
     if (timerMode == true) {
-      secondsRemaining.value = 60 * int.parse(minutesEditingController.text);
+      secondsRemaining.value = 60 * minutesValue.value;
     } else if (leaderboardMode == true) {
       secondsRemaining.value = 120;
     } else {
@@ -435,7 +449,7 @@ class HomeController extends GetxController {
 
   startCountDownTimer() {
     if (secondsRemaining.value == 0) {
-      secondsRemaining.value = 60 * int.parse(minutesEditingController.text);
+      secondsRemaining.value = 60 * minutesValue.value;
     }
     update();
     if (timer != null) {
@@ -498,44 +512,16 @@ class HomeController extends GetxController {
   }
 
   void onClickSave(BuildContext context) async {
-    String seconds = timerIntervalEditingController.text;
-    String minutes = minutesEditingController.text;
+    int seconds = timerIntervalValue.value;
+    int minutes = minutesValue.value;
     saveStrings();
     if (defaultTimerSelectedValue == "Countdown") {
-      if (seconds.isNotEmpty && minutes.isNotEmpty) {
-        if (int.parse(seconds) < 1) {
-          showToast(
-              context: context,
-              message:
-                  "Timer interval seconds should be greater then or equal to 1",
-              isError: true);
-        } else if (int.parse(minutes) < 1) {
-          showToast(
-              context: context,
-              message: "Minutes should be greater then or equal to 1",
-              isError: true);
-        } else {
-          SharedPrefHelper.instance
-              .storeDefaultTimerType(defaultTimerSelectedValue.value);
+          SharedPrefHelper.instance.storeDefaultTimerType(defaultTimerSelectedValue.value);
           SharedPrefHelper.instance.storeTimerInterval(seconds);
           SharedPrefHelper.instance.storeDefaultTimerMinutes(minutes);
           popup(context);
-        }
-      } else if (seconds.isEmpty) {
-        showToast(
-            context: context,
-            message:
-                "Timer interval seconds should be greater then or equal to 1",
-            isError: true);
-      } else if (minutes.isEmpty) {
-        showToast(
-            context: context,
-            message: "Minutes should be greater then or equal to 1",
-            isError: true);
-      }
     } else {
-      SharedPrefHelper.instance
-          .storeDefaultTimerType(defaultTimerSelectedValue.value);
+      SharedPrefHelper.instance.storeDefaultTimerType(defaultTimerSelectedValue.value);
       popup(context);
     }
   }
@@ -560,12 +546,9 @@ class HomeController extends GetxController {
   }
 
   Future<void> initLocalDbData() async {
-    defaultTimerSelectedValue(
-        await SharedPrefHelper.instance.getDefaultTimerType());
-    minutesEditingController.text =
-        '${await SharedPrefHelper.instance.getDefaultTimerMinutes()}';
-    timerIntervalEditingController.text =
-        '${await SharedPrefHelper.instance.getTimerInterval()}';
+    defaultTimerSelectedValue(await SharedPrefHelper.instance.getDefaultTimerType());
+    minutesValue.value = await SharedPrefHelper.instance.getDefaultTimerMinutes();
+    timerIntervalValue.value = await SharedPrefHelper.instance.getTimerInterval();
     string1 = await SharedPrefHelper.instance.getString1();
     string2 = await SharedPrefHelper.instance.getString2();
     string3 = await SharedPrefHelper.instance.getString3();

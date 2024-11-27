@@ -35,14 +35,12 @@ class PortraitBoard extends StatelessWidget {
               enabled: true,
               svgImg: AppAssets.iconTropy,
               onTap: () {
-                //controller.updateScore(21);
+                 controller.updateScore(102);
                 Get.to(() => LeadershipScreen(),
                     transition: Transition.leftToRight);
-                if (isFreePlan) {
-                  controller.interstitialAds?.showInterstitial();
-                }
-                // Get.to(() => LeadershipScreen(),
-                //     transition: Transition.leftToRight);
+                // if (isFreePlan) {
+                //   controller.interstitialAds?.showInterstitial();
+                // }
               },
             ),
             trailingWidget: JHGSettingsOptBtn(

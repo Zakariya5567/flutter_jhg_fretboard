@@ -9,6 +9,7 @@ import 'package:fretboard/app_utils/app_strings.dart';
 import 'package:fretboard/app_utils/app_subscription.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/main.dart';
+import 'package:fretboard/views/widgets/default_timer.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
 
@@ -20,6 +21,8 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+
+  HomeController homeController = Get.put(HomeController());
   String deviceName = 'Unknown';
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
@@ -43,10 +46,12 @@ class _SettingScreenState extends State<SettingScreen> {
     if (!kIsWeb) {
       _initPackageInfo();
     }
+    homeController.onDefaultTimerInitialized();
   }
 
   Future<void> _initPackageInfo() async {
     await getDeviceInfo();
+
   }
 
   bool toggle = true;
@@ -67,7 +72,7 @@ class _SettingScreenState extends State<SettingScreen> {
       init: HomeController(),
       builder: (controller) {
         return controller.isPortrait || kIsWeb
-            ? JHGSettings(
+             ? JHGSettings(
                 androidAppIdentifier: AppStrings.androidBuildId,
                 iosAppIdentifier: AppStrings.iOSBuildId,
                 appStoreId: AppStrings.appStoreId,
@@ -270,16 +275,7 @@ class _SettingScreenState extends State<SettingScreen> {
             SizedBox(height: 20),
             SizedBox(
               width: MediaQuery.sizeOf(context).height * 0.85,
-              child: JHGSettingsDefaultTimer(
-                  selectedValue: controller.defaultTimerSelectedValue.value,
-                  onChanged: (String? value) {
-                    if (value != null) {
-                      controller.defaultTimerSelectedValue.value = value;
-                    }
-                  },
-                  paddingTop: EdgeInsets.symmetric(vertical: 10),
-                  minutesController: controller.minutesEditingController,
-                  secondsController: controller.timerIntervalEditingController),
+              child: SettingsDefaultTimer(controller: controller)
             ),
           ],
         );

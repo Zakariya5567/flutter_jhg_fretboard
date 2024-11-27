@@ -42,9 +42,9 @@ class SharedPrefHelper {
   }
 
   // Timer minutes operations
-  Future<bool> storeDefaultTimerMinutes(String value) async {
+  Future<bool> storeDefaultTimerMinutes(int value) async {
     final prefs = await preferences;
-    return await prefs.setInt(defaultTimerMinutesKey, int.parse(value));
+    return await prefs.setInt(defaultTimerMinutesKey, value);
   }
 
   Future<int> getDefaultTimerMinutes() async {
@@ -54,9 +54,9 @@ class SharedPrefHelper {
   }
 
   // Timer interval operations
-  Future<bool> storeTimerInterval(String value) async {
+  Future<bool> storeTimerInterval(int value) async {
     final prefs = await preferences;
-    return await prefs.setInt(defaultTimerIntervalKey, int.parse(value));
+    return await prefs.setInt(defaultTimerIntervalKey, value);
   }
 
   Future<int> getTimerInterval() async {
