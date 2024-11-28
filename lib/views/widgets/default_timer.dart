@@ -60,7 +60,7 @@ class SettingsDefaultTimer extends StatelessWidget {
                             },
                           ),
 
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 10),
 
                           TimerWidget(
                               title:   "Interval Time",
@@ -114,65 +114,82 @@ class TimerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          flex: 2,
-          child: Column(
-            children: [
-              Row(
+    return Container(
+      height: 65,
+      //MediaQuery.sizeOf(context).height*0.070,
+      // color: Colors.green,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: JHGTextStyles.subLabelStyle,
+                  Row(
+                    children: [
+                      Text(
+                        title,
+                        style: JHGTextStyles.subLabelStyle,
+                      ),
+                      isInfoEnable == true ?
+                      JHGIconButton(
+                        onTap: onInfoTap,
+                        childPadding: const EdgeInsets.only(left: 8),
+                        iconData: Icons.info_outline_rounded,
+                        iconColor: JHGColors.white,
+                        size: 20,
+                      ) : SizedBox(),
+                    ],
                   ),
+
                   isInfoEnable == true ?
-                  JHGIconButton(
-                    onTap: onInfoTap,
-                    childPadding: const EdgeInsets.only(left: 8),
-                    iconData: Icons.info_outline_rounded,
-                    iconColor: JHGColors.white,
-                    size: 20,
+                  JHGExpandableSection(
+                    expand: isExpend ?? false,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: Text(subtitle ?? " ",
+                        style: JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),),
+                    ),
                   ) : SizedBox(),
                 ],
               ),
-
-              isInfoEnable == true ?
-              JHGExpandableSection(
-                expand: isExpend ?? false,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 2),
-                  child: Text(subtitle ?? " ",
-                    style: JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                AddAndSubtractButton(onTap: onDecrementTap, isAdd: false),
+                SizedBox(width: 10),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: JHGColors.boxBorder)
+                    ),
+                    child: Text(
+                      value,
+                      textAlign: TextAlign.center,
+                      style: JHGTextStyles.lrlabelStyle.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                 ),
-              ) : SizedBox(),
-            ],
-          ),
-        ),
-        AddAndSubtractButton(onTap: onDecrementTap, isAdd: false),
-        SizedBox(width: 10),
-        Expanded(
-          flex: 2,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: JHGColors.boxBorder)
+                SizedBox(width: 10),
+                AddAndSubtractButton(onTap: onIncrementTap, isAdd: true),
+              ],
             ),
-            child: Text(
-              value,
-              textAlign: TextAlign.center,
-              style: JHGTextStyles.lrlabelStyle.copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(width: 10),
-        AddAndSubtractButton(onTap: onIncrementTap, isAdd: true),
-      ],
+          )
+        ],
+      ),
     );
   }
 }
