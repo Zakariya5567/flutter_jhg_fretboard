@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:fretboard/app_utils/app_assets.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
+import 'package:fretboard/utils/app_assets.dart';
+import 'package:fretboard/utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/main.dart';
 import 'package:fretboard/views/screens/home/widgets/guitar_board.dart';
@@ -35,7 +35,6 @@ class PortraitBoard extends StatelessWidget {
               enabled: true,
               svgImg: AppAssets.iconTropy,
               onTap: () {
-                 controller.updateScore(102);
                 Get.to(() => LeadershipScreen(),
                     transition: Transition.leftToRight);
                 // if (isFreePlan) {
@@ -143,7 +142,8 @@ class PortraitBoard extends StatelessWidget {
                         svgImg: AppAssets.iconStopwatch,
                         enabled: true,
                         onTap: () {
-                          controller.setGameMode(timer: true, leaderboard: false);
+                          controller.setGameMode(
+                              timer: true, leaderboard: false);
                           controller.resetTimer();
                         })
                     : controller.timerMode == true
@@ -152,7 +152,8 @@ class PortraitBoard extends StatelessWidget {
                             enabled: true,
                             svgImg: AppAssets.iconTimer,
                             onTap: () {
-                              controller.setGameMode(timer: false, leaderboard: true);
+                              controller.setGameMode(
+                                  timer: false, leaderboard: true);
                               controller.resetTimer();
                             })
                         : controller.leaderboardMode == true
@@ -162,7 +163,8 @@ class PortraitBoard extends StatelessWidget {
                                 enabled: true,
                                 svgImg: AppAssets.iconTropy,
                                 onTap: () {
-                                  controller.setGameMode(timer: false, leaderboard: false);
+                                  controller.setGameMode(
+                                      timer: false, leaderboard: false);
                                   controller.resetTimer();
                                 })
                             : SizedBox(),

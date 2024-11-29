@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
+import 'package:fretboard/utils/app_strings.dart';
 
 String monthlySubscription() {
   return Platform.isAndroid

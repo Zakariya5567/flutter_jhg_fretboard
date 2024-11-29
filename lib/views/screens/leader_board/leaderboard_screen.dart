@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fretboard/app_utils/app_assets.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
+import 'package:fretboard/utils/app_assets.dart';
+import 'package:fretboard/utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/controllers/leaderboard_controller.dart';
 import 'package:fretboard/views/screens/leader_board/widgets/leaderboard_widget.dart';
@@ -14,31 +14,30 @@ class LeadershipScreen extends StatelessWidget {
   String? intervalType;
   LeadershipScreen({this.intervalType, super.key});
   HomeController hc = Get.put(HomeController());
-  LeaderBoardController  controller = Get.put(LeaderBoardController());
+  LeaderBoardController controller = Get.put(LeaderBoardController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: JHGColors.secondryBlack,
-      body: GetBuilder<LeaderBoardController>(
-          builder: (con) {
-            return LayoutBuilder(builder: (context, constraints) {
-              if (constraints.maxWidth >= 450) {
-                return LeaderWebView(
-                  controller: controller,
-                );
-              } else {
-                if (hc.isPortrait == true) {
-                  return LeaderPortraitView(
-                    controller: controller,
-                  );
-                } else {
-                  return LeaderLandscapeView(
-                    controller: controller,
-                  );
-                }
-              }
-            });
-          }),
+      body: GetBuilder<LeaderBoardController>(builder: (con) {
+        return LayoutBuilder(builder: (context, constraints) {
+          if (constraints.maxWidth >= 450) {
+            return LeaderWebView(
+              controller: controller,
+            );
+          } else {
+            if (hc.isPortrait == true) {
+              return LeaderPortraitView(
+                controller: controller,
+              );
+            } else {
+              return LeaderLandscapeView(
+                controller: controller,
+              );
+            }
+          }
+        });
+      }),
       // bottomNavigationBar: leaderBoardButton(),
     );
   }
@@ -98,9 +97,9 @@ class LeaderPortraitView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             leaderBoardTextWidget('Current Leader',
-                                controller.highestUserScore.value),
-                            leaderBoardTextWidget(
-                                'Score', controller.highScore.value),
+                                controller.leader.value.username ?? ''),
+                            leaderBoardTextWidget('Score',
+                                controller.leader.value.score.toString()),
                           ],
                         ),
                       ),
@@ -204,12 +203,7 @@ class LeaderLandscapeView extends StatelessWidget {
                                         MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: [
-                                      leaderBoardTextWidget('Current Leader',
-                                          controller.highestUserScore.value),
-                                      leaderBoardTextWidget(
-                                          'Score', controller.highScore.value),
-                                    ],
+                                    children: [],
                                   ),
                                 ),
                               ),
@@ -316,9 +310,9 @@ class LeaderWebView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             leaderBoardTextWidget('Current Leader',
-                                controller.highestUserScore.value),
-                            leaderBoardTextWidget(
-                                'Score', controller.highScore.value),
+                                controller.leader.value.username ?? ''),
+                            leaderBoardTextWidget('Score',
+                                controller.leader.value.score.toString()),
                           ],
                         ),
                       ),

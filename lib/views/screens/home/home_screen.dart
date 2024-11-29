@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:fretboard/app_utils/app_subscription.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/controllers/leaderboard_controller.dart';
 import 'package:fretboard/main.dart';
+import 'package:fretboard/utils/app_subscription.dart';
 import 'package:fretboard/views/screens/home/widgets/landscape_board.dart';
 import 'package:fretboard/views/screens/home/widgets/portrait_board.dart';
 import 'package:fretboard/views/screens/home/widgets/web_board.dart';
@@ -21,7 +21,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   LeaderBoardController lc = Get.put(LeaderBoardController());
-
   // Set expiry date when user login to the app
   // we will expire user login after 14 days
   setExpiryDate() async {
@@ -40,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     setExpiryDate();
     super.initState();
-    print('user session ${SplashScreen.session}');
     if (!kIsWeb) {
       StringsDownloadService().isStringsDownloaded("jhg-fretboard-trainer");
       LocalDB.getIsFreePlan().then((value) {
@@ -72,13 +70,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           builder: (controller) {
             return GestureDetector(
               child: AbsorbPointer(
-                absorbing:
-                kIsWeb
-                    ?
-                controller.isActive == true
-                        ? false
-                        : true
-                    : false,
+                absorbing: kIsWeb ? !controller.isActive : false,
                 child: kIsWeb
                     ? Container(
                         height: height,

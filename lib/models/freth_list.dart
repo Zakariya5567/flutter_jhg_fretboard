@@ -1,4 +1,4 @@
-import 'package:fretboard/app_utils/app_strings.dart';
+import 'package:fretboard/utils/app_strings.dart';
 
 import 'board_model.dart';
 

@@ -1,79 +1,53 @@
 import 'package:flutter/foundation.dart';
-import 'package:fretboard/repositories/fretboard_repository.dart';
+import 'package:fretboard/models/leaderboard.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
+
+import '../repositories/leaderboard_repo.dart';
 
 class LeaderBoardController extends GetxController {
   RxBool isLoading = false.obs;
   RxString gameType = "fretboardtrainer".obs;
   RxString username = "user1".obs;
-  RxString highestUserScore = "".obs;
-  RxString highScore = "0".obs;
-  RxList scoreList = [].obs;
+  Rx<LeaderboardData> leader = LeaderboardData().obs;
 
-  @override
-  void onInit() {
-    getDataFromApi();
-    super.onInit();
-  }
-  
+  RxList<LeaderboardData> scoreList = <LeaderboardData>[].obs;
 
   getDataFromApi() async {
-    await getUserName();
+    username.value = SplashScreen.session.user?.userName ?? '';
     await getLeaderBoard();
   }
 
- Future getUserName()async {
-    var usernames  =  await LocalDB.getUserName;
-    username.value = usernames??'';
-  }
-
   Future<dynamic> getLeaderBoard() async {
-    try{
+    try {
       scoreList([]);
       isLoading(true);
-      var value = await compute(getLeaderBoardApiRequest,gameType.value);
+      var value = await compute(getLeaderBoardApiRequest, gameType.value);
       scoreList.value = value;
       isLoading(false);
-      await highestScorer(scoreList);
+      await highestScorer();
       update();
       return scoreList;
-    }catch (e){
+    } catch (e) {
       isLoading(false);
     }
   }
 
-
-  static Future<dynamic> getLeaderBoardApiRequest(gameType) async {
-    List scoredList =[];
-    var response =  await FretBoardRepository().getRequest("${FretBoardRepository().getLeaderboardApi}${gameType}");
-    for (var scores in response['leaderboard']) {
-      scoredList.add(scores);
-    }
-    return scoredList;
+  Future<List<LeaderboardData>> getLeaderBoardApiRequest(gameType) async {
+    return await LeaderboardRepo().getLeaderboardData();
   }
 
-  Future<dynamic> highestScorer(leaderboard) async {
+  Future<String?> highestScorer() async {
     String? highestScorer;
-    int highestScore = 0; // Initialize to the lowest possible value
-
-    for (var player in leaderboard) {
-      String username = player['username'];
-      int score = player['score'];
-
+    int highestScore = 0;
+    for (var player in scoreList) {
+      int score = player.score ?? 0;
       if (score > highestScore) {
         highestScore = score;
-        highestScorer = username;
+        leader(player);
       }
-    }
-
-    if (highestScorer != null) {
-      highestUserScore.value = highestScorer.toString();
-      highScore.value = highestScore.toString();
     }
     update();
     return highestScorer;
   }
-
-
 }

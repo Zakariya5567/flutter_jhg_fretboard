@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:fretboard/app_utils/app_assets.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
+import 'package:fretboard/utils/app_assets.dart';
+import 'package:fretboard/utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/main.dart';
 import 'package:fretboard/views/screens/home/widgets/guitar_board.dart';

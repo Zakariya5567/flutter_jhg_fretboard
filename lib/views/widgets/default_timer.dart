@@ -5,112 +5,108 @@ import 'package:fretboard/views/widgets/add_sub_button.dart';
 import 'package:get/get.dart';
 
 class SettingsDefaultTimer extends StatelessWidget {
-  const SettingsDefaultTimer({super.key,required this.controller});
+  const SettingsDefaultTimer({super.key, required this.controller});
   final HomeController controller;
 
   @override
   Widget build(BuildContext context) {
-    return
-      Obx(()=> Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Row(
-                  children: [
-                    const Expanded(
-                      flex: 2,
-                      child: Text(
-                        "Default Timer",
-                        style: JHGTextStyles.subLabelStyle,
-                      ),
+    return Obx(() => Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Row(
+                children: [
+                  const Expanded(
+                    flex: 2,
+                    child: Text(
+                      "Default Timer",
+                      style: JHGTextStyles.subLabelStyle,
                     ),
-                    Expanded(
-                        flex: 2,
-                        child: JHGDropDown<String>(
-                          value: controller.defaultTimerSelectedValue.value ?? "Stopwatch",
-                          items: controller.defaultTimer,
-                          onChanged: (String? value) {
-                            if (value != null) {
-                              controller.selectedDropDownValue.value = value;
-                              }
-                          },
-                        )),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                      flex: 2,
+                      child: JHGDropDown<String>(
+                        value: controller.defaultTimerSelectedValue.value,
+                        items: controller.defaultTimer,
+                        onChanged: (String? value) {
+                          if (value != null) {
+                            controller.selectedDropDownValue.value = value;
+                          }
+                        },
+                      )),
+                ],
               ),
-              Padding(
-                  padding:  const EdgeInsets.only(top: 20),
-                  child: JHGExpandableSection(
-                      expand: controller.selectedDropDownValue.value == controller.defaultTimer[1],
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TimerWidget(
-                            title:   "Minutes",
-                            value: controller.minutesValue.value.toString(),
-                            onIncrementTap: (){
-                                controller.minutesValue++;
-                            },
-                            onDecrementTap: () {
-                              if(  controller.minutesValue.value >1){
-                                controller.minutesValue--;
-                              }
-                            },
-                          ),
-
-                          const SizedBox(height: 10),
-
-                          TimerWidget(
-                              title:   "Interval Time",
-                              subtitle: "Set the intervals in Seconds",
-                              value: controller.timerIntervalValue.value.toString(),
-                              isExpend: controller.timerIntervalExpanded.value,
-                              isInfoEnable: true,
-                              onInfoTap: (){
-                                controller.timerIntervalExpanded.value = !controller.timerIntervalExpanded.value;
-                              },
-                              onIncrementTap: (){
-                                controller.timerIntervalValue++;
-                              },
-                              onDecrementTap: (){
-                                if(  controller.timerIntervalValue.value >1){
-                                  controller.timerIntervalValue--;
-                                }
-                              },
-                          )
-
-                        ],
-                      ))),
-            ],
-          )
-      );
+            ),
+            Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: JHGExpandableSection(
+                    expand: controller.selectedDropDownValue.value ==
+                        controller.defaultTimer[1],
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TimerWidget(
+                          title: "Minutes",
+                          value: controller.minutesValue.value.toString(),
+                          onIncrementTap: () {
+                            controller.minutesValue++;
+                          },
+                          onDecrementTap: () {
+                            if (controller.minutesValue.value > 1) {
+                              controller.minutesValue--;
+                            }
+                          },
+                        ),
+                        const SizedBox(height: 10),
+                        TimerWidget(
+                          title: "Interval Time",
+                          subtitle: "Set the intervals in Seconds",
+                          value: controller.timerIntervalValue.value.toString(),
+                          isExpend: controller.timerIntervalExpanded.value,
+                          isInfoEnable: true,
+                          onInfoTap: () {
+                            controller.timerIntervalExpanded.value =
+                                !controller.timerIntervalExpanded.value;
+                          },
+                          onIncrementTap: () {
+                            controller.timerIntervalValue++;
+                          },
+                          onDecrementTap: () {
+                            if (controller.timerIntervalValue.value > 1) {
+                              controller.timerIntervalValue--;
+                            }
+                          },
+                        )
+                      ],
+                    ))),
+          ],
+        ));
   }
 }
 
 class TimerWidget extends StatelessWidget {
-  TimerWidget({super.key,
+  TimerWidget({
+    super.key,
     required this.title,
     this.subtitle,
     required this.value,
     required this.onIncrementTap,
     required this.onDecrementTap,
-
     this.isExpend,
     this.isInfoEnable,
     this.onInfoTap,
-
   });
 
   final String title;
-  String? subtitle;
+  final String? subtitle;
   final String value;
   final VoidCallback onIncrementTap;
   final VoidCallback onDecrementTap;
-  bool? isExpend;
-  bool? isInfoEnable;
-  VoidCallback? onInfoTap;
+  final bool? isExpend;
+  final bool? isInfoEnable;
+  final VoidCallback? onInfoTap;
 
   @override
   Widget build(BuildContext context) {
@@ -135,26 +131,30 @@ class TimerWidget extends StatelessWidget {
                         title,
                         style: JHGTextStyles.subLabelStyle,
                       ),
-                      isInfoEnable == true ?
-                      JHGIconButton(
-                        onTap: onInfoTap,
-                        childPadding: const EdgeInsets.only(left: 8),
-                        iconData: Icons.info_outline_rounded,
-                        iconColor: JHGColors.white,
-                        size: 20,
-                      ) : SizedBox(),
+                      isInfoEnable == true
+                          ? JHGIconButton(
+                              onTap: onInfoTap,
+                              childPadding: const EdgeInsets.only(left: 8),
+                              iconData: Icons.info_outline_rounded,
+                              iconColor: JHGColors.white,
+                              size: 20,
+                            )
+                          : SizedBox(),
                     ],
                   ),
-
-                  isInfoEnable == true ?
-                  JHGExpandableSection(
-                    expand: isExpend ?? false,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 2),
-                      child: Text(subtitle ?? " ",
-                        style: JHGTextStyles.subLabelStyle.copyWith(fontSize: 12),),
-                    ),
-                  ) : SizedBox(),
+                  isInfoEnable == true
+                      ? JHGExpandableSection(
+                          expand: isExpend ?? false,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 2),
+                            child: Text(
+                              subtitle ?? " ",
+                              style: JHGTextStyles.subLabelStyle
+                                  .copyWith(fontSize: 12),
+                            ),
+                          ),
+                        )
+                      : SizedBox(),
                 ],
               ),
             ),
@@ -171,8 +171,7 @@ class TimerWidget extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: JHGColors.boxBorder)
-                    ),
+                        border: Border.all(color: JHGColors.boxBorder)),
                     child: Text(
                       value,
                       textAlign: TextAlign.center,
@@ -193,4 +192,3 @@ class TimerWidget extends StatelessWidget {
     );
   }
 }
-

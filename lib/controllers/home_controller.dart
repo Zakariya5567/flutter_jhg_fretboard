@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart' show compute, kIsWeb;
+import 'package:flutter/foundation.dart';// show compute, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/models/freth_list.dart';
-import 'package:fretboard/repositories/fretboard_repository.dart';
+import 'package:fretboard/models/leaderboard.dart';
 import 'package:fretboard/services/local_db_service.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:universal_html/html.dart';
 
+import '../repositories/leaderboard_repo.dart';
 import 'leaderboard_controller.dart';
 
 class HomeController extends GetxController {
@@ -21,12 +22,11 @@ class HomeController extends GetxController {
   List<String> defaultTimer = ['Stopwatch', "Countdown"];
   RxString selectedDropDownValue = "".obs;
 
-  onDefaultTimerInitialized(){
+  onDefaultTimerInitialized() {
     selectedDropDownValue.value = "Stopwatch";
     timerIntervalValue.value = 10;
     minutesValue.value = 1;
   }
-
 
   var isActive = true;
 
@@ -42,7 +42,6 @@ class HomeController extends GetxController {
   RxBool timerIntervalExpanded = false.obs;
   RxInt timerIntervalValue = 10.obs;
   RxInt minutesValue = 1.obs;
-
 
   RxString defaultTimerSelectedValue = "Stopwatch".obs;
   // JHGInterstitialAd? interstitialAd;
@@ -240,14 +239,16 @@ class HomeController extends GetxController {
 
   increaseTime() {
     if (isStart != true) {
-      secondsRemaining.value = secondsRemaining.value + timerIntervalValue.value;
+      secondsRemaining.value =
+          secondsRemaining.value + timerIntervalValue.value;
       update();
     }
   }
 
   decreaseTime() {
     if (secondsRemaining.value > 10 && isStart != true) {
-      secondsRemaining.value = secondsRemaining.value - timerIntervalValue.value;
+      secondsRemaining.value =
+          secondsRemaining.value - timerIntervalValue.value;
       update();
     }
   }
@@ -295,6 +296,7 @@ class HomeController extends GetxController {
   }
 
   startTimer() {
+    debugLog('debug timer Started');
     if (timerMode == true) {
       startCountDownTimer();
     } else if (leaderboardMode == true) {
@@ -484,30 +486,17 @@ class HomeController extends GetxController {
   }
 
   Future<dynamic> updateScore(int score) async {
-    // Package the data into a Map
-    var data = {
-      'gameType': 'fretboardtrainer',
-      'userName':  userName ?? "",
-      'score': score,
-    };
-
-    // Pass the Map to compute
+    debugLog('''
+updateScore
+''');
+    final data = LeaderboardData(
+        score: score, username: SplashScreen.session.user?.userName);
     var response = await compute(updateScoreApiRequest, data);
-
     return response;
   }
 
-  static Future<dynamic> updateScoreApiRequest(
-      Map<String, dynamic> data) async {
-    String gameType = data['gameType'];
-    String userName = data['userName'];
-    int score = data['score'];
-
-    // Perform the API request with the unpacked data
-    var response = await FretBoardRepository().postRequest(
-        "${FretBoardRepository().updateScoreApi}/$gameType/$userName",
-        {'score': score});
-
+  static Future<dynamic> updateScoreApiRequest(LeaderboardData data) async {
+    var response = await LeaderboardRepo().updateLeaderboardData(data);
     return response;
   }
 
@@ -516,12 +505,14 @@ class HomeController extends GetxController {
     int minutes = minutesValue.value;
     saveStrings();
     if (defaultTimerSelectedValue == "Countdown") {
-          SharedPrefHelper.instance.storeDefaultTimerType(defaultTimerSelectedValue.value);
-          SharedPrefHelper.instance.storeTimerInterval(seconds);
-          SharedPrefHelper.instance.storeDefaultTimerMinutes(minutes);
-          popup(context);
+      SharedPrefHelper.instance
+          .storeDefaultTimerType(defaultTimerSelectedValue.value);
+      SharedPrefHelper.instance.storeTimerInterval(seconds);
+      SharedPrefHelper.instance.storeDefaultTimerMinutes(minutes);
+      popup(context);
     } else {
-      SharedPrefHelper.instance.storeDefaultTimerType(defaultTimerSelectedValue.value);
+      SharedPrefHelper.instance
+          .storeDefaultTimerType(defaultTimerSelectedValue.value);
       popup(context);
     }
   }
@@ -546,9 +537,12 @@ class HomeController extends GetxController {
   }
 
   Future<void> initLocalDbData() async {
-    defaultTimerSelectedValue(await SharedPrefHelper.instance.getDefaultTimerType());
-    minutesValue.value = await SharedPrefHelper.instance.getDefaultTimerMinutes();
-    timerIntervalValue.value = await SharedPrefHelper.instance.getTimerInterval();
+    defaultTimerSelectedValue(
+        await SharedPrefHelper.instance.getDefaultTimerType());
+    minutesValue.value =
+        await SharedPrefHelper.instance.getDefaultTimerMinutes();
+    timerIntervalValue.value =
+        await SharedPrefHelper.instance.getTimerInterval();
     string1 = await SharedPrefHelper.instance.getString1();
     string2 = await SharedPrefHelper.instance.getString2();
     string3 = await SharedPrefHelper.instance.getString3();

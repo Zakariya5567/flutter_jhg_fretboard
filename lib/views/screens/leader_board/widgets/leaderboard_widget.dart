@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
-import 'package:fretboard/app_utils/app_strings.dart';
+import 'package:fretboard/utils/app_strings.dart';
 import 'package:fretboard/controllers/leaderboard_controller.dart';
+import 'package:fretboard/models/leaderboard.dart';
 import 'package:get/get.dart';
 
 final ScrollController _scrollController = ScrollController();
 
-Widget populateScoreList(List data) {
+Widget populateScoreList(List<LeaderboardData> leaderboardData) {
   return Padding(
     padding: const EdgeInsets.only(left: 0.0, top: 0.0),
     child: Card(
@@ -28,7 +29,7 @@ Widget populateScoreList(List data) {
                     scrollDirection: Axis.vertical,
                     physics: const ScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
-                      var model = data[index];
+                      LeaderboardData  data= leaderboardData[index];
                       int count = index + 1;
                       return Padding(
                         padding: EdgeInsets.all(8.dp),
@@ -49,7 +50,8 @@ Widget populateScoreList(List data) {
                                                 fontSize: Adaptive.sp(14.0)),
                                       ),
                                       Text(
-                                        "${model[AppStrings.username]}",
+                                        data.username??'',
+                                        // "${model[AppStrings.username]}",
                                         style: JHGTextStyles.smlabelStyle
                                             .copyWith(
                                                 fontSize: Adaptive.sp(14.0)),
@@ -60,7 +62,8 @@ Widget populateScoreList(List data) {
                                 SizedBox(
                                   // width: 20.dp,
                                   child: Text(
-                                    "${model[AppStrings.score]}",
+                                    data.score.toString(),
+                                    // "${model[AppStrings.score]}",
                                     textAlign: TextAlign.end,
                                     style: JHGTextStyles.smlabelStyle
                                         .copyWith(fontSize: Adaptive.sp(14.0)),
@@ -70,7 +73,7 @@ Widget populateScoreList(List data) {
                             )),
                       );
                     },
-                    itemCount: data.length),
+                    itemCount: leaderboardData.length),
                 leaderBoardButton()
               ],
             ),
