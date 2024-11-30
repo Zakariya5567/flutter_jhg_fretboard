@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
-import 'package:fretboard/utils/app_strings.dart';
 import 'package:fretboard/controllers/leaderboard_controller.dart';
 import 'package:fretboard/models/leaderboard.dart';
+import 'package:fretboard/utils/app_strings.dart';
 import 'package:get/get.dart';
 
 final ScrollController _scrollController = ScrollController();
@@ -15,7 +15,6 @@ Widget populateScoreList(List<LeaderboardData> leaderboardData) {
       color: const Color.fromARGB(84, 12, 12, 12),
       elevation: 1.0,
       child: SizedBox(
-        //  height: 400.dp,
         child: Padding(
           padding: EdgeInsets.only(left: 10.dp, top: 15.0.dp),
           child: Scrollbar(
@@ -29,7 +28,7 @@ Widget populateScoreList(List<LeaderboardData> leaderboardData) {
                     scrollDirection: Axis.vertical,
                     physics: const ScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
-                      LeaderboardData  data= leaderboardData[index];
+                      LeaderboardData data = leaderboardData[index];
                       int count = index + 1;
                       return Padding(
                         padding: EdgeInsets.all(8.dp),
@@ -50,7 +49,7 @@ Widget populateScoreList(List<LeaderboardData> leaderboardData) {
                                                 fontSize: Adaptive.sp(14.0)),
                                       ),
                                       Text(
-                                        data.username??'',
+                                        data.username ?? '',
                                         // "${model[AppStrings.username]}",
                                         style: JHGTextStyles.smlabelStyle
                                             .copyWith(
@@ -84,7 +83,7 @@ Widget populateScoreList(List<LeaderboardData> leaderboardData) {
   );
 }
 
-leaderBoardTextWidget(String text1, String text2) {
+Widget leaderBoardTextWidget(String text1, String text2) {
   return Padding(
     padding: EdgeInsets.only(left: 4.0.dp, right: 4.0.dp),
     child: Column(
@@ -106,7 +105,7 @@ leaderBoardTextWidget(String text1, String text2) {
         Text(
           text2,
           style:
-          JHGTextStyles.btnLabelStyle.copyWith(fontWeight: FontWeight.w600),
+              JHGTextStyles.btnLabelStyle.copyWith(fontWeight: FontWeight.w600),
           overflow: TextOverflow.ellipsis,
         ),
       ],
@@ -114,7 +113,7 @@ leaderBoardTextWidget(String text1, String text2) {
   );
 }
 
-leaderBoardButton() {
+Widget leaderBoardButton() {
   return Padding(
     padding: const EdgeInsets.all(16.0),
     child: JHGPrimaryBtn(
@@ -122,14 +121,13 @@ leaderBoardButton() {
       width: 200,
       bgColor: JHGColors.charcolGray,
       onPressed: () {
-        LeaderBoardController lc = Get.put(LeaderBoardController());
-        lc.getDataFromApi();
+        Get.find<LeaderBoardController>().getLeaderBoard();
       },
     ),
   );
 }
 
-leaderBoardTitleWidget() {
+Widget leaderBoardTitleWidget() {
   return Padding(
     padding: EdgeInsets.only(top: 17.dp),
     child: Text(

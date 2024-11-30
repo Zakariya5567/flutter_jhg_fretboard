@@ -1,4 +1,3 @@
-import 'package:reg_page/reg_page.dart' as l;
 import 'package:reg_page/reg_page.dart';
 
 mixin BaseController {
@@ -12,11 +11,7 @@ mixin BaseController {
       showErrorToast('Oops! It tooks too long to respond');
     } else if (error is UnAutthorizedException) {
       showErrorToast(error.message == '' ? 'UnAuthorised' : '');
-      l.debugLog(error.toString());
-      // if (!(error.url.contains('Account'))) {
-      //   await UserSession.deleteUser();
-      //   Nav.off(const LoginScreen());
-      // }
+      debugLog(error.toString());
     } else {
       showErrorToast('Something went wrong $error');
     }

@@ -1,18 +1,15 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';// show compute, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:fretboard/models/freth_list.dart';
-import 'package:fretboard/models/leaderboard.dart';
 import 'package:fretboard/services/local_db_service.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:reg_page/reg_page.dart';
 import 'package:universal_html/html.dart';
 
-import '../repositories/leaderboard_repo.dart';
 import 'leaderboard_controller.dart';
 
 class HomeController extends GetxController {
@@ -22,7 +19,7 @@ class HomeController extends GetxController {
   List<String> defaultTimer = ['Stopwatch', "Countdown"];
   RxString selectedDropDownValue = "".obs;
 
-  onDefaultTimerInitialized() {
+  void onDefaultTimerInitialized() {
     selectedDropDownValue.value = "Stopwatch";
     timerIntervalValue.value = 10;
     minutesValue.value = 1;
@@ -36,8 +33,6 @@ class HomeController extends GetxController {
   String? selectedNote;
   int? selectedString;
   String? userName;
-  // TextEditingController timerIntervalEditingController = new TextEditingController();
-  // TextEditingController minutesEditingController = new TextEditingController();
 
   RxBool timerIntervalExpanded = false.obs;
   RxInt timerIntervalValue = 10.obs;
@@ -57,7 +52,7 @@ class HomeController extends GetxController {
   }
 
   // Initialize  animation controller
-  initializeData() async {
+  Future<void> initializeData() async {
     selectedColor = Colors.transparent;
     isStart = false;
     selectedFret = null;
@@ -83,11 +78,8 @@ class HomeController extends GetxController {
 
   bool isPlayed = false;
 
-  Future playSound(int index, String note, int str, String tune) async {
-    print("===================================");
-    print("Highlight Freth ******  : $index");
-    print("highlightNode ******  : $note");
-    print("highlightString ****** : $str");
+  Future<void> playSound(int index, String note, int str, String tune) async {
+
     isPlayed = false;
     await player.stop();
     // EXECUTE LOOP
@@ -148,14 +140,14 @@ class HomeController extends GetxController {
   // Correct increment , incorrect decrement
   int score = 0;
 
-  incrementScore() {
+  void incrementScore() {
     score = score + 1;
     isPlayed = true;
     selectedColor = JHGColors.green;
     update();
   }
 
-  decrementScore() {
+  void decrementScore() {
     score = score - 1;
     isPlayed = true;
     selectedColor = JHGColors.primary;
@@ -167,7 +159,7 @@ class HomeController extends GetxController {
   bool timerMode = false;
   bool leaderboardMode = false;
 
-  setGameMode({required bool timer, required bool leaderboard}) {
+  void setGameMode({required bool timer, required bool leaderboard}) {
     timerMode = timer;
     leaderboardMode = leaderboard;
     update();
@@ -185,23 +177,23 @@ class HomeController extends GetxController {
   Color? selectedColor;
 
   // WHEN PRESS CORRECT NOTE THEN HIGHLIGHT ANOTHER ONE TO SELECT
-  highLightTheGame() {
+  void highLightTheGame() {
     // Get randomly highlight node
     int randomIndex = getRandomIndex();
     highlightFret = randomIndex;
     highlightNode = fretList[randomIndex].note;
     highlightString = fretList[randomIndex].string;
 
-    print("===================================");
-    print("Highlight Freth ===>  : $randomIndex");
-    print("highlightNode====>  : $highlightNode");
-    print("highlightString=====>  : $highlightString");
+    // print("===================================");
+    // print("Highlight Freth ===>  : $randomIndex");
+    // print("highlightNode====>  : $highlightNode");
+    // print("highlightString=====>  : $highlightString");
 
     update();
   }
 
 // GET RANDOM INDEX ACCORDING TO  ALLOW STRING
-  getRandomIndex() {
+  int getRandomIndex() {
     Random random = Random();
     int randomIndex;
     do {
@@ -211,7 +203,7 @@ class HomeController extends GetxController {
   }
 
   // START THE GAME ON START BUTTON
-  startTheGame() {
+  void startTheGame() {
     isStart = true;
     int randomIndex = getRandomIndex();
     highlightFret = randomIndex;
@@ -220,12 +212,12 @@ class HomeController extends GetxController {
     highlightNode = fretList[randomIndex].note;
     highlightString = fretList[randomIndex].string;
 
-    print("===================================");
-    print("Highlight Freth : $randomIndex");
-    print("PreviousHighlightFret Freth : $previousHighlightFret");
-    print("previousHighlightNode  : $previousHighlightNode");
-    print("highlightNode  : $highlightNode");
-    print("highlightString  : $highlightString");
+    // print("===================================");
+    // print("Highlight Freth : $randomIndex");
+    // print("PreviousHighlightFret Freth : $previousHighlightFret");
+    // print("previousHighlightNode  : $previousHighlightNode");
+    // print("highlightNode  : $highlightNode");
+    // print("highlightString  : $highlightString");
 
     update();
   }
@@ -237,7 +229,7 @@ class HomeController extends GetxController {
 
   // bool isTimerSet = false;
 
-  increaseTime() {
+  void increaseTime() {
     if (isStart != true) {
       secondsRemaining.value =
           secondsRemaining.value + timerIntervalValue.value;
@@ -245,7 +237,7 @@ class HomeController extends GetxController {
     }
   }
 
-  decreaseTime() {
+  void decreaseTime() {
     if (secondsRemaining.value > 10 && isStart != true) {
       secondsRemaining.value =
           secondsRemaining.value - timerIntervalValue.value;
@@ -253,7 +245,7 @@ class HomeController extends GetxController {
     }
   }
 
-  resetGame(bool resetAll) {
+  void resetGame(bool resetAll) {
     if (timer != null) {
       timer!.cancel();
     }
@@ -283,7 +275,7 @@ class HomeController extends GetxController {
     resetTimer();
   }
 
-  resetTimer() {
+  void resetTimer() {
     //isTimerSet = true;
     if (timerMode == true) {
       secondsRemaining.value = 60 * minutesValue.value;
@@ -295,7 +287,7 @@ class HomeController extends GetxController {
     update();
   }
 
-  startTimer() {
+  void startTimer() {
     debugLog('debug timer Started');
     if (timerMode == true) {
       startCountDownTimer();
@@ -346,7 +338,7 @@ class HomeController extends GetxController {
   // STRING 1
   bool string1 = true;
 
-  setString1(int index) {
+  void setString1(int index) {
     string1 = !string1;
     offString[index] = string1;
     if (!offString.contains(true)) {
@@ -359,7 +351,7 @@ class HomeController extends GetxController {
   // STRING 2
   bool string2 = true;
 
-  setString2(int index) {
+  void setString2(int index) {
     string2 = !string2;
     offString[index] = string2;
     if (!offString.contains(true)) {
@@ -372,7 +364,7 @@ class HomeController extends GetxController {
   // STRING 3
   bool string3 = true;
 
-  setString3(int index) {
+  void setString3(int index) {
     string3 = !string3;
     offString[index] = string3;
     if (!offString.contains(true)) {
@@ -385,7 +377,7 @@ class HomeController extends GetxController {
   // STRING 4
   bool string4 = true;
 
-  setString4(int index) {
+  void setString4(int index) {
     string4 = !string4;
     offString[index] = string4;
     if (!offString.contains(true)) {
@@ -398,7 +390,7 @@ class HomeController extends GetxController {
   // STRING 5
   bool string5 = true;
 
-  setString5(int index) {
+  void setString5(int index) {
     string5 = !string5;
     offString[index] = string5;
     if (!offString.contains(true)) {
@@ -411,7 +403,7 @@ class HomeController extends GetxController {
   // STRING 6
   bool string6 = true;
 
-  setString6(int index) {
+  void setString6(int index) {
     string6 = !string6;
     offString[index] = string6;
     if (!offString.contains(true)) {
@@ -425,7 +417,7 @@ class HomeController extends GetxController {
 
   ValueNotifier<int> secondsRemaining = ValueNotifier(0);
 
-  startLeaderBoardCountDownTimer() {
+  void startLeaderBoardCountDownTimer() {
     if (secondsRemaining.value == 0) {
       secondsRemaining.value = 10;
     }
@@ -440,16 +432,15 @@ class HomeController extends GetxController {
         secondsRemaining.value--;
       } else {
         timer.cancel();
-        updateScore(score);
+        LeaderBoardController lc = Get.find<LeaderBoardController>();
+        lc.updateScore(score);
         resetGame(false);
         update();
-        LeaderBoardController lc = Get.put(LeaderBoardController());
-        lc.getDataFromApi();
       }
     });
   }
 
-  startCountDownTimer() {
+  void startCountDownTimer() {
     if (secondsRemaining.value == 0) {
       secondsRemaining.value = 60 * minutesValue.value;
     }
@@ -472,7 +463,7 @@ class HomeController extends GetxController {
     });
   }
 
-  startCountUpTimer() {
+  void startCountUpTimer() {
     secondsRemaining.value = 0;
     update();
     if (timer != null) {
@@ -483,21 +474,6 @@ class HomeController extends GetxController {
       // Update the UI and decrement the remaining seconds
       secondsRemaining.value++;
     });
-  }
-
-  Future<dynamic> updateScore(int score) async {
-    debugLog('''
-updateScore
-''');
-    final data = LeaderboardData(
-        score: score, username: SplashScreen.session.user?.userName);
-    var response = await compute(updateScoreApiRequest, data);
-    return response;
-  }
-
-  static Future<dynamic> updateScoreApiRequest(LeaderboardData data) async {
-    var response = await LeaderboardRepo().updateLeaderboardData(data);
-    return response;
   }
 
   void onClickSave(BuildContext context) async {

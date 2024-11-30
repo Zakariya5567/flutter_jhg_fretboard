@@ -20,7 +20,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  LeaderBoardController lc = Get.put(LeaderBoardController());
   // Set expiry date when user login to the app
   // we will expire user login after 14 days
   setExpiryDate() async {
@@ -31,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    final homeController = Get.put(HomeController());
-    lc.getDataFromApi();
+    final homeController = Get.find<HomeController>();
+    Get.find<LeaderBoardController>().getLeaderBoard();
     homeController.initializeData();
     if (kIsWeb) {
       homeController.getUserNameFromRL();
@@ -41,13 +40,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
     if (!kIsWeb) {
       StringsDownloadService().isStringsDownloaded("jhg-fretboard-trainer");
-      LocalDB.getIsFreePlan().then((value) {
-        isFreePlan = value;
-        if (value) {
-          homeController.interstitialAds = JHGInterstitialAd(interstitialAdId);
-          homeController.interstitialAds?.loadAd();
-        }
-      });
+
+      isFreePlan = SplashScreen.session.isFreePlan;
+      if (isFreePlan) {
+        homeController.interstitialAds = JHGInterstitialAd(interstitialAdId);
+        homeController.interstitialAds?.loadAd();
+      }
     }
   }
 
@@ -55,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   void didChangeDependencies() {
-    homeController = Get.put(HomeController());
+    homeController = Get.find<HomeController>();
     super.didChangeDependencies();
   }
 
@@ -63,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: JHGColors.secondryBlack,
       body: GetBuilder<HomeController>(

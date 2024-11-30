@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fretboard/utils/app_assets.dart';
-import 'package:fretboard/utils/app_strings.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/controllers/leaderboard_controller.dart';
+import 'package:fretboard/utils/app_assets.dart';
+import 'package:fretboard/utils/app_strings.dart';
 import 'package:fretboard/views/screens/leader_board/widgets/leaderboard_widget.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +13,8 @@ import 'package:get/get.dart';
 class LeadershipScreen extends StatelessWidget {
   String? intervalType;
   LeadershipScreen({this.intervalType, super.key});
-  HomeController hc = Get.put(HomeController());
-  LeaderBoardController controller = Get.put(LeaderBoardController());
+
+  LeaderBoardController controller = Get.find<LeaderBoardController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class LeadershipScreen extends StatelessWidget {
               controller: controller,
             );
           } else {
-            if (hc.isPortrait == true) {
+            if (Get.find<HomeController>().isPortrait) {
               return LeaderPortraitView(
                 controller: controller,
               );
@@ -143,7 +143,6 @@ class LeaderLandscapeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return JHGBody(
       padding: EdgeInsets.symmetric(vertical: 24),

@@ -5,10 +5,10 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_jhg_elements/jhg_elements.dart';
-import 'package:fretboard/utils/app_strings.dart';
-import 'package:fretboard/utils/app_subscription.dart';
 import 'package:fretboard/controllers/home_controller.dart';
 import 'package:fretboard/main.dart';
+import 'package:fretboard/utils/app_strings.dart';
+import 'package:fretboard/utils/app_subscription.dart';
 import 'package:fretboard/views/widgets/default_timer.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
@@ -21,8 +21,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-
-  HomeController homeController = Get.put(HomeController());
+  HomeController homeController = Get.find<HomeController>();
   String deviceName = 'Unknown';
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
@@ -51,7 +50,6 @@ class _SettingScreenState extends State<SettingScreen> {
 
   Future<void> _initPackageInfo() async {
     await getDeviceInfo();
-
   }
 
   bool toggle = true;
@@ -72,7 +70,7 @@ class _SettingScreenState extends State<SettingScreen> {
       init: HomeController(),
       builder: (controller) {
         return controller.isPortrait || kIsWeb
-             ? JHGSettings(
+            ? JHGSettings(
                 androidAppIdentifier: AppStrings.androidBuildId,
                 iosAppIdentifier: AppStrings.iOSBuildId,
                 appStoreId: AppStrings.appStoreId,
@@ -145,11 +143,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 trailing: isFreePlan
                     ? Padding(
                         padding: EdgeInsets.symmetric(vertical: 15),
-                        child: JHGBannerAd(adId: bannerAdId)
-                        // JHGNativeBanner(
-                        //   adID: nativeBannerAdId,
-                        // ),
-                        )
+                        child: JHGBannerAd(adId: bannerAdId))
                     : const SizedBox(),
                 body: settingLandscape(
                     controller: controller, height: height, width: width),
@@ -274,9 +268,8 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
             SizedBox(height: 20),
             SizedBox(
-              width: MediaQuery.sizeOf(context).height * 0.85,
-              child: SettingsDefaultTimer(controller: controller)
-            ),
+                width: MediaQuery.sizeOf(context).height * 0.85,
+                child: SettingsDefaultTimer(controller: controller)),
           ],
         );
       },

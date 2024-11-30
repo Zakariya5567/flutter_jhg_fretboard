@@ -9,7 +9,9 @@ import 'package:fretboard/views/screens/home/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:reg_page/reg_page.dart';
 
-var isFreePlan = false;
+import 'controllers/app_bindings.dart';
+
+bool isFreePlan = false;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,7 +56,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'JHG Fretboard',
           theme: JHGTheme.themeData,
-          // home:  const HomeScreen()
+          initialBinding: AppBindings(),
           navigatorKey: navKey,
           home: kIsWeb
               ? const HomeScreen()
