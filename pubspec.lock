@@ -235,8 +235,8 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "8056d4c927354759a3255fb5cabf3b8345ab416e"
-      url: "https://github.com/jamie2364/flutter_jhg_elements.git"
+      resolved-ref: b4365acc15356a42ea0b652e0d3c46cb1c380639
+      url: "https://github.com/jamie2364/flutter_jhg_elements"
     source: git
     version: "0.0.1"
   flutter_launcher_icons:
@@ -686,8 +686,8 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "29a4e2f7bb467f14ab8b14521359b72eda7d1b23"
-      url: "https://github.com/jamie2364/flutter-jhg-reg-page.git"
+      resolved-ref: "4e5edbef71f688b6fd4eca1a656fd7a5709d03d0"
+      url: "https://github.com/jamie2364/flutter-jhg-reg-page"
     source: git
     version: "0.0.1"
   rxdart:
@@ -1051,10 +1051,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "84ba388638ed7a8cb3445a320c8273136ab2631cd5f2c57888335504ddab1bc2"
+      sha256: "8b338d4486ab3fbc0ba0db9f9b4f5239b6697fcee427939a40e720cbb9ee0a69"
       url: "https://pub.dev"
     source: hosted
-    version: "5.8.0"
+    version: "5.9.0"
   win32_registry:
     dependency: transitive
     description:
