@@ -57,7 +57,8 @@ class LeaderBoardController extends GetxController {
 
   Future<dynamic> updateScore(int score) async {
     final data = LeaderboardData(
-        score: score, username: SplashScreen.session.user?.userName);
+        score: score,
+        username: SplashScreen.session.user?.userName ?? 'jamieharrisontest');
     if (score < myCurrentScore) return;
     var response = await compute(updateScoreApiRequest, data);
     JHGDialogHelper.showInfoDialog(

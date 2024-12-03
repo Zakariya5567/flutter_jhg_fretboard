@@ -79,7 +79,6 @@ class HomeController extends GetxController {
   bool isPlayed = false;
 
   Future<void> playSound(int index, String note, int str, String tune) async {
-
     isPlayed = false;
     await player.stop();
     // EXECUTE LOOP
