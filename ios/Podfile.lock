@@ -15,7 +15,7 @@ PODS:
     - Flutter
     - Google-Mobile-Ads-SDK (~> 11.10.0)
     - webview_flutter_wkwebview
-  - GoogleUserMessagingPlatform (2.6.0)
+  - GoogleUserMessagingPlatform (2.7.0)
   - in_app_purchase_storekit (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -109,7 +109,7 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   Google-Mobile-Ads-SDK: 13e6e98edfd78ad8d8a791edb927658cc260a56f
   google_mobile_ads: 2a538d8e42b1813809782792e48f8cf4374c2180
-  GoogleUserMessagingPlatform: 0c3a08353e53ce8c2feab7addd0b652cde522450
+  GoogleUserMessagingPlatform: a8b56893477f67212fbc8411c139e61d463349f5
   in_app_purchase_storekit: 8c3b0b3eb1b0f04efbff401c3de6266d4258d433
   just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
@@ -124,4 +124,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 9c46fd01abff66081b39f5fa5767b3f1d0b11d76
 
-COCOAPODS: 1.16.1
+COCOAPODS: 1.15.2
